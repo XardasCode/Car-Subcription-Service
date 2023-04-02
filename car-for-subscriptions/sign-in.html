@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/sign-in.css">
+	<title>Вхід</title>
+</head>
+
+<body>
+	<!-- <div class="wrapper"> -->
+		<div class="container main_container">
+
+			<header class="header">
+				<div class="container header__container">
+					<div class="row">
+						<nav class="navbar navbar-expand-lg header__navbar">
+						  <div class="container-fluid">
+						    <a class="navbar-brand header__logo" href="#">
+						    	<span class="header__span-1">Brand name</span>
+						    	<span class="header__span-2">Car Subscription</span>
+						    	<span class="header__car"></span>
+						    </a>
+						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						      <span class="navbar-toggler-icon"></span>
+						    </button>
+						    <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+						      <ul class="navbar-nav ms-auto mb-lg-0 header__list">
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> <!--catalog.html-->
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+						        </li>
+						        <div class="header__wrapper-lact-item">
+							        <li class="nav-item">
+							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Зареєструватись</a><!--sign-up.html sign-in.html-->
+							        </li>
+						        </div>
+						      </ul>
+						    </div>
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</header>
+					
+			<section class="sign-in">
+				<div class="sign-in__wrapper">
+					<div class="sign-in__switch">
+						<a class="sign-in__up" href="#">Реєстрація</a>
+						<a class="sign-in__in blue-button" href="#">Вхід</a>
+					</div>
+					<form>
+						<div class="sign-in__title">Увійти в особистий кабінет</div>
+						<div class="mb-3 sign-in__email">
+							<label for="exampleInputEmail1" class="form-label">Електронна пошта</label>
+							<input type="email" placeholder="viktor.grygorovych@ukr.tak" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+						</div>
+						<div class="mb-3 sign-in__password">
+							<label for="exampleInputPassword1" class="form-label">Пароль</label>
+							<input type="password" placeholder="*********" class="form-control" id="exampleInputPassword1">
+						</div>
+						<div class="mb-3 form-check sign-in__remember">
+							<input type="checkbox" class="form-check-input sign-in__checkbox" id="exampleCheck1">
+							<label class="form-check-label sign-in__remember-label" for="exampleCheck1">Запамʼятати цей пристрій</label>
+						</div>
+						<button type="submit" class="sign-in__authorization blue-button">Авторизація</button>
+					</form>
+				</div>
+			</section>
+
+		</div>
+				
+			<footer class="footer">
+				<div class="container footer_container">
+					<div class="row no-gutters">
+						<div class="col-md-4 footer__logo">
+							<a class="footer__a" href="#">
+								<span class="footer__span-1">Brand name</span>
+								<span class="footer__span-2">Car Subscription</span>
+								<span class="footer__car"></span>
+							</a>
+						</div>
+						<div class="col-md-4 footer__copyright">
+							<span>2023 © Всі права захищені</span>
+						</div>
+						<div class="col-md-4 footer__icons">
+								<a href="#"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+								<a href="#"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+								<a href="#"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+								<a href="#"><img src="img/general-svg/google.svg" alt="Google-plus"></a>
+								
+						</div>
+					</div>
+				</div>
+			</footer>
+				
+	<!-- </div> -->
+
+	<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
