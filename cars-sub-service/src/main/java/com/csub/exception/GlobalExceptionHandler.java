@@ -37,6 +37,24 @@ public class GlobalExceptionHandler {
                 ErrorCode.USER_ALREADY_EXISTS.getErrorCode()),
                 HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(ManagerNotFoundException.class)
+    public ResponseEntity<ExceptionJSONInfo> handleException(ManagerNotFoundException e) {
+        log.error("Manager not found error: " + e.getMessage());
+        return new ResponseEntity<>(new ExceptionJSONInfo(
+                "Manager not found error",
+                e.getMessage(),
+                ErrorCode.MANAGER_NOT_FOUND.getErrorCode()),
+                HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(ManagerAlreadyExistsException.class)
+    public ResponseEntity<ExceptionJSONInfo> handleException(ManagerAlreadyExistsException e) {
+        log.error("Manager already exists error: " + e.getMessage());
+        return new ResponseEntity<>(new ExceptionJSONInfo(
+                "Manager already exists error",
+                e.getMessage(),
+                ErrorCode.MANAGER_ALREADY_EXISTS.getErrorCode()),
+                HttpStatus.BAD_REQUEST);
+    }
 
 }

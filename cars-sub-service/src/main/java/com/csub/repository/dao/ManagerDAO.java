@@ -2,12 +2,14 @@ package com.csub.repository.dao;
 
 import com.csub.entity.Manager;
 
+import java.util.Optional;
+
 public interface ManagerDAO {
     void addManager(Manager manager);
 
-    void deleteManager(int id);
+    void deleteManager(long id);
 
     void updateManager(Manager manager);
 
-    Manager getManager(int id);
+    Optional<Manager> getManager(long id);
 }

@@ -59,11 +59,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+        long id = user.getId();
+        Optional<User> userOptional = userDAO.getUser(id);
+
+        if (userOptional.isEmpty()) {
+            log.warn("User with id {} not found", id);
+            throw new UserNotFoundException("User with id " + id + " not found");
+        }
+        userDAO.updateUser(user);
+        log.trace("User updated: {}", user);
     }
 
     @Override
     public void deleteUser(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+        Optional<User> user = userDAO.getUser(id);
+        if (user.isEmpty()) {
+            log.warn("User with id {} not found", id);
+            throw new UserNotFoundException("User with id " + id + " not found");
+        }
+        userDAO.deleteUser(id);
+        log.trace("User deleted: {}", user);
     }
 }

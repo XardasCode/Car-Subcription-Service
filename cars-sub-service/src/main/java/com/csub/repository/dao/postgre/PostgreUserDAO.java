@@ -34,13 +34,16 @@ public class PostgreUserDAO implements UserDAO {
     }
 
     @Override
-    public void deleteUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+    @Transactional
+    public void deleteUser(long id) {
+        User user = sessionFactory.getCurrentSession().get(User.class, id);
+        if (user != null) sessionFactory.getCurrentSession().remove(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+        sessionFactory.getCurrentSession().merge(user);
     }
 
     @Override

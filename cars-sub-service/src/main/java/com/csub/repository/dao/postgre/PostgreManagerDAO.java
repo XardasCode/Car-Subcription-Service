@@ -2,9 +2,12 @@ package com.csub.repository.dao.postgre;
 
 import com.csub.entity.Manager;
 import com.csub.repository.dao.ManagerDAO;
+import jakarta.transaction.Transactional;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class PostgreManagerDAO implements ManagerDAO {
@@ -17,22 +20,27 @@ public class PostgreManagerDAO implements ManagerDAO {
     }
 
     @Override
+    @Transactional
     public void addManager(Manager manager) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+        sessionFactory.getCurrentSession().persist(manager);
     }
 
     @Override
-    public void deleteManager(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+    @Transactional
+    public void deleteManager(long id) {
+        Manager manager = sessionFactory.getCurrentSession().get(Manager.class, id);
+        if (manager != null) sessionFactory.getCurrentSession().remove(manager);
     }
 
     @Override
+    @Transactional
     public void updateManager(Manager manager) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+        sessionFactory.getCurrentSession().merge(manager);
     }
 
     @Override
-    public Manager getManager(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // todo: implement this method
+    @Transactional
+    public Optional<Manager> getManager(long id) {
+        return Optional.ofNullable(sessionFactory.getCurrentSession().get(Manager.class, id));
     }
 }
