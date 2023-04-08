@@ -2,53 +2,72 @@ package com.csub.repository.dao.postgre;
 
 import com.csub.entity.User;
 import com.csub.repository.dao.UserDAO;
-import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
+@Slf4j
 public class PostgreUserDAO implements UserDAO {
 
-    SessionFactory sessionFactory;
-
-    @Autowired
-    public PostgreUserDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
+    private final SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
+        log.debug("Getting all users");
         return sessionFactory.getCurrentSession().createQuery("from User", User.class).list();
     }
 
     @Override
-    @Transactional
-    public void addUser(User user) {
+    public long addUser(User user) {
+        log.debug("Adding user: {}", user);
         sessionFactory.getCurrentSession().persist(user);
+        log.debug("User created with id {}", user.getId());
+        return user.getId();
     }
 
     @Override
-    @Transactional
     public void deleteUser(long id) {
+        log.debug("Delete user with id: {}", id);
         User user = sessionFactory.getCurrentSession().get(User.class, id);
         if (user != null) sessionFactory.getCurrentSession().remove(user);
+        log.debug("User deleted with id {}", id);
     }
 
     @Override
-    @Transactional
     public void updateUser(User user) {
+        log.debug("Updating user: {}", user);
         sessionFactory.getCurrentSession().merge(user);
+        log.debug("User updated: {}", user);
     }
 
     @Override
-    @Transactional
     public Optional<User> getUser(long id) {
+        log.debug("Getting user with id {}", id);
         return Optional.ofNullable(sessionFactory.getCurrentSession().get(User.class, id));
+    }
+
+    @Override
+    public Optional<User> getUserByEmailAndPassword(String email, String password) {
+        log.debug("Getting user with email {} and password {}", email, password);
+        return sessionFactory.getCurrentSession()
+                .createQuery("from User where email = :email and password = :password", User.class)
+                .setParameter("email", email)
+                .setParameter("password", password)
+                .uniqueResultOptional();
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        log.debug("Getting user with email {}", email);
+        return sessionFactory.getCurrentSession()
+                .createQuery("from User where email = :email", User.class)
+                .setParameter("email", email)
+                .uniqueResultOptional();
     }
 }

@@ -1,67 +1,56 @@
 package com.csub.service.impl;
 
 import com.csub.entity.Manager;
-import com.csub.exception.ManagerAlreadyExistsException;
-import com.csub.exception.ManagerNotFoundException;
+import com.csub.exception.ErrorList;
+import com.csub.exception.ServerException;
 import com.csub.repository.dao.ManagerDAO;
 import com.csub.service.ManagerService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class ManagerServiceImpl implements ManagerService {
-    ManagerDAO managerDAO;
+    private final ManagerDAO managerDAO;
 
-    @Autowired
-    public ManagerServiceImpl(ManagerDAO managerDAO) {
-        this.managerDAO = managerDAO;
-    }
     @Override
+    @Transactional
     public void addManager(Manager manager) {
-        long id = manager.getId();
-        Optional<Manager> managerOptional = managerDAO.getManager(id);
-
-        if (managerOptional.isPresent()) {
-            log.warn("Manager with id {} already exists", id);
-            throw new ManagerAlreadyExistsException("Manager with id " + id + " already exists");
-        }
+        log.debug("Adding manager: {}", manager);
         managerDAO.addManager(manager);
-        log.trace("Manager added: {}", manager);
+        log.debug("Manager added: {}", manager);
     }
     @Override
     public Manager getManager(long id) {
+        log.debug("Getting manager with id {}", id);
         Optional<Manager> manager = managerDAO.getManager(id);
         if (manager.isEmpty()) {
-            log.warn("Manager with id {} not found", id);
-            throw new ManagerNotFoundException("Manager with id " + id + " not found");
+            log.debug("Manager with id {} not found", id);
+            throw new ServerException("Manager with id " + id + " not found", ErrorList.MANAGER_NOT_FOUND);
         }
-        log.trace("User found: {}", manager);
+        log.debug("User found: {}", manager);
         return manager.get();
     }
 
     @Override
+    @Transactional
     public void updateManager(Manager manager) {
-        long id = manager.getId();
-        Optional<Manager> managerOptional = managerDAO.getManager(id);
-        if (managerOptional.isEmpty()) {
-            log.warn("Manager with id {} not found", id);
-            throw new ManagerNotFoundException("Manager with id " + id + " not found");
-        }
+        log.debug("Updating manager: {}", manager);
+        managerDAO.getManager(manager.getId());
         managerDAO.updateManager(manager);
-        log.trace("Manager updated: {}", manager);
+        log.debug("Manager updated: {}", manager);
     }
     @Override
+    @Transactional
     public void deleteManager(long id) {
-        Optional<Manager> manager = managerDAO.getManager(id);
-        if (manager.isEmpty()) {
-            log.warn("Manager with id {} not found", id);
-            throw new ManagerNotFoundException("Manager with id " + id + " not found");
-        }
+        log.debug("Deleting manager with id {}", id);
+        managerDAO.getManager(id);
         managerDAO.deleteManager(id);
-        log.trace("Manager deleted: {}", manager);
+        log.debug("Manager deleted: {}", id);
     }
 }

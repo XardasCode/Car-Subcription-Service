@@ -9,11 +9,15 @@ public interface UserDAO {
 
     List<User> getAllUsers();
 
-    void addUser(User user);
+    long addUser(User user);
 
     void deleteUser(long id);
 
     void updateUser(User user);
 
     Optional<User> getUser(long id);
+
+    Optional<User> getUserByEmailAndPassword(String email, String password);
+
+    Optional<User> getUserByEmail(String email);
 }

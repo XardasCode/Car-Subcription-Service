@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS managers
     name     VARCHAR(255) NOT NULL,
     surname  VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email    VARCHAR(255) NOT NULL
+    email    VARCHAR(255) NOT NULL,
+
+    UNIQUE (email)
 );
 
 CREATE TABLE IF NOT EXISTS car_statuses
@@ -48,10 +50,12 @@ CREATE TABLE IF NOT EXISTS users
     surname           VARCHAR(255) NOT NULL,
     email             VARCHAR(255) NOT NULL,
     password          VARCHAR(255) NOT NULL,
-    phone             VARCHAR(255) NOT NULL,
+    phone             VARCHAR(255),
     is_verified       BOOLEAN      NOT NULL DEFAULT FALSE,
     is_blocked        BOOLEAN      NOT NULL DEFAULT FALSE,
-    verification_code VARCHAR(255) NOT NULL
+    verification_code VARCHAR(255),
+
+    UNIQUE (email)
 );
 
 

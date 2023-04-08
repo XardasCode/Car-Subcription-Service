@@ -2,19 +2,17 @@ package com.csub.repository.dao.postgre;
 
 import com.csub.entity.Car;
 import com.csub.repository.dao.CarDAO;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
+@Slf4j
 public class PostgreCarDAO implements CarDAO {
 
-    SessionFactory sessionFactory;
-
-    @Autowired
-    public PostgreCarDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final SessionFactory sessionFactory;
 
     @Override
     public void addCar(Car car) {

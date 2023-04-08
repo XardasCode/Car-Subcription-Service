@@ -2,19 +2,17 @@ package com.csub.repository.dao.postgre;
 
 import com.csub.entity.Subscription;
 import com.csub.repository.dao.SubscriptionDAO;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
+@Slf4j
 public class PostgreSubscriptionDAO implements SubscriptionDAO {
 
-    SessionFactory sessionFactory;
-
-    @Autowired
-    public PostgreSubscriptionDAO(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final SessionFactory sessionFactory;
 
     @Override
     public void addSubscription(Subscription subscription) {
