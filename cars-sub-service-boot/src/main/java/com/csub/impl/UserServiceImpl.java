@@ -92,6 +92,15 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    @Transactional
+    public List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) { // sortType - ASC / DESC
+        // Пошук користувачів
+        // Кожен з параметрів є не обов`язковим, тобто можуть передатись або всі, або тільки один, або не передатись ні один
+        // Якщо не передався ні один параметр - повернути всі користувачівя
+        throw new UnsupportedOperationException("Not implemented yet"); // todo: implement this
+    }
+
     private void checkIfEmailAlreadyExists(String email) {
         log.debug("Checking if user with email {} already exists", email);
         Optional<User> user = userDAO.getUserByEmail(email);

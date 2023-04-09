@@ -17,4 +17,6 @@ public interface UserService {
     void updateUser(User user, long id);
 
     void deleteUser(long id);
+
+    List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);z
 }
