@@ -26,11 +26,13 @@ public enum ErrorList {
 
     VALIDATION_ERROR(1019, HttpStatus.BAD_REQUEST),
 
+    CAR_NOT_FOUND(1020, HttpStatus.NOT_FOUND),
+
     SERVER_ERROR(2000, HttpStatus.INTERNAL_SERVER_ERROR);
 
-    private int code;
+    private final int code;
 
-    private HttpStatus status;
+    private final HttpStatus status;
 
     public int getErrorCode() {
         return code;

@@ -33,9 +33,18 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/{email}/{password}")
-    public ResponseEntity<User> checkUserCredentials(@PathVariable String email, @PathVariable String password) {
+    public ResponseEntity<User> checkUserCredzentials(@PathVariable String email, @PathVariable String password) {
         log.info("Checking user credentials");
         return ResponseEntity.ok(userService.checkUserCredentials(email, password));
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<User>> findUsers(@RequestParam(value = "partOfName",required = false) String partOfName,
+                                                @RequestParam(value = "partOfSurname",required = false) String partOfSurname,
+                                                @RequestParam(value = "isSortByName",required = false) boolean isSortByName,
+                                                @RequestParam(value = "sortType",required = false) String sortType) {
+        log.info("Searching users");
+        return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType));
     }
 
     @PostMapping

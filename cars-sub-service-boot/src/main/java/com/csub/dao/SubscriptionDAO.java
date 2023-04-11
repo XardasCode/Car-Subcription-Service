@@ -2,12 +2,17 @@ package com.csub.dao;
 
 import com.csub.entity.Subscription;
 
-public interface SubscriptionDAO {
-    void addSubscription(Subscription subscription);
+import java.util.List;
+import java.util.Optional;
 
-    void deleteSubscription(int id);
+public interface SubscriptionDAO {
+    long addSubscription(Subscription subscription);
+
+    void deleteSubscription(long id);
 
     void updateSubscription(Subscription subscription);
 
-    Subscription getSubscription(int id);
+    Optional<Subscription> getSubscription(long id);
+
+    List<Subscription> getAllSubscription();
 }

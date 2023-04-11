@@ -20,4 +20,6 @@ public interface UserDAO {
     Optional<User> getUserByEmailAndPassword(String email, String password);
 
     Optional<User> getUserByEmail(String email);
+
+    List<User> findUsers(String query);
 }

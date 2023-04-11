@@ -70,4 +70,9 @@ public class PostgreUserDAO implements UserDAO {
                 .setParameter("email", email)
                 .uniqueResultOptional();
     }
+    @Override
+    public List<User> findUsers(String query) {
+        log.debug("Searching user");
+        return sessionFactory.getCurrentSession().createQuery(query, User.class).list();
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -87,10 +88,55 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteUser(long id) {
         log.debug("Deleting user with id {}", id);
+        Optional<User> user = userDAO.getUser(id);
+        if (user.isEmpty()) {
+            log.warn("User with id {} not found", id);
+            throw new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND);
+        }
         userDAO.deleteUser(id);
         log.debug("User with id {} deleted", id);
     }
 
+
+    @Override
+    @Transactional
+    public List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) { // sortType - ASC / DESC
+        // Пошук користувачів
+        // Кожен з параметрів є не обов`язковим, тобто можуть передатись або всі, або тільки один, або не передатись ні один
+        // Якщо не передався ні один параметр - повернути всі користувачівя
+
+        if((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)){
+            return userDAO.getAllUsers();
+        }
+
+        String query = "from User where 1=1 ";
+        String order_by = "order by name";
+
+        if(partOfName != null && !partOfName.isEmpty()) {
+            query += " and name like '%"+partOfName+"%' ";
+        }
+
+        if(partOfSurname != null && !partOfSurname.isEmpty()) {
+            query += " and surname like '%"+partOfSurname+"%' ";
+        }
+
+        if(isSortByName) {
+            if(sortType.equals("DESC")){
+                order_by = " order by name desc";
+            }
+            query+=order_by;
+        }
+
+        log.warn("sort type {}",query);
+        List<User> users = userDAO.findUsers(query);
+
+        if (users.isEmpty()) {
+            log.warn("User not found");
+            throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);
+        }
+
+        return users;
+    }
 
     private void checkIfEmailAlreadyExists(String email) {
         log.debug("Checking if user with email {} already exists", email);

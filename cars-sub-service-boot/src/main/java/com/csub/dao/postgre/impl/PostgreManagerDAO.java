@@ -40,6 +40,6 @@ public class PostgreManagerDAO implements ManagerDAO {
     @Override
     public Optional<Manager> getManager(long id) {
         log.debug("Getting manager with id {}", id);
-        return Optional.of(sessionFactory.getCurrentSession().get(Manager.class, id));
+        return Optional.ofNullable(sessionFactory.getCurrentSession().get(Manager.class, id));
     }
 }

@@ -33,7 +33,7 @@ public class ManagerServiceImpl implements ManagerService {
             log.debug("Manager with id {} not found", id);
             throw new ServerException("Manager with id " + id + " not found", ErrorList.MANAGER_NOT_FOUND);
         }
-        log.debug("User found: {}", manager);
+        log.debug("Manager found: {}", manager);
         return manager.get();
     }
 
