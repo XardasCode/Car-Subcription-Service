@@ -243,156 +243,153 @@ body {
 /****************
 *****Answers*****
 *****************/
-.answers__title {
-  margin-bottom: 50px; }
-  @media (max-width: 991.98px) {
-    .answers__title {
-      margin-bottom: 35px; } }
-  @media (max-width: 767.98px) {
-    .answers__title {
-      margin-bottom: 25px; } }
-  @media (max-width: 575.98px) {
-    .answers__title {
-      margin-bottom: 20px; } }
-  @media (max-width: 479.98px) {
-    .answers__title {
-      margin-bottom: 15px; } }
-  @media (max-width: 379.98px) {
-    .answers__title {
-      margin-bottom: 10px; } }
-  .answers__title h2 {
-    font-size: 36px;
-    line-height: 44px;
-    margin: 0;
-    text-align: center; }
-    @media (max-width: 991.98px) {
-      .answers__title h2 {
-        font-size: 30px; } }
-    @media (max-width: 767.98px) {
-      .answers__title h2 {
-        font-size: 26px; } }
-    @media (max-width: 575.98px) {
-      .answers__title h2 {
-        font-size: 24px; } }
-    @media (max-width: 479.98px) {
-      .answers__title h2 {
-        font-size: 22px; } }
-    @media (max-width: 379.98px) {
-      .answers__title h2 {
-        font-size: 19.5px; } }
-
-.answers__accordion {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 160px;
-  background: url(../img/questions/svg/bg.svg) no-repeat 0 50%; }
+.answers {
+  margin-bottom: 160px; }
   @media (max-width: 1199.98px) {
-    .answers__accordion {
+    .answers {
       margin-bottom: 120px; } }
   @media (max-width: 991.98px) {
-    .answers__accordion {
+    .answers {
       background: none;
       margin-bottom: 100px; } }
   @media (max-width: 767.98px) {
-    .answers__accordion {
+    .answers {
       margin-bottom: 80px; } }
   @media (max-width: 575.98px) {
-    .answers__accordion {
+    .answers {
       margin-bottom: 60px; } }
   @media (max-width: 479.98px) {
-    .answers__accordion {
+    .answers {
       margin-bottom: 40px; } }
   @media (max-width: 379.98px) {
-    .answers__accordion {
-      margin-bottom: 20px; } }
-
-.answers__item {
-  width: 74.1%;
-  background: #F9F9F9;
-  border: 2px solid #437DD5 !important;
-  -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 20px !important;
-  margin-bottom: 16px; }
-  @media (max-width: 991.98px) {
-    .answers__item {
-      width: 100%; } }
-  @media (max-width: 575.98px) {
-    .answers__item {
-      margin-bottom: 14px; } }
-  @media (max-width: 479.98px) {
-    .answers__item {
-      margin-bottom: 12px; } }
-  @media (max-width: 379.98px) {
-    .answers__item {
-      margin-bottom: 10px; } }
-  .answers__item button {
-    font-size: 24px;
-    line-height: 29px;
-    padding: 29px 40px;
-    background: #F9F9F9;
-    border-radius: 20px !important; }
+    .answers {
+      margin-bottom: 30px; } }
+  .answers__title {
+    margin-bottom: 50px; }
     @media (max-width: 991.98px) {
-      .answers__item button {
-        font-size: 22px; } }
+      .answers__title {
+        margin-bottom: 35px; } }
     @media (max-width: 767.98px) {
-      .answers__item button {
-        font-size: 20px;
-        padding: 25px 35px;
-        line-height: 26px; } }
+      .answers__title {
+        margin-bottom: 25px; } }
     @media (max-width: 575.98px) {
-      .answers__item button {
-        font-size: 18px;
-        padding: 20px 30px; } }
+      .answers__title {
+        margin-bottom: 20px; } }
     @media (max-width: 479.98px) {
-      .answers__item button {
-        font-size: 16px;
-        padding: 15px 25px;
-        line-height: 24px; } }
+      .answers__title {
+        margin-bottom: 15px; } }
     @media (max-width: 379.98px) {
-      .answers__item button {
-        padding: 10px 20px;
+      .answers__title {
+        margin-bottom: 10px; } }
+    .answers__title h2 {
+      font-size: 36px;
+      line-height: 44px;
+      margin: 0;
+      text-align: center; }
+      @media (max-width: 991.98px) {
+        .answers__title h2 {
+          font-size: 30px; } }
+      @media (max-width: 767.98px) {
+        .answers__title h2 {
+          font-size: 26px; } }
+      @media (max-width: 575.98px) {
+        .answers__title h2 {
+          font-size: 24px; } }
+      @media (max-width: 479.98px) {
+        .answers__title h2 {
+          font-size: 22px; } }
+      @media (max-width: 379.98px) {
+        .answers__title h2 {
+          font-size: 19.5px; } }
+  .answers__accordion {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: url(../img/questions/svg/bg.svg) no-repeat 0 50%; }
+  .answers__item {
+    width: 74.1%;
+    background: #F9F9F9;
+    border: 2px solid #437DD5 !important;
+    -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 20px !important;
+    margin-bottom: 16px; }
+    @media (max-width: 991.98px) {
+      .answers__item {
+        width: 100%; } }
+    @media (max-width: 575.98px) {
+      .answers__item {
+        margin-bottom: 14px; } }
+    @media (max-width: 479.98px) {
+      .answers__item {
+        margin-bottom: 12px; } }
+    @media (max-width: 379.98px) {
+      .answers__item {
+        margin-bottom: 10px; } }
+    .answers__item button {
+      font-size: 24px;
+      line-height: 29px;
+      padding: 29px 40px;
+      background: #F9F9F9;
+      border-radius: 20px !important; }
+      @media (max-width: 991.98px) {
+        .answers__item button {
+          font-size: 22px; } }
+      @media (max-width: 767.98px) {
+        .answers__item button {
+          font-size: 20px;
+          padding: 25px 35px;
+          line-height: 26px; } }
+      @media (max-width: 575.98px) {
+        .answers__item button {
+          font-size: 18px;
+          padding: 20px 30px; } }
+      @media (max-width: 479.98px) {
+        .answers__item button {
+          font-size: 16px;
+          padding: 15px 25px;
+          line-height: 24px; } }
+      @media (max-width: 379.98px) {
+        .answers__item button {
+          padding: 10px 20px;
+          line-height: 22px; } }
+  .answers__item:last-child {
+    margin-bottom: 0; }
+  .answers__accordion-text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    padding: 20px 38px 20px 38px; }
+    @media (max-width: 991.98px) {
+      .answers__accordion-text {
+        font-size: 17px;
+        padding: 15px 30px 15px 30px; } }
+    @media (max-width: 767.98px) {
+      .answers__accordion-text {
+        font-size: 16px;
+        padding: 15px 25px 15px 25px; } }
+    @media (max-width: 575.98px) {
+      .answers__accordion-text {
+        font-size: 14px;
+        padding: 12px 22px 12px 22px;
         line-height: 22px; } }
-
-.answers__item:last-child {
-  margin-bottom: 0; }
-
-.answers__accordion-text {
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 25px;
-  padding: 20px 38px 20px 38px; }
-  @media (max-width: 991.98px) {
-    .answers__accordion-text {
-      font-size: 17px;
-      padding: 15px 30px 15px 30px; } }
-  @media (max-width: 767.98px) {
-    .answers__accordion-text {
-      font-size: 16px;
-      padding: 15px 25px 15px 25px; } }
-  @media (max-width: 575.98px) {
-    .answers__accordion-text {
-      font-size: 14px;
-      padding: 12px 22px 12px 22px;
-      line-height: 22px; } }
-  @media (max-width: 479.98px) {
-    .answers__accordion-text {
-      font-size: 13px;
-      padding: 10px 20px 10px 20px;
-      line-height: 20px; } }
-  @media (max-width: 379.98px) {
-    .answers__accordion-text {
-      font-size: 12px;
-      padding: 8px 15px 8px 15px;
-      line-height: 18px; } }
+    @media (max-width: 479.98px) {
+      .answers__accordion-text {
+        font-size: 13px;
+        padding: 10px 20px 10px 20px;
+        line-height: 20px; } }
+    @media (max-width: 379.98px) {
+      .answers__accordion-text {
+        font-size: 12px;
+        padding: 8px 15px 8px 15px;
+        line-height: 18px; } }
 
 /*****************
 ******Footer****** 

@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/payment.css">
-	<title>Оплата</title>
+	<link rel="stylesheet" type="text/css" href="css/cabinet-expected.css">
+	<title>Кабінет (на розгляді)</title>
 </head>
 <body>
-	<div class="wrapper"> 
+	<div class="wrapper">
 		<div class="container main_container">
 
 			<header class="header">
@@ -30,17 +30,17 @@
 						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> 
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
+						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> 
 						        </li>
 						        <li class="nav-item">
 						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
 						        </li>
 						        <div class="header__wrapper-lact-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html sign-in.html-->
+							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html-->
 							        </li>
 						        </div>
 						      </ul>
@@ -50,25 +50,38 @@
 					</div>
 				</div>
 			</header>
-				
-			<section class="payment">
-				<div class="payment__block">
-					<div class="payment__title">
-						<h2>Оберіть метод оплати</h2>
-					</div>
-					<div class="payment__services">
-						<a href=""><img src="img/payment/svg/payoneer.svg" alt="Payoneer"></a>
-						<a href=""><img src="img/payment/svg/pay-pal.svg" alt="PayPal"></a>
-						<a href=""><img src="img/payment/svg/binance.svg" alt="Binance"></a>
-						<a href=""><img src="img/payment/svg/google-pay.svg" alt="GooglePay"></a>
-						<a href=""><img src="img/payment/svg/apple-pay.svg" alt="ApplePay"></a>
-						<a href=""><img src="img/payment/svg/monobank.svg" alt="Monobank"></a>
-						<a href=""><img src="img/payment/svg/privat24.svg" alt="Privat24"></a>
+					
+			<section class="expected">
+				<div class="expected__container">
+					<div class="expected__row">
+
+						<div class="expected__left">
+							<h3>Кабінет підписки</h3>
+							<div class="expected__user">
+								<img src="img/expected/svg/user.svg" class="expected__user-img" alt="user"><span>Віктор Григорович</span><a href="#"><img src="img/expected/svg/edit.svg" class="expected__edit-img" alt="edit"></a>
+							</div>
+							<div class="expected__email">viktor.grygorovych@ukr.tak</div>
+							<div class="expected__birthday">
+								<img src="img/expected/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
+							</div>
+							<div class="expected__phone">
+								<img src="img/expected/svg/phone.svg" alt="phone">+380671234567
+							</div>
+						</div>
+
+						<div class="expected__right">
+							<div class="expected__block">
+								<div class="expected__status"><span>Статус підписки</span>: На розгляді</div>
+								<div class="expected__manager"><span>Менеджер</span>: Петро Горошенко, тел. <a href="tel:+380671234567">+380671234567</a></div>
+							</div>
+							<div class="expected__button">
+								<a class="expected__a blue-button" href="#">Переглянути заявку</a>
+							</div>						
+						</div>
 					</div>
 				</div>
-				<button type="button" class="btn-close payment__button" aria-label="Close"></button>
 			</section>
-		
+
 		</div>
 				
 			<footer class="footer">

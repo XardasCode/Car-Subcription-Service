@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/sign-in.css">
-	<title>Вхід</title>
+	<link rel="stylesheet" type="text/css" href="css/sign-up.css">
+	<title>Реєстрація</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 						        </li>
 						        <div class="header__wrapper-lact-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a><!--sign-up.html sign-in.html-->
+							          <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up header__active" href="#">Зареєструватись</a><!--sign-up.html sign-in.html-->
 							        </li>
 						        </div>
 						      </ul>
@@ -52,27 +52,51 @@
 				</div>
 			</header>
 					
-			<section class="sign-in">
-				<div class="sign-in__wrapper">
-					<div class="sign-in__switch">
-						<a class="sign-in__up" href="sign-up.html">Реєстрація</a>
-						<a class="sign-in__in blue-button" href="#">Вхід</a>
+			<section class="sign-up">
+				<div class="sign-up__wrapper">
+					<div class="sign-up__switch">
+						<a class="sign-up__up blue-button" href="#">Реєстрація</a>
+						<a class="sign-up__in" href="sign-in.html">Вхід</a>
 					</div>
 					<form>
-						<div class="sign-in__title">Увійти в особистий кабінет</div>
-						<div class="mb-3 sign-in__email">
+						<div class="sign-up__title">Реєстрація акаунту</div>
+						<div class="col sign-up__name">
+							<label for="exampleInputEmail1" class="form-label">Ім'я</label>
+					   	<input type="text" class="form-control" placeholder="Віктор" aria-label="First name">
+						</div>
+						<div class="col sign-up__surname">
+							<label for="exampleInputEmail1" class="form-label">Прізвище</label>
+					   	<input type="text" class="form-control" placeholder="Григорович" aria-label="Last name">
+						</div>
+						<div class="col sign-up__date">
+							<label for="exampleInputEmail1" class="form-label">Дата народження</label>
+					   	<input type="date" class="form-control" placeholder="10.03.1995" aria-label="Date">
+						</div>
+						<div class="col sign-up__email">
 							<label for="exampleInputEmail1" class="form-label">Електронна пошта</label>
 							<input type="email" placeholder="viktor.grygorovych@ukr.tak" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 						</div>
-						<div class="mb-3 sign-in__password">
+						<div class="col sign-up__number">
+							<label for="exampleInputEmail1" class="form-label">Номер телефону</label>
+					   	<input type="number" class="form-control" placeholder="+380671234567" aria-label="Date">
+						</div>
+						<div class="col sign-up__password">
 							<label for="exampleInputPassword1" class="form-label">Пароль</label>
 							<input type="password" placeholder="*********" class="form-control" id="exampleInputPassword1">
 						</div>
-						<div class="mb-3 form-check sign-in__remember">
-							<input type="checkbox" class="form-check-input sign-in__checkbox" id="exampleCheck1">
-							<label class="form-check-label sign-in__remember-label" for="exampleCheck1">Запамʼятати цей пристрій</label>
+						<div class="col sign-up__confirm-password">
+							<label for="exampleInputPassword1" class="form-label">Підтвердити пароль</label>
+							<input type="password" placeholder="*********" class="form-control" id="exampleInputPassword1">
 						</div>
-						<button type="submit" class="sign-in__authorization blue-button">Авторизація</button>
+						<div class="col form-check sign-up__agree">
+							<label class="form-check-label sign-up__agree-label" for="exampleCheck1">Я надаю згоду на обробку своїх персональних даних з метою ідентифікації як користувача сервісу</label>
+							<input type="checkbox" class="form-check-input sign-up__checkbox" id="exampleCheck1">						
+						</div>
+						<div class="col form-check sign-up__want-receive">
+							<label class="form-check-label sign-up__want-receive-label" for="exampleCheck2">Я хочу отримувати email розсилку</label>
+							<input type="checkbox" class="form-check-input sign-up__checkbox" id="exampleCheck2">
+						</div>
+						<button type="submit" class="sign-up__authorization blue-button">Зараєструватись</button>
 					</form>
 				</div>
 			</section>

@@ -68,10 +68,28 @@ body {
     body {
       background: #f0f8ff; } }
 
+.wrapper {
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
 .main_container {
   max-width: 1400px;
   padding: 0 25px;
-  min-height: 89.2%; }
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto; }
+  @media (max-width: 479.98px) {
+    .main_container {
+      padding: 0 20px; } }
+  @media (max-width: 379.98px) {
+    .main_container {
+      padding: 0 15px; } }
 
 .adaptive-img {
   max-width: 100%;
@@ -257,7 +275,7 @@ body {
     margin: 0 auto; }
   .sign-in__switch {
     border-radius: 10px;
-    padding: 16px 0 15px 3px;
+    padding: 16px 0 15px 0px;
     -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #F0F0F0;
@@ -289,18 +307,18 @@ body {
     @media (max-width: 575.98px) {
       .sign-in__up {
         font-size: 16px;
-        padding: 16px 40px; } }
+        padding: 16px 41.555px; } }
     @media (max-width: 479.98px) {
       .sign-in__up {
         font-size: 14px;
-        padding: 15px 30px; } }
+        padding: 15px 33px; } }
     @media (max-width: 379.98px) {
       .sign-in__up {
-        padding: 15px 18px; } }
+        padding: 15px 22px; } }
   .sign-in__in {
     font-size: 18px;
     line-height: 22px;
-    padding: 16px 85px;
+    padding: 16px 86.546px;
     background: #3f7cd5; }
     @media (max-width: 575.98px) {
       .sign-in__in {
@@ -309,10 +327,10 @@ body {
     @media (max-width: 479.98px) {
       .sign-in__in {
         font-size: 14px;
-        padding: 15px 65px; } }
+        padding: 15px 62px; } }
     @media (max-width: 379.98px) {
       .sign-in__in {
-        padding: 15px 54px; } }
+        padding: 15px 50px; } }
   .sign-in__in:hover {
     background: #3f7cd5; }
   .sign-in__title {
@@ -338,10 +356,19 @@ body {
         font-size: 18px;
         margin-bottom: 5px; } }
   .sign-in__email {
-    margin-bottom: 16px !important; }
-    @media (max-width: 479.98px) {
+    margin-bottom: 18px !important; }
+    @media (max-width: 767.98px) {
+      .sign-in__email {
+        margin-bottom: 16px !important; } }
+    @media (max-width: 575.98px) {
       .sign-in__email {
         margin-bottom: 14px !important; } }
+    @media (max-width: 479.98px) {
+      .sign-in__email {
+        margin-bottom: 12px !important; } }
+    @media (max-width: 379.98px) {
+      .sign-in__email {
+        margin-bottom: 10px !important; } }
   .sign-in__password {
     margin-bottom: 30px !important; }
     @media (max-width: 767.98px) {
@@ -353,6 +380,9 @@ body {
     @media (max-width: 479.98px) {
       .sign-in__password {
         margin-bottom: 18px !important; } }
+    @media (max-width: 379.98px) {
+      .sign-in__password {
+        margin-bottom: 16px !important; } }
   .sign-in label {
     font-size: 20px;
     line-height: 24px;
@@ -373,7 +403,6 @@ body {
   .sign-in input {
     padding: 10px 17px;
     font-size: 20px;
-    color: #A2A2A2;
     -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px; }
@@ -388,36 +417,44 @@ body {
         font-size: 14px; } }
   .sign-in .sign-in__checkbox {
     padding: 10px;
-    border-radius: 0px !important;
+    border-radius: 0px;
     margin-top: 0;
     height: 0;
     -webkit-box-shadow: none;
-    box-shadow: none;
-    font-size: 10px; }
-    @media (max-width: 379.98px) {
+    box-shadow: none; }
+    @media (max-width: 479.98px) {
       .sign-in .sign-in__checkbox {
         padding: 9px; } }
   .sign-in__remember {
+    padding-left: 35px;
     margin-bottom: 22px !important; }
     @media (max-width: 767.98px) {
       .sign-in__remember {
+        padding-left: 33px;
         margin-bottom: 20px !important; } }
     @media (max-width: 575.98px) {
       .sign-in__remember {
+        padding-left: 30px;
         margin-bottom: 18px !important; } }
     @media (max-width: 479.98px) {
       .sign-in__remember {
+        padding-left: 27px;
         margin-bottom: 16px !important; } }
   .sign-in .sign-in__remember-label {
     font-size: 15px;
     line-height: 22px;
-    margin-left: 5px; }
+    margin-left: -3px; }
+    @media (max-width: 767.98px) {
+      .sign-in .sign-in__remember-label {
+        margin-left: 0px; } }
     @media (max-width: 575.98px) {
       .sign-in .sign-in__remember-label {
-        font-size: 14px; } }
+        font-size: 14px;
+        margin-left: 3px; } }
     @media (max-width: 479.98px) {
       .sign-in .sign-in__remember-label {
-        font-size: 12px; } }
+        font-size: 13px;
+        margin-left: 5px; } }
   .sign-in__authorization {
     padding: 14px 20px;
     display: block;

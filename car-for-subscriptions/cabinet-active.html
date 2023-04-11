@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/payment.css">
-	<title>Оплата</title>
+	<link rel="stylesheet" type="text/css" href="css/cabinet-active.css">
+	<title>Кабінет (Активна)</title>
 </head>
 <body>
-	<div class="wrapper"> 
+	<div class="wrapper">
 		<div class="container main_container">
 
 			<header class="header">
@@ -30,17 +30,17 @@
 						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> 
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
+						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> 
 						        </li>
 						        <li class="nav-item">
 						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
 						        </li>
 						        <div class="header__wrapper-lact-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html sign-in.html-->
+							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html-->
 							        </li>
 						        </div>
 						      </ul>
@@ -50,25 +50,50 @@
 					</div>
 				</div>
 			</header>
-				
-			<section class="payment">
-				<div class="payment__block">
-					<div class="payment__title">
-						<h2>Оберіть метод оплати</h2>
-					</div>
-					<div class="payment__services">
-						<a href=""><img src="img/payment/svg/payoneer.svg" alt="Payoneer"></a>
-						<a href=""><img src="img/payment/svg/pay-pal.svg" alt="PayPal"></a>
-						<a href=""><img src="img/payment/svg/binance.svg" alt="Binance"></a>
-						<a href=""><img src="img/payment/svg/google-pay.svg" alt="GooglePay"></a>
-						<a href=""><img src="img/payment/svg/apple-pay.svg" alt="ApplePay"></a>
-						<a href=""><img src="img/payment/svg/monobank.svg" alt="Monobank"></a>
-						<a href=""><img src="img/payment/svg/privat24.svg" alt="Privat24"></a>
+					
+			<section class="cabinet-active">
+				<div class="cabinet-active__container">
+					<div class="cabinet-active__row">
+
+						<div class="cabinet-active__left">
+							<h3>Кабінет підписки</h3>
+							<div class="cabinet-active__user">
+								<img src="img/active/svg/user.svg" class="cabinet-active__user-img" alt="user"><span>Віктор Григорович</span><a href="#"><img src="img/active/svg/edit.svg" class="cabinet-active__edit-img" alt="edit"></a>
+							</div>
+							<div class="cabinet-active__email">viktor.grygorovych@ukr.tak</div>
+							<div class="cabinet-active__birthday">
+								<img src="img/active/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
+							</div>
+							<div class="cabinet-active__phone">
+								<img src="img/active/svg/phone.svg" alt="phone">+380671234567
+							</div>
+						</div>
+
+						<div class="cabinet-active__right">
+							<div class="cabinet-active__block">
+								<div class="cabinet-active__block-text">
+									<div class="cabinet-active__status">Статус підписки: <span>Активна</span></div>
+									<div class="cabinet-active__auto">Авто: <span>Volkswagen Tiguan</span> <a href="catalog.html">(переглянути в каталозі)</a></div>
+									<div class="cabinet-active__remain">Залишилось до наступного платежу: <span>18 днів</span></div>
+								</div>
+
+								<div class="cabinet-active__block-buttons">
+									<div class="cabinet-active__button-report">
+										<a class="cabinet-active__a-report blue-button" href="#">Переглянути звіт</a>
+									</div>
+									<div class="cabinet-active__button-payment">
+										<a class="cabinet-active__a-payment blue-button" href="payment.html">Перейти до оплати</a>
+									</div>		
+								</div>
+							</div>
+							<!-- <div class="cabinet-active__button">
+								<a class="cabinet-active__a blue-button" href="#">Подати заявку</a>
+							</div> -->						
+						</div>
 					</div>
 				</div>
-				<button type="button" class="btn-close payment__button" aria-label="Close"></button>
 			</section>
-		
+
 		</div>
 				
 			<footer class="footer">

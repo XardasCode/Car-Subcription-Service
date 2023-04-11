@@ -214,10 +214,16 @@ body{
 	}
 }
 /****************
-*****Sign-in*****
+*****Sign-up*****
 *****************/
-.sign-in{
-	margin: 55px 0 60px 0;
+.sign-up{
+	margin: 55px 0 125px 0;
+	@media (max-width: 1399.98px) {
+		margin: 55px 0 100px 0;
+	}
+	@media (max-width: 1199.98px) {
+		margin: 55px 0 80px 0;
+	}
 	@media (max-width: 991.98px) {}
 	@media (max-width: 767.98px) {
 		margin: 50px 0 50px 0;
@@ -250,7 +256,7 @@ body{
 			margin: 0 auto 30px auto;
 		}
 		@media (max-width: 479.98px) {
-			padding: 14px 0 12px 3px;
+			padding: 14px 0 12px 0px;
 			max-width: 316px;
 			margin: 0 auto 25px auto;
 		}
@@ -262,28 +268,29 @@ body{
 	&__up{
 		font-size: 18px;
 		line-height: 22px;
-		text-transform: uppercase;
-		color: #5B5B5B;
-		background: #F0F0F0;
+		background: rgba(63, 124, 213, 1);
 		border-radius: 10px;
 		padding: 16px 50px;
 		@media (max-width: 575.98px) {
 			font-size: 16px;
-			padding: 16px 41.555px;
+			padding: 16px 40px;
 		}
 		@media (max-width: 479.98px) {
 			font-size: 14px;
-			padding: 15px 33px;
+			padding: 15px 35px;
 		}
 		@media (max-width: 379.98px) {
-			padding: 15px 22px;
+			padding: 15px 23px;
 		}
 	}
 	&__in{
 		font-size: 18px;
 		line-height: 22px;
-		padding: 16px 86.546px;
-		background: rgba(63, 124, 213, 1);
+		text-transform: uppercase;
+		color: #5B5B5B;
+		background: #F0F0F0;
+		border-radius: 10px;
+		padding: 16px 86.546px;;
 		@media (max-width: 991.98px) {}
 		@media (max-width: 767.98px) {
 			// font-size: 16px;
@@ -294,14 +301,14 @@ body{
 		}
 		@media (max-width: 479.98px) {
 			font-size: 14px;
-			padding: 15px 62px;
+			padding: 15px 60px;
 		}
 		@media (max-width: 379.98px) {
 			padding: 15px 50px;
 		}
 	}
 	&__in:hover{
-		background: rgba(63, 124, 213, 1);
+		// background: rgba(63, 124, 213, 1);
 	}
 	&__title{
 		font-size: 24px;
@@ -327,7 +334,7 @@ body{
 			margin-bottom: 5px;
 		}
 	}
-	&__email{
+	&__name, &__surname, &__date, &__email, &__number, &__password {
 		margin-bottom: 18px !important;
 		@media (max-width: 767.98px) {
 			margin-bottom: 16px !important;
@@ -342,7 +349,7 @@ body{
 			margin-bottom: 10px !important;;
 		}
 	}
-	&__password{
+	&__confirm-password{
 		margin-bottom: 30px !important;
 		@media (max-width: 767.98px) {
 			margin-bottom: 25px !important;
@@ -399,7 +406,7 @@ body{
 		}
 		@media (max-width: 379.98px) {}
 	}
-	.sign-in__checkbox{
+	.sign-up__checkbox{
 		padding: 10px;
 		border-radius: 0px;
 		margin-top: 0;
@@ -412,25 +419,36 @@ body{
 			padding: 9px;
 		}
 	}
-	&__remember{
+	&__agree, &__want-receive{
 		padding-left: 35px;
-		margin-bottom: 22px !important;
 		@media (max-width: 767.98px) {
 			padding-left: 33px;
-			margin-bottom: 20px !important;
 		}
 		@media (max-width: 575.98px) {
 			padding-left: 30px;
-			margin-bottom: 18px !important;
 		}
 		@media (max-width: 479.98px) {
 			padding-left: 27px;
+		}
+	}
+	&__want-receive{
+		margin-bottom: 22px;
+		@media (max-width: 767.98px) {
+			margin-bottom: 20px !important;
+		}
+		@media (max-width: 575.98px) {
+			margin-bottom: 18px !important;
+		}
+		@media (max-width: 479.98px) {
 			margin-bottom: 16px !important;
 		}
 	}
-	.sign-in__remember-label{
+	&__agree{
+		margin-bottom: 8px;
+	}
+	.sign-up__agree-label, .sign-up__want-receive-label{
 		font-size: 15px;
-		line-height: 22px;
+		line-height: 18px;
 		margin-left: -3px;
 		@media (max-width: 991.98px) {}
 		@media (max-width: 767.98px) {

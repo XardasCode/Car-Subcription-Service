@@ -204,6 +204,26 @@ body{
 *****Answers*****
 *****************/
 .answers{
+		margin-bottom: 160px;
+			@media (max-width: 1199.98px) {
+				margin-bottom: 120px;
+			}
+			@media (max-width: 991.98px) {
+				background: none;
+				margin-bottom: 100px;
+			}
+			@media (max-width: 767.98px) {
+				margin-bottom: 80px;
+			}
+			@media (max-width: 575.98px) {
+				margin-bottom: 60px;
+			}
+			@media (max-width: 479.98px) {
+				margin-bottom: 40px;
+			}
+			@media (max-width: 379.98px) {
+				margin-bottom: 30px;
+			}	
 	&__title{
 		margin-bottom: 50px;
 		@media (max-width: 991.98px) {
@@ -247,27 +267,7 @@ body{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 160px;
 		background: url(../img/questions/svg/bg.svg) no-repeat 0 50%;
-		@media (max-width: 1199.98px) {
-			margin-bottom: 120px;
-		}
-		@media (max-width: 991.98px) {
-			background: none;
-			margin-bottom: 100px;
-		}
-		@media (max-width: 767.98px) {
-			margin-bottom: 80px;
-		}
-		@media (max-width: 575.98px) {
-			margin-bottom: 60px;
-		}
-		@media (max-width: 479.98px) {
-			margin-bottom: 40px;
-		}
-		@media (max-width: 379.98px) {
-			margin-bottom: 20px;
-		}
 	}
 	&__item{
 		width: 74.1%;
