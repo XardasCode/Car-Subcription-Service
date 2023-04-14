@@ -58,15 +58,15 @@
 						<a class="sign-up__up blue-button" href="#">Реєстрація</a>
 						<a class="sign-up__in" href="sign-in.html">Вхід</a>
 					</div>
-					<form>
+					<form action="#" id="form">
 						<div class="sign-up__title">Реєстрація акаунту</div>
 						<div class="col sign-up__name">
 							<label for="exampleInputEmail1" class="form-label">Ім'я</label>
-					   	<input type="text" class="form-control" placeholder="Віктор" aria-label="First name">
+					   	<input type="text" class="form-control sign-up__input _req" placeholder="Віктор" aria-label="First name">
 						</div>
 						<div class="col sign-up__surname">
 							<label for="exampleInputEmail1" class="form-label">Прізвище</label>
-					   	<input type="text" class="form-control" placeholder="Григорович" aria-label="Last name">
+					   	<input type="text" class="form-control sign-up__input _req" placeholder="Григорович" aria-label="Last name">
 						</div>
 						<div class="col sign-up__date">
 							<label for="exampleInputEmail1" class="form-label">Дата народження</label>
@@ -74,11 +74,11 @@
 						</div>
 						<div class="col sign-up__email">
 							<label for="exampleInputEmail1" class="form-label">Електронна пошта</label>
-							<input type="email" placeholder="viktor.grygorovych@ukr.tak" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							<input type="email" placeholder="viktor.grygorovych@ukr.tak" class="form-control _req _email" id="exampleInputEmail1" aria-describedby="emailHelp">
 						</div>
 						<div class="col sign-up__number">
 							<label for="exampleInputEmail1" class="form-label">Номер телефону</label>
-					   	<input type="number" class="form-control" placeholder="+380671234567" aria-label="Date">
+					   	<input type="number" class="form-control _req" placeholder="+380671234567" aria-label="Date">
 						</div>
 						<div class="col sign-up__password">
 							<label for="exampleInputPassword1" class="form-label">Пароль</label>
@@ -89,12 +89,12 @@
 							<input type="password" placeholder="*********" class="form-control" id="exampleInputPassword1">
 						</div>
 						<div class="col form-check sign-up__agree">
-							<label class="form-check-label sign-up__agree-label" for="exampleCheck1">Я надаю згоду на обробку своїх персональних даних з метою ідентифікації як користувача сервісу</label>
-							<input type="checkbox" class="form-check-input sign-up__checkbox" id="exampleCheck1">						
+							<input type="checkbox" class="form-check-input sign-up__checkbox checkbox _req" id="exampleCheck1">
+							<label class="form-check-label sign-up__agree-label" for="exampleCheck1">Я надаю згоду на обробку своїх персональних даних з метою ідентифікації як користувача сервісу</label>				
 						</div>
 						<div class="col form-check sign-up__want-receive">
-							<label class="form-check-label sign-up__want-receive-label" for="exampleCheck2">Я хочу отримувати email розсилку</label>
 							<input type="checkbox" class="form-check-input sign-up__checkbox" id="exampleCheck2">
+							<label class="form-check-label sign-up__want-receive-label" for="exampleCheck2">Я хочу отримувати email розсилку</label>
 						</div>
 						<button type="submit" class="sign-up__authorization blue-button">Зараєструватись</button>
 					</form>
@@ -130,5 +130,9 @@
 	</div>
 
 	<script src="js/bootstrap.bundle.min.js"></script>
+
+	<!-- Валідація -->
+	<script type="text/javascript" src="js/sign-up.js"></script>
+	<!-- Валідація -->
 </body>
 </html>

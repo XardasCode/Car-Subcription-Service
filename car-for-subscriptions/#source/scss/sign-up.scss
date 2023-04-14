@@ -404,7 +404,6 @@ body{
 		@media (max-width: 479.98px) {
 			font-size: 14px;
 		}
-		@media (max-width: 379.98px) {}
 	}
 	.sign-up__checkbox{
 		padding: 10px;
@@ -412,9 +411,15 @@ body{
 		margin-top: 0;
 		height: 0;
 		box-shadow: none;
-		@media (max-width: 991.98px) {}
-		@media (max-width: 767.98px) {}
-		@media (max-width: 575.98px) {}
+		transition: all 0.7s ease 0s;
+		position: relative;
+		cursor: pointer;
+		@media (max-width: 767.98px) {
+			top: 1px;
+		}
+		@media (max-width: 575.98px) {
+			top: 2px;
+		}
 		@media (max-width: 479.98px) {
 			padding: 9px;
 		}
@@ -478,7 +483,15 @@ body{
 		@media (max-width: 379.98px) {}
 	}
 }
-
+/*****************
+******Валідація****** 
+******************/
+input._error{
+	box-shadow: 0 0 7px red;
+}
+.checkbox._error{
+	box-shadow: 0 0 7px red;
+}
 /*****************
 ******Footer****** 
 ******************/

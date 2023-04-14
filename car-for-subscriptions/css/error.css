@@ -106,13 +106,13 @@ body {
       margin: 30px 0; } }
   @media (max-width: 767.98px) {
     .error__text {
-      margin-bottom: 30px; } }
+      margin-bottom: 20px; } }
   @media (max-width: 575.98px) {
     .error__text {
-      margin: 20px 0; } }
+      margin-bottom: 15px; } }
   @media (max-width: 479.98px) {
     .error__text {
-      margin: 10px 0; } }
+      margin-bottom: 10px; } }
   .error__text h1 {
     font-size: 150px;
     font-family: 'Bree Serif', serif; }
@@ -145,6 +145,7 @@ body {
         font-size: 28px; } }
     @media (max-width: 991.98px) {
       .error__not-find {
+        margin-bottom: 20px;
         font-size: 26px; } }
     @media (max-width: 575.98px) {
       .error__not-find {
@@ -152,7 +153,7 @@ body {
     @media (max-width: 479.98px) {
       .error__not-find {
         font-size: 22px;
-        margin-bottom: 20px; } }
+        margin-bottom: 15px; } }
     @media (max-width: 379.98px) {
       .error__not-find {
         font-size: 20px; }
@@ -160,10 +161,14 @@ body {
           display: inline; } }
   .error__404 {
     font-size: 16px;
-    margin-bottom: 10px; }
+    margin-bottom: 25px; }
+    @media (max-width: 991.98px) {
+      .error__404 {
+        margin-bottom: 20px; } }
     @media (max-width: 479.98px) {
       .error__404 {
-        font-size: 15px; } }
+        font-size: 15px;
+        margin-bottom: 15px; } }
     @media (max-width: 379.98px) {
       .error__404 {
         font-size: 14px; } }
@@ -208,3 +213,12 @@ body {
     @media (max-width: 379.98px) {
       .error__img img {
         width: 230px; } }
+  @media (max-width: 767.98px) {
+    .error__desktop {
+      display: none; } }
+  .error__telephone {
+    display: none; }
+    @media (max-width: 767.98px) {
+      .error__telephone {
+        display: block;
+        width: 300px; } }

@@ -421,7 +421,14 @@ body {
     margin-top: 0;
     height: 0;
     -webkit-box-shadow: none;
-    box-shadow: none; }
+    box-shadow: none;
+    -webkit-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    position: relative; }
+    @media (max-width: 575.98px) {
+      .sign-in .sign-in__checkbox {
+        top: 1px; } }
     @media (max-width: 479.98px) {
       .sign-in .sign-in__checkbox {
         padding: 9px; } }

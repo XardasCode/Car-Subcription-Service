@@ -426,7 +426,18 @@ body {
     margin-top: 0;
     height: 0;
     -webkit-box-shadow: none;
-    box-shadow: none; }
+    box-shadow: none;
+    -webkit-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    position: relative;
+    cursor: pointer; }
+    @media (max-width: 767.98px) {
+      .sign-up .sign-up__checkbox {
+        top: 1px; } }
+    @media (max-width: 575.98px) {
+      .sign-up .sign-up__checkbox {
+        top: 2px; } }
     @media (max-width: 479.98px) {
       .sign-up .sign-up__checkbox {
         padding: 9px; } }
@@ -478,6 +489,17 @@ body {
     @media (max-width: 479.98px) {
       .sign-up__authorization {
         padding: 12px 20px; } }
+
+/*****************
+******Валідація****** 
+******************/
+input._error {
+  -webkit-box-shadow: 0 0 7px red;
+  box-shadow: 0 0 7px red; }
+
+.checkbox._error {
+  -webkit-box-shadow: 0 0 7px red;
+  box-shadow: 0 0 7px red; }
 
 /*****************
 ******Footer****** 
