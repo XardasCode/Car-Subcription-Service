@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS managers CASCADE;
 DROP TABLE IF EXISTS car_statuses CASCADE;
 DROP TABLE IF EXISTS cars CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS subscription_statuses CASCADE;
 DROP TABLE IF EXISTS subscriptions CASCADE;
 
 
@@ -58,6 +59,11 @@ CREATE TABLE IF NOT EXISTS users
     UNIQUE (email)
 );
 
+CREATE TABLE IF NOT EXISTS subscription_statuses
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS subscriptions
 (
@@ -74,7 +80,7 @@ CREATE TABLE IF NOT EXISTS subscriptions
     status_id    INT          NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (status_id) REFERENCES car_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (status_id) REFERENCES subscription_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (manager_id) REFERENCES managers (id) ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (user_id),
     UNIQUE (car_id)

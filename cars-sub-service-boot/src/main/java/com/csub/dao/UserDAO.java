@@ -1,13 +1,14 @@
 package com.csub.dao;
 
 import com.csub.entity.User;
+import com.csub.util.UserSearchInfo;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserDAO {
 
-    List<User> getAllUsers();
+    List<User> getUsers(UserSearchInfo info);
 
     long addUser(User user);
 
@@ -17,9 +18,7 @@ public interface UserDAO {
 
     Optional<User> getUser(long id);
 
-    Optional<User> getUserByEmailAndPassword(String email, String password);
-
     Optional<User> getUserByEmail(String email);
 
-    List<User> findUsers(String query);
+//    List<User> findUsers(String query);
 }

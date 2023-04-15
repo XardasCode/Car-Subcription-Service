@@ -1,4 +1,4 @@
-package com.csub.controller;
+package com.csub.controller.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,7 @@
 package com.csub.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -28,19 +25,24 @@ public class Subscription {
     @Column(name = "total_months")
     private int totalMonths;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", unique = true)
+    @EqualsAndHashCode.Exclude
     private User user;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "car_id", unique = true)
+    @EqualsAndHashCode.Exclude
     private Car car;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "manager_id", nullable = false)
+    @EqualsAndHashCode.Exclude
     private Manager manager;
 
-    @Column(name = "status_id")
-    private int statusId;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "status_id", nullable = false)
+    @EqualsAndHashCode.Exclude
+    private SubscriptionStatus status;
 
 }

@@ -1,22 +1,24 @@
 package com.csub.service;
 
+import com.csub.dto.UserDTO;
 import com.csub.entity.User;
+import com.csub.util.UserSearchInfo;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getAllUsers();
+    List<UserDTO> getUsers(UserSearchInfo info);
 
     long addUser(User user);
 
-    User getUser(long id);
+    UserDTO getUser(long id);
 
-    User checkUserCredentials(String email, String password);
+    UserDTO checkUserCredentials(String email, String password);
 
     void updateUser(User user, long id);
 
     void deleteUser(long id);
 
-    List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
+    List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
 }

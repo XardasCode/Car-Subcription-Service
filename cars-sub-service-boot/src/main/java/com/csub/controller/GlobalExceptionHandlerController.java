@@ -15,7 +15,7 @@ import java.util.List;
 
 @ControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionJSONInfo> handleException(Exception e) {

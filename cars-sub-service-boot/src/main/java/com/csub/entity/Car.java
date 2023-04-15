@@ -1,10 +1,7 @@
 package com.csub.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -44,6 +41,12 @@ public class Car {
     @Column(name = "status_id")
     private String statusId;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @EqualsAndHashCode.Exclude
     private Subscription subscriptions;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "status_id", insertable = false, updatable = false)
+    @EqualsAndHashCode.Exclude
+    private CarStatus carStatus;
 }

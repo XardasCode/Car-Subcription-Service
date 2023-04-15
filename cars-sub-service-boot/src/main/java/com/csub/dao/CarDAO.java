@@ -1,6 +1,8 @@
 package com.csub.dao;
 
 import com.csub.entity.Car;
+import com.csub.util.CarSearchInfo;
+
 import java.util.Optional;
 import java.util.List;
 
@@ -13,5 +15,5 @@ public interface CarDAO {
 
     Optional<Car> getCar(long id);
 
-    List<Car> getAllCars();
+    List<Car> getCars(CarSearchInfo info);
 }

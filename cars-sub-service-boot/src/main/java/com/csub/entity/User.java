@@ -53,6 +53,6 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String verificationCode;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Subscription subscriptions;
 }

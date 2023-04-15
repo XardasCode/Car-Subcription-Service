@@ -2,6 +2,7 @@ package com.csub.dao.postgre.impl;
 
 import com.csub.entity.Subscription;
 import com.csub.dao.SubscriptionDAO;
+import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
@@ -15,12 +16,12 @@ import java.util.Optional;
 @Slf4j
 public class PostgreSubscriptionDAO implements SubscriptionDAO {
 
-    private final SessionFactory sessionFactory;
+    private final EntityManager sessionFactory;
 
     @Override
     public long addSubscription(Subscription subscription) {
         log.debug("Adding subscription: {}", subscription);
-        sessionFactory.getCurrentSession().persist(subscription);
+        sessionFactory.persist(subscription);
         log.debug("Subscription created with id {}", subscription.getId());
         return subscription.getId();
     }
@@ -28,27 +29,36 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
     @Override
     public void deleteSubscription(long id) {
         log.debug("Delete subscription with id: {}", id);
-        Subscription subscription = sessionFactory.getCurrentSession().get(Subscription.class, id);
-        if (subscription != null) sessionFactory.getCurrentSession().remove(subscription);
+        Subscription subscription = sessionFactory.find(Subscription.class, id);
+        if (subscription != null) sessionFactory.remove(subscription);
         log.debug("Subscription deleted with id {}", id);
     }
 
     @Override
     public void updateSubscription(Subscription subscription) {
         log.debug("Updating subscription: {}", subscription);
-        sessionFactory.getCurrentSession().merge(subscription);
+        sessionFactory.merge(subscription);
         log.debug("Subscription updated: {}", subscription);
     }
 
     @Override
     public Optional<Subscription> getSubscription(long id) {
         log.debug("Getting subscription with id {}", id);
-        return Optional.ofNullable(sessionFactory.getCurrentSession().get(Subscription.class, id));
+        return Optional.ofNullable(sessionFactory.find(Subscription.class, id));
     }
 
     @Override
     public List<Subscription> getAllSubscription() {
         log.debug("Getting all users");
-        return sessionFactory.getCurrentSession().createQuery("from Subscription", Subscription.class).list();
+        return sessionFactory.createQuery("from Subscription", Subscription.class).getResultList();
+    }
+
+    @Override
+    public List<Subscription> getSubscriptionsByUserId(long id) {
+        log.debug("Getting all subscriptions by user id {}", id);
+        return sessionFactory.createQuery("from Subscription where User.id = :id", Subscription.class)
+                .setParameter("id", id)
+                .getResultList();
+
     }
 }

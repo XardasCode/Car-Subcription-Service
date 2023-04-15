@@ -1,7 +1,10 @@
 package com.csub.controller;
 
+import com.csub.controller.util.JSONInfo;
+import com.csub.dto.UserDTO;
 import com.csub.entity.User;
 import com.csub.service.UserService;
+import com.csub.util.UserSearchInfo;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,28 +24,36 @@ public class UserRestController {
     private static final String SUCCESS = "success";
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        log.info("Getting all users");
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserDTO>> getUsers(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    ) {
+        log.info("Getting users with page {} and size {}", page, size);
+        return ResponseEntity.ok(userService.getUsers(
+                UserSearchInfo.builder()
+                        .page(page)
+                        .size(size)
+                        .build()
+        ));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getUser(@PathVariable long id) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable long id) {
         log.info("Getting user with id {}", id);
         return ResponseEntity.ok(userService.getUser(id));
     }
 
     @GetMapping(value = "/{email}/{password}")
-    public ResponseEntity<User> checkUserCredzentials(@PathVariable String email, @PathVariable String password) {
+    public ResponseEntity<UserDTO> checkUserCredzentials(@PathVariable String email, @PathVariable String password) {
         log.info("Checking user credentials");
         return ResponseEntity.ok(userService.checkUserCredentials(email, password));
     }
 
     @GetMapping(value = "/search")
-    public ResponseEntity<List<User>> findUsers(@RequestParam(value = "partOfName",required = false) String partOfName,
-                                                @RequestParam(value = "partOfSurname",required = false) String partOfSurname,
-                                                @RequestParam(value = "isSortByName",required = false) boolean isSortByName,
-                                                @RequestParam(value = "sortType",required = false) String sortType) {
+    public ResponseEntity<List<UserDTO>> findUsers(@RequestParam(value = "partOfName", required = false) String partOfName,
+                                                   @RequestParam(value = "partOfSurname", required = false) String partOfSurname,
+                                                   @RequestParam(value = "isSortByName", required = false) boolean isSortByName,
+                                                   @RequestParam(value = "sortType", required = false) String sortType) {
         log.info("Searching users");
         return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType));
     }

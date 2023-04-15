@@ -1,10 +1,13 @@
 package com.csub.impl;
 
+import com.csub.dto.UserDTO;
+import com.csub.dto.mapper.UserDTOMapper;
 import com.csub.entity.User;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.dao.UserDAO;
 import com.csub.service.UserService;
+import com.csub.util.UserSearchInfo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +24,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
 
+    private final UserDTOMapper userDTOMapper;
+
     @Override
     @Transactional
-    public List<User> getAllUsers() {
+    public List<UserDTO> getUsers(UserSearchInfo info) {
         log.debug("Getting all users");
-        List<User> users = userDAO.getAllUsers();
+        List<User> users = userDAO.getUsers(info);
         log.debug("Users found: {}", users.size());
-        return users;
+        return users.stream().map(userDTOMapper).toList();
     }
 
     @Override
@@ -46,28 +51,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUser(long id) {
+    public UserDTO getUser(long id) {
         log.debug("Getting user with id {}", id);
         Optional<User> user = userDAO.getUser(id);
-        if (user.isEmpty()) {
-            log.warn("User with id {} not found", id);
-            throw new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND);
-        }
-        log.debug("User found: {}", user);
-        return user.get();
+        return user.map(userDTOMapper).orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
     }
 
     @Override
     @Transactional
-    public User checkUserCredentials(String email, String password) {
+    public UserDTO checkUserCredentials(String email, String password) {
         log.debug("Checking user credentials");
-        Optional<User> user = userDAO.getUserByEmailAndPassword(email, password);
-        if (user.isEmpty()) {
-            log.warn("User with email {} and password {} not found", email, password);
-            throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
-        }
-        log.debug("User found: {}", user);
-        return user.get();
+        Optional<User> user = userDAO.getUserByEmail(email);
+        return user.map(userDTOMapper).orElseThrow(() -> new ServerException("User with email " + email + " not found", ErrorList.USER_NOT_FOUND));
     }
 
     @Override
@@ -88,55 +83,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteUser(long id) {
         log.debug("Deleting user with id {}", id);
-        Optional<User> user = userDAO.getUser(id);
-        if (user.isEmpty()) {
-            log.warn("User with id {} not found", id);
-            throw new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND);
-        }
+        getUser(id); // check if user exists and throw exception if not
         userDAO.deleteUser(id);
         log.debug("User with id {} deleted", id);
     }
 
-
-    @Override
-    @Transactional
-    public List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) { // sortType - ASC / DESC
-        // Пошук користувачів
-        // Кожен з параметрів є не обов`язковим, тобто можуть передатись або всі, або тільки один, або не передатись ні один
-        // Якщо не передався ні один параметр - повернути всі користувачівя
-
-        if((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)){
-            return userDAO.getAllUsers();
-        }
-
-        String query = "from User where 1=1 ";
-        String order_by = "order by name";
-
-        if(partOfName != null && !partOfName.isEmpty()) {
-            query += " and name like '%"+partOfName+"%' ";
-        }
-
-        if(partOfSurname != null && !partOfSurname.isEmpty()) {
-            query += " and surname like '%"+partOfSurname+"%' ";
-        }
-
-        if(isSortByName) {
-            if(sortType.equals("DESC")){
-                order_by = " order by name desc";
-            }
-            query+=order_by;
-        }
-
-        log.warn("sort type {}",query);
-        List<User> users = userDAO.findUsers(query);
-
-        if (users.isEmpty()) {
-            log.warn("User not found");
-            throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);
-        }
-
-        return users;
-    }
 
     private void checkIfEmailAlreadyExists(String email) {
         log.debug("Checking if user with email {} already exists", email);
@@ -147,4 +98,46 @@ public class UserServiceImpl implements UserService {
         }
         log.debug("User with email {} does not exist", email);
     }
+
+    @Transactional
+    @Override
+    public List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) { // sortType - ASC / DESC
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+//
+//
+//        if ((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)) {
+//            return userDAO.getAllUsers();
+//        }
+//
+//        String query = "from User where 1=1 ";
+//        String order_by = "order by name";
+//
+//        if (partOfName != null && !partOfName.isEmpty()) {
+//            query += " and name like '%" + partOfName + "%' ";
+//        }
+//
+//        if (partOfSurname != null && !partOfSurname.isEmpty()) {
+//            query += " and surname like '%" + partOfSurname + "%' ";
+//        }
+//
+//        if (isSortByName) {
+//            if (sortType.equals("DESC")) {
+//                order_by = " order by name desc";
+//            }
+//            query += order_by;
+//        }
+//
+//        log.warn("sort type {}", query);
+//        List<User> users = userDAO.findUsers(query);
+//
+//        if (users.isEmpty()) {
+//            log.warn("User not found");
+//            throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);
+//        }
+//
+//        return users;
+//    }
+
 }

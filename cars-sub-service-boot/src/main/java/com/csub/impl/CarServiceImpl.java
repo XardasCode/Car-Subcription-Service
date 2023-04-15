@@ -1,10 +1,13 @@
 package com.csub.impl;
 
 import com.csub.dao.CarDAO;
+import com.csub.dto.CarDTO;
+import com.csub.dto.mapper.CarDTOMapper;
 import com.csub.entity.Car;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.CarService;
+import com.csub.util.CarSearchInfo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +20,10 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 public class CarServiceImpl implements CarService {
+
     private final CarDAO carDAO;
+
+    private final CarDTOMapper carDTOMapper;
 
     @Override
     @Transactional
@@ -29,15 +35,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public Car getCar(long id) {
+    public CarDTO getCar(long id) {
         log.debug("Getting car with id {}", id);
         Optional<Car> car = carDAO.getCar(id);
-        if (car.isEmpty()) {
-            log.debug("Car with id {} not found", id);
-            throw new ServerException("Car not found", ErrorList.CAR_NOT_FOUND);
-        }
-        log.debug("Car found: {}", car);
-        return car.get();
+        return car.map(carDTOMapper)
+                .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
     }
 
     @Override
@@ -60,10 +62,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public List<Car> getAllCars() {
+    public List<CarDTO> getCars(CarSearchInfo info) {
         log.debug("Getting all cars");
-        List<Car> cars = carDAO.getAllCars();
+        List<Car> cars = carDAO.getCars(info);
         log.debug("Cars found: {}", cars.size());
-        return cars;
+        return cars.stream().map(carDTOMapper).toList();
     }
 }

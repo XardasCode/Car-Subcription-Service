@@ -1,11 +1,13 @@
 package com.csub.impl;
 
 import com.csub.dao.SubscriptionDAO;
+import com.csub.dto.SubscriptionDTO;
+import com.csub.dto.mapper.SubscriptionDTOMapper;
 import com.csub.entity.Subscription;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.SubscriptionService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +16,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
     private final SubscriptionDAO subscriptionDAO;
+
+    private final SubscriptionDTOMapper subscriptionDTOMapper;
 
     @Override
     @Transactional
@@ -35,15 +39,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public Subscription getSubscription(long id) {
+    public SubscriptionDTO getSubscription(long id) {
         log.debug("Getting subscription with id {}", id);
-        Optional <Subscription> subscription = subscriptionDAO.getSubscription((int) id);
-        if (subscription.isEmpty()) {
-            log.debug("Subscription with id {} not found", id);
-            throw new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND);
-        }
-        log.debug("Subscription found: {}", subscription);
-        return subscription.get();
+        Optional<Subscription> subscription = subscriptionDAO.getSubscription((int) id);
+        return subscription.map(subscriptionDTOMapper)
+                .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
     }
 
     @Override
@@ -66,10 +66,18 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public List<Subscription> getAllSubscription() {
+    public List<SubscriptionDTO> getAllSubscriptions() {
         log.debug("Getting all subscriptions");
         List<Subscription> subscriptions = subscriptionDAO.getAllSubscription();
         log.debug("Subscriptions found: {}", subscriptions.size());
-        return subscriptions;
+        return subscriptions.stream().map(subscriptionDTOMapper).toList();
+    }
+
+    @Override
+    public List<SubscriptionDTO> getSubscriptionsByUserId(long id) {
+        log.debug("Getting subscriptions by user id {}", id);
+        List<Subscription> subscriptions = subscriptionDAO.getSubscriptionsByUserId(id);
+        log.debug("Subscriptions found: {}", subscriptions.size());
+        return subscriptions.stream().map(subscriptionDTOMapper).toList();
     }
 }
