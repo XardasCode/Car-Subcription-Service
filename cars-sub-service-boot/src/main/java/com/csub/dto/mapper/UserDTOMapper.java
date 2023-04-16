@@ -10,6 +10,7 @@ import java.util.function.Function;
 public class UserDTOMapper implements Function<User, UserDTO> {
     @Override
     public UserDTO apply(User user) {
+        int subscriptionId = user.getSubscription() == null ? 0 : user.getSubscription().getId();
         return new UserDTO(
                 user.getId(),
                 user.getName(),
@@ -17,6 +18,6 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                 user.getEmail(),
                 user.getPhone(),
                 user.isBlocked(),
-                user.getSubscription().getId());
+                subscriptionId);
     }
 }
