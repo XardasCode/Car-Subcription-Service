@@ -54,5 +54,5 @@ public class User {
     private String verificationCode;
 
     @OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    private Subscription subscriptions;
+    private Subscription subscription;
 }

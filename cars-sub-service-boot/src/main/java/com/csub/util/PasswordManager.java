@@ -2,7 +2,10 @@ package com.csub.util;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
-public class PasswordManager {
+public final class PasswordManager {
+
+    private PasswordManager() {}
+
     private static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
 
     public static String encryptPassword(String password) {
