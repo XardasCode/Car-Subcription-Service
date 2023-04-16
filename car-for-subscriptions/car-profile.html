@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/cabinet-inactive.css">
     <link rel="stylesheet" type="text/css" href="css/car-profile.css">
+    <link rel="stylesheet" type="text/css" href="css/catalog.css">
 	<title>Авто за підписку</title>
 </head>
 <body>
@@ -59,8 +60,10 @@
                         <img src="img/catalog/svg/car-2.svg" class="adaptive-img" alt="Volkswagen T-Roc">
                     </div>
                     <div class="car-main__text">
-                        <h3 class="text__brand-title">Volkswagen</h3> 
-                        <h2 class="text__model-title">Tiguan R-Line</h2>
+                        <div class="car-main__titles-wrapper">
+                            <h3 class="text__brand-title">Volkswagen</h3> 
+                            <h2 class="text__model-title">Tiguan R-Line</h2>
+                        </div>
                         <div class="text__line"></div>
                         <div class="text__wrapper">
                             <div class="text__wrapper-left-side">
@@ -81,37 +84,48 @@
             </section>
 
             <section class="car-info">
-                <div class="car-info__container">
-                    <div class="car-info__container-element">
-                        <p>Розгін</p>
-                        <h2>8,3</h2>
-                        <p>сек</p>
+                <div class="car-info__container container">
+                    <div class="row">
+                        <div class="car-info__container-element col">
+                            <p>Розгін</p>
+                            <h2>8,3</h2>
+                            <p>сек</p>
+                        </div>
+                        <div class="car-info__container-element col">
+                            <p>Витрати палива</p>
+                            <h2>5,3</h2>
+                            <p>л/100 км</p>
+                        </div>
+                        <div class="car-info__containers-smallscreen">
+                            <div class="w-100"></div>
+                        </div>
+                        <div class="car-info__container-element col">
+                            <p>Потужність</p>
+                            <h2>155</h2>
+                            <p>к.с.</p>
+                        </div>
+                        <div class="car-info__container-element col">
+                            <p>Макс. швидкість</p>
+                            <h2>208</h2>
+                            <p>км/год</p>
+                        </div>
                     </div>
-                    <div class="car-info__container-element">
-                        <p>Витрати палива</p>
-                        <h2>5,3</h2>
-                        <p>л/100 км</p>
-                    </div>
-                    <div class="car-info__container-element">
-                        <p>Потужність</p>
-                        <h2>155</h2>
-                        <p>к.с.</p>
-                    </div>
-                    <div class="car-info__container-element">
-                        <p>Макс. швидкість</p>
-                        <h2>208</h2>
-                        <p>км/год</p>
-                    </div>
+                    
                 </div>
             </section>
 
             <section class="sub-info">
                 <div class="sub-info__wrapper">
                     <div class="sub-info__container">
-                        <div class="sub-info__text">
-                            <p>Період підписки  ----------------------</p>
-                            <p>Вартість підписки в місяць  --------------</p>
-                            <p>Перший платіж, сів і поїхав  -------------</p>
+                        <div class="sub-info__text sub-info__text-bigscreen">
+                            <p>Період підписки&ensp;&ensp;- - - - - - - - - - - -</p>
+                            <p>Вартість підписки в місяць&ensp;&ensp;- - - - - - - -</p>
+                            <p>Перший платіж, сів і поїхав&ensp; - - - - - - -</p>
+                        </div>
+                        <div class="sub-info__text sub-info__text-smallscreen">
+                            <p>Період підписки</p>
+                            <p>Вартість підписки в місяць</p>
+                            <p>Перший платіж, сів і поїхав</p>
                         </div>
                         <div class="sub-info__bold-text">
                             <p>36 місяців</p>
@@ -124,7 +138,7 @@
 
             <section class="sub-enter">
                 <div class="sub-enter__button">
-                    <a class="taigun__a blue-button" href="sign-in.html">Увійти для підписки</a>
+                    <a class="sub-enter__button-rectangle" href="sign-in.html">Увійти для підписки</a>
                 </div>
             </section>
 		</div>

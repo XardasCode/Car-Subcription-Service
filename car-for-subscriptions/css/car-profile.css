@@ -1,24 +1,33 @@
-.sub_info {
-    text-align: center;
-}
+
+/************************
+***** CAR MAIN INFO *****
+*************************/
 
 .car-main__container {
     display: flex;
     margin: 20px;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+@media (max-width: 991.98px) {
+    .car-main__container {
+      margin: auto; } }
+
+.car-main__img {
+    width: 50%;
+}
+.adaptive-img {
+    width: 100%;
 }
 
-.car-main__img, .adaptive-img {
-    width: 100%;
+.car-main__titles-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .text__brand-title {
     /* Volkswagen */
-
-    padding-top: 24px;
-    padding-right: 150px;
-    margin: auto;
 
     font-size: 46px;
     line-height: 58px;
@@ -26,6 +35,26 @@
 
     color: #437DD5;
 }
+@media (max-width: 991.98px) {
+    .text__brand-title {
+      font-size: 42px;
+      line-height: 42px; } }
+  @media (max-width: 767.98px) {
+    .text__brand-title {
+      font-size: 38px;
+      line-height: 38px; } }
+  @media (max-width: 575.98px) {
+    .text__brand-title {
+      font-size: 34px;
+      line-height: 34px; } }
+  @media (max-width: 479.98px) {
+    .text__brand-title {
+      font-size: 28px;
+      line-height: 28px; } }
+  @media (max-width: 350.98px) {
+    .text__brand-title {
+      font-size: 22px;
+      line-height: 22px; } }    
 
 .text__model-title {
     /* Tiguan R-Line */
@@ -33,16 +62,42 @@
     font-size: 64px;
     line-height: 60px;
     text-align: center;
+    white-space: nowrap;
 
     color: #437DD5;
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+  @media (max-width: 991.98px) {
+    .text__model-title {
+      font-size: 60px;
+      line-height: 64px; } }
+  @media (max-width: 767.98px) {
+    .text__model-title {
+      font-size: 56px;
+      line-height: 56px; } }
+  @media (max-width: 575.98px) {
+    .text__model-title {
+      font-size: 50px;
+      line-height: 50px; } }
+  @media (max-width: 500.98px) {
+    .text__model-title {
+      font-size: 44px;
+      line-height: 44px; } }
+  @media (max-width: 450.98px) {
+    .text__model-title {
+      font-size: 35px;
+      line-height: 35px; } }    
+  @media (max-width: 390.98px) {
+    .text__model-title {
+      font-size: 30px;
+      line-height: 30px; } }    
+      
 
 .text__line {
     /* Line 1 */
 
-    width: 469px;
+    width: 85%;
     height: 0px;
     margin: 20px auto;
 
@@ -51,28 +106,25 @@
 
 }
 
-.text__wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+
 
 .car-main__text {
     /* Rectangle */
-
-    width: 100%;
-    margin: 20px;
-    padding: auto;
+    
+    width: 50%;
+    padding: 15px 0;
 
     background: #D9EDFF;
     border-radius: 15px;
 }
+@media (max-width: 991.98px) {
+    .car-main__text {
+      width: 80%; } }
 
 .car-main__text p {
     /* Об'єм двигуна: Рік випуску: Колір: Паливо: */
 
     margin: auto;
-    margin-left: 60px;
 
     text-align: justify;
     font-size: 28px;
@@ -81,31 +133,81 @@
     color: #437DD5;
 }
 
-.text__wrapper-right-side {
-    margin: auto;
+.text__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: auto;
 }
+@media (max-width: 991.98px) {
+    .text__wrapper p{
+      font-size: 28px;
+      line-height: 34px; } }
+  @media (max-width: 767.98px) {
+    .text__wrapper p{
+      font-size: 24px;
+      line-height: 30px; } }
+  @media (max-width: 575.98px) {
+    .text__wrapper p{
+      font-size: 20px;
+      line-height: 24px; } }
+  @media (max-width: 479.98px) {
+    .text__wrapper p{
+      font-size: 16px;
+      line-height: 20px; } }
+
 
 .text__wrapper-right-side p {
     text-align: right;
-    
 }
+
+/**************************
+***** CAR INFO BLOCKS *****
+***************************/
+
+
 
 .car-info__container {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: space-between;
+    justify-content: center;
     text-align: center;
     width: 80%;
     margin: 40px auto;
 }
 
+.car-info__container-element {
+    margin: auto;
+}
+
+
+@media(min-width:775px) {         /* Make 2 columns */
+    .car-info__containers-smallscreen {
+        display:none; } }
+
+@media(max-width:775px) {         /* Make 2 columns */
+    .car-info__container {
+        width: 65%; } }        
+
 .car-info__container p {
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 87%;
+    white-space: nowrap;
 }
+@media (max-width: 991.98px) {
+    .car-info__container p {
+      font-size: 20px; } }
+  @media (max-width: 767.98px) {
+    .car-info__container p {
+      font-size: 18px; } }
+  @media (max-width: 575.98px) {
+    .car-info__container p {
+      font-size: 16px; } }
+  @media (max-width: 479.98px) {
+    .car-info__container p {
+      font-size: 14px; } }
 
 .car-info__container h2 {
     font-size: 48px;
@@ -114,7 +216,27 @@
 
     color: #437DD5;
 }
+@media (max-width: 991.98px) {
+    .car-info__container h2 {
+      font-size: 42px; } }
+  @media (max-width: 767.98px) {
+    .car-info__container h2 {
+      font-size: 38px; } }
+  @media (max-width: 575.98px) {
+    .car-info__container h2 {
+      font-size: 34px; } }
+  @media (max-width: 479.98px) {
+    .car-info__container h2 {
+      font-size: 30px; } }
 
+/****************************
+***** SUBSCRIPTION INFO *****
+*****************************/
+
+.sub_info {
+    text-align: center;
+}
+      
 .sub-info__wrapper {
     display: flex;
     margin: 30px auto;
@@ -138,27 +260,96 @@
     box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
 }
+  @media (max-width: 575.98px) {
+    .sub-info__container {
+      padding: 0 20px; } }
+  @media (max-width: 479.98px) {
+    .sub-info__container {
+      font-size: 12px;
+      padding: 0 15px; } }
 
-.hyphen__nowrap {
-    white-space: nowrap;
-}
-
-.sub-info__text p {
-    font-size: 15px;
+.sub-info__text p {       
+    font-size: 16px;
     font-weight: 400;
     margin: 22px auto;
     line-height: 16px;
 }
+@media (max-width: 991.98px) {
+    .sub-info__text p {
+      font-size: 15px; } }
+  @media (max-width: 767.98px) {
+    .sub-info__text p {
+      font-size: 14px;
+      line-height: 10px; } }
+  @media (max-width: 575.98px) {
+    .sub-info__text p {
+      font-size: 13px;
+      line-height: 9px; } }
+  @media (max-width: 479.98px) {
+    .sub-info__text p {
+      font-size: 12px;
+      line-height: 5px; } }
+
+@media(max-width:600px) {         /* With hyphens */
+    .sub-info__text-bigscreen {
+        display:none; } }
+          
+@media(min-width:599px) {         /* Remove hyphens */
+    .sub-info__text-smallscreen {
+        display:none; } }        
 
 .sub-info__bold-text p {
     text-align: right;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 500;
     margin: 22px auto;
+    white-space: nowrap;
 }
+@media (max-width: 991.98px) {
+    .sub-info__bold-text p {
+      font-size: 16px;
+      line-height: 16px; } }
+  @media (max-width: 767.98px) {
+    .sub-info__bold-text p {
+      font-size: 15px;
+      line-height: 10px;} }
+  @media (max-width: 575.98px) {
+    .sub-info__bold-text p {
+      font-size: 14px;
+      line-height: 9px; } }
+  @media (max-width: 479.98px) {
+    .sub-info__bold-text p {
+      font-size: 13px;
+      line-height: 5px; } }
+
+/***********************
+***** ENTER BUTTON *****
+************************/
 
 .sub-enter__button {
     display: flex;
     justify-content: center;
     margin: 50px;
 }
+
+.sub-enter__button-rectangle {
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+    background: rgba(46, 111, 208, 0.9);
+    padding: 14px 24px 14px 24px;
+    border-radius: 10px; }
+    @media (max-width: 991.98px) {
+      .sub-enter__button-rectangle {
+        font-size: 18px; } }
+    @media (max-width: 767.98px) {
+      .sub-enter__button-rectangle {
+        font-size: 16px; } }
+    @media (max-width: 575.98px) {
+      .sub-enter__button-rectangle {
+        font-size: 14px; } }
+    @media (max-width: 479.98px) {
+      .sub-enter__button-rectangle {
+        font-size: 12px; } }
