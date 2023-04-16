@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RequestMapping("/api/v1/users")
+@CrossOrigin
 public class UserRestController {
     private final UserService userService;
 
@@ -44,7 +45,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/{email}/{password}")
-    public ResponseEntity<UserDTO> checkUserCredzentials(@PathVariable String email, @PathVariable String password) {
+    public ResponseEntity<UserDTO> checkUserCredentials(@PathVariable String email, @PathVariable String password) {
         log.info("Checking user credentials");
         return ResponseEntity.ok(userService.checkUserCredentials(email, password));
     }
