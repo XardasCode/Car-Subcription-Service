@@ -54,9 +54,16 @@ public class UserRestController {
     public ResponseEntity<List<UserDTO>> findUsers(@RequestParam(value = "partOfName", required = false) String partOfName,
                                                    @RequestParam(value = "partOfSurname", required = false) String partOfSurname,
                                                    @RequestParam(value = "isSortByName", required = false) boolean isSortByName,
-                                                   @RequestParam(value = "sortType", required = false) String sortType) {
+                                                   @RequestParam(value = "sortType", required = false) String sortType,
+                                                   @RequestParam(required = false, defaultValue = "1") int page,
+                                                   @RequestParam(required = false, defaultValue = "10") int size
+    ) {
         log.info("Searching users");
-        return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType));
+        UserSearchInfo info = UserSearchInfo.builder()
+                .page(page)
+                .size(size)
+                .build();
+        return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType, info));
     }
 
     @PostMapping

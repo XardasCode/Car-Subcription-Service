@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.csub.util.PasswordManager.checkPassword;
+import static com.csub.util.PasswordManager.encryptPassword;
+
 
 @Service
 @Slf4j
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService {
     public long addUser(User user) {
         log.debug("Adding user: {}", user);
         checkIfEmailAlreadyExists(user.getEmail());
+        user.setPassword(encryptPassword(user.getPassword()));
         long id = userDAO.addUser(user);
         if (id == 0) {
             log.warn("User not added");
@@ -62,6 +66,16 @@ public class UserServiceImpl implements UserService {
     public UserDTO checkUserCredentials(String email, String password) {
         log.debug("Checking user credentials");
         Optional<User> user = userDAO.getUserByEmail(email);
+        if (user.isEmpty()) {
+            log.warn("User with email {} and password {} not found", email, password);
+            throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
+        }
+        User thisUser = user.get();
+        if(!checkPassword(password, thisUser.getPassword())){
+            log.warn("User with email {} has bad pass: {}", email, password);
+            throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
+        }
+        log.debug("User found: {}", user);
         return user.map(userDTOMapper).orElseThrow(() -> new ServerException("User with email " + email + " not found", ErrorList.USER_NOT_FOUND));
     }
 
@@ -101,43 +115,17 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) { // sortType - ASC / DESC
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType, UserSearchInfo info) { // sortType - ASC / DESC
+        if((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)){
+            return userDAO.getUsers(info).stream().map(userDTOMapper).toList();
+        }
 
-//
-//
-//        if ((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)) {
-//            return userDAO.getAllUsers();
-//        }
-//
-//        String query = "from User where 1=1 ";
-//        String order_by = "order by name";
-//
-//        if (partOfName != null && !partOfName.isEmpty()) {
-//            query += " and name like '%" + partOfName + "%' ";
-//        }
-//
-//        if (partOfSurname != null && !partOfSurname.isEmpty()) {
-//            query += " and surname like '%" + partOfSurname + "%' ";
-//        }
-//
-//        if (isSortByName) {
-//            if (sortType.equals("DESC")) {
-//                order_by = " order by name desc";
-//            }
-//            query += order_by;
-//        }
-//
-//        log.warn("sort type {}", query);
-//        List<User> users = userDAO.findUsers(query);
-//
-//        if (users.isEmpty()) {
-//            log.warn("User not found");
-//            throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);
-//        }
-//
-//        return users;
-//    }
+        List<User> users = userDAO.findUsers(partOfName,partOfSurname,isSortByName,sortType);
+        if (users.isEmpty()) {
+            log.warn("User not found");
+            throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);
+        }
+        return users.stream().map(userDTOMapper).toList();
+    }
 
 }

@@ -20,5 +20,5 @@ public interface UserService {
 
     void deleteUser(long id);
 
-    List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
+    List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType, UserSearchInfo info);
 }

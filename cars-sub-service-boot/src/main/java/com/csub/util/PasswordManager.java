@@ -1,6 +1,15 @@
 package com.csub.util;
 
-public class PasswordManager {
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
-    // шифрація та дешифрація паролів
+public class PasswordManager {
+    private static final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+
+    public static String encryptPassword(String password) {
+        return encryptor.encryptPassword(password);
+    }
+
+    public static boolean checkPassword(String inputPassword, String encryptedPassword) {
+        return encryptor.checkPassword(inputPassword, encryptedPassword);
+    }
 }

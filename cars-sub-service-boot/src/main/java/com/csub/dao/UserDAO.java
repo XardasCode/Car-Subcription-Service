@@ -20,5 +20,5 @@ public interface UserDAO {
 
     Optional<User> getUserByEmail(String email);
 
-//    List<User> findUsers(String query);
+    List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
 }

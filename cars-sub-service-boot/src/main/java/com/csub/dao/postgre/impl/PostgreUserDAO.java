@@ -67,11 +67,31 @@ public class PostgreUserDAO implements UserDAO {
 
     }
 
-//    @Override
-//    public List<User> findUsers(String query) {
-//        log.debug("Searching user");
-//        return sessionFactory.createQuery("SELECT u FROM User u WHERE u.name LIKE :query OR u.email LIKE :query", User.class)
-//                .setParameter("query", "%" + query + "%")
-//                .getResultList();
-//    }
+    @Override
+    public List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType) {
+
+        log.debug("Searching user");
+        if (partOfName == null) partOfName = "";
+
+        if (partOfSurname == null) partOfSurname = "";
+
+        if (sortType == null) sortType = "";
+
+        String orderBy = "";
+        if (isSortByName) {
+            if (sortType.equals("DESC")) {
+                orderBy = "order by name DESC";
+            } else if (sortType.equals("ASC")) {
+                orderBy = "order by name ASC";
+            } else {
+                orderBy = "order by name";
+            }
+        }
+
+        return sessionFactory
+                .createQuery("from User where name like :name and surname like :surname " + orderBy, User.class)
+                .setParameter("name", "%" + partOfName + "%")
+                .setParameter("surname", "%" + partOfSurname + "%")
+                .getResultList();
+    }
 }
