@@ -6,6 +6,7 @@ import com.csub.dto.mapper.ManagerDTOMapper;
 import com.csub.entity.Subscription;
 import com.csub.entity.Manager;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -47,14 +48,14 @@ class ManagerServiceImplTest {
                 .subscriptions(subscriptionSet)
                 .build();
     }
-
+    @DisplayName("addManager checks if the managerDAO method is called")
     @Test
     void addManager() {
         Mockito.doNothing().when(managerDAO).addManager(ArgumentMatchers.any());
         managerService.addManager(manager);
         Mockito.verify(managerDAO, Mockito.times(1)).addManager(manager);
     }
-
+    @DisplayName("getManager must return valid manager when id is valid")
     @Test
     void getManager() {
         Mockito.when(managerDAO.getManager(manager.getId())).thenReturn(Optional.of(manager));
@@ -65,6 +66,7 @@ class ManagerServiceImplTest {
             assertEquals(manager.getName(),actual.name());
         });
     }
+    @DisplayName("getManager must throw ServerException when id is not valid")
     @Test
     void getManagerMustThrowServerException() {
         Manager nullManager = new Manager();
@@ -73,7 +75,7 @@ class ManagerServiceImplTest {
                 .hasMessage("Manager not found");
         Mockito.verify(managerDAO, Mockito.times(1)).getManager(manager.getId());
     }
-
+    @DisplayName("addManager checks if the managerDAO method is called")
     @Test
     void updateManager() {
         Mockito.doNothing().when(managerDAO).updateManager(ArgumentMatchers.any());
@@ -81,7 +83,7 @@ class ManagerServiceImplTest {
         managerService.updateManager(manager);
         Mockito.verify(managerDAO, Mockito.times(1)).updateManager(manager);
     }
-
+    @DisplayName("addManager checks if the managerDAO method is called")
     @Test
     void deleteManager() {
         Mockito.doNothing().when(managerDAO).deleteManager(anyLong());
@@ -89,6 +91,7 @@ class ManagerServiceImplTest {
         managerService.deleteManager(manager.getId());
         Mockito.verify(managerDAO, Mockito.times(1)).deleteManager(manager.getId());
     }
+    @DisplayName("getManagers must return list of managers")
     @Test
     void getManagers() {
         List<Manager> list = new ArrayList<>();

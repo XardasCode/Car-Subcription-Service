@@ -8,6 +8,7 @@ import com.csub.entity.Car;
 import com.csub.entity.CarStatus;
 import com.csub.entity.Subscription;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -56,13 +57,14 @@ public class CarServiceImplTest {
                 .subscriptions(subscription)
                 .build();
     }
+    @DisplayName("addCar checks if the carDao method is called")
     @Test
     void addCar() {
         Mockito.doNothing().when(carDAO).addCar(ArgumentMatchers.any());
         carService.addCar(car);
         Mockito.verify(carDAO, Mockito.times(1)).addCar(car);
     }
-
+    @DisplayName("getCar must return valid car when id is valid")
     @Test
     void getCar() {
         Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.of(car));
@@ -73,6 +75,7 @@ public class CarServiceImplTest {
             assertEquals(car.getName(),actual.name());
         });
     }
+    @DisplayName("getCar must throw ServerException when id is not valid")
     @Test
     void getCarMustThrowServerException() {
         Mockito.when(carDAO.getCar(anyLong())).thenReturn(Optional.empty());
@@ -80,6 +83,7 @@ public class CarServiceImplTest {
                 .hasMessage("Car not found");
         Mockito.verify(carDAO, Mockito.times(1)).getCar(car.getId());
     }
+    @DisplayName("updateCar checks if the carDao method is called")
     @Test
     void updateCar() {
         Mockito.doNothing().when(carDAO).updateCar(any());
@@ -87,6 +91,7 @@ public class CarServiceImplTest {
         carService.updateCar(car,1);
         Mockito.verify(carDAO, Mockito.times(1)).updateCar(car);
     }
+    @DisplayName("deleteCar checks if the carDao method is called")
     @Test
     void deleteCar() {
         Mockito.doNothing().when(carDAO).deleteCar(anyLong());
