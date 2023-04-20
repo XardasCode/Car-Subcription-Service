@@ -185,10 +185,10 @@ body {
   background: rgba(17, 86, 190, 0.5); }
 
 .header__active {
-  background: rgba(17, 90, 190, 0.35); }
+  text-decoration: underline; }
 
 .header__active:hover {
-  background: rgba(17, 90, 190, 0.35) !important; }
+  text-decoration: underline; }
 
 .header .header__lang {
   font-size: 15px;

@@ -144,10 +144,10 @@ body{
 		}
 	}	
 	&__active{
-		background: rgba(17, 90, 190, 0.35);
+		text-decoration: underline;
 	}
 	&__active:hover{
-		background: rgba(17, 90, 190, 0.35) !important;
+		text-decoration: underline;
 	}
 	.header__lang{
 		font-size: 15px;
@@ -671,8 +671,8 @@ body{
 	// z-index: 10;
 	display: flex;
 	align-items: center;
-   width: 100%;
-   cursor: pointer;
+    width: 100%;
+    cursor: pointer;
 }
 .inactive__head-auto::after {
     width: 13px;
@@ -685,31 +685,31 @@ body{
     content: '';
     display: block;
     transition: .2s ease-in;
-	}
+}
 
 .inactive__head-auto.open::after {
     transform: translateY(50%) rotate(180deg);
 }
 
 .inactive__list-auto {
-   display: none;
-   font-size: 16px;
+    display: none;
+    font-size: 16px;
 	line-height: 19px;
 	text-align-last: left;
 	color: #000;
-   background: #E8E8E8;
-   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-   border: 2px solid #437DD5;
-   border-radius: 10px;
-   overflow-x: hidden;
-   overflow-y: auto;
-   z-index: 1;
-   position: absolute;
-   top: 31px;
-   left: 0;
-   right: 0;
-   margin: 0;
-   padding: 5px 0;
+    background: #E8E8E8;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    border: 2px solid #437DD5;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    top: 31px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 5px 0;
 }
 
 .inactive__list-auto::-webkit-scrollbar {
@@ -726,10 +726,10 @@ body{
 .inactive__list-auto .inactive__item-auto {
 	font-size: 16px;
 	line-height: 19px;
-   position: relative;
-   padding: 5px 15px;
-   cursor: pointer;
-   list-style-type: none;
+    position: relative;
+    padding: 5px 15px;
+    cursor: pointer;
+    list-style-type: none;
    // z-index: 1;
 }
 
@@ -776,8 +776,8 @@ body{
 	// z-index: 10;
 	display: flex;
 	align-items: center;
-   width: 100%;
-   cursor: pointer;
+    width: 100%;
+    cursor: pointer;
 }
 .inactive__head-term::after {
     width: 13px;
@@ -797,24 +797,24 @@ body{
 }
 
 .inactive__list-term {
-   display: none;
-   font-size: 16px;
+    display: none;
+    font-size: 16px;
 	line-height: 19px;
 	text-align-last: left;
 	color: #000;
-   background: #E8E8E8;
-   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-   border: 2px solid #437DD5;
-   border-radius: 10px;
-   overflow-x: hidden;
-   overflow-y: auto;
-   z-index: 1;
-   position: absolute;
-   top: 31px;
-   left: 0;
-   right: 0;
-   margin: 0;
-   padding: 5px 0;
+    background: #E8E8E8;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    border: 2px solid #437DD5;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    top: 31px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 5px 0;
 }
 
 .inactive__list-term::-webkit-scrollbar {
@@ -831,11 +831,11 @@ body{
 .inactive__list-term .inactive__item-term {
 	font-size: 16px;
 	line-height: 19px;
-   position: relative;
-   padding: 5px 15px;
-   cursor: pointer;
-   list-style-type: none;
-   // z-index: 1;
+    position: relative;
+    padding: 5px 15px;
+    cursor: pointer;
+    list-style-type: none;
+    // z-index: 1;
 }
 
 .inactive__list-term .inactive__item-term:hover {

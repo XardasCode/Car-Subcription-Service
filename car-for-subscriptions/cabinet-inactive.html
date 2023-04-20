@@ -36,11 +36,11 @@
 						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> 
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active header__lang header__active" aria-current="page" href="#">UA</a>
+						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
 						        </li>
 						        <div class="header__wrapper-lact-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html-->
+							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html-->
 							        </li>
 						        </div>
 						      </ul>
@@ -75,7 +75,7 @@
 							</div>
 							<div class="inactive__request">
 								<h3>Подати заявку на підписку</h3>
-								<form action="">
+								<form action="" id="form">
 									<div class="inactive__wrapper-auto">
 										<label for="">Оберіть авто зі списку:</label>
 										<div class="inactive__auto">	
@@ -125,7 +125,7 @@
 									</div> -->
 									<div class="inactive__wrapper-color">
 										<label for="">Оберіть колір авто:</label>
-										<div class="inactive__color">	
+										<div class="inactive__color">	 
 										  	<input class="inactive__input-color" type="hidden" name="">
 										  	<div class="inactive__head-color">Сірий</div>
 										  	<ul class="inactive__list-color">
@@ -147,11 +147,11 @@
 									</div> -->
 									<div class="inactive__passport">
 										<label for="passport">Введіть номер паспорта:</label>
-										<input type="number" placeholder="10101010-10101">
+										<input id="passport" type="number" placeholder="10101010-10101">
 									</div>
 									<div class="inactive__ipn">
 										<label for="ipn">Введіть свій ІПН:</label>
-										<input type="number" placeholder="100000000000">
+										<input id="ipn" type="number" placeholder="0000000000">
 									</div>
 									<div class="inactive__contact">
 										<label for="contact">Залишіть посилання на соцмережі:</label>
@@ -204,6 +204,8 @@
 	<!-- Випадаюче меню -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/cabinet-inactive.js"></script>
-	<!-- Випадаюче меню -->
+	
+	<!-- Валідація -->
+	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 </body>
 </html>
