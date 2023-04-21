@@ -157,7 +157,7 @@ class UserServiceImplTest {
         userService.updateUser(user, user.getId());
         Mockito.verify(userDAO, Mockito.times(1)).updateUser(user);
     }
-    @DisplayName("updateUser checks if the carDao method is called")
+    @DisplayName("deleteUser checks if the carDao method is called")
     @Test
     void deleteUser() {
         Mockito.doNothing().when(userDAO).deleteUser(anyLong());
