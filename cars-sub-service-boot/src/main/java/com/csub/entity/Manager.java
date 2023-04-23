@@ -35,7 +35,7 @@ public class Manager {
     @Column(name = "create_date")
     private String createDate;
 
-    @Column(name = "last_update_date")
+    @Column(name = "last_update")
     private String lastUpdateDate;
 
     @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
