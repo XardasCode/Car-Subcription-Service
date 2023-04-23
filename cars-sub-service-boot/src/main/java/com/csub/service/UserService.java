@@ -1,5 +1,6 @@
 package com.csub.service;
 
+import com.csub.controller.request.UserRequestDTO;
 import com.csub.dto.UserDTO;
 import com.csub.entity.User;
 import com.csub.util.UserSearchInfo;
@@ -10,13 +11,13 @@ public interface UserService {
 
     List<UserDTO> getUsers(UserSearchInfo info);
 
-    long addUser(User user);
+    long addUser(UserRequestDTO user);
 
     UserDTO getUser(long id);
 
     UserDTO checkUserCredentials(String email, String password);
 
-    void updateUser(User user, long id);
+    void updateUser(UserRequestDTO user, long id);
 
     void deleteUser(long id);
 

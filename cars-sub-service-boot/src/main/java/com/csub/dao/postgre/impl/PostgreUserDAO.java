@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 @Repository
 @AllArgsConstructor
@@ -32,11 +33,11 @@ public class PostgreUserDAO implements UserDAO {
     }
 
     @Override
-    public long addUser(User user) {
+    public OptionalLong addUser(User user) {
         log.debug("Adding user: {}", user);
         sessionFactory.persist(user);
         log.debug("User created with id {}", user.getId());
-        return user.getId();
+        return OptionalLong.of(user.getId());
     }
 
     @Override
@@ -63,8 +64,11 @@ public class PostgreUserDAO implements UserDAO {
     @Override
     public Optional<User> getUserByEmail(String email) {
         log.debug("Getting user with email {}", email);
-        return Optional.ofNullable(sessionFactory.find(User.class, email));
-
+        return sessionFactory
+                .createQuery("from User where email = :email", User.class)
+                .setParameter("email", email)
+                .getResultStream()
+                .findFirst();
     }
 
     @Override

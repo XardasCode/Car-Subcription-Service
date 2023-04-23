@@ -8,7 +8,9 @@ import lombok.Data;
 @Builder
 @Data
 public class JSONInfo {
+
     private String status;
 
     private String message;
+
 }

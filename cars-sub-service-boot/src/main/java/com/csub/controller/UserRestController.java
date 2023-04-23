@@ -1,8 +1,8 @@
 package com.csub.controller;
 
+import com.csub.controller.request.UserRequestDTO;
 import com.csub.controller.util.JSONInfo;
 import com.csub.dto.UserDTO;
-import com.csub.entity.User;
 import com.csub.service.UserService;
 import com.csub.util.UserSearchInfo;
 import jakarta.validation.Valid;
@@ -67,19 +67,19 @@ public class UserRestController {
     }
 
     @PostMapping
-    public ResponseEntity<JSONInfo> addUser(@RequestBody @Valid User user) {
+    public ResponseEntity<JSONInfo> addUser(@RequestBody @Valid UserRequestDTO user) {
         log.info("Adding user: {}", user);
         long id = userService.addUser(user);
         log.info("User added with id {}", id);
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, "New user with id " + id + " created"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<JSONInfo> updateUser(@RequestBody User user, @PathVariable long id) {
+    public ResponseEntity<JSONInfo> updateUser(@RequestBody UserRequestDTO user, @PathVariable long id) {
         log.info("Updating user: {}", user);
         userService.updateUser(user, id);
         log.info("User updated");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, "User with id " + user.getId() + " updated"), HttpStatus.OK);
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -87,6 +87,6 @@ public class UserRestController {
         log.info("Deleting user with id {}", id);
         userService.deleteUser(id);
         log.info("User deleted");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, "User with id " + id + " deleted"), HttpStatus.OK);
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
     }
 }

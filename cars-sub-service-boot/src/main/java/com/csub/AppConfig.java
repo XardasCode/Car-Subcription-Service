@@ -1,10 +1,8 @@
-package com.csub.configuration;
+package com.csub;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,8 +16,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ConfigurationProperties(prefix = "app")
-@ComponentScan(basePackages = "com.csub")
 @Setter(onMethod_ = @Autowired)
 public class AppConfig {
 

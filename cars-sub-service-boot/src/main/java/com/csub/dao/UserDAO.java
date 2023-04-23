@@ -5,12 +5,13 @@ import com.csub.util.UserSearchInfo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 public interface UserDAO {
 
     List<User> getUsers(UserSearchInfo info);
 
-    long addUser(User user);
+    OptionalLong addUser(User user);
 
     void deleteUser(long id);
 

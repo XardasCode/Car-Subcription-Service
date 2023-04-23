@@ -1,5 +1,6 @@
 package com.csub.impl;
 
+import com.csub.controller.request.UserRequestDTO;
 import com.csub.dto.UserDTO;
 import com.csub.dto.mapper.UserDTOMapper;
 import com.csub.entity.User;
@@ -40,15 +41,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public long addUser(User user) {
+    public long addUser(UserRequestDTO user) {
         log.debug("Adding user: {}", user);
         checkIfEmailAlreadyExists(user.getEmail());
         user.setPassword(encryptPassword(user.getPassword()));
-        long id = userDAO.addUser(user);
-        if (id == 0) {
-            log.warn("User not added");
-            throw new ServerException("User not added", ErrorList.USER_NOT_CREATED);
-        }
+        User userEntity = User.mapUserRequestDTOToUser(user);
+        long id = userDAO.addUser(userEntity).orElseThrow(() -> new ServerException("User not added", ErrorList.USER_NOT_CREATED));
         log.debug("User added: {}", user);
         return id;
     }
@@ -71,7 +69,7 @@ public class UserServiceImpl implements UserService {
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }
         User thisUser = user.get();
-        if(!checkPassword(password, thisUser.getPassword())){
+        if (!checkPassword(password, thisUser.getPassword())) {
             log.warn("User with email {} has bad pass: {}", email, password);
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }
@@ -81,16 +79,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user, long id) {
+    public void updateUser(UserRequestDTO user, long id) {
         log.debug("Updating user: {}", user);
         Optional<User> optionalUser = userDAO.getUser(id);
         User checkUser = optionalUser.orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
+        User userEntity = User.mapUserRequestDTOToUser(user);
         if (!checkUser.getEmail().equals(user.getEmail())) {
             log.debug("Email changed, checking if email already exists");
-            checkIfEmailAlreadyExists(user.getEmail());
+            checkIfEmailAlreadyExists(userEntity.getEmail());
         }
-        userDAO.updateUser(user);
-        log.debug("User updated: {}", user);
+        userDAO.updateUser(userEntity);
+        log.debug("User updated: {}", userEntity);
     }
 
     @Override
@@ -105,22 +104,21 @@ public class UserServiceImpl implements UserService {
 
     private void checkIfEmailAlreadyExists(String email) {
         log.debug("Checking if user with email {} already exists", email);
-        Optional<User> user = userDAO.getUserByEmail(email);
-        if (user.isPresent()) {
+        userDAO.getUserByEmail(email).ifPresent(u -> {
             log.warn("User with email {} already exists", email);
             throw new ServerException("User with email " + email + " already exists", ErrorList.USER_ALREADY_EXISTS);
-        }
+        });
         log.debug("User with email {} does not exist", email);
     }
 
     @Transactional
     @Override
     public List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType, UserSearchInfo info) { // sortType - ASC / DESC
-        if((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)){
+        if ((partOfName == null) && (partOfSurname == null) && (!isSortByName) && (sortType == null)) {
             return userDAO.getUsers(info).stream().map(userDTOMapper).toList();
         }
 
-        List<User> users = userDAO.findUsers(partOfName,partOfSurname,isSortByName,sortType);
+        List<User> users = userDAO.findUsers(partOfName, partOfSurname, isSortByName, sortType);
         if (users.isEmpty()) {
             log.warn("User not found");
             throw new ServerException("User not found", ErrorList.USER_NOT_FOUND);

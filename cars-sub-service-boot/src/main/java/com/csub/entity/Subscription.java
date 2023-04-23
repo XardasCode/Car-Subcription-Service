@@ -10,18 +10,24 @@ import lombok.*;
 @Entity
 @Table(name = "subscriptions")
 public class Subscription {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
     @Column(name = "is_active")
     private boolean isActive;
+
     @Column(name = "start_date")
     private String startDate;
+
     @Column(name = "month_price")
     private int monthPrice;
+
     @Column(name = "total_price")
     private int totalPrice;
+
     @Column(name = "total_months")
     private int totalMonths;
 
