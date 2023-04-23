@@ -1,4 +1,4 @@
-///////////////auto//////////////////
+/////Auto/////
 
 jQuery(($) => {
     $('.inactive__auto').on('click', '.inactive__head-auto', function () {
@@ -28,7 +28,7 @@ jQuery(($) => {
     });
 });
 
-///////////////term//////////////////
+/////Term/////
 
 jQuery(($) => {
     $('.inactive__term').on('click', '.inactive__head-term', function () {
@@ -58,7 +58,7 @@ jQuery(($) => {
     });
 });
 
-///////////////color//////////////////
+/////Color/////
 
 jQuery(($) => {
     $('.inactive__color').on('click', '.inactive__head-color', function () {
@@ -87,3 +87,42 @@ jQuery(($) => {
         }
     });
 });
+
+
+/////Validate number/////
+
+const validator = new JustValidate('#form');
+
+validator.addField('#passport', [
+  {
+    rule: 'minNumber',
+    value: 13,
+  },
+  {
+    rule: 'maxNumber',
+    value: 14,
+    errorMassage: "Поле має містити максимум 14 символів",
+  },
+  {
+    rule: 'number',
+    errorMassage: "Значення повинне бути числом",
+  },
+  {
+    rule: 'required',
+    errorMassage: "Заповніть обов'язкове поле",
+  },
+]);
+
+const validator2 = new JustValidate2('#form');
+
+validator2.addField('#ipn', [
+  {
+    rule: 'minNumber',
+    value: 10,
+  },
+  {
+    rule: 'maxNumber',
+    value: 10,
+    errorMassage: "Поле має містити максимум 10 символів",
+  },
+]);

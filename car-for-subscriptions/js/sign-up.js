@@ -1,4 +1,4 @@
-"use strict"
+// "use strict"
 
 document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
 	const form = document.getElementById('form');
@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
 
 		let error = formValidate(form);
 
-		/*let formData = new FormData(form);*/ //за допомогою FormData витягуєм всі дані з полів
+		let formData = new FormData(form); //за допомогою FormData витягуєм всі дані з полів
 
 		if(error === 0) {
 
-			/*let response = await fetch('файл', { //відправка технологією AJAX, за допомогою fetch
+			let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', { //відправка технологією AJAX, за допомогою fetch
 				method: 'POST',
 				body: formData
 			});
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
 				form.reset();								//очистка всіх полів форми
 			}else{
 				alert('Помилка');							//якщо щось пішло не так - виводиться помилка
-			}*/
+			}
 
 		} else {
 			alert("Заповніть обов'язкові поля!")
