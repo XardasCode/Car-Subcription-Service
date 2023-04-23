@@ -1,8 +1,10 @@
 package com.csub.entity;
 
+import com.csub.entity.audit.SubscriptionEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+@EntityListeners(SubscriptionEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,6 +55,12 @@ public class Car {
 
     @Column(name = "status_id")
     private String statusId;
+
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "last_update_date")
+    private String lastUpdateDate;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude

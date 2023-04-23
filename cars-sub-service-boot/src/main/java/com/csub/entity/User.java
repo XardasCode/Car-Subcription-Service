@@ -1,12 +1,14 @@
 package com.csub.entity;
 
 import com.csub.controller.request.UserRequestDTO;
+import com.csub.entity.audit.UserEntityListener;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@EntityListeners(UserEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,6 +44,12 @@ public class User {
 
     @Column(name = "verification_code")
     private String verificationCode;
+
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "last_update_date")
+    private String lastUpdateDate;
 
     @OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Subscription subscription;

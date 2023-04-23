@@ -74,10 +74,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public List<SubscriptionDTO> getSubscriptionsByUserId(long id) {
+    public SubscriptionDTO getSubscriptionByUserId(long id) {
         log.debug("Getting subscriptions by user id {}", id);
-        List<Subscription> subscriptions = subscriptionDAO.getSubscriptionsByUserId(id);
-        log.debug("Subscriptions found: {}", subscriptions.size());
-        return subscriptions.stream().map(subscriptionDTOMapper).toList();
+        Optional<Subscription> subscriptions = subscriptionDAO.getSubscriptionsByUserId(id);
+        return subscriptions.map(subscriptionDTOMapper)
+                .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
     }
 }

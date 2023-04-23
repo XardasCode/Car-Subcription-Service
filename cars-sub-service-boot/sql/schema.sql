@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS managers
     surname  VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email    VARCHAR(255) NOT NULL,
+    create_date varchar(255) NOT NULL,
+    last_update varchar(255) NOT NULL,
 
     UNIQUE (email)
 );
@@ -39,6 +41,8 @@ CREATE TABLE IF NOT EXISTS cars
     mileage           INT          NOT NULL,
     last_service_date varchar(255) NOT NULL,
     status_id         INT          NOT NULL,
+    create_date       varchar(255) NOT NULL,
+    last_update_date       varchar(255) NOT NULL,
 
     FOREIGN KEY (status_id) REFERENCES car_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -55,6 +59,8 @@ CREATE TABLE IF NOT EXISTS users
     is_verified       BOOLEAN      NOT NULL DEFAULT FALSE,
     is_blocked        BOOLEAN      NOT NULL DEFAULT FALSE,
     verification_code VARCHAR(255),
+    create_date       varchar(255) NOT NULL,
+    last_update_date       varchar(255) NOT NULL,
 
     UNIQUE (email)
 );
@@ -73,6 +79,8 @@ CREATE TABLE IF NOT EXISTS subscriptions
     month_price  INT          NOT NULL,
     total_price  INT          NOT NULL,
     total_months INT          NOT NULL,
+    create_date  varchar(255) NOT NULL,
+    last_update_date  varchar(255) NOT NULL,
 
     user_id      INT          NOT NULL,
     car_id       INT          NOT NULL,

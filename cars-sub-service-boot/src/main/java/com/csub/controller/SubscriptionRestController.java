@@ -29,8 +29,8 @@ public class SubscriptionRestController {
     }
 
     @GetMapping(value = "/user/{id}")
-    public List<SubscriptionDTO> getSubscriptionsByUserId(@PathVariable long id) {
+    public SubscriptionDTO getSubscriptionsByUserId(@PathVariable long id) {
         log.info("Getting subscriptions by user id {}", id);
-        return subscriptionService.getSubscriptionsByUserId(id);
+        return subscriptionService.getSubscriptionByUserId(id);
     }
 }

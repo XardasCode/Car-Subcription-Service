@@ -1,10 +1,12 @@
 package com.csub.entity;
 
+import com.csub.entity.audit.ManagerEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
 
+@EntityListeners(ManagerEntityListener.class)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +31,12 @@ public class Manager {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "last_update_date")
+    private String lastUpdateDate;
 
     @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude

@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -27,17 +26,16 @@ class SubscriptionServiceImplTest {
     @Mock
     private SubscriptionDAO subscriptionDAO;
 
-    private SubscriptionDTOMapper subscriptionDTOMapper = new SubscriptionDTOMapper();
+    private final SubscriptionDTOMapper subscriptionDTOMapper = new SubscriptionDTOMapper();
 
     User user;
     Subscription subscription;
     Car car;
-    Manager  manager;
+    Manager manager;
 
     @BeforeEach
-    void setUp()
-    {
-        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,subscriptionDTOMapper);
+    void setUp() {
+        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO, subscriptionDTOMapper);
         CarStatus carStatus = new CarStatus();
         SubscriptionStatus status = new SubscriptionStatus();
         user = User.builder()
@@ -80,7 +78,7 @@ class SubscriptionServiceImplTest {
                 .startDate("21.04.2023")
                 .monthPrice(car.getPrice())
                 .totalMonths(5)
-                .totalPrice(5*car.getPrice())
+                .totalPrice(5 * car.getPrice())
                 .manager(manager)
                 .user(user)
                 .car(car)
@@ -89,14 +87,16 @@ class SubscriptionServiceImplTest {
 
 
     }
+
     @DisplayName("addSubscription must return valid generated id when subscription is valid")
     @Test
     void addSubscription() {
         Mockito.when(subscriptionDAO.addSubscription(subscription)).thenReturn(Long.valueOf(subscription.getId()));
         long actual = subscriptionService.addSubscription(subscription);
         Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(subscription);
-        assertEquals(1,actual);
+        assertEquals(1, actual);
     }
+
     @DisplayName("addSubscription must throw ServerException when subscription is not valid")
     @Test
     void addSubscriptionMustThrowServerException() {
@@ -105,17 +105,19 @@ class SubscriptionServiceImplTest {
                 .hasMessage("Subscription not added");
         Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(subscription);
     }
+
     @DisplayName("getSubscription must return valid subscription when id is valid")
     @Test
     void getSubscription() {
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         SubscriptionDTO actual = subscriptionService.getSubscription(subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscription(subscription.getId());
-        assertAll(()->{
-            assertEquals(subscription.getId(),actual.id());
-            assertEquals(subscription.isActive(),actual.is_active());
+        assertAll(() -> {
+            assertEquals(subscription.getId(), actual.id());
+            assertEquals(subscription.isActive(), actual.is_active());
         });
     }
+
     @DisplayName("getSubscription must throw ServerException when subscription id is not valid")
     @Test
     void getSubscriptionMustThrowServerException() {
@@ -124,6 +126,7 @@ class SubscriptionServiceImplTest {
                 .hasMessage("Subscription not found");
         Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscription(subscription.getId());
     }
+
     @DisplayName("updateSubscription checks if the carDao method is called")
     @Test
     void updateSubscription() {
@@ -132,6 +135,7 @@ class SubscriptionServiceImplTest {
         subscriptionService.updateSubscription(subscription, subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).updateSubscription(subscription);
     }
+
     @DisplayName("deleteSubscription checks if the carDao method is called")
     @Test
     void deleteSubscription() {
@@ -140,15 +144,16 @@ class SubscriptionServiceImplTest {
         subscriptionService.deleteSubscription(subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).deleteSubscription(subscription.getId());
     }
+
     @DisplayName("getSubscriptionsByUserId must return valid list of subscriptions when user id is valid")
     @Test
     void getSubscriptionsByUserId() {
-        Mockito.when(subscriptionDAO.getSubscriptionsByUserId(subscription.getUser().getId())).thenReturn(List.of(subscription));
-        List<SubscriptionDTO> actual = subscriptionService.getSubscriptionsByUserId(subscription.getUser().getId());
+        Mockito.when(subscriptionDAO.getSubscriptionsByUserId(subscription.getUser().getId())).thenReturn(Optional.of(subscription));
+        SubscriptionDTO actual = subscriptionService.getSubscriptionByUserId(subscription.getUser().getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscriptionsByUserId(subscription.getUser().getId());
-        assertAll(()->{
-            assertEquals(subscription.getId(),actual.get(0).id());
-            assertEquals(subscription.isActive(),actual.get(0).is_active());
+        assertAll(() -> {
+            assertEquals(subscription.getId(), actual.id());
+            assertEquals(subscription.isActive(), actual.is_active());
         });
     }
 }

@@ -54,11 +54,12 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
     }
 
     @Override
-    public List<Subscription> getSubscriptionsByUserId(long id) {
-        log.debug("Getting all subscriptions by user id {}", id);
-        return sessionFactory.createQuery("from Subscription where User.id = :id", Subscription.class)
+    public Optional<Subscription> getSubscriptionsByUserId(long id) {
+        log.debug("Getting subscription with user id {}", id);
+        return sessionFactory.createQuery("from Subscription where Subscription.user.id = :id", Subscription.class)
                 .setParameter("id", id)
-                .getResultList();
+                .getResultStream()
+                .findFirst();
 
     }
 }

@@ -55,8 +55,8 @@ public class UserRestController {
                                                    @RequestParam(value = "partOfSurname", required = false) String partOfSurname,
                                                    @RequestParam(value = "isSortByName", required = false) boolean isSortByName,
                                                    @RequestParam(value = "sortType", required = false) String sortType,
-                                                   @RequestParam(required = false, defaultValue = "1") int page,
-                                                   @RequestParam(required = false, defaultValue = "10") int size
+                                                   @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                                   @RequestParam(value = "size", required = false, defaultValue = "10") int size
     ) {
         log.info("Searching users");
         UserSearchInfo info = UserSearchInfo.builder()

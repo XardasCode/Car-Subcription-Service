@@ -1,8 +1,10 @@
 package com.csub.entity;
 
+import com.csub.entity.audit.SubscriptionEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+@EntityListeners(SubscriptionEntityListener.class)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +32,12 @@ public class Subscription {
 
     @Column(name = "total_months")
     private int totalMonths;
+
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "last_update_date")
+    private String lastUpdateDate;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", unique = true)

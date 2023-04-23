@@ -22,12 +22,12 @@ import static org.mockito.ArgumentMatchers.anyLong;
 
 
 @ExtendWith(MockitoExtension.class)
-public class CarServiceImplTest {
+class CarServiceImplTest {
     @InjectMocks
     private CarServiceImpl carService;
     @Mock
     private CarDAO carDAO;
-    private  CarDTOMapper carDTOMapper = new CarDTOMapper();
+    private final CarDTOMapper carDTOMapper = new CarDTOMapper();
     Car car;
     CarStatus carStatus = new CarStatus();
     @BeforeEach

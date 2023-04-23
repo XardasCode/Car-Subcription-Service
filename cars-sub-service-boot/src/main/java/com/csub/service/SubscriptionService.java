@@ -20,5 +20,5 @@ public interface SubscriptionService {
 
     List<SubscriptionDTO> getAllSubscriptions();
 
-    List<SubscriptionDTO> getSubscriptionsByUserId(long id);
+    SubscriptionDTO getSubscriptionByUserId(long id);
 }

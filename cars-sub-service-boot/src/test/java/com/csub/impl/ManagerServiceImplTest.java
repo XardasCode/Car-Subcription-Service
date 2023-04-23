@@ -29,7 +29,7 @@ class ManagerServiceImplTest {
     private ManagerServiceImpl managerService;
     @Mock
     private ManagerDAO managerDAO;
-    private  ManagerDTOMapper managerDTOMapper = new ManagerDTOMapper();
+    private final ManagerDTOMapper managerDTOMapper = new ManagerDTOMapper();
     Manager manager;
 
     @BeforeEach

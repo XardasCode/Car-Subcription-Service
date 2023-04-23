@@ -15,23 +15,23 @@ class PasswordManagerTest {
     @DisplayName("encryptPassword must return encrypted password")
     @Test
     void encryptPassword() {
-        String actual = passwordManager.encryptPassword("enscryptTest");
-        assertNotEquals("enscryptTest",actual);
+        String actual = passwordManager.encryptPassword("encryptTest");
+        assertNotEquals("encryptTest",actual);
     }
     @DisplayName("encryptPassword must return true if password and encrypted password are equal")
     @Test
     void checkPasswordMustBeEquals() {
-        String password  = "enscryptTest";
+        String password  = "encryptTest";
         String enscryptedPassword = passwordManager.encryptPassword(password);
         boolean actual = passwordManager.checkPassword(password,enscryptedPassword);
-        assertEquals(true,actual);
+        assertTrue(actual);
     }
     @DisplayName("encryptPassword must return false if password and encrypted password are not equal")
     @Test
     void checkPasswordMustBeNotEquals() {
-        String password  = "enscryptTest";
-        String enscryptedPassword = passwordManager.encryptPassword(password);
-        boolean actual = passwordManager.checkPassword("password",enscryptedPassword);
-        assertEquals(false,actual);
+        String password  = "encryptTest";
+        String encryptedPassword = passwordManager.encryptPassword(password);
+        boolean actual = passwordManager.checkPassword("password",encryptedPassword);
+        assertFalse(actual);
     }
 }

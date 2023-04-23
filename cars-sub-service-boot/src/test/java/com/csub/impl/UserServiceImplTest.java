@@ -35,7 +35,7 @@ class UserServiceImplTest {
     private UserServiceImpl userService;
     @Mock
     private UserDAO userDAO;
-    private UserDTOMapper userDTOMapper = new UserDTOMapper();
+    private final UserDTOMapper userDTOMapper = new UserDTOMapper();
     User user;
 
     @BeforeEach
