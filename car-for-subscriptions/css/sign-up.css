@@ -491,7 +491,7 @@ body {
         padding: 12px 20px; } }
 
 /*****************
-******Валідація****** 
+*****Валідація*****
 ******************/
 input._error {
   -webkit-box-shadow: 0 0 7px red;
@@ -500,6 +500,10 @@ input._error {
 .checkbox._error {
   -webkit-box-shadow: 0 0 7px red;
   box-shadow: 0 0 7px red; }
+
+p#result {
+  margin-top: 3px;
+  line-height: 20px; }
 
 /*****************
 ******Footer****** 

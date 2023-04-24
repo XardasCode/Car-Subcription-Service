@@ -16,7 +16,7 @@
 					<div class="row">
 						<nav class="navbar navbar-expand-lg header__navbar">
 						  <div class="container-fluid">
-						    <a class="navbar-brand header__logo" href="#">
+						    <a class="navbar-brand header__logo" href="index.html">
 						    	<span class="header__span-1">Brand name</span>
 						    	<span class="header__span-2">Car Subscription</span>
 						    	<span class="header__car"></span>
@@ -58,14 +58,14 @@
 						<div class="inactive__left">
 							<h3>Кабінет підписки</h3>
 							<div class="inactive__user">
-								<img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user"><span>Віктор Григорович</span><a href="#"><img src="img/inactive/svg/edit.svg" class="inactive__edit-img" alt="edit"></a>
+								<img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user"><span id="username">Віктор Григорович</span><a href="#"><img src="img/inactive/svg/edit.svg" class="inactive__edit-img" alt="edit"></a>
 							</div>
-							<div class="inactive__email">viktor.grygorovych@ukr.tak</div>
+							<div class="inactive__email" id="email">viktor.grygorovych@ukr.tak</div>
 							<div class="inactive__birthday">
 								<img src="img/inactive/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
 							</div>
 							<div class="inactive__phone">
-								<img src="img/inactive/svg/phone.svg" alt="phone">+380671234567
+								<img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">+380671234567</span>
 							</div>
 						</div>
 
@@ -89,17 +89,7 @@
 										  	</ul>
 										</div>
 									</div>
-									<!-- <div class="inactive__auto">
-										<label for="auto">Оберіть авто зі списку:</label>
-										<select class="form-select inactive__select" name="auto" id="auto" aria-label="Default select example">
-											<div class="inactive__option-block">
-												<option selected>Volkswagen Tiguan</option>
-												<option value="Hyundai i30">Hyundai i30</option>
-												<option value="Toyota RAV-4">Toyota RAV-4</option>
-												<option value="Volkswagen T-Roc">Volkswagen T-Roc</option>
-											</div>
-										</select>
-									</div> -->
+
 									<div class="inactive__wrapper-term">
 										<label for="">Оберіть термін підписки:</label>
 										<div class="inactive__term">	
@@ -114,15 +104,7 @@
 										  	</ul>
 										</div>
 									</div>
-									<!-- <div class="inactive__term">
-										<label for="term">Оберіть термін підписки:</label>
-										<select class="form-select inactive__select" name="term" id="term" aria-label="Default select example">
-											<option selected>03.04.2023-03.04.2024</option>
-											<option value="03.04.2023-03.04.2025">03.04.2023-03.04.2025</option>
-											<option value="03.04.2023-03.04.2026">03.04.2023-03.04.2026</option>
-											<option value="03.04.2023-03.04.2027">03.04.2023-03.04.2027</option>
-										</select>
-									</div> -->
+
 									<div class="inactive__wrapper-color">
 										<label for="">Оберіть колір авто:</label>
 										<div class="inactive__color">	 
@@ -136,36 +118,23 @@
 										  	</ul>
 										</div>
 									</div>
-									<!-- <div class="inactive__color">
-										<label for="color">Оберіть колір авто:</label>
-										<select class="form-select inactive__select" name="color" id="color" aria-label="Default select example">
-											<option selected>Сірий</option>
-											<option value="Червоний">Червоний</option>
-											<option value="Білий">Білий</option>
-											<option value="Жовтий">Жовтий</option>
-										</select>
-									</div> -->
+
 									<div class="inactive__passport">
 										<label for="passport">Введіть номер паспорта:</label>
-										<input id="passport" type="number" placeholder="10101010-10101">
+										<input class="_req" id="passport" type="text" placeholder="10101010-10101">
+										<p id="result"></p>
 									</div>
 									<div class="inactive__ipn">
 										<label for="ipn">Введіть свій ІПН:</label>
-										<input id="ipn" type="number" placeholder="0000000000">
+										<input class="_req" id="ipn" type="text" placeholder="0000000000">
+										<p id="result2"></p>
 									</div>
 									<div class="inactive__contact">
 										<label for="contact">Залишіть посилання на соцмережі:</label>
-										<input type="text" placeholder="@h_vetinari">
+										<input class="_req" type="text" placeholder="@h_vetinari">
 									</div>
 									<button class="inactive__button blue-button">Подати заявку</button>
 								</form>
-
-								<!-- <div class="inactive__item">Оберіть авто зі списку:</div>
-								<div class="inactive__item">Оберіть термін підписки:</div>
-								<div class="inactive__item">Оберіть колір авто:</div>
-								<div class="inactive__item">Введіть номер паспорта:</div>
-								<div class="inactive__item">Введіть свій ІПН:</div>
-								<div class="inactive__item">Залишіть посилання на соцмережі:</div> -->
 							</div>
 						</div>
 					</div>
@@ -201,11 +170,12 @@
 
 	<script src="js/bootstrap.bundle.min.js"></script>
 
+	<!-- Валідація -->
+	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+
 	<!-- Випадаюче меню -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/cabinet-inactive.js"></script>
 	
-	<!-- Валідація -->
-	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 </body>
 </html>

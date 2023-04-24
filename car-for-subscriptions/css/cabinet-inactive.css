@@ -662,7 +662,9 @@ body {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative;
+  z-index: 10; }
 
 .inactive__head-auto::after {
   width: 13px;
@@ -695,16 +697,17 @@ body {
   -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid #437DD5;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1;
   position: absolute;
-  top: 31px;
+  top: 22px;
   left: 0;
   right: 0;
   margin: 0;
-  padding: 5px 0; }
+  padding: 12px 0 5px 0;
+  z-index: 9; }
 
 .inactive__list-auto::-webkit-scrollbar {
   width: 7px;
@@ -766,7 +769,9 @@ body {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative;
+  z-index: 8; }
 
 .inactive__head-term::after {
   width: 13px;
@@ -799,16 +804,17 @@ body {
   -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid #437DD5;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1;
   position: absolute;
-  top: 31px;
+  top: 22px;
   left: 0;
   right: 0;
   margin: 0;
-  padding: 5px 0; }
+  padding: 12px 0 5px 0;
+  z-index: 7; }
 
 .inactive__list-term::-webkit-scrollbar {
   width: 7px;
@@ -870,7 +876,9 @@ body {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative;
+  z-index: 6; }
 
 .inactive__head-color::after {
   width: 13px;
@@ -903,16 +911,16 @@ body {
   -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid #437DD5;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   overflow-x: hidden;
   overflow-y: auto;
-  z-index: 1;
   position: absolute;
-  top: 31px;
+  top: 22px;
   left: 0;
   right: 0;
   margin: 0;
-  padding: 5px 0; }
+  padding: 12px 0 5px 0;
+  z-index: 5; }
 
 .inactive__list-color::-webkit-scrollbar {
   width: 7px;
@@ -933,6 +941,18 @@ body {
 
 .inactive__list-color .inactive__item-color:hover {
   background-color: #d8d8d8; }
+
+/*****************
+*****Валідація***** 
+******************/
+input._error {
+  -webkit-box-shadow: 0 0 7px red !important;
+  box-shadow: 0 0 7px red !important;
+  border: 0px !important; }
+
+p#result, #result2 {
+  margin-top: 3px;
+  line-height: 20px; }
 
 /*****************
 ******Footer****** 

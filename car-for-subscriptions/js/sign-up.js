@@ -9,20 +9,43 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
 
 		let error = formValidate(form);
 
-		let formData = new FormData(form); //за допомогою FormData витягуєм всі дані з полів
+		// let formData = new FormData(form); //за допомогою FormData витягуєм всі дані з полів
+		let name = document.getElementById('userInputName').value;
+		let surname = document.getElementById('userInputSurname').value;
+		// let date = document.getElementById('userInputDate').value;
+		let email = document.getElementById('userInputEmail').value;
+		let phone = document.getElementById('userInputNumber').value;
+		let password = document.getElementById('userInputPassword').value;
+		
+		let test = {
+			"name": name,
+			"surname": surname,
+			// "date": date,
+			"email": email,
+			"phone": phone,
+			"password": password
+		}
 
 		if(error === 0) {
 
-			let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', { //відправка технологією AJAX, за допомогою fetch
+			let response = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', { //відправка технологією AJAX, за допомогою fetch
 				method: 'POST',
-				body: formData
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(test)
 			});
-			if (response.ok) { 							//маємо получити відповідь вдала відправка чи ні
-				let result = await response.json(); //якщо все ок получаємо певну json відповідь
-				alert(result.message);					//виводимо відповідь користувачеві
-				form.reset();								//очистка всіх полів форми
+			if (response.ok) { //маємо получити відповідь вдала відправка чи ні
+				let result = response.json(); //якщо все ок получаємо певну json відповідь
+				let id = result.message;
+
+				let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/'+id)
+            .then(response => response.json())
+            .then(json => sessionStorage.setItem('user', JSON.stringify(json)));
+            window.location.href = 'http://localhost:7886/cabinet-inactive.html';
+				
 			}else{
-				alert('Помилка');							//якщо щось пішло не так - виводиться помилка
+				alert('Помилка'); //якщо щось пішло не так - виводиться помилка
 			}
 
 		} else {
@@ -68,3 +91,24 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
 		return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value); //регулярним вирозом перевіряє на відповідність чи є різні символи
 	}
 });
+
+
+// Валідація номеру телефона регулярним виразом
+
+var result = document.querySelector('#result');
+var form = document.querySelector('#form');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let userInputNumber = document.getElementById('userInputNumber');
+    checkPhoneNumber(userInputNumber.value);
+})
+
+function checkPhoneNumber(phoneNo){
+    var phoneRE = /^\(\d\d\d\) \d\d\d-\d\d\d\d$/;
+    if (phoneNo.match(phoneRE)) {
+        result.innerHTML = 'Номер телефону введено правильно';
+    }else {
+        result.innerHTML = 'Номер телефону введено <strong><u>не правильно</u></strong><br>Приклад: (XXX) XXX-XXXX';
+    }
+}

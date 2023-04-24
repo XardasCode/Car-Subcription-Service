@@ -630,6 +630,14 @@ body {
         height: 28px; } }
   .catalog .switch-active {
     background: #2869CA; }
+  .catalog .switch-item-2:hover, .catalog .switch-item-3:hover {
+    color: #2869CA;
+    background: inherit;
+    border: 2px solid #2869CA;
+    font-weight: bold;
+    -webkit-transition: .2s ease-in;
+    -o-transition: .2s ease-in;
+    transition: .2s ease-in; }
   .catalog__switch-item:last-child {
     margin: 0; }
   .catalog__switch:before {
