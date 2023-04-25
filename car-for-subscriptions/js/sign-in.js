@@ -1,26 +1,25 @@
 // "use strict"
 
 
-document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
+document.addEventListener('DOMContentLoaded', function() { 
 	const form = document.getElementById('form__sign-in');
-	form.addEventListener('submit', formSend); //при відправці форми ми переходимо в функцію formSend
+	form.addEventListener('submit', formSend); 
 
 	async function formSend(e){
-		e.preventDefault(); //забороняєм стандартну відправку форми
+		e.preventDefault(); 
 
-		let email = document.getElementById('exampleInputEmail1').value;
-		let password = document.getElementById('exampleInputPassword1').value;
+		let email = document.getElementById('userInputEmail').value;
+		let password = document.getElementById('userInputPassword').value;
 		let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
-		alert(url);
-		let response = fetch(url, { //відправка технологією AJAX, за допомогою fetch
-			method: 'GET'
-		});
-		if (response.ok) { //маємо получити відповідь вдала відправка чи ні
-			let result = response.json(); //якщо все ок получаємо певну json відповідь
-			sessionStorage.setItem('user', JSON.stringify(result)); //через кому потрібно поставити user
-			window.location.href = "http://localhost:7886/cabinet-inactive.html";
+		let response = await fetch(url);
+	   let responseJSON = await response.json();
+		let status = responseJSON['id'];
+		if (status) {
+			sessionStorage.setItem('user', JSON.stringify(responseJSON));
+			window.location.href = 'http://localhost:7886/cabinet-inactive.html';
 		}else{
-			alert('Email або password бути введені неправильно'); //якщо щось пішло не так - виводиться помилка
+			let error = responseJSON['errorMessage'];
+			alert(error);
 		}
 	};
 })

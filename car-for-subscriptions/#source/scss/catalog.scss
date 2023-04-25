@@ -32,6 +32,12 @@ body{
 	max-width: 1400px;
 	padding: 0 25px;
 	flex: 1 1 auto;
+	@media (max-width: 479.98px) {
+		padding: 0 20px;
+	}
+	@media (max-width: 379.98px) {
+		padding: 0 15px;
+	}
 }
 .adaptive-img{
 	max-width: 100%;
@@ -283,6 +289,19 @@ body{
 			margin-right: 0px;
 		}
 	}
+	// .filter-wrapper:after{
+	// 	width: 13px;
+	//    height: 9px;
+	//    background: url("../img/catalog/svg/arrow	.svg") no-repeat center / cover;
+	//    position: relative;
+	//    left: 131px;
+	//    bottom: 33px;
+	//    transform: translateY(50%);
+	//    content: '';
+	//    display: block;
+	//    transition: .2s ease-in;
+	//    z-index: 5;
+	// }
 	.filter-head{
 		font-size: 18px;
 		line-height: 22px;

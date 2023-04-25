@@ -68,9 +68,28 @@ body {
     body {
       background: #f0f8ff; } }
 
+.wrapper {
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
 .main_container {
   max-width: 1400px;
-  padding: 0 25px; }
+  padding: 0 25px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto; }
+  @media (max-width: 479.98px) {
+    .main_container {
+      padding: 0 20px; } }
+  @media (max-width: 379.98px) {
+    .main_container {
+      padding: 0 15px; } }
 
 .adaptive-img {
   max-width: 100%;

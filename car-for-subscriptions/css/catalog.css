@@ -90,6 +90,12 @@ body {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto; }
+  @media (max-width: 479.98px) {
+    .main_container {
+      padding: 0 20px; } }
+  @media (max-width: 379.98px) {
+    .main_container {
+      padding: 0 15px; } }
 
 .adaptive-img {
   max-width: 100%;

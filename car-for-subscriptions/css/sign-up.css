@@ -501,9 +501,11 @@ input._error {
   -webkit-box-shadow: 0 0 7px red;
   box-shadow: 0 0 7px red; }
 
-p#result {
+span#result {
+  display: block;
+  line-height: 20px;
   margin-top: 3px;
-  line-height: 20px; }
+  padding-left: 7px; }
 
 /*****************
 ******Footer****** 

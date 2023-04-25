@@ -25,6 +25,29 @@ if (sessionStorage.getItem('user') != null) {
     window.location.href = 'http://localhost:7886/sign-in.html';
 }
 
+
+// Можливість редагування імені
+
+function editText() {
+  // Отримую посилання на span
+  var textElement = document.getElementById("username");
+  // Отримую поточний текстовий вміст цього елемента
+  var currentText = textElement.innerHTML;
+  // Замінюю текст на форму для редагування
+  textElement.innerHTML = '<input type="text" id="edit-input" value="' + currentText + '"><button onclick="saveText()">Зберегти</button>';
+}
+
+function saveText() {
+  var inputElement = document.getElementById("edit-input");
+  // Отримую введене користувачем значення
+  var newText = inputElement.value;
+  // Отримую посилання на HTML-елемент, що містить текст, який ми хочемо редагувати
+  var textElement = inputElement.parentNode;
+  // Замінюю форму для редагування на нове ім'я
+  textElement.innerHTML = newText;
+}
+
+
 //Випадаюче меню:
 
 /////Auto/////
@@ -117,46 +140,7 @@ jQuery(($) => {
     });
 });
 
-
-/////Validate number/////
-
-/*const validator = new JustValidate('#form');
-
-validator.addField('#passport', [
-  {
-    rule: 'minNumber',
-    value: 13,
-  },
-  {
-    rule: 'maxNumber',
-    value: 14,
-    errorMassage: "Поле має містити максимум 14 символів",
-  },
-  {
-    rule: 'number',
-    errorMassage: "Значення повинне бути числом",
-  },
-  {
-    rule: 'required',
-    errorMassage: "Заповніть обов'язкове поле",
-  },
-]);
-
-const validator2 = new JustValidate2('#form');
-
-validator2.addField('#ipn', [
-  {
-    rule: 'minNumber',
-    value: 10,
-  },
-  {
-    rule: 'maxNumber',
-    value: 10,
-    errorMassage: "Поле має містити максимум 10 символів",
-  },
-]);*/
-
-
+// Валідація полів на заповнення 
 
 document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
     const form = document.getElementById('form');
@@ -173,12 +157,12 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
                 method: 'POST',
                 body: formData
             });
-            if (response.ok) {                          //маємо получити відповідь вдала відправка чи ні
+            if (response.ok) { //маємо получити відповідь вдала відправка чи ні
                 let result = await response.json(); //якщо все ок получаємо певну json відповідь
-                alert(result.message);                  //виводимо відповідь користувачеві
-                form.reset();                               //очистка всіх полів форми
+                alert(result.message); //виводимо відповідь користувачеві
+                form.reset(); //очистка всіх полів форми
             }else{
-                alert('Помилка');                           //якщо щось пішло не так - виводиться помилка
+                alert('Помилка'); //якщо щось пішло не так - виводиться помилка
             }*/
 
         } else {
@@ -211,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
         input.classList.remove('_error'); //забираю клас error у об'єкта 
     }
 });
-
 
 
 // Валідація номеру паспорта регулярним виразом 

@@ -492,9 +492,11 @@ input._error{
 .checkbox._error{
 	box-shadow: 0 0 7px red;
 }
-p#result{
-	margin-top: 3px;
+span#result{
+	display: block;
 	line-height: 20px;
+	margin-top: 3px;
+	padding-left: 7px;
 }
 /*****************
 ******Footer****** 

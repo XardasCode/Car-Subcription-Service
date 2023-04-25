@@ -58,14 +58,18 @@
 						<div class="inactive__left">
 							<h3>Кабінет підписки</h3>
 							<div class="inactive__user">
-								<img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user"><span id="username">Віктор Григорович</span><a href="#"><img src="img/inactive/svg/edit.svg" class="inactive__edit-img" alt="edit"></a>
+								<img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user">
+								<span id="username">Віктор Григорович</span>
+								<a href="#">
+									<img src="img/inactive/svg/edit.svg" onclick="editText()" class="inactive__edit-img" alt="edit">
+								</a>
 							</div>
 							<div class="inactive__email" id="email">viktor.grygorovych@ukr.tak</div>
 							<div class="inactive__birthday">
 								<img src="img/inactive/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
 							</div>
 							<div class="inactive__phone">
-								<img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">+380671234567</span>
+								<img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">(067) 123-4567</span>
 							</div>
 						</div>
 
@@ -122,12 +126,12 @@
 									<div class="inactive__passport">
 										<label for="passport">Введіть номер паспорта:</label>
 										<input class="_req" id="passport" type="text" placeholder="10101010-10101">
-										<p id="result"></p>
+										<span id="result"></span>
 									</div>
 									<div class="inactive__ipn">
 										<label for="ipn">Введіть свій ІПН:</label>
 										<input class="_req" id="ipn" type="text" placeholder="0000000000">
-										<p id="result2"></p>
+										<span id="result2"></span>
 									</div>
 									<div class="inactive__contact">
 										<label for="contact">Залишіть посилання на соцмережі:</label>

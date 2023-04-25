@@ -248,7 +248,6 @@ body{
 			flex: 0 1 35%;
 		}
 		@media (max-width: 767.98px) {
-			// Проблема з left, сильно зменшується
 			margin-bottom: 50px;
 			margin-left: 0px;
 		}
@@ -286,12 +285,26 @@ body{
 			font-size: 18px;
 		}
 		span{
-			margin-right: 10px;
-			@media (max-width: 1199.98px) {
-				margin-right: 8px;
+			display: inline-flex;
+			flex-direction: column;
+			margin-right: 3px;
+			input{
+				max-width: 220px;
+				background: #F9F9F9;
+				border: 1px solid #437DD5;
+				box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+				border-radius: 10px;
+				padding: 3px 10px;
 			}
-			@media (max-width: 991.98px) {
-				margin-right: 5px;
+			button{
+				color: #fff;
+				background: rgba(46, 111, 208, 0.9);
+				border-radius: 10px;
+				padding: 5px 10px;
+				margin: 10px auto;
+			}
+			button:hover{
+				background: #2869ca;
 			}
 		}
 	}
@@ -306,6 +319,7 @@ body{
 	&__email{
 		font-size: 16px;
 		line-height: 19px;	
+		padding-left: 5px;
 		margin-bottom: 30px;	
 		position: relative;
 		top: -3px;
@@ -352,8 +366,11 @@ body{
 		@media (max-width: 991.98px) {
 			font-size: 14px;
 		}
+		span{
+			display: inline-block;
+			margin: 2px 0 0 2px;
+		}
 	}
-
 	&__right {
 		flex: 0 1 78%;
 		padding: 0;
@@ -957,9 +974,12 @@ input._error{
 	box-shadow: 0 0 7px red !important;
 	border: 0px !important;
 }
-p#result, #result2{
-	margin-top: 3px;
+span#result, #result2{
+	display: block;
 	line-height: 20px;
+	margin-top: 3px;
+	margin-bottom: 0;
+	padding-right: 7px;
 }
 /*****************
 ******Footer****** 
