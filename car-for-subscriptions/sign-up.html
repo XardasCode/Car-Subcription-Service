@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/sign-up.css">
+	<title>Реєстрація</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="container main_container">
+
+			<header class="header">
+				<div class="container header__container">
+					<div class="row">
+						<nav class="navbar navbar-expand-lg header__navbar">
+						  <div class="container-fluid">
+						    <a class="navbar-brand header__logo" href="index.html">
+						    	<span class="header__span-1">Brand name</span>
+						    	<span class="header__span-2">Car Subscription</span>
+						    	<span class="header__car"></span>
+						    </a>
+						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						      <span class="navbar-toggler-icon"></span>
+						    </button>
+						    <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+						      <ul class="navbar-nav ms-auto mb-lg-0 header__list">
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> <!--catalog.html-->
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+						        </li>
+						        <div class="header__wrapper-lact-item">
+							        <li class="nav-item">
+							          <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up header__active" href="#">Зареєструватись</a><!--sign-up.html sign-in.html-->
+							        </li>
+						        </div>
+						      </ul>
+						    </div>
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</header>
+					
+			<section class="sign-up">
+				<div class="sign-up__wrapper">
+					<div class="sign-up__switch">
+						<a class="sign-up__up blue-button" href="#">Реєстрація</a>
+						<a class="sign-up__in" href="sign-in.html">Вхід</a>
+					</div>
+					<form action="#" id="form">
+						<div class="sign-up__title">Реєстрація акаунту</div>
+						<div class="col sign-up__name">
+							<label for="userInputName" class="form-label">Ім'я</label>
+					   	<input type="text" id="userInputName" class="form-control sign-up__input _req" placeholder="Віктор" aria-label="First name">
+						</div>
+						<div class="col sign-up__surname">
+							<label for="userInputSurname" class="form-label">Прізвище</label>
+					   	<input type="text" id="userInputSurname" class="form-control sign-up__input _req" placeholder="Григорович" aria-label="Last name">
+						</div>
+						<div class="col sign-up__date">
+							<label for="userInputDate" class="form-label">Дата народження</label>
+					   	<input type="date" id="userInputDate" class="form-control" placeholder="10.03.1995" aria-label="Date">
+						</div>
+						<div class="col sign-up__email">
+							<label for="userInputEmail" class="form-label">Електронна пошта</label>
+							<input type="email" id="userInputEmail" placeholder="viktor.grygorovych@ukr.tak" class="form-control _req _email" aria-describedby="emailHelp">
+						</div>
+						<div class="col sign-up__number">
+							<label for="userInputNumber" class="form-label">Номер телефону</label>
+					   	<input type="text" id="userInputNumber" class="form-control _req" placeholder="(XXX) XXX-XXXX">
+							<span id="result"></span>
+						</div>
+						<div class="col sign-up__password">
+							<label for="userInputPassword" class="form-label">Пароль</label>
+							<input type="password" id="userInputPassword" placeholder="*********" class="form-control">
+						</div>
+						<div class="col sign-up__confirm-password">
+							<label for="userInputPasswordRepeat" class="form-label">Підтвердити пароль</label>
+							<input type="password" id="userInputPasswordRepeat" placeholder="*********" class="form-control" >
+						</div>
+						<div class="col form-check sign-up__agree">
+							<input type="checkbox" checked class="form-check-input sign-up__checkbox checkbox _req" id="exampleCheck1">
+							<label class="form-check-label sign-up__agree-label" for="exampleCheck1">Я надаю згоду на обробку своїх персональних даних з метою ідентифікації як користувача сервісу</label>				
+						</div>
+						<div class="col form-check sign-up__want-receive">
+							<input type="checkbox" class="form-check-input sign-up__checkbox" id="exampleCheck2">
+							<label class="form-check-label sign-up__want-receive-label" for="exampleCheck2">Я хочу отримувати email розсилку</label>
+						</div>
+						<button type="submit" class="sign-up__authorization blue-button">Зараєструватись</button>
+					</form>
+				</div>
+			</section>
+
+		</div>
+				
+			<footer class="footer">
+				<div class="container footer_container">
+					<div class="row no-gutters">
+						<div class="col-md-4 footer__logo">
+							<a class="footer__a" href="#">
+								<span class="footer__span-1">Brand name</span>
+								<span class="footer__span-2">Car Subscription</span>
+								<span class="footer__car"></span>
+							</a>
+						</div>
+						<div class="col-md-4 footer__copyright">
+							<span>2023 © Всі права захищені</span>
+						</div>
+						<div class="col-md-4 footer__icons">
+							<a href="#"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+							<a href="#"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+							<a href="#"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+							<a href="#"><img src="img/general-svg/google.svg" alt="Google-plus"></a>							
+						</div>
+					</div>
+				</div>
+			</footer>
+				
+	</div>
+
+	<script src="js/bootstrap.bundle.min.js"></script>
+
+	<!-- Валідація + редірект -->
+	<script type="text/javascript" src="js/sign-up.js"></script>
+</body>
+</html>
