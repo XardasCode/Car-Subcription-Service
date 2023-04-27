@@ -1,0 +1,33 @@
+.container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  display: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.buttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.buttons button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.buttons button:hover {
+  background-color: #3e8e41;
+}

@@ -38,9 +38,9 @@
 						        <li class="nav-item">
 						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
 						        </li>
-						        <div class="header__wrapper-lact-item">
+						        <div class="header__last-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html-->
+							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" id="logoutButton" href="sign-in.html">Вийти</a>
 							        </li>
 						        </div>
 						      </ul>
@@ -71,6 +71,8 @@
 							<div class="inactive__phone">
 								<img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">(067) 123-4567</span>
 							</div>
+							<br>
+							<a href="cabinet-manager.html">manager</a> (тимчасове посилання)
 						</div>
 
 						<div class="inactive__right">
@@ -79,7 +81,7 @@
 							</div>
 							<div class="inactive__request">
 								<h3>Подати заявку на підписку</h3>
-								<form action="" id="form">
+								<form action="#" id="form">
 									<div class="inactive__wrapper-auto">
 										<label for="">Оберіть авто зі списку:</label>
 										<div class="inactive__auto">	
@@ -172,13 +174,13 @@
 				
 	</div>
 
+	<!-- Bootstrap -->
 	<script src="js/bootstrap.bundle.min.js"></script>
-
 	<!-- Валідація -->
 	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-
 	<!-- Випадаюче меню -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Підключення свого файлу -->
 	<script type="text/javascript" src="js/cabinet-inactive.js"></script>
 	
 </body>

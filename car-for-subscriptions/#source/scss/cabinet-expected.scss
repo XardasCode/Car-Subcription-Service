@@ -175,14 +175,14 @@ body{
 			border-radius: 0;
 		}
 	}
-	&__wrapper-lact-item{
+	&__last-item{
 		display: flex;
 		align-items: center;
 		@media (max-width: 991.98px) {
 			padding: 20px 15px;
 		}
 	}
-	.header__sign-in{
+	.header__cabinet{
 		display: inline;
 		padding: 0 !important;
 		margin-top: 33px;
@@ -191,7 +191,7 @@ body{
 			margin: 0;
 		}
 	}
-	.header__sign-in:hover{
+	.header__cabinet:hover{
 		text-decoration: underline;
 		background: none;
 	}
@@ -204,10 +204,10 @@ body{
 			font-size: 16px;
 		}
 	}
-	.header__sign-up{
+	.header__exit{
 		padding: 0 !important;
 	}
-	.header__sign-up:hover{
+	.header__exit:hover{
 		text-decoration: underline;
 		background: none;
 	}

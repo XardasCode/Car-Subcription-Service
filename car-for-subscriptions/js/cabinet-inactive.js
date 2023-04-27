@@ -140,6 +140,7 @@ jQuery(($) => {
     });
 });
 
+
 // Валідація полів на заповнення 
 
 document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
@@ -234,3 +235,12 @@ function checkIpnNumber(ipnNo){
         result2.innerHTML = 'Номер паспорту введено <strong><u>не правильно</u></strong><br>Приклад: 0101010101';
     }
 }
+
+
+// Розлогування користувача та потрапляння на сторінку входу
+
+const logoutButton = document.querySelector('#logoutButton');
+  logoutButton.addEventListener('click', () => {
+    // Код для виходу з аккаунту
+  });
+

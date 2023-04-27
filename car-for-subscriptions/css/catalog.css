@@ -225,7 +225,7 @@ body {
     .header .header__lang:hover {
       border-radius: 0; } }
 
-.header__wrapper-lact-item {
+.header__last-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -233,7 +233,7 @@ body {
   -ms-flex-align: center;
   align-items: center; }
   @media (max-width: 991.98px) {
-    .header__wrapper-lact-item {
+    .header__last-item {
       padding: 20px 15px; } }
 
 .header .header__sign-in {

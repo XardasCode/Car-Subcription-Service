@@ -101,16 +101,15 @@ body {
   text-transform: uppercase;
   color: #fff;
   background: rgba(46, 111, 208, 0.9);
-  border-radius: 10px; }
-  @media (max-width: 767.98px) {
-    .blue-button {
-      font-size: 18px; } }
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
   @media (max-width: 575.98px) {
     .blue-button {
-      font-size: 16px; } }
+      font-size: 18px; } }
   @media (max-width: 479.98px) {
     .blue-button {
-      font-size: 14px; } }
+      font-size: 16px; } }
 
 .blue-button:hover {
   background: #2869ca; }
@@ -126,18 +125,18 @@ body {
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 9px;
-  margin: 40px 0px 0px 0px;
+  margin: 40px 0px 70px 0px;
   padding: 0 33px; }
   @media (max-width: 991.98px) {
     .header__navbar {
       padding: 20px 33px;
-      margin: 20px 0px 0px 0px; } }
+      margin: 20px 0px 50px 0px; } }
   @media (max-width: 767.98px) {
     .header__navbar {
-      margin: 20px 0px 0px 0px; } }
+      margin: 20px 0px 40px 0px; } }
   @media (max-width: 575.98px) {
     .header__navbar {
-      margin: 20px 0px 0px 0px;
+      margin: 20px 0px 30px 0px;
       padding: 15px 20px; } }
 
 .header .container-fluid {
@@ -183,6 +182,12 @@ body {
 
 .header__list li a:hover {
   background: rgba(17, 86, 190, 0.5); }
+
+.header__active {
+  background: rgba(17, 90, 190, 0.35); }
+
+.header__active:hover {
+  background: rgba(17, 90, 190, 0.35) !important; }
 
 .header .header__lang {
   font-size: 15px;
@@ -234,12 +239,6 @@ body {
   text-decoration: underline;
   background: none; }
 
-.header__active {
-  text-decoration: underline; }
-
-.header__active:hover {
-  text-decoration: underline; }
-
 .header__slash {
   color: #fff; }
   @media (max-width: 991.98px) {
@@ -257,219 +256,226 @@ body {
   background: none; }
 
 /****************
-*****Sign-in*****
+*****Confirm*****
 *****************/
-.sign-in {
-  margin: 55px 0 60px 0; }
-  @media (max-width: 767.98px) {
-    .sign-in {
-      margin: 50px 0 50px 0; } }
+.confirm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 67px; }
   @media (max-width: 575.98px) {
-    .sign-in {
-      margin: 40px 0 40px 0; } }
+    .confirm {
+      margin-bottom: 60px; } }
+  @media (max-width: 479.98px) {
+    .confirm {
+      margin-bottom: 50px; } }
   @media (max-width: 379.98px) {
-    .sign-in {
-      margin: 30px 0 30px 0; } }
-  .sign-in__wrapper {
-    max-width: 430px;
-    margin: 0 auto; }
-  .sign-in__switch {
-    border-radius: 10px;
-    padding: 16px 0 15px 0px;
-    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #F0F0F0;
-    margin-bottom: 40px; }
+    .confirm {
+      margin-bottom: 40px; } }
+  .confirm__block {
+    background: rgba(249, 249, 249, 0.3);
+    border: 2px solid #437DD5;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+    padding: 45px 40px 60px 40px;
+    margin-bottom: 62px; }
     @media (max-width: 767.98px) {
-      .sign-in__switch {
-        margin-bottom: 35px; } }
+      .confirm__block {
+        padding: 40px 35px 40px 35px;
+        margin-bottom: 50px; } }
     @media (max-width: 575.98px) {
-      .sign-in__switch {
-        max-width: 373px;
-        margin: 0 auto 30px auto; } }
+      .confirm__block {
+        padding: 25px 30px 30px 30px;
+        margin-bottom: 40px; } }
     @media (max-width: 479.98px) {
-      .sign-in__switch {
-        padding: 14px 0 12px 3px;
-        max-width: 316px;
-        margin: 0 auto 25px auto; } }
+      .confirm__block {
+        padding: 20px 25px 25px 25px; } }
     @media (max-width: 379.98px) {
-      .sign-in__switch {
-        max-width: 270px;
-        margin: 0 auto 20px auto; } }
-  .sign-in__up {
-    font-size: 18px;
-    line-height: 22px;
-    text-transform: uppercase;
-    color: #5B5B5B;
-    background: #F0F0F0;
-    border-radius: 10px;
-    padding: 16px 50px; }
+      .confirm__block {
+        padding: 20px 20px 25px 20px;
+        margin-bottom: 30px; } }
+  .confirm__title {
+    margin-bottom: 30px; }
+    @media (max-width: 767.98px) {
+      .confirm__title {
+        margin-bottom: 25px; } }
     @media (max-width: 575.98px) {
-      .sign-in__up {
-        font-size: 16px;
-        padding: 16px 41.555px; } }
-    @media (max-width: 479.98px) {
-      .sign-in__up {
-        font-size: 14px;
-        padding: 15px 33px; } }
+      .confirm__title {
+        margin-bottom: 20px; } }
     @media (max-width: 379.98px) {
-      .sign-in__up {
-        padding: 15px 22px; } }
-  .sign-in__in {
-    font-size: 18px;
-    line-height: 22px;
-    padding: 16px 86.546px;
-    background: #3f7cd5; }
+      .confirm__title {
+        margin-bottom: 15px; } }
+    .confirm__title h2 {
+      font-size: 24px;
+      line-height: 29px;
+      font-weight: 600;
+      color: #262626;
+      text-align: center; }
+      @media (max-width: 767.98px) {
+        .confirm__title h2 {
+          font-size: 22px; } }
+      @media (max-width: 575.98px) {
+        .confirm__title h2 {
+          font-size: 20px;
+          line-height: 26px; } }
+      @media (max-width: 479.98px) {
+        .confirm__title h2 {
+          line-height: 24px; } }
+      @media (max-width: 379.98px) {
+        .confirm__title h2 {
+          font-size: 18px; } }
+  .confirm__text {
+    margin-bottom: 23px; }
+    @media (max-width: 767.98px) {
+      .confirm__text {
+        margin-bottom: 20px; } }
     @media (max-width: 575.98px) {
-      .sign-in__in {
-        font-size: 16px;
-        padding: 16px 75px; } }
-    @media (max-width: 479.98px) {
-      .sign-in__in {
-        font-size: 14px;
-        padding: 15px 62px; } }
+      .confirm__text {
+        margin-bottom: 18px; } }
     @media (max-width: 379.98px) {
-      .sign-in__in {
-        padding: 15px 50px; } }
-  .sign-in__in:hover {
-    background: #3f7cd5; }
-  .sign-in__title {
-    font-size: 24px;
-    line-height: 29px;
-    text-align: center;
-    margin-bottom: 16px;
-    color: #000; }
+      .confirm__text {
+        margin-bottom: 15px; } }
+    .confirm__text p {
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center; }
+      @media (max-width: 767.98px) {
+        .confirm__text p {
+          font-size: 18px; } }
+      @media (max-width: 575.98px) {
+        .confirm__text p {
+          font-size: 17px;
+          line-height: 22px; } }
+      @media (max-width: 479.98px) {
+        .confirm__text p {
+          line-height: 20px; } }
+      @media (max-width: 379.98px) {
+        .confirm__text p {
+          font-size: 16px; } }
+      .confirm__text p span {
+        display: block; }
+        @media (max-width: 479.98px) {
+          .confirm__text p span {
+            display: inline; } }
+  .confirm__spam {
+    margin-bottom: 34px; }
     @media (max-width: 767.98px) {
-      .sign-in__title {
-        font-size: 22px;
-        margin-bottom: 14px; } }
+      .confirm__spam {
+        margin-bottom: 30px; } }
     @media (max-width: 575.98px) {
-      .sign-in__title {
-        font-size: 20px;
-        margin-bottom: 12px; } }
+      .confirm__spam {
+        margin-bottom: 25px; } }
     @media (max-width: 479.98px) {
-      .sign-in__title {
-        font-size: 18px;
-        margin-bottom: 10px; } }
+      .confirm__spam {
+        margin-bottom: 20px; } }
     @media (max-width: 379.98px) {
-      .sign-in__title {
-        font-size: 18px;
-        margin-bottom: 5px; } }
-  .sign-in__email {
-    margin-bottom: 18px !important; }
+      .confirm__spam {
+        margin-bottom: 15px; } }
+    .confirm__spam p {
+      font-size: 12px;
+      line-height: 15px;
+      text-align: center; }
+      .confirm__spam p span {
+        display: block; }
+  .confirm__form {
+    padding: 0 20px;
+    margin-bottom: 28px; }
     @media (max-width: 767.98px) {
-      .sign-in__email {
-        margin-bottom: 16px !important; } }
+      .confirm__form {
+        margin-bottom: 25px; } }
     @media (max-width: 575.98px) {
-      .sign-in__email {
-        margin-bottom: 14px !important; } }
+      .confirm__form {
+        padding: 0 15px;
+        margin-bottom: 20px; } }
     @media (max-width: 479.98px) {
-      .sign-in__email {
-        margin-bottom: 12px !important; } }
+      .confirm__form {
+        padding: 0 12px; } }
     @media (max-width: 379.98px) {
-      .sign-in__email {
-        margin-bottom: 10px !important; } }
-  .sign-in__password {
-    margin-bottom: 30px !important; }
-    @media (max-width: 767.98px) {
-      .sign-in__password {
-        margin-bottom: 25px !important; } }
+      .confirm__form {
+        margin-bottom: 15px;
+        padding: 0 10px; } }
+    .confirm__form label {
+      font-size: 20px;
+      line-height: 24px;
+      display: block;
+      padding-left: 10px;
+      margin-bottom: 6px; }
+      @media (max-width: 767.98px) {
+        .confirm__form label {
+          font-size: 18px;
+          margin-bottom: 5px; } }
+      @media (max-width: 575.98px) {
+        .confirm__form label {
+          font-size: 17px;
+          margin-bottom: 3px;
+          padding-left: 7px; } }
+      @media (max-width: 479.98px) {
+        .confirm__form label {
+          margin-bottom: 2px; } }
+      @media (max-width: 379.98px) {
+        .confirm__form label {
+          font-size: 16px;
+          margin-bottom: 1px; } }
+    .confirm__form input {
+      width: 100%;
+      padding: 10px 18px;
+      font-size: 20px;
+      -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 10px; }
+      @media (max-width: 767.98px) {
+        .confirm__form input {
+          font-size: 18px; } }
+      @media (max-width: 575.98px) {
+        .confirm__form input {
+          font-size: 17px;
+          padding: 10px 15px; } }
+      @media (max-width: 479.98px) {
+        .confirm__form input {
+          padding: 10px 12px; } }
+      @media (max-width: 379.98px) {
+        .confirm__form input {
+          font-size: 16px;
+          padding: 10px 10px; } }
+  .confirm__resend {
+    padding-left: 30px; }
     @media (max-width: 575.98px) {
-      .sign-in__password {
-        margin-bottom: 20px !important; } }
-    @media (max-width: 479.98px) {
-      .sign-in__password {
-        margin-bottom: 18px !important; } }
+      .confirm__resend {
+        padding-left: 21px; } }
     @media (max-width: 379.98px) {
-      .sign-in__password {
-        margin-bottom: 16px !important; } }
-  .sign-in label {
-    font-size: 20px;
-    line-height: 24px;
-    margin-left: 12px;
-    color: #000;
-    margin-bottom: 2px; }
-    @media (max-width: 767.98px) {
-      .sign-in label {
-        font-size: 18px; } }
-    @media (max-width: 575.98px) {
-      .sign-in label {
-        font-size: 16px;
-        margin-bottom: 0px; } }
+      .confirm__resend {
+        padding-left: 18px; } }
+    .confirm__resend a {
+      font-size: 16px;
+      line-height: 19px;
+      -webkit-text-decoration-line: underline;
+      text-decoration-line: underline;
+      color: #1C1C1C; }
+      @media (max-width: 767.98px) {
+        .confirm__resend a {
+          font-size: 15px; } }
+      @media (max-width: 575.98px) {
+        .confirm__resend a {
+          font-size: 14px; } }
+      @media (max-width: 379.98px) {
+        .confirm__resend a {
+          font-size: 12.5px; } }
+  .confirm__button a {
+    padding: 13px 26px; }
     @media (max-width: 479.98px) {
-      .sign-in label {
-        font-size: 14px;
-        margin-bottom: -2px; } }
-  .sign-in input {
-    padding: 10px 17px;
-    font-size: 20px;
-    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px; }
-    @media (max-width: 767.98px) {
-      .sign-in input {
-        font-size: 18px; } }
-    @media (max-width: 575.98px) {
-      .sign-in input {
-        font-size: 16px; } }
-    @media (max-width: 479.98px) {
-      .sign-in input {
-        font-size: 14px; } }
-  .sign-in .sign-in__checkbox {
-    padding: 10px;
-    border-radius: 0px;
-    margin-top: 0;
-    height: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-transition: all 0.7s ease 0s;
-    -o-transition: all 0.7s ease 0s;
-    transition: all 0.7s ease 0s;
-    position: relative; }
-    @media (max-width: 575.98px) {
-      .sign-in .sign-in__checkbox {
-        top: 1px; } }
-    @media (max-width: 479.98px) {
-      .sign-in .sign-in__checkbox {
-        padding: 9px; } }
-  .sign-in__remember {
-    padding-left: 35px;
-    margin-bottom: 22px !important; }
-    @media (max-width: 767.98px) {
-      .sign-in__remember {
-        padding-left: 33px;
-        margin-bottom: 20px !important; } }
-    @media (max-width: 575.98px) {
-      .sign-in__remember {
-        padding-left: 30px;
-        margin-bottom: 18px !important; } }
-    @media (max-width: 479.98px) {
-      .sign-in__remember {
-        padding-left: 27px;
-        margin-bottom: 16px !important; } }
-  .sign-in .sign-in__remember-label {
-    font-size: 15px;
-    line-height: 22px;
-    margin-left: -3px; }
-    @media (max-width: 767.98px) {
-      .sign-in .sign-in__remember-label {
-        margin-left: 0px; } }
-    @media (max-width: 575.98px) {
-      .sign-in .sign-in__remember-label {
-        font-size: 14px;
-        margin-left: 3px; } }
-    @media (max-width: 479.98px) {
-      .sign-in .sign-in__remember-label {
-        font-size: 13px;
-        margin-left: 5px; } }
-  .sign-in__authorization {
-    padding: 14px 20px;
-    display: block;
-    margin: 0 auto;
-    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
-    @media (max-width: 479.98px) {
-      .sign-in__authorization {
+      .confirm__button a {
+        padding: 12px 24px; } }
+    @media (max-width: 379.98px) {
+      .confirm__button a {
         padding: 12px 20px; } }
 
 /*****************
