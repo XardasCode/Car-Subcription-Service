@@ -55,38 +55,31 @@
 				<div class="manager__container">
 					<div class="manager__row">
 
-						<div class="manager__left">
+						<div class="manager__profile profile">
 							<h3>Кабінет менеджера</h3>
-							<img src="img/inactive/svg/user.svg" class="manager__user-img" alt="user">
-							<div class="manager__user">
+							<img src="img/manager/svg/user.svg" class="profile__user-img" alt="user">
+							<div class="profile__user">
 								<span id="username">Петро Горошенко</span>
 								<a href="#">
-									<img src="img/inactive/svg/edit.svg" onclick="editText()" class="manager__edit-img" alt="edit">
+									<img src="img/manager/svg/edit.svg" onclick="editText()" class="profile__edit-img" alt="edit">
 								</a>
 							</div>
-							<div class="manager__email" id="email">petro.horoshenko@car.sub</div>
-							<div class="manager__edit-catalog">
+							<div class="profile__email" id="email">petro.horoshenko@car.sub</div>
+							<div class="profile__edit-catalog">
 								<a href="#" class="blue-button">Редагувати каталог</a>
 							</div>
-							<div class="manager__activated-sub">
+							<div class="profile__activated-sub">
 								<a href="#" class="blue-button">Активні підписки</a>
 							</div>
 						</div>
 
-						<div class="manager__right">
-							<div class="accordion manager__accordion" id="accordionExample">
+						<div class="manager__collapsible collapsible">
 					
-							  <div class="accordion-item manager__item">
-							    <h2 class="accordion-header">
-							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							        <ul>
-								        <li>Статус заявки: На розгляді</li>
-								        <li>Заявник: Василь Щур</li>
-							        </ul>
-							      </button>
-							    </h2>
-							    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-							      <ul class="manager__accordion-list">
+							<div class="collapsible__item-wrapper" id="item-wrapper-1">
+							  	<div class="collapsible__info">
+							  		<ul class="collapsible__list">
+								      <li>Статус заявки: На розгляді</li>
+								      <li>Заявник: Василь Щур</li>
 							        	<li>Статус пошти: Підтверджена</li>
 							        	<li>Авто: Hyundai i30</li>
 							        	<li>Термін: 03.2023-03.2026</li>
@@ -96,69 +89,65 @@
 							        	<li>Дата народження: 08.01.1971</li>
 							        	<li>Номер телефону: (063) 123-4567</li>
 							        	<li>Соцмережі: @vashya228</li>
-							      </ul>
-							    </div>
-							  </div>
-
-							  <div class="accordion-item manager__item">
-							    <h2 class="accordion-header">
-							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							        <ul>
-								        <li>Статус заявки: На розгляді</li>
-								        <li>Заявник: Віктор Григорович</li>
-							        </ul>
-							      </button>
-							    </h2>
-							    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-							     <div class="manager__accordion-left">
-								      <ul class="manager__accordion-list">
-								        	<li>Статус пошти: Підтверджена</li>
-								        	<li>Авто: Volkswagen Tiguan</li>
-								        	<li>Термін: 03.2023-03.2024</li>
-								        	<li>Колір: Сірий</li>
-								        	<li>Номер паспорта: 10101010-10101</li>
-								        	<li>ІПН: 0000000000</li>
-								        	<li>Дата народження: 10.03.1995</li>
-								        	<li>Номер телефону: (067) 123-4567</li>
-								        	<li>Соцмережі: @h_vetinari</li>
-								      </ul>
-							   	</div>
-							   	<div class="manager__accordion-right">
-										<a href="#" class="show-more">Показати менше</a>
-							   		<div class="manager__active-sub">
-											<a href="#" class="blue-button">Активувати підписку</a>
-										</div>
-							   	</div>
-							    </div>
-							  </div>
-
-							  <div class="accordion-item manager__item">
-							    <h2 class="accordion-header">
-							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							        <ul>
-								        <li>Статус заявки: На розгляді</li>
-								        <li>Заявник: Ігор Свищ</li>
-							        </ul>
-							      </button>
-							    </h2>
-							    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-							      <ul class="manager__accordion-list">
-							        	<li>Статус пошти: Не підтверджена</li>
-							        	<li>Авто: Audi Q2</li>
-							        	<li>Термін: 03.2023-03.2025</li>
-							        	<li>Колір: Білий</li>
-							        	<li>Номер паспорта: 12345678-12345</li>
-							        	<li>ІПН: 1234567890</li>
-							        	<li>Дата народження: 12.11.2001</li>
-							        	<li>Номер телефону: (067) 123-4567</li>
-							        	<li>Соцмережі: @net_Igor</li>
-							      </ul>
-							    </div>
-							  </div>
-
+							     	</ul>
+							  	</div>
+							  	<div class="collapsible__buttons">
+							  		<button class="toggle-btn" id="toggle-btn-1">Показати більше</button>
+							  		<div class="collapsible__active-sub">
+										<a href="#" class="blue-button">Активувати</a>
+									</div>
+							  	</div>	 
 							</div>
-						</div>
 
+							<div class="collapsible__item-wrapper" id="item-wrapper-2">
+							  	<div class="collapsible__info">
+							  		<ul class="collapsible__list">
+								      <li>Статус заявки: На розгляді</li>
+								      <li>Заявник: Віктор Григорович</li>
+								      <li>Статус пошти: Підтверджена</li>
+								      <li>Авто: Volkswagen Tiguan</li>
+								      <li>Термін: 03.2023-03.2024</li>
+								      <li>Колір: Сірий</li>
+								      <li>Номер паспорта: 10101010-10101</li>
+								      <li>ІПН: 0000000000</li>
+								      <li>Дата народження: 10.03.1995</li>
+								      <li>Номер телефону: (063) 123-4567</li>
+								      <li>Соцмережі: @h_vetinari</li>
+							     	</ul>
+							  	</div>
+							  	<div class="collapsible__buttons">
+							  		<button class="toggle-btn" id="toggle-btn-2">Показати більше</button>
+							  		<div class="collapsible__active-sub">
+										<a href="#" class="blue-button">Активувати</a>
+									</div>
+							  	</div>	 
+							</div>
+
+							<div class="collapsible__item-wrapper" id="item-wrapper-3">
+							  	<div class="collapsible__info">
+							  		<ul class="collapsible__list">
+								   	<li>Статус заявки: На розгляді</li>
+								   	<li>Заявник: Ігор Свищ</li>
+								   	<li>Статус пошти: Не підтверджена</li>
+								   	<li>Авто: Audi Q2</li>
+								   	<li>Термін: 03.2023-03.2025</li>
+								   	<li>Колір: Білий</li>
+								   	<li>Номер паспорта: 12345678-12345</li>
+								   	<li>ІПН: 1234567890</li>
+								   	<li>Дата народження: 12.11.2001</li>
+								   	<li>Номер телефону: (063) 123-4567</li>
+								   	<li>Соцмережі: @net_Igor</li>
+							     	</ul>
+							  	</div>
+							  	<div class="collapsible__buttons">
+							  		<button class="toggle-btn" id="toggle-btn-3">Показати більше</button>
+							  		<div class="collapsible__active-sub">
+										<a href="#" class="blue-button">Активувати</a>
+									</div>
+							  	</div>	 
+							</div>
+
+						</div>
 					</div>
 				</div>
 			</section>

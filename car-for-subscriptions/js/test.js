@@ -1,4 +1,4 @@
-let numToShow = 4;
+/*let numToShow = 4;
 let items = document.querySelectorAll('.list li');
 for (let i = 0; i < numToShow; i++) {
   items[i].style.display = "block";
@@ -24,5 +24,22 @@ document.getElementById("show-less").addEventListener("click", function() {
     } else {
       items[i].style.display = "none";
     }
+  }
+});*/
+
+
+const textWrapper = document.querySelector('.text-wrapper');
+// const text = document.querySelector('.text');
+const toggleBtn = document.querySelector('.toggle-btn');
+
+toggleBtn.addEventListener('click', function() {
+  if (textWrapper.classList.contains('open')) {
+    // згорнути текст
+    textWrapper.classList.remove('open');
+    toggleBtn.innerHTML = 'Розгорнути';
+  } else {
+    // розгорнути текст
+    textWrapper.classList.add('open');
+    toggleBtn.innerHTML = 'Згорнути';
   }
 });

@@ -12,7 +12,6 @@
 body{
 	font-family: 'Inter', sans-serif;
 	background: url(../img/bg-test.png) no-repeat 60% 0% aliceblue; //поправити bg
-	// background: lightgray;
 	@media (max-width: 767.98px) {
 		background: #f0f8ff;
 	}
@@ -581,37 +580,7 @@ body{
 				}
 			}
 		}
-	}
-		// .inactive__auto, .inactive__term, .inactive__color{
-		// 	background: none;
-		// 	color: none;
-		// 	border: 0px;
-		// 	margin-bottom: 10px;
-		// }
-		// .inactive__accordion-button {
-		// 	font-size: 16px;
-		// 	line-height: 19px;
-		// 	height: 32px;
-		// 	background: #F9F9F9;
-		// 	border: 1px solid #437DD5;
-		// 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-		// 	border-radius: 10px !important;
-		// 	padding: 0px 15px;
-		// 	z-index: 2;
-		// }
-		// .accordion-body{ //Пофіксити боді випадаючого списку
-		// 	font-size: 16px;
-		// 	line-height: 20px;
-		// 	background: #E8E8E8;
-		// 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-		// 	border: 1px solid #437DD5;
-		// 	border-radius: 0 0 10px 10px;
-		// 	padding: 12px 15px 5px 15px;
-		// 	position: relative;
-		// 	top: -8px;
-		// 	z-index: 1;
-		// }	
-
+	}	
 	&__auto, &__term, &__color, &__passport, &__ipn {
 		margin-bottom: 10px;
 		@media (max-width: 991.98px) {
@@ -640,14 +609,6 @@ body{
 		}
 	}
 }
-// @media (max-width: 1399.98px) {}
-// @media (max-width: 1199.98px) {}
-// @media (max-width: 991.98px) {}
-// @media (max-width: 767.98px) {}
-// @media (max-width: 575.98px) {}
-// @media (max-width: 479.98px) {}
-// @media (max-width: 379.98px) {}
-
 /***********************************************
 **********Стилізація випадаючого меню***********
 *********************auto***********************
@@ -659,7 +620,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }
@@ -766,7 +726,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }
@@ -872,7 +831,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }

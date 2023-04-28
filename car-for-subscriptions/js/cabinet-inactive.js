@@ -237,10 +237,78 @@ function checkIpnNumber(ipnNo){
 }
 
 
-// Розлогування користувача та потрапляння на сторінку входу
+// Динамічний header в залежності від того, чи користувач залогований
 
-const logoutButton = document.querySelector('#logoutButton');
-  logoutButton.addEventListener('click', () => {
-    // Код для виходу з аккаунту
-  });
+function updateHeader() {
+  const headerEl = document.querySelector('.header__last-item');
+  const userStr = sessionStorage.getItem('user');
+  if (userStr) {
+    // Якщо користувач залогований, виводимо кнопки "Мій кабінет/Вийти"
+    const user = JSON.parse(userStr);
+    headerEl.innerHTML = `
+    <li class="nav-item">
+      <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" id="logoutButton" href="#">Вийти</a>
+    </li>
+    `;
+    const logoutBtn = headerEl.querySelector('#logout-btn');
+    logoutBtn.addEventListener('click', logoutUser);
+  } else {
+    // Якщо користувач не залогований, виводимо кнопки "Увійти/Зареєструватись"
+    headerEl.innerHTML = `
+    <li class="nav-item">
+      <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a>
+    </li>
+    `;
+  }
+}
 
+
+// Розлогування користувача та редірект на сторінку входу
+
+const logoutButton = document.getElementById('logoutButton');
+
+logoutButton.addEventListener('click', logoutUser); // Обробник подій для кнопки "Вийти"
+
+function logoutUser() { // Функція для розлогування користувача
+  sessionStorage.removeItem('user'); // Видалення з сесії
+
+  window.location.replace('sign-in.html'); // Редірект на сторінку входу
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Перевірка наявності інформації про користувача в сесії
+/*const userStr = sessionStorage.getItem('user');
+
+if (!userStr) {
+  // Якщо інформація про користувача відсутня, перенаправлення на сторінку входу
+  window.location.replace('login.html');
+} else {
+  // Якщо інформація про коркористувача присутня, виведення інформації про нього на сторінку та додавання обробника події для кнопки "Вийти"
+const user = JSON.parse(userStr);
+const userInfoEl = document.getElementById('user-info');
+userInfoEl.textContent = Вітаємо, ${user.name} (${user.email})!;
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', logoutUser); // Обробник подій для кнопки "Вийти"
+}
+function logoutUser() { // Функція для розлогування користувача
+  sessionStorage.removeItem('user'); // Видалення з сесії
+
+  window.location.replace('sign-in.html'); // Редірект на сторінку входу
+}*/

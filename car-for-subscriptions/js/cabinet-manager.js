@@ -18,3 +18,54 @@ function saveText() {
   // Замінюю форму для редагування на нове ім'я
   textElement.innerHTML = newText;
 }
+
+
+// Розгортання/згортання контенту (collapsible)
+
+// #1
+const itemWrapper1 = document.getElementById('item-wrapper-1');
+const toggleBtn1 = document.getElementById('toggle-btn-1');
+
+toggleBtn1.addEventListener('click', function() {
+  if (itemWrapper1.classList.contains('open')) {
+    // згорнути текст
+    itemWrapper1.classList.remove('open');
+    toggleBtn1.innerHTML = 'Показати більше';
+  } else {
+    // розгорнути текст
+    itemWrapper1.classList.add('open');
+    toggleBtn1.innerHTML = 'Показати менше';
+  }
+});
+
+// #2
+const itemWrapper2 = document.getElementById('item-wrapper-2');
+const toggleBtn2 = document.getElementById('toggle-btn-2');
+
+toggleBtn2.addEventListener('click', function() {
+  if (itemWrapper2.classList.contains('open')) {
+    // згорнути текст
+    itemWrapper2.classList.remove('open');
+    toggleBtn2.innerHTML = 'Показати більше';
+  } else {
+    // розгорнути текст
+    itemWrapper2.classList.add('open');
+    toggleBtn2.innerHTML = 'Показати менше';
+  }
+});
+
+// #3
+const itemWrapper3 = document.getElementById('item-wrapper-3');
+const toggleBtn3 = document.getElementById('toggle-btn-3');
+
+toggleBtn3.addEventListener('click', function() {
+  if (itemWrapper3.classList.contains('open')) {
+    // згорнути текст
+    itemWrapper3.classList.remove('open');
+    toggleBtn3.innerHTML = 'Показати більше';
+  } else {
+    // розгорнути текст
+    itemWrapper3.classList.add('open');
+    toggleBtn3.innerHTML = 'Показати менше';
+  }
+});
