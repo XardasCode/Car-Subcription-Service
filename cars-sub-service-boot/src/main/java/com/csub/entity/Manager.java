@@ -1,13 +1,12 @@
 package com.csub.entity;
 
+import com.csub.entity.audit.ManagerEntityListener;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
+@EntityListeners(ManagerEntityListener.class)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,19 +14,31 @@ import java.util.Set;
 @Entity
 @Table(name = "managers")
 public class Manager {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "create_date")
+    private String createDate;
+
+    @Column(name = "last_update")
+    private String lastUpdateDate;
+
+    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @EqualsAndHashCode.Exclude
     private Set<Subscription> subscriptions;
 }

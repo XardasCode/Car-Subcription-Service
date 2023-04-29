@@ -1,25 +1,25 @@
 package com.csub.service;
 
+import com.csub.controller.request.UserRequestDTO;
+import com.csub.dto.UserDTO;
 import com.csub.entity.User;
-import jakarta.transaction.Transactional;
+import com.csub.util.UserSearchInfo;
 
-import javax.mail.MessagingException;
 import java.util.List;
 
 public interface UserService {
 
+    List<UserDTO> getUsers(UserSearchInfo info);
 
-    List<User> getAllUsers();
+    long addUser(UserRequestDTO user);
 
-    long addUser(User user);
+    UserDTO getUser(long id);
 
-    User getUser(long id);
+    UserDTO checkUserCredentials(String email, String password);
 
-    User checkUserCredentials(String email, String password);
-
-    void updateUser(User user, long id);
+    void updateUser(UserRequestDTO user, long id);
 
     void deleteUser(long id);
 
-    List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
+    List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType, UserSearchInfo info);
 }

@@ -15,4 +15,6 @@ public interface SubscriptionDAO {
     Optional<Subscription> getSubscription(long id);
 
     List<Subscription> getAllSubscription();
+
+    Optional<Subscription> getSubscriptionsByUserId(long id);
 }

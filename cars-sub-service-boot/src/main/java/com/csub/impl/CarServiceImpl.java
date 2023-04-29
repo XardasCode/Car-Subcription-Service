@@ -1,10 +1,16 @@
 package com.csub.impl;
 
+import com.csub.controller.request.CarRequestDTO;
 import com.csub.dao.CarDAO;
+import com.csub.dto.CarDTO;
+import com.csub.dto.mapper.CarDTOMapper;
 import com.csub.entity.Car;
+import com.csub.entity.CarStatus;
+import com.csub.entity.Subscription;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.CarService;
+import com.csub.util.CarSearchInfo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,35 +23,38 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 public class CarServiceImpl implements CarService {
+
     private final CarDAO carDAO;
+
+    private final CarDTOMapper carDTOMapper;
 
     @Override
     @Transactional
-    public void addCar(Car car) {
+    public void addCar(CarRequestDTO car) {
         log.debug("Adding car: {}", car);
-        carDAO.addCar(car);
+        Car carEntity = Car.mapCarRequestDTOToCar(car);
+        carEntity.setCarStatus(carDAO.getCarStatusById(Integer.parseInt(car.getStatusId())));
+        carDAO.addCar(carEntity);
         log.debug("Car added: {}", car);
     }
 
     @Override
     @Transactional
-    public Car getCar(long id) {
+    public CarDTO getCar(long id) {
         log.debug("Getting car with id {}", id);
         Optional<Car> car = carDAO.getCar(id);
-        if (car.isEmpty()) {
-            log.debug("Car with id {} not found", id);
-            throw new ServerException("Car not found", ErrorList.CAR_NOT_FOUND);
-        }
-        log.debug("Car found: {}", car);
-        return car.get();
+        return car.map(carDTOMapper)
+                .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
     }
 
     @Override
     @Transactional
-    public void updateCar(Car car, long id) {
+    public void updateCar(CarRequestDTO car, long id) {
         log.debug("Updating car: {}", car);
         getCar(id);
-        carDAO.updateCar(car);
+        Car carEntity = Car.mapCarRequestDTOToCar(car);
+        carEntity.setCarStatus(carDAO.getCarStatusById(Integer.parseInt(car.getStatusId())));
+        carDAO.updateCar(carEntity);
         log.debug("Car updated: {}", car);
     }
 
@@ -60,10 +69,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public List<Car> getAllCars() {
+    public List<CarDTO> getCars(CarSearchInfo info) {
         log.debug("Getting all cars");
-        List<Car> cars = carDAO.getAllCars();
+        List<Car> cars = carDAO.getCars(info);
         log.debug("Cars found: {}", cars.size());
-        return cars;
+        return cars.stream().map(carDTOMapper).toList();
     }
 }

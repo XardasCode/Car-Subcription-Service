@@ -1,23 +1,25 @@
 package com.csub.service;
 
+import com.csub.controller.request.SubscriptionRequestDTO;
+import com.csub.dto.SubscriptionDTO;
 import com.csub.entity.Subscription;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface SubscriptionService {
-    @Transactional
-    long addSubscription(Subscription subscription);
 
-    @Transactional
-    Subscription getSubscription(long id);
+    long addSubscription(SubscriptionRequestDTO subscription);
 
-    @Transactional
-    void updateSubscription(Subscription subscription, long id);
 
-    @Transactional
+    SubscriptionDTO getSubscription(long id);
+
+
+    void updateSubscription(SubscriptionRequestDTO subscription, long id);
+
     void deleteSubscription(long id);
 
-    @Transactional
-    List<Subscription> getAllSubscription();
+
+    List<SubscriptionDTO> getAllSubscriptions();
+
+    SubscriptionDTO getSubscriptionByUserId(long id);
 }
