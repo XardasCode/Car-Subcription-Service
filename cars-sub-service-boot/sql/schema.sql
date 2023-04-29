@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS subscriptions CASCADE;
 
 CREATE TABLE IF NOT EXISTS managers
 (
-    id       SERIAL PRIMARY KEY,
-    name     VARCHAR(255) NOT NULL,
-    surname  VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email    VARCHAR(255) NOT NULL,
+    id          SERIAL PRIMARY KEY,
+    name        VARCHAR(255) NOT NULL,
+    surname     VARCHAR(255) NOT NULL,
+    password    VARCHAR(255) NOT NULL,
+    email       VARCHAR(255) NOT NULL,
     create_date varchar(255) NOT NULL,
     last_update varchar(255) NOT NULL,
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS cars
     last_service_date varchar(255) NOT NULL,
     status_id         INT          NOT NULL,
     create_date       varchar(255) NOT NULL,
-    last_update_date       varchar(255) NOT NULL,
+    last_update_date  varchar(255) NOT NULL,
     image_path        VARCHAR(255),
 
     FOREIGN KEY (status_id) REFERENCES car_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS users
     is_blocked        BOOLEAN      NOT NULL DEFAULT FALSE,
     verification_code VARCHAR(255),
     create_date       varchar(255) NOT NULL,
-    last_update_date       varchar(255) NOT NULL,
+    last_update_date  varchar(255) NOT NULL,
 
     UNIQUE (email)
 );
@@ -74,19 +74,19 @@ CREATE TABLE IF NOT EXISTS subscription_statuses
 
 CREATE TABLE IF NOT EXISTS subscriptions
 (
-    id           SERIAL PRIMARY KEY,
-    is_active    BOOLEAN      NOT NULL DEFAULT TRUE,
-    start_date   varchar(255) NOT NULL,
-    month_price  INT          NOT NULL,
-    total_price  INT          NOT NULL,
-    total_months INT          NOT NULL,
-    create_date  varchar(255) NOT NULL,
-    last_update_date  varchar(255) NOT NULL,
+    id               SERIAL PRIMARY KEY,
+    is_active        BOOLEAN      NOT NULL DEFAULT TRUE,
+    start_date       varchar(255) NOT NULL,
+    month_price      INT          NOT NULL,
+    total_price      INT          NOT NULL,
+    total_months     INT          NOT NULL,
+    create_date      varchar(255) NOT NULL,
+    last_update_date varchar(255) NOT NULL,
 
-    user_id      INT          NOT NULL,
-    car_id       INT          NOT NULL,
-    manager_id   INT          NOT NULL,
-    status_id    INT          NOT NULL,
+    user_id          INT,
+    car_id           INT,
+    manager_id       INT,
+    status_id        INT,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (status_id) REFERENCES subscription_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE,

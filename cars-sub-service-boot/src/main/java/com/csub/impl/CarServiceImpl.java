@@ -1,9 +1,11 @@
 package com.csub.impl;
 
+import com.csub.controller.request.CarRequestDTO;
 import com.csub.dao.CarDAO;
 import com.csub.dto.CarDTO;
 import com.csub.dto.mapper.CarDTOMapper;
 import com.csub.entity.Car;
+import com.csub.entity.CarStatus;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.CarService;
@@ -31,9 +33,15 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public void addCar(Car car) {
+    public void addCar(CarRequestDTO car) {
         log.debug("Adding car: {}", car);
-        carDAO.addCar(car);
+        Car carEntity = Car.createCarFromRequest(car);
+
+        CarStatus carStatus = getCarStatusById(car.getStatusId());
+        carEntity.setCarStatus(carStatus);
+        carEntity.getCarStatus().getCars().add(carEntity);
+
+        carDAO.addCar(carEntity);
         log.debug("Car added: {}", car);
     }
 
@@ -48,10 +56,17 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public void updateCar(Car car, long id) {
+    public void updateCar(CarRequestDTO car, long id) {
         log.debug("Updating car: {}", car);
-        getCar(id);
-        carDAO.updateCar(car);
+
+        Car dbCar = getCarEntity(id);
+        Car carEntity = Car.createCarFromRequest(car);
+
+        updateCarStatus(car, carEntity, dbCar);
+
+        Car.mergeCars(dbCar, carEntity);
+
+        carDAO.updateCar(carEntity);
         log.debug("Car updated: {}", car);
     }
 
@@ -90,5 +105,29 @@ public class CarServiceImpl implements CarService {
         String imagePath = carDAO.getImagePath(carId);
         log.debug("Image path: {}", imagePath);
         return imageService.getImage(imagePath);
+    }
+
+    private CarStatus getCarStatusById(String statusId) {
+        log.debug("Getting car status by id {}", statusId);
+        return carDAO.getCarStatusById(statusId)
+                .orElseThrow(() -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
+    }
+
+    private Car getCarEntity(long id) {
+        log.debug("Getting car with id {}", id);
+        return carDAO.getCar(id)
+                .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+    }
+
+    private void updateCarStatus(CarRequestDTO car, Car carEntity, Car dbCar) {
+        if (car.getStatusId() != null) {
+            CarStatus carStatus = getCarStatusById(car.getStatusId());
+            carEntity.setCarStatus(carStatus);
+            if (!carEntity.getCarStatus().getCars().contains(carEntity)) {
+                carEntity.getCarStatus().getCars().add(carEntity);
+            }
+        } else {
+            carEntity.setCarStatus(dbCar.getCarStatus());
+        }
     }
 }

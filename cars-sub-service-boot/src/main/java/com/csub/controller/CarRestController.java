@@ -1,9 +1,11 @@
 package com.csub.controller;
 
+import com.csub.controller.request.CarRequestDTO;
 import com.csub.controller.util.JSONInfo;
 import com.csub.dto.CarDTO;
 import com.csub.service.CarService;
 import com.csub.util.CarSearchInfo;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -46,6 +48,20 @@ public class CarRestController {
     public CarDTO getCar(@PathVariable long id) {
         log.info("Getting car with id {}", id);
         return carService.getCar(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<JSONInfo> addCar(@RequestBody @Valid CarRequestDTO carDTO) {
+        log.info("Adding car");
+        carService.addCar(carDTO);
+        return ResponseEntity.ok(JSONInfo.builder().message("Car added successfully").build());
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<JSONInfo> updateCar(@RequestBody CarRequestDTO carDTO, @PathVariable long id) {
+        log.info("Updating car");
+        carService.updateCar(carDTO, id);
+        return ResponseEntity.ok(JSONInfo.builder().message("Car updated successfully").build());
     }
 
     @PostMapping("/image/{carId}")

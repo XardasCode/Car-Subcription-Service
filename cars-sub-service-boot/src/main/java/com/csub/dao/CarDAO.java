@@ -1,6 +1,7 @@
 package com.csub.dao;
 
 import com.csub.entity.Car;
+import com.csub.entity.CarStatus;
 import com.csub.util.CarSearchInfo;
 
 import java.util.Optional;
@@ -20,4 +21,6 @@ public interface CarDAO {
     void updateImage(String imagePath, long carId);
 
     String getImagePath(long carId);
+
+    Optional<CarStatus> getCarStatusById(String statusId);
 }

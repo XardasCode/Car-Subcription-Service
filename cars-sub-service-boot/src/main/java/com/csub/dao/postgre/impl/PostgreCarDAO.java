@@ -3,6 +3,7 @@ package com.csub.dao.postgre.impl;
 import com.csub.dao.postgre.util.CarCriteriaBuilderManager;
 import com.csub.entity.Car;
 import com.csub.dao.CarDAO;
+import com.csub.entity.CarStatus;
 import com.csub.util.CarSearchInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -29,7 +30,7 @@ public class PostgreCarDAO implements CarDAO {
     public void addCar(Car car) {
         log.debug("Adding car: {}", car);
         sessionFactory.persist(car);
-        log.debug("Car created with id {}", car.getId());
+        log.debug("Car added: {}", car);
     }
 
     @Override
@@ -85,5 +86,11 @@ public class PostgreCarDAO implements CarDAO {
         return sessionFactory.createQuery("SELECT c.imagePath FROM Car c WHERE c.id = :carId", String.class)
                 .setParameter("carId", carId)
                 .getSingleResult();
+    }
+
+    @Override
+    public Optional<CarStatus> getCarStatusById(String statusId) {
+        log.debug("Getting car status with id {}", statusId);
+        return Optional.ofNullable(sessionFactory.find(CarStatus.class, statusId));
     }
 }
