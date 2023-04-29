@@ -16,4 +16,8 @@ public interface CarDAO {
     Optional<Car> getCar(long id);
 
     List<Car> getCars(CarSearchInfo info);
+
+    void updateImage(String imagePath, long carId);
+
+    String getImagePath(long carId);
 }

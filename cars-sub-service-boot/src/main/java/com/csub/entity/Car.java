@@ -62,6 +62,9 @@ public class Car {
     @Column(name = "last_update_date")
     private String lastUpdateDate;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude
     private Subscription subscriptions;

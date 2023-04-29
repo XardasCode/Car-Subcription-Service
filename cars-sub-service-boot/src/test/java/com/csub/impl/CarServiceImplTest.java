@@ -7,6 +7,7 @@ import com.csub.dto.mapper.CarDTOMapper;
 import com.csub.entity.Car;
 import com.csub.entity.CarStatus;
 import com.csub.entity.Subscription;
+import com.csub.util.ImageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class CarServiceImplTest {
     @BeforeEach
     void setUp()
     {
-        carService = new CarServiceImpl(carDAO,carDTOMapper);
+        carService = new CarServiceImpl(carDAO,carDTOMapper, new ImageService());
         carStatus.setId(1);
         carStatus.setName("In Stock");
 

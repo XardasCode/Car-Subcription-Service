@@ -69,4 +69,21 @@ public class PostgreCarDAO implements CarDAO {
                 .setMaxResults(info.getSize());
         return typedQuery.getResultList();
     }
+
+    @Override
+    public void updateImage(String imagePath, long carID) {
+        log.debug("Updating image path for car with id {}", carID);
+        sessionFactory.createQuery("UPDATE Car c SET c.imagePath = :imagePath WHERE c.id = :carId")
+                .setParameter("imagePath", imagePath)
+                .setParameter("carId", carID)
+                .executeUpdate();
+    }
+
+    @Override
+    public String getImagePath(long carId) {
+        log.debug("Getting image path for car with id {}", carId);
+        return sessionFactory.createQuery("SELECT c.imagePath FROM Car c WHERE c.id = :carId", String.class)
+                .setParameter("carId", carId)
+                .getSingleResult();
+    }
 }

@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 public class JSONInfo {
 
-    private String status;
+    @Builder.Default
+    private String status = "success";
 
     private String message;
 

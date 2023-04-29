@@ -8,10 +8,12 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.CarService;
 import com.csub.util.CarSearchInfo;
+import com.csub.util.ImageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,8 @@ public class CarServiceImpl implements CarService {
     private final CarDAO carDAO;
 
     private final CarDTOMapper carDTOMapper;
+
+    private final ImageService imageService;
 
     @Override
     @Transactional
@@ -67,5 +71,24 @@ public class CarServiceImpl implements CarService {
         List<Car> cars = carDAO.getCars(info);
         log.debug("Cars found: {}", cars.size());
         return cars.stream().map(carDTOMapper).toList();
+    }
+
+    @Override
+    @Transactional
+    public void uploadImage(MultipartFile file, long carId) {
+        log.debug("Uploading image");
+        getCar(carId); // check if car exists, if not - throw exception
+        String imagePath = imageService.storeImage(file);
+        carDAO.updateImage(imagePath, carId);
+        log.debug("Image uploaded");
+    }
+
+    @Override
+    @Transactional
+    public byte[] getImage(long carId) {
+        log.debug("Getting image");
+        String imagePath = carDAO.getImagePath(carId);
+        log.debug("Image path: {}", imagePath);
+        return imageService.getImage(imagePath);
     }
 }

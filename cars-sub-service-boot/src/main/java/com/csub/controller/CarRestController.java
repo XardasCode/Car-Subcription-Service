@@ -1,11 +1,15 @@
 package com.csub.controller;
 
+import com.csub.controller.util.JSONInfo;
 import com.csub.dto.CarDTO;
 import com.csub.service.CarService;
 import com.csub.util.CarSearchInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,5 +46,19 @@ public class CarRestController {
     public CarDTO getCar(@PathVariable long id) {
         log.info("Getting car with id {}", id);
         return carService.getCar(id);
+    }
+
+    @PostMapping("/image/{carId}")
+    public ResponseEntity<JSONInfo> uploadImage(@RequestParam("imageFile") MultipartFile file, @PathVariable long carId) {
+        log.info("Uploading image");
+        carService.uploadImage(file, carId);
+        return ResponseEntity.ok(JSONInfo.builder().message("Image uploaded successfully").build());
+    }
+
+    @GetMapping(value = "/image/{carId}",
+            produces = {"image/png", "image/jpg", "image/jpeg"})
+    public @ResponseBody byte[] getImage(@PathVariable long carId) {
+        log.info("Getting image");
+        return carService.getImage(carId);
     }
 }

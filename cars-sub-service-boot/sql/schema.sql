@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS cars
     status_id         INT          NOT NULL,
     create_date       varchar(255) NOT NULL,
     last_update_date       varchar(255) NOT NULL,
+    image_path        VARCHAR(255),
 
     FOREIGN KEY (status_id) REFERENCES car_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE
 );

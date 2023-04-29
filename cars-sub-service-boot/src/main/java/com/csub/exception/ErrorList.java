@@ -28,7 +28,9 @@ public enum ErrorList {
 
     CAR_NOT_FOUND(1020, HttpStatus.NOT_FOUND),
 
-    SERVER_ERROR(2000, HttpStatus.INTERNAL_SERVER_ERROR);
+    SERVER_ERROR(2000, HttpStatus.INTERNAL_SERVER_ERROR),
+    IMAGE_SAVE_ERROR(2001, HttpStatus.INTERNAL_SERVER_ERROR),
+    IMAGE_GET_ERROR(2002, HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final int code;
 
