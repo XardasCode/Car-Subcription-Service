@@ -49,14 +49,8 @@ body{
 	@media (max-width: 767.98px) {
 		font-size: 16px;
 	}
-	@media (max-width: 575.98px) {
-		
-	}
 	@media (max-width: 479.98px) {
 		font-size: 14px;
-	}
-	@media (max-width: 379.98px) {
-		// font-size: 10px;
 	}
 }
 .blue-button:hover{
@@ -117,12 +111,8 @@ body{
 	    left: 100px;
 	    padding-top: 7px;
 	}
-	&__collapse{
-		// text-align: center;
-	}
 	&__list{
 		li{
-			// padding: 0 15px;
 			a{
 				color: #fff !important; //Не хоче переоприділяти колір
 				padding: 33px 15px !important;

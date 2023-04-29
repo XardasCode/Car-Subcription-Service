@@ -1,4 +1,6 @@
-// "use strict"
+
+
+// Відправка форми
 
 document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
 	const form = document.getElementById('form');
@@ -50,31 +52,32 @@ document.addEventListener('DOMContentLoaded', function() { //перевірка 
 				alert('Помилка'); //якщо щось пішло не так - виводиться помилка
 			}*/
 
-				const response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(test)
-				});
-				let responseJSON = await response.json();
-				let status = responseJSON['status'];
-				if (status === 'success') {
-					let id = responseJSON['message'];
-					let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/'+id)
-	            .then(response => response.json())
-	            .then(json => sessionStorage.setItem('user', JSON.stringify(json)));
-	            window.location.href = 'http://localhost:7886/cabinet-inactive.html';
-				}else{
-					let error = responseJSON['errorMessage'];
-					alert(error);
-				}
+			const response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(test)
+			});
+			let responseJSON = await response.json();
+			let status = responseJSON['status'];
+			if (status === 'success') {
+				let id = responseJSON['message'];
+				let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/'+id)
+	        .then(response => response.json())
+	        .then(json => sessionStorage.setItem('user', JSON.stringify(json)));
+	        window.location.href = 'http://localhost:7886/cabinet-inactive.html';
+			}else{
+				let error = responseJSON['errorMessage'];
+				alert(error);
+			}
 
 		} else {
 			alert("Заповніть обов'язкові поля!")
 		}
 	}
 
+	// Валідація email, checkbox, перевірка на заповлення поля
 
 	function formValidate(form) {
 		let error = 0;
@@ -146,4 +149,10 @@ function checkPhoneNumber(phoneNo){
     }else {
         result.innerHTML = 'Номер телефону введено <strong><u>не правильно</u></strong><br>Приклад: (XXX) XXX-XXXX';
     }
+}
+
+// Редірект користувача в кабінет, при спробі повернутись до сторінки реєстрації
+
+if (sessionStorage.getItem('user') != null) {
+	window.location.href = 'cabinet-inactive.html';
 }

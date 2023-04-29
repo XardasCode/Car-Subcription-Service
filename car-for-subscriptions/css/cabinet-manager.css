@@ -599,7 +599,8 @@ body {
     .collapsible__buttons {
       -webkit-box-align: start;
       -ms-flex-align: start;
-      align-items: start; } }
+      align-items: start;
+      margin-top: 5px; } }
   .collapsible__buttons .toggle-btn {
     color: #000;
     background: inherit;
@@ -621,8 +622,13 @@ body {
         font-size: 13px; } }
 
 .collapsible__active-sub {
-  margin-top: 30px;
-  display: none; }
+  margin: 30px 0 10px 0; }
+  @media (max-width: 1199.98px) {
+    .collapsible__active-sub {
+      margin: 25px 0 10px 0; } }
+  @media (max-width: 767.98px) {
+    .collapsible__active-sub {
+      margin: 20px 0 10px 0; } }
   .collapsible__active-sub a {
     padding: 14px 25px; }
     @media (max-width: 1399.98px) {
@@ -637,6 +643,9 @@ body {
     @media (max-width: 379.98px) {
       .collapsible__active-sub a {
         padding: 10px 14px; } }
+
+.collapsible .display-none {
+  display: none; }
 
 /*****************
 ******Footer****** 

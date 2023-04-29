@@ -1,5 +1,4 @@
-// "use strict"
-
+// Відправлення форми входу
 
 document.addEventListener('DOMContentLoaded', function() { 
 	const form = document.getElementById('form__sign-in');
@@ -16,10 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		let status = responseJSON['id'];
 		if (status) {
 			sessionStorage.setItem('user', JSON.stringify(responseJSON));
-			window.location.href = 'http://localhost:7886/cabinet-inactive.html';
+			window.location.href = 'cabinet-inactive.html';
 		}else{
 			let error = responseJSON['errorMessage'];
 			alert(error);
 		}
 	};
 })
+
+
+// Редірект користувача в кабінет, при спробі повернутись до сторінки входу
+
+if (sessionStorage.getItem('user') != null) {
+	window.location.href = 'cabinet-inactive.html';
+}

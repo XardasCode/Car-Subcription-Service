@@ -511,6 +511,7 @@ body{
 		}
 		@media (max-width: 479.98px) {
 			align-items: start;
+			margin-top: 5px;
 		}
 		.toggle-btn{
 			color: #000;
@@ -534,8 +535,13 @@ body{
 		}
 	}
 	&__active-sub{
-		margin-top: 30px;
-		display: none;
+		margin: 30px 0 10px 0;
+		@media (max-width: 1199.98px) {
+			margin: 25px 0 10px 0;
+		}
+		@media (max-width: 767.98px) {
+			margin: 20px 0 10px 0;
+		}
 		a{
 			padding: 14px 25px;
 			@media (max-width: 1399.98px) {
@@ -551,6 +557,9 @@ body{
 				padding: 10px 14px;
 			}
 		}	
+	}
+	.display-none{
+		display: none;
 	}
 }
 /*****************

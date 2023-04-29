@@ -118,12 +118,8 @@ body{
 	    left: 100px;
 	    padding-top: 7px;
 	}
-	&__collapse{
-		// text-align: center;
-	}
 	&__list{
 		li{
-			// padding: 0 15px;
 			a{
 				color: #fff !important; //Не хоче переоприділяти колір
 				padding: 33px 15px !important;
@@ -629,7 +625,6 @@ body{
 			background: rgba(17, 86, 190, 0.31);
 			padding: 10px;
 			border-radius: 50%;
-			// facebook кайфує
 		}
 		a:last-child{
 			margin-right: 0;
