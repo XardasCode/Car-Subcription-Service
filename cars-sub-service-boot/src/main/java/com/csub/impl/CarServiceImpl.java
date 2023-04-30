@@ -119,9 +119,10 @@ public class CarServiceImpl implements CarService {
 
     private void updateCarStatus(CarRequestDTO car, Car carEntity, Car dbCar) {
         if (car.getStatusId() != null) {
-            CarStatus carStatus = getCarStatusById(car.getStatusId());
+            long statusId = Long.parseLong(car.getStatusId());
+            CarStatus carStatus = getCarStatusById(car.getStatusId()); // get car status or throw exception
             carEntity.setCarStatus(carStatus);
-            if (!carEntity.getCarStatus().getCars().contains(carEntity)) {
+            if (statusId != dbCar.getCarStatus().getId()) {
                 carEntity.getCarStatus().getCars().add(carEntity);
             }
         } else {
