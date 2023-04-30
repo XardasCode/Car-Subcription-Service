@@ -18,7 +18,7 @@ public class SubscriptionDTOMapper implements Function<Subscription, Subscriptio
                 subscription.getTotalPrice(),
                 subscription.getTotalMonths(),
                 subscription.getUser().getId(),
-                subscription.getManager().getId(),
+                subscription.getCar().getId(),
                 subscription.getManager().getId(),
                 subscription.getStatus().getName());
     }

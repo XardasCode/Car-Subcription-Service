@@ -2,7 +2,6 @@ package com.csub.service;
 
 import com.csub.controller.request.CarRequestDTO;
 import com.csub.dto.CarDTO;
-import com.csub.entity.Car;
 import com.csub.util.CarSearchInfo;
 import org.springframework.web.multipart.MultipartFile;
 

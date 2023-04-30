@@ -60,13 +60,28 @@ class CarServiceImplTest {
                 .subscription(subscription)
                 .build();
     }
-
     @DisplayName("addCar checks if the carDao method is called")
     @Test
     void addCar() {
-        Mockito.doNothing().when(carDAO).addCar(ArgumentMatchers.any());
-        carService.addCar(CarRequestDTO.builder().build());
-        Mockito.verify(carDAO, Mockito.times(1)).addCar(car);
+        CarRequestDTO carRequestDTO = CarRequestDTO.builder()
+                .name("Toyota Camry")
+                .model("SE")
+                .brand("Toyota")
+                .year("2021")
+                .color("Black")
+                .price("25000")
+                .fuelType("Gasoline")
+                .chassisNumber("12345678901234567")
+                .regNumber("ABC123")
+                .regDate("2022-01-01")
+                .mileage("10000")
+                .lastServiceDate("2022-03-01")
+                .statusId("1")
+                .build();
+        Mockito.doNothing().when(carDAO).addCar(any());
+        Mockito.when(carDAO.getCarStatusById("1")).thenReturn(Optional.ofNullable(carStatus));
+        carService.addCar(carRequestDTO);
+        Mockito.verify(carDAO, Mockito.times(1)).addCar(any());
     }
 
     @DisplayName("getCar must return valid car when id is valid")

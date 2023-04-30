@@ -49,4 +49,14 @@ public class PostgreManagerDAO implements ManagerDAO {
         log.debug("Getting all managers");
         return sessionFactory.createQuery("from Manager", Manager.class).getResultList();
     }
+
+    @Override
+    public Optional<Manager> getManagerByEmail(String email) {
+        log.debug("Getting manager with email {}", email);
+        return sessionFactory.createQuery("from Manager where email = :email", Manager.class)
+                .setParameter("email", email)
+                .getResultList()
+                .stream()
+                .findFirst();
+    }
 }

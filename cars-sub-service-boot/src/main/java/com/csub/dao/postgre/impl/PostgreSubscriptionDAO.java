@@ -1,8 +1,16 @@
 package com.csub.dao.postgre.impl;
 
+import com.csub.dao.postgre.util.SubscriptionCriteriaBuilderManager;
 import com.csub.entity.Subscription;
 import com.csub.dao.SubscriptionDAO;
+import com.csub.entity.SubscriptionStatus;
+import com.csub.util.SubscriptionSearchInfo;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
@@ -60,6 +68,29 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
                 .setParameter("id", id)
                 .getResultStream()
                 .findFirst();
+    }
+
+    @Override
+    public Optional<SubscriptionStatus> getSubscriptionStatusById(String statusId) {
+        log.debug("Getting car subscription with id {}", statusId);
+        return Optional.ofNullable(sessionFactory.find(SubscriptionStatus.class, statusId));
+    }
+
+    @Override
+    public List<Subscription> searchSubscription(SubscriptionSearchInfo info) {
+        log.debug("Getting subscription with search info {}", info);
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<Subscription> query = builder.createQuery(Subscription.class);
+        Root<Subscription> root = query.from(Subscription.class);
+
+        List<Predicate> predicates = SubscriptionCriteriaBuilderManager.buildCriteria(info, builder, query, root);
+
+        int offset = (info.getPage() - 1) * info.getSize();
+        query.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<Subscription> typedQuery = sessionFactory.createQuery(query)
+                .setFirstResult(offset)
+                .setMaxResults(info.getSize());
+        return typedQuery.getResultList();
 
     }
 }

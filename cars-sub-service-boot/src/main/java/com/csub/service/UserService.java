@@ -21,4 +21,12 @@ public interface UserService {
     void deleteUser(long id);
 
     List<UserDTO> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType, UserSearchInfo info);
+
+    void blockUser(long id);
+
+    void unblockUser(long id);
+
+    void generateVerificationCode(long id);
+
+    void verifyEmail(long id, String code);
 }

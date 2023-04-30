@@ -1,6 +1,10 @@
 package com.csub.impl;
 
+import com.csub.controller.request.SubscriptionRequestDTO;
+import com.csub.dao.CarDAO;
+import com.csub.dao.ManagerDAO;
 import com.csub.dao.SubscriptionDAO;
+import com.csub.dao.UserDAO;
 import com.csub.dto.SubscriptionDTO;
 import com.csub.dto.mapper.SubscriptionDTOMapper;
 import com.csub.entity.*;
@@ -25,6 +29,12 @@ class SubscriptionServiceImplTest {
     private SubscriptionServiceImpl subscriptionService;
     @Mock
     private SubscriptionDAO subscriptionDAO;
+    @Mock
+    private  CarDAO carDAO;
+    @Mock
+    private  UserDAO userDAO;
+    @Mock
+    private  ManagerDAO managerDAO;
 
     private final SubscriptionDTOMapper subscriptionDTOMapper = new SubscriptionDTOMapper();
 
@@ -32,12 +42,17 @@ class SubscriptionServiceImplTest {
     Subscription subscription;
     Car car;
     Manager manager;
+    SubscriptionRequestDTO subscriptionRequestDTO;
+    CarStatus carStatus = new CarStatus();
+    SubscriptionStatus status = new SubscriptionStatus();
 
     @BeforeEach
     void setUp() {
-        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO, subscriptionDTOMapper);
-        CarStatus carStatus = new CarStatus();
-        SubscriptionStatus status = new SubscriptionStatus();
+        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,carDAO,userDAO,managerDAO,subscriptionDTOMapper);
+        carStatus.setId(1);
+        carStatus.setName("In stock");
+        status.setId(1);
+        status.setName("Active");
         user = User.builder()
                 .id(1)
                 .name("Fogell")
@@ -55,14 +70,13 @@ class SubscriptionServiceImplTest {
                 .brand("Toyota ")
                 .year(2019)
                 .color("Black")
-                .price(2250)
+                .price(2000)
                 .fuelType("Gasoline")
                 .chassisNumber("9591")
                 .regNumber("TT")
                 .regDate("25.05.2020")
-                .mileage("11230")
+                .mileage(Integer.parseInt("11230"))
                 .lastServiceDate("05.10.2022")
-                .statusId("1")
                 .carStatus(carStatus)
                 .build();
         manager = Manager.builder()
@@ -76,13 +90,24 @@ class SubscriptionServiceImplTest {
                 .id(1)
                 .isActive(true)
                 .startDate("21.04.2023")
-                .monthPrice(car.getPrice())
+                .monthPrice(2000)
                 .totalMonths(5)
-                .totalPrice(5 * car.getPrice())
+                .totalPrice(10000)
                 .manager(manager)
                 .user(user)
                 .car(car)
                 .status(status)
+                .build();
+        subscriptionRequestDTO = SubscriptionRequestDTO.builder()
+                .isActive("true")
+                .startDate("21.04.2023")
+                .monthPrice("2000")
+                .totalMonths("5")
+                .totalPrice("10000")
+                .user_id("1")
+                .car_id("1")
+                .manager_id("1")
+                .status_id("1")
                 .build();
 
 
@@ -91,19 +116,29 @@ class SubscriptionServiceImplTest {
     @DisplayName("addSubscription must return valid generated id when subscription is valid")
     @Test
     void addSubscription() {
-        Mockito.when(subscriptionDAO.addSubscription(subscription)).thenReturn(Long.valueOf(subscription.getId()));
-        long actual = subscriptionService.addSubscription(subscription);
-        Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(subscription);
+        Mockito.when(subscriptionDAO.addSubscription(any())).thenReturn(Long.valueOf(subscription.getId()));
+        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
+        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.ofNullable(user));
+        Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
+        Mockito.when(managerDAO.getManager(manager.getId())).thenReturn(Optional.ofNullable(manager));
+
+        long actual = subscriptionService.addSubscription(subscriptionRequestDTO);
+        Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(any());
         assertEquals(1, actual);
     }
 
     @DisplayName("addSubscription must throw ServerException when subscription is not valid")
     @Test
     void addSubscriptionMustThrowServerException() {
-        Mockito.when(subscriptionDAO.addSubscription(subscription)).thenReturn(0L);
-        assertThatThrownBy(() -> subscriptionService.addSubscription(subscription))
+        Mockito.when(subscriptionDAO.addSubscription(any())).thenReturn(Long.valueOf(0));
+        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
+        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.ofNullable(user));
+        Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
+        Mockito.when(managerDAO.getManager(manager.getId())).thenReturn(Optional.ofNullable(manager));
+
+        assertThatThrownBy(() -> subscriptionService.addSubscription(subscriptionRequestDTO))
                 .hasMessage("Subscription not added");
-        Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(subscription);
+        Mockito.verify(subscriptionDAO, Mockito.times(1)).addSubscription(any());
     }
 
     @DisplayName("getSubscription must return valid subscription when id is valid")
@@ -130,10 +165,12 @@ class SubscriptionServiceImplTest {
     @DisplayName("updateSubscription checks if the carDao method is called")
     @Test
     void updateSubscription() {
+        subscription.setCreateDate("2112");
+        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
         Mockito.doNothing().when(subscriptionDAO).updateSubscription(any());
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
-        subscriptionService.updateSubscription(subscription, subscription.getId());
-        Mockito.verify(subscriptionDAO, Mockito.times(1)).updateSubscription(subscription);
+        subscriptionService.updateSubscription(subscriptionRequestDTO, subscription.getId());
+        Mockito.verify(subscriptionDAO, Mockito.times(1)).updateSubscription(any());
     }
 
     @DisplayName("deleteSubscription checks if the carDao method is called")

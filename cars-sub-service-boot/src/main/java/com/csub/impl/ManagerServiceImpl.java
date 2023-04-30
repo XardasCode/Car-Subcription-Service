@@ -7,6 +7,7 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.dao.ManagerDAO;
 import com.csub.service.ManagerService;
+import com.csub.util.PasswordManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -59,11 +60,25 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public List<ManagerDTO> getAllManagers() {
         log.debug("Getting all managers");
         List<Manager> managers = managerDAO.getAllManagers();
         return managers.stream()
                 .map(managerDTOMapper)
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public ManagerDTO checkManagerCredentials(String email, String password) {
+        log.debug("Checking manager credentials");
+        Optional<Manager> manager = managerDAO.getManagerByEmail(email);
+        Manager thisManager = manager.orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
+        if (PasswordManager.checkPassword(password, thisManager.getPassword())) {
+            return manager.map(managerDTOMapper)
+                    .orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
+        }
+        throw new ServerException("Wrong password", ErrorList.MANAGER_NOT_AUTHORIZED);
     }
 }

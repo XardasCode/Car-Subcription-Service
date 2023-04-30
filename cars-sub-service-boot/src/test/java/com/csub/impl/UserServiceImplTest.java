@@ -7,6 +7,7 @@ import com.csub.dto.UserDTO;
 import com.csub.dto.mapper.UserDTOMapper;
 import com.csub.entity.Subscription;
 import com.csub.entity.User;
+import com.csub.util.EmailSender;
 import com.csub.util.UserSearchInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +41,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        userService = new UserServiceImpl(userDAO, userDTOMapper);
+        userService = new UserServiceImpl(userDAO, userDTOMapper, new EmailSender());
         Subscription subscription = Subscription.builder().build();
         user = User.builder()
                 .id(1)

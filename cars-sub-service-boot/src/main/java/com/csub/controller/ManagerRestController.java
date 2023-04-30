@@ -28,4 +28,10 @@ public class ManagerRestController {
         log.info("Getting manager with id {}", id);
         managerService.getManager(id);
     }
+
+    @GetMapping(value = "/{email}/{password}")
+    public ManagerDTO checkManagerCredentials(@PathVariable String email, @PathVariable String password) {
+        log.info("Checking manager credentials");
+        return managerService.checkManagerCredentials(email, password);
+    }
 }

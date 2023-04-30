@@ -89,4 +89,36 @@ public class UserRestController {
         log.info("User deleted");
         return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
     }
+
+    @PatchMapping(value = "/{id}/block")
+    public ResponseEntity<JSONInfo> blockUser(@PathVariable long id) {
+        log.info("Blocking user with id {}", id);
+        userService.blockUser(id);
+        log.info("User blocked");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/{id}/unblock")
+    public ResponseEntity<JSONInfo> unblockUser(@PathVariable long id) {
+        log.info("Unblocking user with id {}", id);
+        userService.unblockUser(id);
+        log.info("User unblocked");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/{id}/generate-verification-code")
+    public ResponseEntity<JSONInfo> verifyEmail(@PathVariable long id) {
+        log.info("Generating verification code for user with id {}", id);
+        userService.generateVerificationCode(id);
+        log.info("Verification code generated");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/{id}/verify-email")
+    public ResponseEntity<JSONInfo> verifyEmail(@PathVariable long id, @RequestParam String code) {
+        log.info("Verifying email for user with id {}", id);
+        userService.verifyEmail(id, code);
+        log.info("Email verified");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+    }
 }

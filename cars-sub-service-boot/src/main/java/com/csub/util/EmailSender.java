@@ -1,5 +1,7 @@
 package com.csub.util;
 
+import com.csub.exception.ErrorList;
+import com.csub.exception.ServerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +19,7 @@ public class EmailSender {
     @Value("${spring.mail.password}")
     private String password;
 
-    public void sendEmail(String to, String subject, String text) throws MessagingException {
+    public void sendEmail(String to, String subject, String text) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -25,18 +27,23 @@ public class EmailSender {
         props.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(props, new Authenticator() {
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
 
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(String.format("Car Subscription Service <%s>", username)));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-        message.setSubject(subject);
-        message.setContent(text,"text/html");
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(String.format("Car Subscription Service <%s>", username)));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setContent(text, "text/html");
 
-        Transport.send(message);
+            Transport.send(message);
+        } catch (MessagingException e) {
+            throw new ServerException("Email not sent", e, ErrorList.EMAIL_NOT_SENT);
+        }
     }
 }
 

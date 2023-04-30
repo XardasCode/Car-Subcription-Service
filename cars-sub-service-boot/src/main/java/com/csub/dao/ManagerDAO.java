@@ -15,4 +15,6 @@ public interface ManagerDAO {
     Optional<Manager> getManager(long id);
 
     List<Manager> getAllManagers();
+
+    Optional<Manager> getManagerByEmail(String email);
 }

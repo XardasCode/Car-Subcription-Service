@@ -4,6 +4,7 @@ import com.csub.entity.audit.ManagerEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @EntityListeners(ManagerEntityListener.class)
@@ -40,5 +41,5 @@ public class Manager {
 
     @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude
-    private Set<Subscription> subscriptions;
+    private Set<Subscription> subscriptions = new HashSet<>();
 }

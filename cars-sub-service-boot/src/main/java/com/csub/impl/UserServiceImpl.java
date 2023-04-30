@@ -8,6 +8,7 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.dao.UserDAO;
 import com.csub.service.UserService;
+import com.csub.util.EmailSender;
 import com.csub.util.UserSearchInfo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.csub.util.PasswordManager.checkPassword;
 import static com.csub.util.PasswordManager.encryptPassword;
@@ -29,6 +31,8 @@ public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
 
     private final UserDTOMapper userDTOMapper;
+
+    private final EmailSender emailSender;
 
     @Override
     @Transactional
@@ -126,4 +130,57 @@ public class UserServiceImpl implements UserService {
         return users.stream().map(userDTOMapper).toList();
     }
 
+    @Override
+    @Transactional
+    public void blockUser(long id) {
+        log.debug("Blocking user with id {}", id);
+        Optional<User> optionalUser = userDAO.getUser(id);
+        User user = optionalUser.orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
+        user.setBlocked(true);
+        userDAO.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void unblockUser(long id) {
+        log.debug("Unblocking user with id {}", id);
+        Optional<User> optionalUser = userDAO.getUser(id);
+        User user = optionalUser.orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
+        user.setBlocked(false);
+        userDAO.updateUser(user);
+    }
+
+    @Override
+    public void generateVerificationCode(long id) {
+        log.debug("Generating verification code for user with id {}", id);
+        User optionalUser = userDAO.getUser(id)
+                .orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
+        if (optionalUser.isVerified()) {
+            log.warn("User with id {} is already verified", id);
+            throw new ServerException("User with id " + id + " is already verified", ErrorList.USER_VERIFICATION_ERROR);
+        }
+        String code = UUID.randomUUID().toString();
+        optionalUser.setVerificationCode(code);
+        userDAO.updateUser(optionalUser);
+        emailSender.sendEmail(optionalUser.getEmail(), "Verification code", "Your verification code is: " + code);
+        log.debug("Verification code generated for user with id {}", id);
+    }
+
+    @Override
+    public void verifyEmail(long id, String code) {
+        log.debug("Verifying email for user with id {}", id);
+        User optionalUser = userDAO.getUser(id)
+                .orElseThrow(() -> new ServerException("User with id " + id + " not found", ErrorList.USER_NOT_FOUND));
+        if (optionalUser.getVerificationCode() == null) {
+            log.warn("User with id {} has no verification code", id);
+            throw new ServerException("User with id " + id + " has no verification code", ErrorList.USER_VERIFICATION_ERROR);
+        }
+        if (!optionalUser.getVerificationCode().equals(code)) {
+            log.warn("User with id {} has wrong verification code", id);
+            throw new ServerException("User with id " + id + " has wrong verification code", ErrorList.USER_VERIFICATION_ERROR);
+        }
+        optionalUser.setVerificationCode(null);
+        optionalUser.setVerified(true);
+        userDAO.updateUser(optionalUser);
+    }
 }

@@ -15,4 +15,6 @@ public interface ManagerService {
     void deleteManager(long id);
 
     List<ManagerDTO> getAllManagers();
+
+    ManagerDTO checkManagerCredentials(String email, String password);
 }

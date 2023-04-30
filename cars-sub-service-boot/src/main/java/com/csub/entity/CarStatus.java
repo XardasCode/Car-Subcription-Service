@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "car_statuses")
@@ -20,5 +22,5 @@ public class CarStatus {
     private String name;
 
     @OneToMany(mappedBy = "carStatus", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Car> cars;
+    private Set<Car> cars = new HashSet<>();
 }
