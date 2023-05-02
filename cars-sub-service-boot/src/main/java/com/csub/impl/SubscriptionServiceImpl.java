@@ -24,6 +24,10 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
+    private static final String CONFIRM_STATUS = "4";
+    private static final String REJECT_STATUS = "5";
+
+
     private final SubscriptionDAO subscriptionDAO;
     private final CarDAO carDAO;
     private final UserDAO userDAO;
@@ -79,7 +83,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Updating subscription: {}", subscription);
         Subscription dbSub = getSubEntity(id);
         Subscription subscriptionEntity = Subscription.createSubscriptionFromRequest(subscription);
-        updateSubscriptionStatus(subscription,subscriptionEntity,dbSub);
+        updateSubEntity(subscription,subscriptionEntity,dbSub);
         Subscription.mergeSubscription(dbSub,subscriptionEntity);
         subscriptionDAO.updateSubscription(subscriptionEntity);
         log.debug("Subscription updated: {}", subscription);
@@ -118,21 +122,97 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Subscriptions found: {}", subscriptions.size());
         return subscriptions.stream().map(subscriptionDTOMapper).toList();
     }
+
+    private SubscriptionStatus getSubStatusById(String statusId){
+        log.debug("Getting sub status by id {}", statusId);
+        return subscriptionDAO.getSubscriptionStatusById(statusId)
+                .orElseThrow(() -> new ServerException("Subscription status not found", ErrorList.SUBSCRIPTION_STATUS_NOT_FOUND));
+    }
+    private User getUserById(String userId){
+        log.debug("Getting sub user by id {}", userId);
+        return userDAO.getUser(Long.parseLong(userId))
+                .orElseThrow(() -> new ServerException("User status not found", ErrorList.USER_NOT_FOUND));
+    }
+    private Car getCarById(String carId){
+        log.debug("Getting sub status by id {}", carId);
+        return carDAO.getCar(Long.parseLong(carId))
+                .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+    }
+    private Manager getManagerById(String managerId){
+        log.debug("Getting manager by id {}", managerId);
+        return managerDAO.getManager(Long.parseLong(managerId))
+                .orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
+    }
+
     private Subscription getSubEntity(long id){
         log.debug("Getting subscription with id {}", id);
         return subscriptionDAO.getSubscription(id)
                 .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
     }
 
-    private void updateSubscriptionStatus(SubscriptionRequestDTO subscription, Subscription subscriptionEntity, Subscription dbSub) {
+
+    private void updateSubEntity(SubscriptionRequestDTO subscription, Subscription subscriptionEntity, Subscription dbSub) {
+
         if (subscription.getStatus_id() != null) {
-            Optional<SubscriptionStatus> status = subscriptionDAO.getSubscriptionStatusById(subscription.getStatus_id());
-            subscriptionEntity.setStatus(status.get());
-            if (!subscriptionEntity.getStatus().getSubscriptions().contains(subscriptionEntity)) {
+            long statusId = Long.parseLong(subscription.getStatus_id());
+            SubscriptionStatus status = getSubStatusById(subscription.getStatus_id());
+            subscriptionEntity.setStatus(status);
+            if (statusId != dbSub.getStatus().getId()) {
                 subscriptionEntity.getStatus().getSubscriptions().add(subscriptionEntity);
             }
         } else {
             subscriptionEntity.setStatus(dbSub.getStatus());
         }
+
+        if(subscription.getUser_id() != null){
+            long userId = Long.parseLong(subscription.getStatus_id());
+            User user = getUserById(subscription.getUser_id());
+            subscriptionEntity.setUser(user);
+
+        }else {
+            subscriptionEntity.setUser(dbSub.getUser());
+        }
+
+        if(subscription.getCar_id() != null){
+            long carId = Long.parseLong(subscription.getCar_id());
+            Car car = getCarById(subscription.getCar_id());
+            subscriptionEntity.setCar(car);
+
+        }else {
+            subscriptionEntity.setCar(dbSub.getCar());
+        }
+
+        if(subscription.getManager_id() != null){
+            long managerId = Long.parseLong(subscription.getManager_id());
+            Manager manager = getManagerById(subscription.getManager_id());
+            subscriptionEntity.setManager(manager);
+            if (managerId != dbSub.getManager().getId()) {
+                subscriptionEntity.getManager().getSubscriptions().add(subscriptionEntity);
+            }
+        }else {
+            subscriptionEntity.setManager(dbSub.getManager());
+        }
+
+    }
+    @Override
+    @Transactional
+    public void confirmSubscription(long id) {
+        log.debug("Confirming subscription with id {}", id);
+        Subscription subscription = getSubEntity(id);
+        SubscriptionStatus status = getSubStatusById(CONFIRM_STATUS);
+        subscription.setActive(true);
+        subscription.setStatus(status);
+        subscriptionDAO.updateSubscription(subscription);
+    }
+
+    @Override
+    @Transactional
+    public void rejectSubscription(long id) {
+        log.debug("Rejecting subscription with id {}", id);
+        Subscription subscription = getSubEntity(id);
+        SubscriptionStatus status = getSubStatusById(REJECT_STATUS);
+        subscription.setActive(false);
+        subscription.setStatus(status);
+        subscriptionDAO.updateSubscription(subscription);
     }
 }

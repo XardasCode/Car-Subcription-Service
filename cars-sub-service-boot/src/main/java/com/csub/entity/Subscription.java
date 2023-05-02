@@ -5,6 +5,9 @@ import com.csub.entity.audit.SubscriptionEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @EntityListeners(SubscriptionEntityListener.class)
 @Data
 @AllArgsConstructor
@@ -76,8 +79,8 @@ public class Subscription {
 
     public static void mergeSubscription(Subscription dbSubscription, Subscription subscriptionEntity){
         subscriptionEntity.setId(dbSubscription.getId());
-        subscriptionEntity.setActive(dbSubscription.isActive());
         subscriptionEntity.setCreateDate(dbSubscription.getCreateDate());
+        subscriptionEntity.setActive((Objects.isNull(subscriptionEntity.isActive())) ? dbSubscription.isActive() : subscriptionEntity.isActive());
         subscriptionEntity.setStartDate((subscriptionEntity.getStartDate() != null && !subscriptionEntity.getStartDate().isBlank())
                 ? subscriptionEntity.getStartDate() : dbSubscription.getStartDate());
         subscriptionEntity.setMonthPrice((subscriptionEntity.getMonthPrice() != 0) ? subscriptionEntity.getMonthPrice() : dbSubscription.getMonthPrice());
@@ -86,6 +89,7 @@ public class Subscription {
         subscriptionEntity.setUser(subscriptionEntity.getUser() != null ? subscriptionEntity.getUser() : dbSubscription.getUser());
         subscriptionEntity.setManager(subscriptionEntity.getManager() != null ? subscriptionEntity.getManager() : dbSubscription.getManager());
         subscriptionEntity.setCar(subscriptionEntity.getCar() != null ? subscriptionEntity.getCar() : dbSubscription.getCar());
+        subscriptionEntity.setStatus(subscriptionEntity.getStatus() != null? subscriptionEntity.getStatus(): dbSubscription.getStatus());
 
     }
 

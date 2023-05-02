@@ -49,7 +49,7 @@ public class SubscriptionRestController {
         log.info("Subscription added");
         return new ResponseEntity<>(new JSONInfo(SUCCESS,"Subscription added"), HttpStatus.CREATED);
     }
-    @PostMapping(value = "/{id}")
+    @PatchMapping(value = "/{id}")
     public ResponseEntity<JSONInfo> updateSubscription(@RequestBody SubscriptionRequestDTO subscription, @PathVariable long id) {
         log.info("Updating subscription: {}", subscription);
         subscriptionService.updateSubscription(subscription,id);
@@ -74,5 +74,20 @@ public class SubscriptionRestController {
                         .filter(filter)
                         .build()
         );
+    }
+
+    @PatchMapping(value = "/{id}/confirm")
+    public ResponseEntity<JSONInfo> confirmSubscription(@PathVariable long id) {
+        log.info("Confirming subscription with id {}", id);
+        subscriptionService.confirmSubscription(id);
+        log.info("Subscription confirmed");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+    }
+    @PatchMapping(value = "/{id}/reject")
+    public ResponseEntity<JSONInfo> rejectSubscription(@PathVariable long id) {
+        log.info("Rejecting subscription with id {}", id);
+        subscriptionService.rejectSubscription(id);
+        log.info("Subscription rejected");
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
     }
 }
