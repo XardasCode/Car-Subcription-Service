@@ -29,6 +29,17 @@ public final class CarCriteriaBuilderManager {
         setSortingInfo(info, builder, query, root);
         return fieldPredicates;
     }
+
+    public static List<Predicate> buildCountCriteria(int size, List<String> filter, CriteriaBuilder builder, Root<Car> root) {
+        List<Predicate> fieldPredicates = new ArrayList<>();
+        CarSearchInfo info = CarSearchInfo.builder()
+                .filter(filter)
+                .size(size)
+                .build();
+        setFilterInfo(info, builder, root, fieldPredicates);
+        return fieldPredicates;
+    }
+
     private static void setFilterInfo(CarSearchInfo info, CriteriaBuilder builder, Root<Car> root, List<Predicate> fieldPredicates) {
         if (info.getFilter() != null && !info.getFilter().isEmpty()) {
             for (String field : info.getFilter()) {

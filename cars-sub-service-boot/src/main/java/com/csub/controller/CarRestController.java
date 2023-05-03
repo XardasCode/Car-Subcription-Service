@@ -71,10 +71,18 @@ public class CarRestController {
         return ResponseEntity.ok(JSONInfo.builder().message("Image uploaded successfully").build());
     }
 
-    @GetMapping(value = "/image/{carId}",
-            produces = {"image/png", "image/jpg", "image/jpeg"})
-    public @ResponseBody byte[] getImage(@PathVariable long carId) {
-        log.info("Getting image");
-        return carService.getImage(carId);
+    @GetMapping(value = "/image/{carId}")
+    public ResponseEntity<JSONInfo> getImage(@PathVariable long carId) {
+        log.info("Getting car image for car with id {}", carId);
+        return ResponseEntity.ok(JSONInfo.builder().message(carService.getImage(carId)).build());
+    }
+
+    @GetMapping("/page-count")
+    public int getPageCount(
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "") List<String> filter
+    ) {
+        log.info("Getting page count");
+        return carService.getPageCount(size, filter);
     }
 }

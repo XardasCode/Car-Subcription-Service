@@ -88,21 +88,30 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
+    public int getPageCount(int size, List<String> filter) {
+        log.debug("Getting page count");
+        int count = carDAO.getCarsCount(size, filter);
+        log.debug("Count: {}", count);
+        return (int) Math.ceil((double) count / size);
+    }
+
+    @Override
+    @Transactional
     public void uploadImage(MultipartFile file, long carId) {
         log.debug("Uploading image");
         getCar(carId); // check if car exists, if not - throw exception
-        String imagePath = imageService.storeImage(file);
+        String imagePath = imageService.uploadImage(file);
         carDAO.updateImage(imagePath, carId);
         log.debug("Image uploaded");
     }
 
     @Override
     @Transactional
-    public byte[] getImage(long carId) {
-        log.debug("Getting image");
-        String imagePath = carDAO.getImagePath(carId);
-        log.debug("Image path: {}", imagePath);
-        return imageService.getImage(imagePath);
+    public String getImage(long carId) {
+        log.debug("Getting car image URL for car: {}", carId);
+        String imagePath = carDAO.getImageURL(carId);
+        log.debug("Image URL: {}", imagePath);
+        return imagePath;
     }
 
     private CarStatus getCarStatusById(String statusId) {
@@ -130,3 +139,4 @@ public class CarServiceImpl implements CarService {
         }
     }
 }
+

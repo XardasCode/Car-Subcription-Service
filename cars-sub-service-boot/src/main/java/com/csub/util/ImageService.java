@@ -2,52 +2,65 @@ package com.csub.util;
 
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-/**
- * Class for storing images in the file system and retrieving them
- */
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ImageService {
 
-    private static final String IMAGE_PATH = "src/main/resources/static/images/";
+    @Value("${image.upload.api.host}")
+    private String imageUploadApiHost;
 
-    public String storeImage(MultipartFile file) {
-        log.debug("Storing image: {}", file.getOriginalFilename());
-        String fileName = file.getOriginalFilename();
-        Path filePath = Path.of(IMAGE_PATH + fileName);
-        try {
-            file.transferTo(filePath);
-        } catch (IOException e) {
-            log.debug("Error while saving image: {}", e.getMessage());
-            throw new ServerException("Error while saving image", e, ErrorList.IMAGE_SAVE_ERROR);
-        }
+    @Value("${image.upload.api.key}")
+    private String apiKeyHost;
 
-        log.debug("Image stored: {}", file.getOriginalFilename());
-        return IMAGE_PATH + fileName;
+    private final WebClient.Builder webClientBuilder;
+
+    private final ObjectMapper objectMapper;
+
+    public String uploadImage(MultipartFile file) {
+        log.debug("Uploading image: {}", file.getOriginalFilename());
+        String url = imageUploadApiHost + "/upload";
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("media", file.getResource());
+        body.add("key", apiKeyHost);
+
+        return parseUrl(webClientBuilder.build()
+                .post()
+                .uri(url)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block());
     }
 
-    public byte[] getImage(String fileName) {
-        log.debug("Getting image: {}", fileName);
-        File file = new File(fileName);
-        byte[] image;
+    private String parseUrl(String response) {
         try {
-            image = Files.readAllBytes(file.toPath());
-        } catch (IOException e) {
-            log.debug("Error while getting image: {}", e.getMessage());
-            throw new ServerException("Error while getting image", e, ErrorList.IMAGE_GET_ERROR);
+            JsonNode jsonNode = objectMapper.readTree(response);
+            int status = jsonNode.get("status").asInt();
+            if (status != 200) {
+                log.error("Error uploading image: {}", response);
+                throw new ServerException("Error uploading image", ErrorList.SERVER_ERROR);
+            }
+            JsonNode data = jsonNode.get("data");
+            return data.get("media").asText();
+        } catch (JsonProcessingException e) {
+            log.error("Error parsing response: {}", response);
+            throw new ServerException("Error parsing response", e, ErrorList.SERVER_ERROR);
         }
-        log.debug("Image got: {}", fileName);
-        return image;
     }
-
 }

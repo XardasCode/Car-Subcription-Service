@@ -20,5 +20,7 @@ public interface CarService {
 
     void uploadImage(MultipartFile file, long carId);
 
-    byte[] getImage(long carId);
+    String getImage(long carId);
+
+    int getPageCount(int size, List<String> filter);
 }

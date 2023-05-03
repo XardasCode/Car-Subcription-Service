@@ -72,6 +72,20 @@ public class PostgreCarDAO implements CarDAO {
     }
 
     @Override
+    public int getCarsCount(int size, List<String> filter) {
+        log.debug("Getting cars count with size {} and filter {}", size, filter);
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+        Root<Car> root = query.from(Car.class);
+
+        List<Predicate> predicates = CarCriteriaBuilderManager.buildCountCriteria(size, filter, builder, root);
+
+        query.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<Long> typedQuery = sessionFactory.createQuery(query);
+        return typedQuery.getResultList().size();
+    }
+
+    @Override
     public void updateImage(String imagePath, long carID) {
         log.debug("Updating image path for car with id {}", carID);
         sessionFactory.createQuery("UPDATE Car c SET c.imagePath = :imagePath WHERE c.id = :carId")
@@ -81,7 +95,7 @@ public class PostgreCarDAO implements CarDAO {
     }
 
     @Override
-    public String getImagePath(long carId) {
+    public String getImageURL(long carId) {
         log.debug("Getting image path for car with id {}", carId);
         return sessionFactory.createQuery("SELECT c.imagePath FROM Car c WHERE c.id = :carId", String.class)
                 .setParameter("carId", carId)

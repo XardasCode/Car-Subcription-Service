@@ -20,7 +20,9 @@ public interface CarDAO {
 
     void updateImage(String imagePath, long carId);
 
-    String getImagePath(long carId);
+    String getImageURL(long carId);
 
     Optional<CarStatus> getCarStatusById(String statusId);
+
+    int getCarsCount(int size, List<String> filter);
 }

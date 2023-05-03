@@ -9,12 +9,14 @@ import com.csub.entity.Car;
 import com.csub.entity.CarStatus;
 import com.csub.entity.Subscription;
 import com.csub.util.ImageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Optional;
 
@@ -37,7 +39,7 @@ class CarServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        carService = new CarServiceImpl(carDAO, carDTOMapper, new ImageService());
+        carService = new CarServiceImpl(carDAO, carDTOMapper, new ImageService(WebClient.builder(), new ObjectMapper()));
         carStatus.setId(1);
         carStatus.setName("In Stock");
 
@@ -60,6 +62,7 @@ class CarServiceImplTest {
                 .subscription(subscription)
                 .build();
     }
+
     @DisplayName("addCar checks if the carDao method is called")
     @Test
     void addCar() {
