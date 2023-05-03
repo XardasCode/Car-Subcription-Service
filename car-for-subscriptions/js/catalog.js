@@ -1,3 +1,53 @@
+// Фільтрація 
+
+// const cars = [...]; // масив об'єктів з даними про авто
+let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars?page=1&size=12')
+.then(response => response.json())
+.then(json => generateCars(json));
+
+function generateCars(json) {
+    document.querySelector('.catalog__item-list').innerHTML = '';
+    json.forEach(item => {
+        // let CarPhoto = getCarPhoto(item['id']);
+        document.querySelector('.catalog__item-list').innerHTML += ` 
+        <div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+            <a href="car-profile.html?id=${item['id']}">
+                <img src="img/catalog/svg/car-1.svg" class="adaptive-img" alt="Volkswagen T-Roc">
+                <span> ${item['name']}</span>
+            </a>
+        </div>
+        `
+    })
+}
+    
+/*async function getCarPhoto(id) {
+    let getResponse = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/image/${id}`)
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+    const byteArray = new Uint8Array(arrayBuffer);
+    console.log(byteArray);
+    });
+    const blob = new Blob([byteArray], { type: 'image/jpg' });
+    const url = URL.createObjectURL(blob);
+    return url;
+}*/
+
+function filterCarsByYear(year) {
+  if (!year) {
+    return cars; // повертаємо всі авто, якщо фільтр не вказаний
+  }
+  
+  return cars.filter(car => car.year === year);
+}
+
+document.getElementById('year-filter').addEventListener('change', event => {
+  const year = event.target.value;
+  const filteredCars = filterCarsByYear(year);
+  // Відображаємо списки авто, що відповідають вибраним параметрам фільтра
+});
+
+
+
 ///////////////year//////////////////
 
 jQuery(($) => {

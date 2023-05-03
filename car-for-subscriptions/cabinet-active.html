@@ -40,7 +40,7 @@
 						        </li>
 						        <div class="header__last-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" href="sign-up.html">Вийти</a>
+							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" href="#" onclick="logoutUser()">Вийти</a>
 							        </li>
 						        </div>
 						      </ul>
@@ -79,7 +79,7 @@
 
 								<div class="cabinet-active__block-buttons">
 									<div class="cabinet-active__button-report">
-										<a class="cabinet-active__a-report blue-button" href="#">Переглянути звіт</a>
+										<a class="cabinet-active__a-report blue-button" href="car-report.html">Переглянути звіт</a>
 									</div>
 									<div class="cabinet-active__button-payment">
 										<a class="cabinet-active__a-payment blue-button" href="payment.html">Перейти до оплати</a>
@@ -110,11 +110,10 @@
 							<span>2023 © Всі права захищені</span>
 						</div>
 						<div class="col-md-4 footer__icons">
-								<a href="#"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
-								<a href="#"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
-								<a href="#"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
-								<a href="#"><img src="img/general-svg/google.svg" alt="Google-plus"></a>
-								
+							<a href="#"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+							<a href="#"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+							<a href="#"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+							<a href="#"><img src="img/general-svg/google.svg" alt="Google-plus"></a>
 						</div>
 					</div>
 				</div>
@@ -122,6 +121,10 @@
 				
 	</div>
 
+	<!-- Bootstrap -->
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- Підключення свого файлу -->
+	<script type="text/javascript" src="js/cabinet-active.js"></script>
+
 </body>
 </html>

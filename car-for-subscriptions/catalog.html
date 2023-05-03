@@ -61,36 +61,36 @@
 								<div class="catalog__year filter-wrapper">
 									<input class="catalog__year-input" type="hidden" name="">
 									<div class="catalog__year-head filter-head">Рік: 2020</div>
-									<ul class="catalog__year-list filter-list">
-										<li class="catalog__year-item filter-item">Рік: 2020</li>
-										<li class="catalog__year-item filter-item">Рік: 2019</li>
-										<li class="catalog__year-item filter-item">Рік: 2018</li>
-										<li class="catalog__year-item filter-item">Рік: 2017</li>
+									<ul class="catalog__year-list filter-list" id="year-filter">
+										<li class="catalog__year-item filter-item" value="2020">Рік: 2020</li>
+										<li class="catalog__year-item filter-item" value="2019">Рік: 2019</li>
+										<li class="catalog__year-item filter-item" value="2018">Рік: 2018</li>
+										<li class="catalog__year-item filter-item" value="2017">Рік: 2017</li>
 									</ul>
 								</div>
 								<div class="catalog__fuel filter-wrapper">
 									<input class="catalog__fuel-input" type="hidden" name="">
 									<div class="catalog__fuel-head filter-head">Паливо</div>
-									<ul class="catalog__fuel-list filter-list">
-										<li class="catalog__fuel-item filter-item">Бензин</li>
-										<li class="catalog__fuel-item filter-item">Дизель</li>
-										<li class="catalog__fuel-item filter-item">Електро</li>
+									<ul class="catalog__fuel-list filter-list" id="fuel-filter">
+										<li class="catalog__fuel-item filter-item" value="gasoline">Бензин</li>
+										<li class="catalog__fuel-item filter-item" value="diesel">Дизель</li>
+										<li class="catalog__fuel-item filter-item" value="electric">Електро</li>
 									</ul>
 								</div>
 								<div class="catalog__color filter-wrapper">
 									<input class="catalog__color-input" type="hidden" name="">
 									<div class="catalog__color-head filter-head">Колір</div>
-									<ul class="catalog__color-list filter-list">
-										<li class="catalog__color-item filter-item">Чорний</li>
-										<li class="catalog__color-item filter-item">Сірий</li>
-										<li class="catalog__color-item filter-item">Білий</li>
-										<li class="catalog__color-item filter-item">Жовтий</li>
+									<ul class="catalog__color-list filter-list" id="color-filter">
+										<li class="catalog__color-item filter-item" value="black">Чорний</li>
+										<li class="catalog__color-item filter-item" value="gray">Сірий</li>
+										<li class="catalog__color-item filter-item" value="white">Білий</li>
+										<li class="catalog__color-item filter-item" value="yellow">Жовтий</li>
 									</ul>
 								</div>
 								<div class="catalog__price filter-wrapper">
 									<input class="catalog__price-input" type="hidden" name="">
 									<div class="catalog__price-head filter-head">Ціна</div>
-									<ul class="catalog__price-list filter-list">
+									<ul class="catalog__price-list filter-list" id="price-filter">
 										<li class="catalog__price-item filter-item">1000$</li>
 										<li class="catalog__price-item filter-item">2000$</li>
 										<li class="catalog__price-item filter-item">3000$</li>
@@ -117,80 +117,82 @@
 
 						</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-1.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen T-Roc</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="car-profile.html">
-								<img src="img/catalog/svg/car-2.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Tiguan</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-3.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Taigun</span>
-							</a>
-						</div>
+						<div class="catalog__item-list row row-cols-3">
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-1.svg" class="adaptive-img" alt="Volkswagen T-Roc">
+									<span>Volkswagen T-Roc</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="car-profile.html">
+									<img src="img/catalog/svg/car-2.svg" class="adaptive-img" alt="Volkswagen Tiguan">
+									<span>Volkswagen Tiguan</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-3.svg" class="adaptive-img" alt="Volkswagen Tiguan">
+									<span>Volkswagen Taigun</span>
+								</a>
+							</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-4.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Golf</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-5.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota RAV-4</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-6.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota Corolla</span>
-							</a>
-						</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-4.svg" class="adaptive-img" alt="Volkswagen Golf">
+									<span>Volkswagen Golf</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-5.svg" class="adaptive-img" alt="Toyota RAV-4">
+									<span>Toyota RAV-4</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-6.svg" class="adaptive-img" alt="Toyota Corolla">
+									<span>Toyota Corolla</span>
+								</a>
+							</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-7.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota Yaris</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-8.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Hyundai Tucson</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-9.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Hyundai i30</span>
-							</a>
-						</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-7.svg" class="adaptive-img" alt="Toyota Yaris">
+									<span>Toyota Yaris</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-8.svg" class="adaptive-img" alt="Hyundai Tucson">
+									<span>Hyundai Tucson</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-9.svg" class="adaptive-img" alt="Hyundai i30">
+									<span>Hyundai i30</span>
+								</a>
+							</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-10.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volvo S60</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-11.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Audi A3</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-12.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Audi Q2</span>
-							</a>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-10.svg" class="adaptive-img" alt="Volvo S60">
+									<span>Volvo S60</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-11.svg" class="adaptive-img" alt="Audi A3">
+									<span>Audi A3</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/svg/car-12.svg" class="adaptive-img" alt="Audi Q2">
+									<span>Audi Q2</span>
+								</a>
+							</div>
 						</div>
 
 						<div class="catalog__switch">

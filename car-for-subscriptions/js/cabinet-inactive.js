@@ -1,3 +1,5 @@
+// Зміна статичних данних на динамічні / редірект в залежності від статусу підписки користувача 
+
 if (sessionStorage.getItem('user') != null) {
     let user = sessionStorage.getItem('user');
     let userJson = JSON.parse(user);
@@ -12,7 +14,7 @@ if (sessionStorage.getItem('user') != null) {
         let jsonPhone = userJson['phone'];
         username.innerHTML = jsonName + ' ' + jsonSurname;
         email.innerHTML = jsonEmail;
-        phone.innerHTML = jsonPhone;    
+        phone.innerHTML = jsonPhone;
     }else if(subId > 0){
         if (sessionStorage.getItem('subscription') == null){
             let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId)
