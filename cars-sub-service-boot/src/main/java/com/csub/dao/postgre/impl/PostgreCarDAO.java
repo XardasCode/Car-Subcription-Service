@@ -75,13 +75,13 @@ public class PostgreCarDAO implements CarDAO {
     public int getCarsCount(int size, List<String> filter) {
         log.debug("Getting cars count with size {} and filter {}", size, filter);
         CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
-        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+        CriteriaQuery<Car> query = builder.createQuery(Car.class);
         Root<Car> root = query.from(Car.class);
 
         List<Predicate> predicates = CarCriteriaBuilderManager.buildCountCriteria(size, filter, builder, root);
 
         query.where(predicates.toArray(new Predicate[]{}));
-        TypedQuery<Long> typedQuery = sessionFactory.createQuery(query);
+        TypedQuery<Car> typedQuery = sessionFactory.createQuery(query);
         return typedQuery.getResultList().size();
     }
 
