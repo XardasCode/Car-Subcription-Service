@@ -24,6 +24,7 @@ public class CarDTOMapper implements Function<Car, CarDTO> {
                 car.getRegDate(),
                 car.getMileage(),
                 car.getLastServiceDate(),
-                car.getCarStatus().getName());
+                car.getCarStatus().getName(),
+                car.getImagePath());
     }
 }
