@@ -1,52 +1,73 @@
-// Фільтрація 
+/*// Фільтрація/Пошук
+window.addEventListener("DOMContentLoaded", (event) => {
+    getCars('1', null, null, null, null, null);
+});
 
-// const cars = [...]; // масив об'єктів з даними про авто
-let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars?page=1&size=12')
-.then(response => response.json())
-.then(json => generateCars(json));
+document.getElementById('model-filter').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      filterCars();
+    }
+});
+
+function filterCars(){
+    let model = document.getElementById('model-filter').value;
+    let year = document.getElementById('year-filter').value;
+    let color = document.getElementById('color-filter').value;
+    let price = document.getElementById('price-filter').value;
+    let brand = document.getElementById('brand-filter').value;
+
+    model = model == '' ? null : model;
+    year = year == '' ? null : year;
+    color = color == '' ? null : color;
+    price = price == '' ? null : price.slice(0, -1);
+    brand = brand == '' ? null : brand;
+    getCars('1', model, year, color, price, brand);
+}
+
+function getCars(page, model, year, color, price, brand) {
+    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars?';
+    let myPage = `page=${page}`;
+    let size = 'size=12';
+    let filter = "";
+    if(year != null || color != null || price != null || brand != null || model != null){
+        filter = `filter=`;
+        if (model != null) {
+            filter += `model:${model},`;
+        }
+        if (year != null) {
+            filter += `year:${year},`;
+        }
+        if (color != null) {
+            filter += `color:${color},`;
+        }
+        if (price != null) {
+            filter += `price:${price},`;
+        }
+        if (brand != null) {
+            filter += `brand:${brand},`;
+        }
+        filter.slice(0, -1);
+    }
+    let url = host + myPage + '&' + size + '&' + filter;
+    let getResponse = fetch(url)
+    .then(response => response.json())
+    .then(json => generateCars(json));
+}
 
 function generateCars(json) {
     document.querySelector('.catalog__item-list').innerHTML = '';
     json.forEach(item => {
-        // let CarPhoto = getCarPhoto(item['id']);
+        let image = item['image'] == null ? 'img/catalog/svg/car-8.svg' : item['image'];
         document.querySelector('.catalog__item-list').innerHTML += ` 
         <div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
             <a href="car-profile.html?id=${item['id']}">
-                <img src="img/catalog/svg/car-1.svg" class="adaptive-img" alt="Volkswagen T-Roc">
+                <img src="${image}" class="adaptive-img" alt="Volkswagen T-Roc">
                 <span> ${item['name']}</span>
             </a>
         </div>
         `
-    })
-}
-    
-/*async function getCarPhoto(id) {
-    let getResponse = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/image/${id}`)
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => {
-    const byteArray = new Uint8Array(arrayBuffer);
-    console.log(byteArray);
     });
-    const blob = new Blob([byteArray], { type: 'image/jpg' });
-    const url = URL.createObjectURL(blob);
-    return url;
 }*/
-
-function filterCarsByYear(year) {
-  if (!year) {
-    return cars; // повертаємо всі авто, якщо фільтр не вказаний
-  }
-  
-  return cars.filter(car => car.year === year);
-}
-
-document.getElementById('year-filter').addEventListener('change', event => {
-  const year = event.target.value;
-  const filteredCars = filterCarsByYear(year);
-  // Відображаємо списки авто, що відповідають вибраним параметрам фільтра
-});
-
-
 
 ///////////////year//////////////////
 

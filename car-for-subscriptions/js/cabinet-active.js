@@ -16,7 +16,6 @@ if (sessionStorage.getItem('user') != null) {
 
 }else{
     window.location.href = 'sign-in.html';
-
 }
 
 
