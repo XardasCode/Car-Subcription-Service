@@ -1,8 +1,10 @@
 package com.csub;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uploadcare.api.Client;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -18,10 +20,16 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@Setter(onMethod_ = @Autowired)
 public class AppConfig {
 
+    @Autowired
     private DataSource dataSource;
+
+    @Value("${uploadcare.public-key}")
+    private String uploadCarePublicKey;
+
+    @Value("${uploadcare.secret-key}")
+    private String uploadCareSecretKey;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -41,5 +49,10 @@ public class AppConfig {
     @Bean
     public ObjectMapper getObjectMapper() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    public Client getClient() {
+        return new Client(uploadCarePublicKey, uploadCareSecretKey);
     }
 }
