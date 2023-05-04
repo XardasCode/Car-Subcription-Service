@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -34,6 +33,5 @@ public class ImageService {
             log.error("Error uploading file: {}", e.getMessage());
             throw new ServerException("Error uploading file", e, ErrorList.SERVER_ERROR);
         }
-
     }
 }
