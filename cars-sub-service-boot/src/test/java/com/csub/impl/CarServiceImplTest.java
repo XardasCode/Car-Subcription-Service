@@ -10,6 +10,7 @@ import com.csub.entity.CarStatus;
 import com.csub.entity.Subscription;
 import com.csub.util.ImageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uploadcare.api.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class CarServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        carService = new CarServiceImpl(carDAO, carDTOMapper, new ImageService(WebClient.builder(), new ObjectMapper()));
+        carService = new CarServiceImpl(carDAO, carDTOMapper, new ImageService(new Client("", "")));
         carStatus.setId(1);
         carStatus.setName("In Stock");
 
