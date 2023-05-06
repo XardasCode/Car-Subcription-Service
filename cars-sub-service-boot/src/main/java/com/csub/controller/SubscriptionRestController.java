@@ -20,9 +20,8 @@ import java.util.List;
 @RequestMapping("/api/v1/subscriptions")
 @CrossOrigin
 public class SubscriptionRestController {
-    private final SubscriptionService subscriptionService;
 
-    private static final String SUCCESS = "success";
+    private final SubscriptionService subscriptionService;
 
     @GetMapping
     public List<SubscriptionDTO> getAllSubscriptions() {
@@ -41,7 +40,7 @@ public class SubscriptionRestController {
     public ResponseEntity<JSONInfo> addSubscription(@RequestBody @Valid SubscriptionRequestDTO subscription) {
         log.info("Adding subscription: {}", subscription);
         long id = subscriptionService.addSubscription(subscription);
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.CREATED);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{id}")
@@ -49,7 +48,7 @@ public class SubscriptionRestController {
         log.info("Updating subscription: {}", subscription);
         subscriptionService.updateSubscription(subscription, id);
         log.info("Subscription updated");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, "Subscription updated"), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/search")
@@ -77,7 +76,7 @@ public class SubscriptionRestController {
         log.info("Confirming subscription with id {}", id);
         subscriptionService.confirmSubscription(id);
         log.info("Subscription confirmed");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}/reject")
@@ -85,6 +84,6 @@ public class SubscriptionRestController {
         log.info("Rejecting subscription with id {}", id);
         subscriptionService.rejectSubscription(id);
         log.info("Subscription rejected");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 }

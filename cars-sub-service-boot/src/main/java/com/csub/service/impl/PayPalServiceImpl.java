@@ -23,16 +23,16 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class PayPalServiceImpl implements PayPalService {
+public class PayPalServiceImpl implements PayPalService { // в сервісі краще залишити лише методи, які звертаються до DAO, все інше повиносити в util клас
 
-    @Autowired
+    @Autowired  // для поля @Autowired краще не використовувати, а просто зробити його final і він сам виконає ініціалізацію
     private  APIContext apiContext;
 
     private final SubscriptionDAO subscriptionDAO;
 
 
     @Override
-    public Payment createPayment(
+    public Payment createPayment( // краще подібну логіку повиносити в окремий Manager utility - клас, а в сервісі викликати його
             PayPalRequestDTO paymentPayPal,
             String successUrl,
             String cancelUrl
@@ -74,7 +74,7 @@ public class PayPalServiceImpl implements PayPalService {
     }
 
     @Override
-    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
+    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{ // це також краще повиносити в utility - клас
         log.info("Executing payment");
         Payment payment = new Payment();
         payment.setId(paymentId);

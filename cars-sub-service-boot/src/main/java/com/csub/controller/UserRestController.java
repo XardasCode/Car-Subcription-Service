@@ -22,8 +22,6 @@ import java.util.List;
 public class UserRestController {
     private final UserService userService;
 
-    private static final String SUCCESS = "success";
-
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -71,7 +69,7 @@ public class UserRestController {
         log.info("Adding user: {}", user);
         long id = userService.addUser(user);
         log.info("User added with id {}", id);
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.CREATED);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
@@ -79,7 +77,7 @@ public class UserRestController {
         log.info("Updating user: {}", user);
         userService.updateUser(user, id);
         log.info("User updated");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -87,7 +85,7 @@ public class UserRestController {
         log.info("Deleting user with id {}", id);
         userService.deleteUser(id);
         log.info("User deleted");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}/block")
@@ -95,7 +93,7 @@ public class UserRestController {
         log.info("Blocking user with id {}", id);
         userService.blockUser(id);
         log.info("User blocked");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}/unblock")
@@ -103,7 +101,7 @@ public class UserRestController {
         log.info("Unblocking user with id {}", id);
         userService.unblockUser(id);
         log.info("User unblocked");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}/generate-verification-code")
@@ -111,7 +109,7 @@ public class UserRestController {
         log.info("Generating verification code for user with id {}", id);
         userService.generateVerificationCode(id);
         log.info("Verification code generated");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}/verify-email")
@@ -119,6 +117,6 @@ public class UserRestController {
         log.info("Verifying email for user with id {}", id);
         userService.verifyEmail(id, code);
         log.info("Email verified");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 }

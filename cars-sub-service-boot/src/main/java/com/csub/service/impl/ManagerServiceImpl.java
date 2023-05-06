@@ -20,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class ManagerServiceImpl implements ManagerService {
+
     private final ManagerDAO managerDAO;
 
     private final ManagerDTOMapper managerDTOMapper;

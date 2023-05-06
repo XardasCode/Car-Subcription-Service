@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriptionCriteriaBuilderManager {
+public final class SubscriptionCriteriaBuilderManager {
 
     private  SubscriptionCriteriaBuilderManager(){
     }

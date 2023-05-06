@@ -8,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class ExceptionJSONInfo {
+
     private String error;
 
     private String errorMessage;
