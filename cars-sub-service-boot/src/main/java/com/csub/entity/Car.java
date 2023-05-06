@@ -27,7 +27,7 @@ public class Car {
     @Column(name = "brand")
     private String brand;
 
-    @Column(name = "year")
+    @Column(name = "production_year")
     private int year;
 
     @Column(name = "color")
@@ -63,12 +63,12 @@ public class Car {
     @Column(name = "image_path")
     private String imagePath;
 
-    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "car")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Subscription subscription;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "status_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

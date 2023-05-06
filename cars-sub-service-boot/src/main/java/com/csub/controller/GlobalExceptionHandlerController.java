@@ -19,7 +19,7 @@ public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionJSONInfo> handleException(Exception e) {
-        log.warn("Internal server error: " + e.getMessage());
+        log.error("Internal server error: " + e.getMessage());
         return new ResponseEntity<>(
                 new ExceptionJSONInfo("Internal server error", e.getMessage(), ErrorList.SERVER_ERROR.getErrorCode()),
                 HttpStatus.INTERNAL_SERVER_ERROR);
@@ -27,8 +27,8 @@ public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(ServerException.class)
     public ResponseEntity<ExceptionJSONInfo> handleServerException(ServerException e) {
-        log.warn("Server exception: " + e.getMessage());
-        log.warn("Error code: " + e.getErrorCode().getErrorCode());
+        log.error("Server exception: " + e.getMessage());
+        log.error("Error code: " + e.getErrorCode().getErrorCode());
         return new ResponseEntity<>(
                 new ExceptionJSONInfo("Error", e.getMessage(), e.getErrorCode().getErrorCode()),
                 e.getErrorCode().getHttpStatus());
@@ -36,9 +36,9 @@ public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionJSONInfo> handleException(MethodArgumentNotValidException exception) {
-        log.warn("Exception: ", exception);
-        log.warn("Exception type: {}", exception.getClass().getName());
-        log.warn("Exception message: {}", exception.getMessage());
+        log.error("Exception: ", exception);
+        log.error("Exception type: {}", exception.getClass().getName());
+        log.error("Exception message: {}", exception.getMessage());
         List<String> errors = new ArrayList<>();
         exception.getBindingResult().getFieldErrors().forEach(error -> errors.add(error.getDefaultMessage()));
         exception.getBindingResult().getGlobalErrors().forEach(error -> errors.add(error.getDefaultMessage()));

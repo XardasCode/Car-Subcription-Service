@@ -62,21 +62,6 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
     }
 
     @Override
-    public Optional<Subscription> getSubscriptionsByUserId(long id) {
-        log.debug("Getting subscription with user id {}", id);
-        return sessionFactory.createQuery("from Subscription where Subscription.user.id = :id", Subscription.class)
-                .setParameter("id", id)
-                .getResultStream()
-                .findFirst();
-    }
-
-    @Override
-    public Optional<SubscriptionStatus> getSubscriptionStatusById(String statusId) {
-        log.debug("Getting car subscription with id {}", statusId);
-        return Optional.ofNullable(sessionFactory.find(SubscriptionStatus.class, statusId));
-    }
-
-    @Override
     public List<Subscription> searchSubscription(SubscriptionSearchInfo info) {
         log.debug("Getting subscription with search info {}", info);
         CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();

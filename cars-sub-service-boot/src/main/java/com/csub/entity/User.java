@@ -51,7 +51,7 @@ public class User {
     @Column(name = "last_update_date")
     private String lastUpdateDate;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "user")
     private Subscription subscription;
 
     public static User mapUserRequestDTOToUser(UserRequestDTO user) {

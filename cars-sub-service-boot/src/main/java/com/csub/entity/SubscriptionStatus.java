@@ -1,9 +1,7 @@
 package com.csub.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +10,8 @@ import java.util.Set;
 @Table(name = "subscription_statuses")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SubscriptionStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class SubscriptionStatus {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "status", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "status")
     @EqualsAndHashCode.Exclude
     private Set<Subscription> subscriptions = new HashSet<>();
 }

@@ -1,17 +1,20 @@
 package com.csub.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "car_statuses")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CarStatus {
 
     @Id
@@ -21,6 +24,6 @@ public class CarStatus {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "carStatus", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "carStatus")
     private Set<Car> cars = new HashSet<>();
 }

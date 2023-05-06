@@ -39,7 +39,7 @@ public class Manager {
     @Column(name = "last_update")
     private String lastUpdateDate;
 
-    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "manager")
     @EqualsAndHashCode.Exclude
     private Set<Subscription> subscriptions = new HashSet<>();
 }

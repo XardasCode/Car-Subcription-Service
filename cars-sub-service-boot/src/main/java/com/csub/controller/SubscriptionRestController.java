@@ -36,26 +36,22 @@ public class SubscriptionRestController {
         return subscriptionService.getSubscription(id);
     }
 
-    @GetMapping(value = "/user/{id}")
-    public SubscriptionDTO getSubscriptionsByUserId(@PathVariable long id) {
-        log.info("Getting subscriptions by user id {}", id);
-        return subscriptionService.getSubscriptionByUserId(id);
-    }
 
     @PostMapping
     public ResponseEntity<JSONInfo> addSubscription(@RequestBody @Valid SubscriptionRequestDTO subscription) {
         log.info("Adding subscription: {}", subscription);
         long id = subscriptionService.addSubscription(subscription);
-        log.info("Subscription added");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS,"Subscription added"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.CREATED);
     }
+
     @PatchMapping(value = "/{id}")
     public ResponseEntity<JSONInfo> updateSubscription(@RequestBody SubscriptionRequestDTO subscription, @PathVariable long id) {
         log.info("Updating subscription: {}", subscription);
-        subscriptionService.updateSubscription(subscription,id);
+        subscriptionService.updateSubscription(subscription, id);
         log.info("Subscription updated");
-        return new ResponseEntity<>(new JSONInfo(SUCCESS,"Subscription updated"), HttpStatus.OK);
+        return new ResponseEntity<>(new JSONInfo(SUCCESS, "Subscription updated"), HttpStatus.OK);
     }
+
     @GetMapping(value = "/search")
     public List<SubscriptionDTO> searchSubscription(
             @RequestParam(required = false, defaultValue = "1") int page,
@@ -83,6 +79,7 @@ public class SubscriptionRestController {
         log.info("Subscription confirmed");
         return new ResponseEntity<>(new JSONInfo(SUCCESS, String.valueOf(id)), HttpStatus.OK);
     }
+
     @PatchMapping(value = "/{id}/reject")
     public ResponseEntity<JSONInfo> rejectSubscription(@PathVariable long id) {
         log.info("Rejecting subscription with id {}", id);

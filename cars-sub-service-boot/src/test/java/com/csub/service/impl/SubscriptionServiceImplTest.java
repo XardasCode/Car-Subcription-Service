@@ -1,4 +1,4 @@
-package com.csub.impl;
+package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
@@ -117,7 +117,6 @@ class SubscriptionServiceImplTest {
     @Test
     void addSubscription() {
         Mockito.when(subscriptionDAO.addSubscription(any())).thenReturn(Long.valueOf(subscription.getId()));
-        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
         Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.ofNullable(user));
         Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
         Mockito.when(managerDAO.getManager(manager.getId())).thenReturn(Optional.ofNullable(manager));
@@ -131,7 +130,6 @@ class SubscriptionServiceImplTest {
     @Test
     void addSubscriptionMustThrowServerException() {
         Mockito.when(subscriptionDAO.addSubscription(any())).thenReturn(Long.valueOf(0));
-        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
         Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.ofNullable(user));
         Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
         Mockito.when(managerDAO.getManager(manager.getId())).thenReturn(Optional.ofNullable(manager));
@@ -166,7 +164,6 @@ class SubscriptionServiceImplTest {
     @Test
     void updateSubscription() {
         subscription.setCreateDate("2112");
-        Mockito.when(subscriptionDAO.getSubscriptionStatusById(subscriptionRequestDTO.getStatus_id())).thenReturn(Optional.ofNullable(status));
         Mockito.doNothing().when(subscriptionDAO).updateSubscription(any());
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         subscriptionService.updateSubscription(subscriptionRequestDTO, subscription.getId());
@@ -180,17 +177,5 @@ class SubscriptionServiceImplTest {
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         subscriptionService.deleteSubscription(subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).deleteSubscription(subscription.getId());
-    }
-
-    @DisplayName("getSubscriptionsByUserId must return valid list of subscriptions when user id is valid")
-    @Test
-    void getSubscriptionsByUserId() {
-        Mockito.when(subscriptionDAO.getSubscriptionsByUserId(subscription.getUser().getId())).thenReturn(Optional.of(subscription));
-        SubscriptionDTO actual = subscriptionService.getSubscriptionByUserId(subscription.getUser().getId());
-        Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscriptionsByUserId(subscription.getUser().getId());
-        assertAll(() -> {
-            assertEquals(subscription.getId(), actual.id());
-            assertEquals(subscription.isActive(), actual.is_active());
-        });
     }
 }

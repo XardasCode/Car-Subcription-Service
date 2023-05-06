@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class UserSearchInfo {
     private int page;
+
     private int size;
 }

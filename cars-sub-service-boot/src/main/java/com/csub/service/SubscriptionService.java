@@ -2,9 +2,7 @@ package com.csub.service;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dto.SubscriptionDTO;
-import com.csub.entity.Subscription;
 import com.csub.util.SubscriptionSearchInfo;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,16 +16,11 @@ public interface SubscriptionService {
 
     void deleteSubscription(long id);
 
-
     List<SubscriptionDTO> getAllSubscriptions();
-
-    SubscriptionDTO getSubscriptionByUserId(long id);
 
     List<SubscriptionDTO> searchSubscription(SubscriptionSearchInfo info);
 
-    @Transactional
     void confirmSubscription(long id);
 
-    @Transactional
     void rejectSubscription(long id);
 }

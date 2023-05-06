@@ -1,4 +1,4 @@
-package com.csub.impl;
+package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
@@ -44,9 +44,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Optional<User> user = userDAO.getUser(Long.parseLong(subscription.getUser_id()));
         Optional<Car> car = carDAO.getCar(Long.parseLong(subscription.getCar_id()));
         Optional<Manager> manager = managerDAO.getManager(Long.parseLong(subscription.getManager_id()));
-        Optional<SubscriptionStatus> status = subscriptionDAO.getSubscriptionStatusById(subscription.getStatus_id());
 
-        subscriptionEntity.setStatus(status.get());
+//        subscriptionEntity.setStatus(status.get());
         subscriptionEntity.getStatus().getSubscriptions().add(subscriptionEntity);
 
         subscriptionEntity.setUser(user.get());
@@ -83,8 +82,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Updating subscription: {}", subscription);
         Subscription dbSub = getSubEntity(id);
         Subscription subscriptionEntity = Subscription.createSubscriptionFromRequest(subscription);
-        updateSubEntity(subscription,subscriptionEntity,dbSub);
-        Subscription.mergeSubscription(dbSub,subscriptionEntity);
+        updateSubEntity(subscription, subscriptionEntity, dbSub);
+        Subscription.mergeSubscription(dbSub, subscriptionEntity);
         subscriptionDAO.updateSubscription(subscriptionEntity);
         log.debug("Subscription updated: {}", subscription);
     }
@@ -108,13 +107,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public SubscriptionDTO getSubscriptionByUserId(long id) {
-        log.debug("Getting subscriptions by user id {}", id);
-        Optional<Subscription> subscriptions = subscriptionDAO.getSubscriptionsByUserId(id);
-        return subscriptions.map(subscriptionDTOMapper)
-                .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
-    }
-    @Override
     @Transactional
     public List<SubscriptionDTO> searchSubscription(SubscriptionSearchInfo info) {
         log.debug("Getting all subscriptions");
@@ -123,28 +115,25 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return subscriptions.stream().map(subscriptionDTOMapper).toList();
     }
 
-    private SubscriptionStatus getSubStatusById(String statusId){
-        log.debug("Getting sub status by id {}", statusId);
-        return subscriptionDAO.getSubscriptionStatusById(statusId)
-                .orElseThrow(() -> new ServerException("Subscription status not found", ErrorList.SUBSCRIPTION_STATUS_NOT_FOUND));
-    }
-    private User getUserById(String userId){
+    private User getUserById(String userId) {
         log.debug("Getting sub user by id {}", userId);
         return userDAO.getUser(Long.parseLong(userId))
                 .orElseThrow(() -> new ServerException("User status not found", ErrorList.USER_NOT_FOUND));
     }
-    private Car getCarById(String carId){
+
+    private Car getCarById(String carId) {
         log.debug("Getting sub status by id {}", carId);
         return carDAO.getCar(Long.parseLong(carId))
                 .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
     }
-    private Manager getManagerById(String managerId){
+
+    private Manager getManagerById(String managerId) {
         log.debug("Getting manager by id {}", managerId);
         return managerDAO.getManager(Long.parseLong(managerId))
                 .orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
     }
 
-    private Subscription getSubEntity(long id){
+    private Subscription getSubEntity(long id) {
         log.debug("Getting subscription with id {}", id);
         return subscriptionDAO.getSubscription(id)
                 .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
@@ -155,8 +144,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         if (subscription.getStatus_id() != null) {
             long statusId = Long.parseLong(subscription.getStatus_id());
-            SubscriptionStatus status = getSubStatusById(subscription.getStatus_id());
-            subscriptionEntity.setStatus(status);
+//            subscriptionEntity.setStatus(status);
             if (statusId != dbSub.getStatus().getId()) {
                 subscriptionEntity.getStatus().getSubscriptions().add(subscriptionEntity);
             }
@@ -164,44 +152,44 @@ public class SubscriptionServiceImpl implements SubscriptionService {
             subscriptionEntity.setStatus(dbSub.getStatus());
         }
 
-        if(subscription.getUser_id() != null){
+        if (subscription.getUser_id() != null) {
             long userId = Long.parseLong(subscription.getStatus_id());
             User user = getUserById(subscription.getUser_id());
             subscriptionEntity.setUser(user);
 
-        }else {
+        } else {
             subscriptionEntity.setUser(dbSub.getUser());
         }
 
-        if(subscription.getCar_id() != null){
+        if (subscription.getCar_id() != null) {
             long carId = Long.parseLong(subscription.getCar_id());
             Car car = getCarById(subscription.getCar_id());
             subscriptionEntity.setCar(car);
 
-        }else {
+        } else {
             subscriptionEntity.setCar(dbSub.getCar());
         }
 
-        if(subscription.getManager_id() != null){
+        if (subscription.getManager_id() != null) {
             long managerId = Long.parseLong(subscription.getManager_id());
             Manager manager = getManagerById(subscription.getManager_id());
             subscriptionEntity.setManager(manager);
             if (managerId != dbSub.getManager().getId()) {
                 subscriptionEntity.getManager().getSubscriptions().add(subscriptionEntity);
             }
-        }else {
+        } else {
             subscriptionEntity.setManager(dbSub.getManager());
         }
 
     }
+
     @Override
     @Transactional
     public void confirmSubscription(long id) {
         log.debug("Confirming subscription with id {}", id);
         Subscription subscription = getSubEntity(id);
-        SubscriptionStatus status = getSubStatusById(CONFIRM_STATUS);
         subscription.setActive(true);
-        subscription.setStatus(status);
+//        subscription.setStatus(status);
         subscriptionDAO.updateSubscription(subscription);
     }
 
@@ -210,9 +198,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void rejectSubscription(long id) {
         log.debug("Rejecting subscription with id {}", id);
         Subscription subscription = getSubEntity(id);
-        SubscriptionStatus status = getSubStatusById(REJECT_STATUS);
         subscription.setActive(false);
-        subscription.setStatus(status);
+//        subscription.setStatus(status);
         subscriptionDAO.updateSubscription(subscription);
     }
 }

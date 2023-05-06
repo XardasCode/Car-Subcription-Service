@@ -1,4 +1,4 @@
-package com.csub.impl;
+package com.csub.service.impl;
 
 import com.csub.controller.request.PayPalRequestDTO;
 import com.csub.dao.SubscriptionDAO;

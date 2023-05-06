@@ -1,4 +1,4 @@
-package com.csub.impl;
+package com.csub.service.impl;
 
 
 import com.csub.controller.request.CarRequestDTO;
@@ -9,7 +9,6 @@ import com.csub.entity.Car;
 import com.csub.entity.CarStatus;
 import com.csub.entity.Subscription;
 import com.csub.util.ImageService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uploadcare.api.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Optional;
 

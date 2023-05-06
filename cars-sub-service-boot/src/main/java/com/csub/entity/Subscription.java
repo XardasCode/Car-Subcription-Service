@@ -43,25 +43,25 @@ public class Subscription {
     @Column(name = "last_update_date")
     private String lastUpdateDate;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
     @JoinColumn(name = "user_id", unique = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private User user;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
     @JoinColumn(name = "car_id", unique = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Car car;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "manager_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Manager manager;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "status_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -80,7 +80,7 @@ public class Subscription {
     public static void mergeSubscription(Subscription dbSubscription, Subscription subscriptionEntity){
         subscriptionEntity.setId(dbSubscription.getId());
         subscriptionEntity.setCreateDate(dbSubscription.getCreateDate());
-        subscriptionEntity.setActive((Objects.isNull(subscriptionEntity.isActive())) ? dbSubscription.isActive() : subscriptionEntity.isActive());
+        subscriptionEntity.setActive(subscriptionEntity.isActive());
         subscriptionEntity.setStartDate((subscriptionEntity.getStartDate() != null && !subscriptionEntity.getStartDate().isBlank())
                 ? subscriptionEntity.getStartDate() : dbSubscription.getStartDate());
         subscriptionEntity.setMonthPrice((subscriptionEntity.getMonthPrice() != 0) ? subscriptionEntity.getMonthPrice() : dbSubscription.getMonthPrice());
