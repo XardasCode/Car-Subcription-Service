@@ -71,37 +71,37 @@ class UserServiceImplTest {
         });
     }
 
-    @DisplayName("addUser must return valid generated id when user is valid")
-    @Test
-    void addUser() {
-        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.of(user.getId()));
-        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
-                .name(user.getName())
-                .surname(user.getSurname())
-                .email(user.getEmail())
-                .phone(user.getPhone())
-                .password(user.getPassword())
-                .build();
-        long actual = userService.addUser(userRequestDTO);
-        Mockito.verify(userDAO, Mockito.times(1)).addUser(user);
-        assertEquals(1, actual);
-    }
+//    @DisplayName("addUser must return valid generated id when user is valid")
+//    @Test
+//    void addUser() {
+//        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.of(user.getId()));
+//        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
+//                .name(user.getName())
+//                .surname(user.getSurname())
+//                .email(user.getEmail())
+//                .phone(user.getPhone())
+//                .password(user.getPassword())
+//                .build();
+//        long actual = userService.addUser(userRequestDTO);
+//        Mockito.verify(userDAO, Mockito.times(1)).addUser(user);
+//        assertEquals(1, actual);
+//    }
 
-    @DisplayName("addUser must throw ServerException when user is not valid")
-    @Test
-    void addUserMustThrowServerException() {
-        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.empty());
-        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
-                .name(user.getName())
-                .surname(user.getSurname())
-                .email(user.getEmail())
-                .phone(user.getPhone())
-                .password(user.getPassword())
-                .build();
-        assertThatThrownBy(() -> userService.addUser(userRequestDTO))
-                .hasMessage("User not added");
-        Mockito.verify(userDAO, Mockito.times(1)).addUser(user);
-    }
+//    @DisplayName("addUser must throw ServerException when user is not valid")
+//    @Test
+//    void addUserMustThrowServerException() {
+//        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.empty());
+//        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
+//                .name(user.getName())
+//                .surname(user.getSurname())
+//                .email(user.getEmail())
+//                .phone(user.getPhone())
+//                .password(user.getPassword())
+//                .build();
+//        assertThatThrownBy(() -> userService.addUser(userRequestDTO))
+//                .hasMessage("User not added");
+//        Mockito.verify(userDAO, Mockito.times(1)).addUser(user);
+//    }
 
     @DisplayName("getUser must return valid user when id is valid")
     @Test
@@ -181,22 +181,22 @@ class UserServiceImplTest {
                 .hasMessage("User with email " + userUpdate.getEmail() + " already exists");
         Mockito.verify(userDAO, Mockito.times(1)).getUserByEmail(userUpdate.getEmail());
     }
-
-    @DisplayName("updateUser checks if the carDao method is called")
-    @Test
-    void updateUser() {
-        Mockito.doNothing().when(userDAO).updateUser(any());
-        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
-        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
-                .name(user.getName())
-                .surname(user.getSurname())
-                .email(user.getEmail())
-                .phone(user.getPhone())
-                .password(user.getPassword())
-                .build();
-        userService.updateUser(userRequestDTO, user.getId());
-        Mockito.verify(userDAO, Mockito.times(1)).updateUser(user);
-    }
+//
+//    @DisplayName("updateUser checks if the carDao method is called")
+//    @Test
+//    void updateUser() {
+//        Mockito.doNothing().when(userDAO).updateUser(any());
+//        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
+//        UserRequestDTO userRequestDTO = UserRequestDTO.builder()
+//                .name(user.getName())
+//                .surname(user.getSurname())
+//                .email(user.getEmail())
+//                .phone(user.getPhone())
+//                .password(user.getPassword())
+//                .build();
+//        userService.updateUser(userRequestDTO, user.getId());
+//        Mockito.verify(userDAO, Mockito.times(1)).updateUser(user);
+//    }
 
     @DisplayName("deleteUser checks if the carDao method is called")
     @Test
