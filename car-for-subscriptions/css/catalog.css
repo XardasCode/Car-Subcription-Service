@@ -268,7 +268,35 @@ body {
 *****Catalog*****
 *****************/
 .catalog {
-  margin: 40px 0 70px 0; }
+  margin: 40px 0 70px 0;
+  /* 	&__switch:before{
+		content: '';
+		width: 15px;
+	   height: 20px;
+	   background: url("../img/catalog/svg/arrow-left.svg") no-repeat center / cover;
+	   position: relative;
+	   right: 20px;
+	   top: 7px;
+	   cursor: pointer;
+	   @media (max-width: 379.98px) {
+			width: 14px;
+	   	height: 18px;
+		}
+	}
+	&__switch:after{
+		content: '';
+		width: 15px;
+	   height: 20px;
+	   background: url("../img/catalog/svg/arrow-right.svg") no-repeat center / cover;
+	   position: relative;
+	   left: 20px;
+	   top: 7px;
+	   cursor: pointer;
+	   @media (max-width: 379.98px) {
+			width: 14px;
+	   	height: 18px;
+		}
+	} */ }
   @media (max-width: 767.98px) {
     .catalog {
       text-align: center; } }
@@ -583,7 +611,10 @@ body {
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    justify-content: center; }
+    justify-content: center;
+    margin: 0 20px 0 20px; }
+    .catalog__switch img {
+      cursor: pointer; }
   .catalog__switch-item {
     width: 32px;
     height: 32px;
@@ -599,7 +630,7 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-right: 18px;
+    margin-right: 10px;
     cursor: pointer; }
     @media (max-width: 479.98px) {
       .catalog__switch-item {
@@ -610,8 +641,8 @@ body {
         width: 28px;
         height: 28px; } }
   .catalog .switch-active {
-    background: #2869CA; }
-  .catalog .switch-item-2:hover, .catalog .switch-item-3:hover {
+    background: red; }
+  .catalog .switch-item:hover, .catalog .switch-item:hover {
     color: #2869CA;
     background: inherit;
     border: 2px solid #2869CA;
@@ -621,32 +652,6 @@ body {
     transition: .2s ease-in; }
   .catalog__switch-item:last-child {
     margin: 0; }
-  .catalog__switch:before {
-    content: '';
-    width: 15px;
-    height: 20px;
-    background: url("../img/catalog/svg/arrow-left.svg") no-repeat center/cover;
-    position: relative;
-    right: 20px;
-    top: 7px;
-    cursor: pointer; }
-    @media (max-width: 379.98px) {
-      .catalog__switch:before {
-        width: 14px;
-        height: 18px; } }
-  .catalog__switch:after {
-    content: '';
-    width: 15px;
-    height: 20px;
-    background: url("../img/catalog/svg/arrow-right.svg") no-repeat center/cover;
-    position: relative;
-    left: 20px;
-    top: 7px;
-    cursor: pointer; }
-    @media (max-width: 379.98px) {
-      .catalog__switch:after {
-        width: 14px;
-        height: 18px; } }
 
 /*****************
 ******Footer****** 

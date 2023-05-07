@@ -1,4 +1,7 @@
-/*// Фільтрація/Пошук
+// Фільтрація/Пошук
+
+let lastPage = '';
+
 window.addEventListener("DOMContentLoaded", (event) => {
     getCars('1', null, null, null, null, null);
 });
@@ -9,7 +12,7 @@ document.getElementById('model-filter').addEventListener('keypress', function (e
     }
 });
 
-function filterCars(){
+function filterCars(pageNumber = '1'){
     let model = document.getElementById('model-filter').value;
     let year = document.getElementById('year-filter').value;
     let color = document.getElementById('color-filter').value;
@@ -21,7 +24,7 @@ function filterCars(){
     color = color == '' ? null : color;
     price = price == '' ? null : price.slice(0, -1);
     brand = brand == '' ? null : brand;
-    getCars('1', model, year, color, price, brand);
+    getCars(pageNumber, model, year, color, price, brand);
 }
 
 function getCars(page, model, year, color, price, brand) {
@@ -52,6 +55,11 @@ function getCars(page, model, year, color, price, brand) {
     let getResponse = fetch(url)
     .then(response => response.json())
     .then(json => generateCars(json));
+
+    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    let getResponsePage = fetch(urlPage)
+    .then(response => response.json())
+    .then(json => generatePageNumber(json, myPage));
 }
 
 function generateCars(json) {
@@ -67,7 +75,59 @@ function generateCars(json) {
         </div>
         `
     });
+}
+
+function generatePageNumber(json, myPage){
+    lastPage = json;
+    const pageNumber = document.getElementById('page_number');
+    pageNumber.innerHTML = '';
+    let activePage = myPage.slice(5, myPage.length);
+    // setArrows(activePage, json);
+
+    for (var i = 1; i <= json; i++) {
+        if (i == activePage) {
+            pageNumber.innerHTML += `<div class="catalog__switch-item switch-active" id="activePage">${i}</div>` 
+        } else{
+            pageNumber.innerHTML += `<div class="catalog__switch-item switch-item" onclick="filterCars(${i})">${i}</div>`   
+        }
+    }
+}
+
+/*function setArrows(activePage, json){
+    const arrowLeft = document.getElementById('arrow-left');
+    const arrowRight = document.getElementById('arrow-right'); 
+    let page = Number(activePage);
+    if (activePage != 1) {
+        let leftPage = (page - 1).toString(); 
+        arrowLeft.addEventListener("click", function() {
+            filterCars(leftPage);
+        });
+    }
+    if (activePage != json){
+        arrowRight.addEventListener("click", changePage(activePage + 1));
+    }
 }*/
+
+function goLeft(){
+    let div = document.getElementById('activePage');
+    if (div) {
+        let page = div.textContent;
+        if (page != '1') {
+        filterCars(page - 1);
+        }
+    }
+}
+function goRight(){
+    let div = document.getElementById('activePage');
+    if (div) {
+        let page = div.textContent;
+        if (page != lastPage) {
+        let rightPage = (Number(page) + 1).toString(); 
+        filterCars(rightPage);
+        }
+    }
+}
+
 
 ///////////////year//////////////////
 

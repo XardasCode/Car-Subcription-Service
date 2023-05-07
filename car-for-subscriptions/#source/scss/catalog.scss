@@ -578,6 +578,10 @@ body{
 	&__switch{
 		display: flex;
 		justify-content: center;
+		margin: 0 20px 0 20px;
+		img{
+			cursor: pointer;
+		}
 	}
 	&__switch-item{
 		width: 32px;
@@ -588,7 +592,7 @@ body{
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin-right: 18px;
+		margin-right: 10px;
 		cursor: pointer;
 		@media (max-width: 479.98px) {
 			width: 30px;
@@ -600,9 +604,9 @@ body{
 		}
 	}
 	.switch-active{
-		background: #2869CA;
+		background: red; //#185fca 
 	}
-	.switch-item-2:hover, .switch-item-3:hover{
+	.switch-item:hover, .switch-item:hover{
 		color: #2869CA;
 		background: inherit;
 		border: 2px solid #2869CA;
@@ -612,7 +616,7 @@ body{
 	&__switch-item:last-child{
 		margin: 0;
 	}
-	&__switch:before{
+/* 	&__switch:before{
 		content: '';
 		width: 15px;
 	   height: 20px;
@@ -639,7 +643,7 @@ body{
 			width: 14px;
 	   	height: 18px;
 		}
-	}
+	} */
 }
 
 
