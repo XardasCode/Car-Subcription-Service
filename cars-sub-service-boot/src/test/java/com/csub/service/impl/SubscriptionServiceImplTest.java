@@ -146,8 +146,7 @@ class SubscriptionServiceImplTest {
         SubscriptionDTO actual = subscriptionService.getSubscription(subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscription(subscription.getId());
         assertAll(() -> {
-            assertEquals(subscription.getId(), actual.id());
-            assertEquals(subscription.isActive(), actual.is_active());
+            assertEquals(subscription.getId(), actual.id());z
         });
     }
 

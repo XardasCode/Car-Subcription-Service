@@ -3,7 +3,6 @@ package com.csub.service;
 import com.csub.controller.request.PayPalRequestDTO;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface PayPalService {
 
