@@ -1,5 +1,8 @@
 package com.csub;
 
+import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.OAuthTokenCredential;
+import com.paypal.base.rest.PayPalRESTException;
 import com.uploadcare.api.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +15,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Configuration
@@ -28,6 +33,15 @@ public class AppConfig {
     @Value("${uploadcare.secret-key}")
     private String uploadCareSecretKey;
 
+    @Value("${paypal.client.id}")
+    private String clientId;
+
+    @Value("${paypal.client.secret}")
+    private String clientSecret;
+
+    @Value("${paypal.mode}")
+    private String mode;
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -41,5 +55,24 @@ public class AppConfig {
     @Bean
     public Client client() {
         return new Client(uploadCarePublicKey, uploadCareSecretKey);
+    }
+
+    @Bean
+    public Map<String,String> paypalConfig(){
+        Map<String,String> configMap = new HashMap<>();
+        configMap.put("mode",mode);
+        return configMap;
+
+    }
+    @Bean
+    public OAuthTokenCredential qAuthTokenCredential(){
+        return new OAuthTokenCredential(clientId,clientSecret,paypalConfig());
+    }
+
+    @Bean
+    public APIContext apiContext() throws PayPalRESTException {
+        APIContext context = new APIContext(qAuthTokenCredential().getAccessToken());
+        context.setConfigurationMap(paypalConfig());
+        return context;
     }
 }

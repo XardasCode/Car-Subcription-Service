@@ -1,45 +1,75 @@
 package com.csub.util;
 
+import com.csub.controller.request.PayPalRequestDTO;
+import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
-import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
-@Configuration
-public class PayPalPaymentManager { // Все звідси потрібно перенести у AppConfig і видалити цей клас
 
-    @Value("${paypal.client.id}")
-    private String clientId;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class PayPalPaymentManager {
 
-    @Value("${paypal.client.secret}")
-    private String clientSecret;
+    private final APIContext apiContext;
+    public Payment createPayment(
+                                  PayPalRequestDTO paymentPayPal,
+                                  String successUrl,
+                                  String cancelUrl
+    ) throws PayPalRESTException {
+        log.info("Creating payment: {}", paymentPayPal);
 
-    @Value("${paypal.mode}")
-    private String mode;
+        double total = Double.parseDouble(paymentPayPal.getPrice());
+        String method = paymentPayPal.getMethod();
+        String currency = paymentPayPal.getCurrency();
+        String intent = paymentPayPal.getIntent();
+        String description = paymentPayPal.getDescription();
 
-    @Bean // Біни мають оголошуватись в основному конфігураційному класі AppConfig
-    public Map<String,String> paypalConfig(){
-        Map<String,String> configMap = new HashMap<>();
-        configMap.put("mode",mode);
-        return configMap;
+        Amount amount = new Amount();
+        amount.setCurrency(currency);
+        total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        amount.setTotal(String.valueOf(total));
 
+        Transaction transaction = new Transaction();
+        transaction.setDescription(description);
+        transaction.setAmount(amount);
+
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(transaction);
+
+        Payer payer = new Payer();
+        payer.setPaymentMethod(method);
+
+        Payment payment = new Payment();
+        payment.setIntent(intent);
+        payment.setPayer(payer);
+        payment.setTransactions(transactionList);
+        RedirectUrls redirectUrls = new RedirectUrls();
+        redirectUrls.setCancelUrl(cancelUrl);
+        redirectUrls.setReturnUrl(successUrl);
+        payment.setRedirectUrls(redirectUrls);
+
+        log.info("Payment created");
+        return payment.create(apiContext);
     }
-    @Bean
-    public OAuthTokenCredential qAuthTokenCredential(){
-        return new OAuthTokenCredential(clientId,clientSecret,paypalConfig());
-    }
 
-    @Bean
-    public APIContext apiContext() throws PayPalRESTException {
-        APIContext context = new APIContext(qAuthTokenCredential().getAccessToken());
-        context.setConfigurationMap(paypalConfig());
-        return context;
+    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
+        log.info("Executing payment");
+        Payment payment = new Payment();
+        payment.setId(paymentId);
+        PaymentExecution paymentExecution = new PaymentExecution();
+        paymentExecution.setPayerId(payerId);
+        log.info("Payment executed");
+        return payment.execute(apiContext,paymentExecution);
     }
 
 }
