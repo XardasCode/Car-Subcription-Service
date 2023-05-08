@@ -28,14 +28,14 @@ public class SubscriptionRequestDTO {
     private String totalMonths;
 
     @NotBlank(message = "User cannot be blank")
-    private String user_id;
+    private String userId;
 
     @NotBlank(message = "Car cannot be blank")
-    private String car_id;
+    private String carId;
 
     @NotBlank(message = "Manager cannot be blank")
-    private String manager_id;
+    private String managerId;
 
     @NotBlank(message = "Status cannot be blank")
-    private String status_id;
+    private String statusId;
 }

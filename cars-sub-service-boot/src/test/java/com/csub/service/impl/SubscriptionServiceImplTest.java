@@ -104,10 +104,10 @@ class SubscriptionServiceImplTest {
                 .monthPrice("2000")
                 .totalMonths("5")
                 .totalPrice("10000")
-                .user_id("1")
-                .car_id("1")
-                .manager_id("1")
-                .status_id("1")
+                .userId("1")
+                .carId("1")
+                .managerId("1")
+                .statusId("1")
                 .build();
 
 

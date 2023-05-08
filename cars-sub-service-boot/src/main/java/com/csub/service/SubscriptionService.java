@@ -12,8 +12,6 @@ public interface SubscriptionService {
 
     SubscriptionDTO getSubscription(long id);
 
-    void updateSubscription(SubscriptionRequestDTO subscription, long id);
-
     void deleteSubscription(long id);
 
     List<SubscriptionDTO> getAllSubscriptions();

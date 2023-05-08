@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 @Repository
 @AllArgsConstructor
@@ -27,11 +28,11 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
     private final EntityManager sessionFactory;
 
     @Override
-    public long addSubscription(Subscription subscription) {
+    public OptionalLong addSubscription(Subscription subscription) {
         log.debug("Adding subscription: {}", subscription);
         sessionFactory.persist(subscription);
         log.debug("Subscription created with id {}", subscription.getId());
-        return subscription.getId();
+        return OptionalLong.of(subscription.getId());
     }
 
     @Override
@@ -76,6 +77,11 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
                 .setFirstResult(offset)
                 .setMaxResults(info.getSize());
         return typedQuery.getResultList();
+    }
 
+    @Override
+    public Optional<SubscriptionStatus> getSubscriptionStatus(int id) {
+        log.debug("Getting subscription status with id {}", id);
+        return Optional.ofNullable(sessionFactory.find(SubscriptionStatus.class, id));
     }
 }

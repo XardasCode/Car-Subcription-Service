@@ -43,14 +43,6 @@ public class SubscriptionRestController {
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<JSONInfo> updateSubscription(@RequestBody SubscriptionRequestDTO subscription, @PathVariable long id) {
-        log.info("Updating subscription: {}", subscription);
-        subscriptionService.updateSubscription(subscription, id);
-        log.info("Subscription updated");
-        return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
-    }
-
     @GetMapping(value = "/search")
     public List<SubscriptionDTO> searchSubscription(
             @RequestParam(required = false, defaultValue = "1") int page,
