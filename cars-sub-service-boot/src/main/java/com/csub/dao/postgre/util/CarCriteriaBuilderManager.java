@@ -48,9 +48,9 @@ public final class CarCriteriaBuilderManager {
                     switch (filter[0]) {
                         case BRAND -> fieldPredicates.add(builder.like(root.get(BRAND), "%" + filter[1] + "%"));
                         case MODEL -> fieldPredicates.add(builder.like(root.get(MODEL), "%" + filter[1] + "%"));
-                        case YEAR -> fieldPredicates.add(builder.like(root.get(YEAR), "%" + filter[1] + "%"));
-                        case PRICE -> fieldPredicates.add(builder.like(root.get(PRICE), "%" + filter[1] + "%"));
                         case COLOR -> fieldPredicates.add(builder.like(root.get(COLOR), "%" + filter[1] + "%"));
+                        case YEAR -> fieldPredicates.add(builder.equal(root.get(YEAR), Integer.parseInt(filter[1])));
+                        case PRICE -> fieldPredicates.add(builder.equal(root.get(PRICE), Integer.parseInt(filter[1])));
                     }
                 }
 
