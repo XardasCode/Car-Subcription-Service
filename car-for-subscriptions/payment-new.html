@@ -5,12 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="img/general-svg/header-logo.svg" type="image/x-icon">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/sign-in.css">
-	<title>Вхід</title>
+	<link rel="stylesheet" type="text/css" href="css/payment-new.css">
+	<title>Оплата</title>
 </head>
-
 <body>
-	<div class="wrapper">
+	<div class="wrapper"> 
 		<div class="container main_container">
 
 			<header class="header">
@@ -32,7 +31,7 @@
 						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> <!--catalog.html-->
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
 						        </li>
 						        <li class="nav-item">
 						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
@@ -42,7 +41,7 @@
 						        </li>
 						        <div class="header__last-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__sign-in header__active" aria-current="page" href="#">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a><!--sign-up.html sign-in.html-->
+							          <a class="nav-link active header__sign-in" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html sign-in.html-->
 							        </li>
 						        </div>
 						      </ul>
@@ -52,32 +51,38 @@
 					</div>
 				</div>
 			</header>
-					
-			<section class="sign-in">
-				<div class="sign-in__wrapper">
-					<div class="sign-in__switch">
-						<a class="sign-in__up" href="sign-up.html">Реєстрація</a>
-						<a class="sign-in__in blue-button" href="#">Вхід</a>
+				
+			<section class="payment">
+				<div class="payment__block">
+
+					<div class="payment__title">
+						<h2>Оплата</h2>
 					</div>
-					<form id="form__sign-in">
-						<div class="sign-in__title">Увійти в особистий кабінет</div>
-						<div class="mb-3 sign-in__email">
-							<label for="userInputEmail" class="form-label">Електронна пошта</label>
-							<input type="email" placeholder="viktor.grygorovych@ukr.tak" class="form-control" id="userInputEmail" aria-describedby="emailHelp">
+
+					<div class="payment__list">
+						<div class="payment__value">
+							<div>Валюта:</div>
+							<div>Метод оплати:</div>
+							<div>Призначення:</div>
 						</div>
-						<div class="mb-3 sign-in__password">
-							<label for="userInputPassword" class="form-label">Пароль</label>
-							<input type="password" placeholder="*********" class="form-control" id="userInputPassword">
+						<div class="payment__key">
+							<div class="payment__currency">USD</div>
+							<div class="payment__method"><a href=""><img src="img/payment/pay-pal.png" alt="PayPal"></a></div>
+							<div class="payment__appointment"><span>Продовження підписки</span> Volkswagen Tiguan</div>
 						</div>
-						<div class="mb-3 form-check sign-in__remember">
-							<input type="checkbox" class="form-check-input sign-in__checkbox" id="exampleCheck1">
-							<label class="form-check-label sign-in__remember-label" for="exampleCheck1">Запамʼятати цей пристрій</label>
-						</div>
-						<button type="submit" class="sign-in__authorization blue-button">Авторизація</button>
-					</form>
+					</div>
+
+					<div class="payment__confirm">
+						До оплати: <span>1600</span>
+						<button class="blue-button">Підтвердити</button>
+					</div>
+					
+				</div>
+				<div class="payment__close">
+					<button type="button" class="btn-close" aria-label="Close"></button>
 				</div>
 			</section>
-
+			
 		</div>
 				
 			<footer class="footer">
@@ -106,9 +111,5 @@
 	</div>
 
 	<script src="js/bootstrap.bundle.min.js"></script>
-
-	<!-- REST API запит -->
-	<script type="text/javascript" src="js/sign-in.js"></script>
-	<!-- REST API запит -->
 </body>
 </html>

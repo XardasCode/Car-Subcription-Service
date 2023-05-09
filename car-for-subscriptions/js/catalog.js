@@ -1,4 +1,4 @@
-// Фільтрація/Пошук
+// Фільтрація/Пошук/Пагінація
 
 let lastPage = '';
 
@@ -51,15 +51,15 @@ function getCars(page, model, year, color, price, brand) {
         }
         filter.slice(0, -1);
     }
-    let url = host + myPage + '&' + size + '&' + filter;
-    let getResponse = fetch(url)
-    .then(response => response.json())
-    .then(json => generateCars(json));
-
     let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
     let getResponsePage = fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage));
+
+    let url = host + myPage + '&' + size + '&' + filter;
+    let getResponse = fetch(url)
+    .then(response => response.json())
+    .then(json => generateCars(json));
 }
 
 function generateCars(json) {
@@ -278,6 +278,3 @@ jQuery(($) => {
         }
     });
 });
-
-///////////////search//////////////////
-

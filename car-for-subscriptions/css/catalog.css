@@ -581,7 +581,6 @@ body {
       .catalog__search {
         width: 220px; } }
   .catalog__block {
-    mix-blend-mode: multiply;
     margin-bottom: 50px; }
     @media (max-width: 1199.98px) {
       .catalog__block {
@@ -641,7 +640,7 @@ body {
         width: 28px;
         height: 28px; } }
   .catalog .switch-active {
-    background: red; }
+    background: #185fca; }
   .catalog .switch-item:hover, .catalog .switch-item:hover {
     color: #2869CA;
     background: inherit;

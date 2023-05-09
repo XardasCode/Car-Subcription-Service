@@ -546,9 +546,8 @@ body{
 		}
 	}
 
-	// зробити стрілочку кожному окремо
 	&__block{
-		mix-blend-mode: multiply;
+		// mix-blend-mode: multiply;
 		margin-bottom: 50px;
 		@media (max-width: 1199.98px) {
 			margin-bottom: 40px;
@@ -604,7 +603,7 @@ body{
 		}
 	}
 	.switch-active{
-		background: red; //#185fca 
+		background: #185fca;
 	}
 	.switch-item:hover, .switch-item:hover{
 		color: #2869CA;
