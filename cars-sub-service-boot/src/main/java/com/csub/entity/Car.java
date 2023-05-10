@@ -88,6 +88,7 @@ public class Car {
                 .regDate(car.getRegDate() == null ? null : car.getRegDate())
                 .mileage(car.getMileage() == null ? 0 : Integer.parseInt(car.getMileage()))
                 .lastServiceDate(car.getLastServiceDate() == null ? null : car.getLastServiceDate())
+                .imagePath(car.getImage() == null ? null : car.getImage())
                 .build();
     }
 

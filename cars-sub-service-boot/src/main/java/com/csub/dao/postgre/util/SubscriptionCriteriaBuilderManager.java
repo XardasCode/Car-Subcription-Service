@@ -14,10 +14,10 @@ public final class SubscriptionCriteriaBuilderManager {
     }
     private static final String ID = "id";
     private static final String IS_ACTIVE = "isActive";
-    private static final String USER = "user_name";
-    private static final String CAR = "brand";
-    private static final String MANAGER = "manager_name";
-    private static final String STATUS = "status_name";
+    private static final String USER = "userSurname";
+    private static final String CAR = "brandCar";
+    private static final String MANAGER = "managerSurname";
+    private static final String STATUS = "statusName";
     private static final String DESC = "desc";
 
     public static List<Predicate> buildCriteria(SubscriptionSearchInfo info, CriteriaBuilder builder, CriteriaQuery<Subscription> query, Root<Subscription> root) {
@@ -36,7 +36,7 @@ public final class SubscriptionCriteriaBuilderManager {
                         case IS_ACTIVE -> fieldPredicates.add(builder.equal(root.get(IS_ACTIVE), Boolean.parseBoolean(filter[1]) ));
                         case USER -> {
                             Join<Subscription, User> userJoin = root.join("user", JoinType.INNER);
-                            fieldPredicates.add(builder.like(userJoin.get("name"), "%" + filter[1] + "%" ));
+                            fieldPredicates.add(builder.like(userJoin.get("surname"), "%" + filter[1] + "%" ));
                         }
                         case CAR -> {
                             Join<Subscription, Car> carJoin = root.join("car", JoinType.INNER);
@@ -44,7 +44,7 @@ public final class SubscriptionCriteriaBuilderManager {
                         }
                         case MANAGER -> {
                             Join<Subscription, Manager> managerJoin = root.join("manager", JoinType.INNER);
-                            fieldPredicates.add(builder.like(managerJoin.get("name"), "%" + filter[1] + "%" ));
+                            fieldPredicates.add(builder.like(managerJoin.get("surname"), "%" + filter[1] + "%" ));
                         }
                         case STATUS -> {
                             Join<Subscription, SubscriptionStatus> statusJoin = root.join("status", JoinType.INNER);

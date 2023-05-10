@@ -54,4 +54,7 @@ public class CarRequestDTO {
 
     @NotBlank(message = "Status id cannot be blank")
     private String statusId;
+
+    @NotBlank(message = "Image cannot be blank")
+    private String image;
 }
