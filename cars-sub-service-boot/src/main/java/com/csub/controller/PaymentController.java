@@ -14,30 +14,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.net.URI;
-
-
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/v1/pay")
 public class PaymentController {
 
     private final PayPalService payPalService;
 
     @Value("${redirect.success-payment-page}")
-    private  String REDIRECT_SUCCESS_PAGE;
+    private String REDIRECT_SUCCESS_PAGE;
 
     @Value("${redirect.error-payment-page}")
-    private  String REDIRECT_ERROR_PAGE;
+    private String REDIRECT_ERROR_PAGE;
 
     @Value("${redirect.approving.success}")
-    private  String SUCCESS_URL;
+    private String SUCCESS_URL;
 
     @Value("${redirect.approving.cancel}")
-    private  String CANCEL_URL;
+    private String CANCEL_URL;
 
 
     @PostMapping(value = "/paypal/{id}")
@@ -63,6 +61,5 @@ public class PaymentController {
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
-
-
 }
+
