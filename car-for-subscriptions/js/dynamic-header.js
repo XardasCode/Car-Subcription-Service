@@ -11,7 +11,9 @@
     </li>
     `;
     const logoutBtn = headerEl.querySelector('#logout-btn');
-    logoutBtn.addEventListener('click', logoutUser);
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', logoutUser);
+    }
   } else {
     // Якщо користувач не залогований, виводимо кнопки "Увійти/Зареєструватись"
     headerEl.innerHTML = `

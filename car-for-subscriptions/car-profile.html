@@ -58,33 +58,35 @@
 			<section class="car-main">
                 <div class="car-main__container">
                     <div class="car-main__img">
-                        <img src="img/catalog/car-2.png" class="adaptive-img" alt="Volkswagen T-Roc">
+                        <img src="img/catalog/car-2.png" class="adaptive-img" alt="Volkswagen R-Line" id="picture">
                     </div>
                     <div class="car-main__text">
                         <div class="car-main__titles-wrapper">
-                            <h3 class="text__brand-title">Volkswagen</h3> 
-                            <h2 class="text__model-title">Tiguan R-Line</h2>
+                            <h3 class="text__brand-title" id="brand">Volkswagen</h3> 
+                            <h2 class="text__model-title" id="model">Tiguan R-Line</h2>
                         </div>
                         <div class="text__line"></div>
                         <div class="text__wrapper">
                             <div class="text__wrapper-left-side">
-                                <p>Об'єм двигуна:</p>
                                 <p>Рік випуску:</p>
                                 <p>Колір:</p>
                                 <p>Паливо: </p>
+                                <p>Реєстраційний номер:</p>
+                                <p>Пробіг:</p>
                             </div>
                             <div class="text__wrapper-right-side">
-                                <p>2л</p>
-                                <p>2021</p>
-                                <p>Сірий</p>
-                                <p>Бензин</p>
+                                <p id="year">2021</p>
+                                <p id="color">Сірий</p>
+                                <p id="fuel">Бензин</p>
+                                <p id="regNumber">ABC777</p>
+                                <p id="mileage">123</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="car-info">
+            <!-- <section class="car-info">
                 <div class="car-info__container container">
                     <div class="row">
                         <div class="car-info__container-element col">
@@ -113,32 +115,32 @@
                     </div>
                     
                 </div>
-            </section>
+            </section> -->
 
             <section class="sub-info">
                 <div class="sub-info__wrapper">
                     <div class="sub-info__container">
                         <div class="sub-info__text sub-info__text-bigscreen">
-                            <p>Період підписки&ensp;&ensp;- - - - - - - - - - - -</p>
-                            <p>Вартість підписки в місяць&ensp;&ensp;- - - - - - - -</p>
-                            <p>Перший платіж, сів і поїхав&ensp; - - - - - - -</p>
+                            <!-- <p>Період підписки&ensp;&ensp;- - - - - - - - - - - - - -</p> -->
+                            <p>Вартість підписки в місяць&ensp;&ensp;- - - - - - - - </p>
+                            <!-- <p>Перший платіж, сів і поїхав&ensp; - - - - - - - -</p> -->
                         </div>
                         <div class="sub-info__text sub-info__text-smallscreen">
-                            <p>Період підписки</p>
+                            <!-- <p>Період підписки</p> -->
                             <p>Вартість підписки в місяць</p>
-                            <p>Перший платіж, сів і поїхав</p>
+                            <!-- <p>Перший платіж, сів і поїхав</p> -->
                         </div>
                         <div class="sub-info__bold-text">
-                            <p>36 місяців</p>
-                            <p>$ 1,750</p>
-                            <p>$ 10,500</p>
+                            <!-- <p id="period">36 місяців</p> -->
+                            <p id="monthPrice">$ 1,750</p>
+                            <!-- <p id="firstPayment">$ 10,500</p> -->
                         </div>
                     </div>
                 </div>     
             </section>
 
             <section class="sub-enter">
-                <div class="sub-enter__button">
+                <div class="sub-enter__button" id="button">
                     <a class="sub-enter__button-rectangle" href="sign-in.html">Увійти для підписки</a>
                 </div>
             </section>
@@ -172,5 +174,7 @@
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<!-- Динамічний header -->
 	<script src="js/dynamic-header.js"></script>
+	<!-- Підключення свого файлу -->
+	<script type="text/javascript" src="js/car-profile.js"></script>
 </body>
 </html>
