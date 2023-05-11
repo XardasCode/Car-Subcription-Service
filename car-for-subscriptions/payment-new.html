@@ -68,13 +68,13 @@
 						<div class="payment__key">
 							<div class="payment__currency">USD</div>
 							<div class="payment__method"><a href=""><img src="img/payment/pay-pal.png" alt="PayPal"></a></div>
-							<div class="payment__appointment"><span>Продовження підписки</span> Volkswagen Tiguan</div>
+							<div class="payment__appointment"><span id="payment-description">Оплата підписки на авто</span ></div>
 						</div>
 					</div>
 
 					<div class="payment__confirm">
-						До оплати: <span>1600</span>
-						<button class="blue-button">Підтвердити</button>
+						До оплати: <span id="month-price"></span>
+						<button class="blue-button" onclick="getApprovingURL()">Оплатити</button>
 					</div>
 					
 				</div>
@@ -110,6 +110,7 @@
 				
 	</div>
 
+		<script type="text/javascript" src="js/payment.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -570,8 +570,8 @@ body {
   .collapsible__list li:last-child {
     margin-bottom: 10px; }
 
-.collapsible #item-wrapper-1.open .collapsible__list, .collapsible #item-wrapper-2.open .collapsible__list, .collapsible #item-wrapper-3.open .collapsible__list {
-  max-height: 500px;
+.collapsible .collapsible__item-wrapper.open .collapsible__list, .collapsible #item-wrapper-2.open .collapsible__list, .collapsible #item-wrapper-3.open .collapsible__list {
+  max-height: 600px;
   -webkit-transition: max-height 0.5s ease-in;
   -o-transition: max-height 0.5s ease-in;
   transition: max-height 0.5s ease-in; }

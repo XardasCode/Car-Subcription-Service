@@ -20,11 +20,11 @@ if (sessionStorage.getItem('user') != null) {
             let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId)
             .then(response => response.json())
             .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
-            window.location.href = 'http://localhost:7886/cabinet-active.html';
+            window.location.href = 'cabinet-active.html';
         }
     }
 }else{
-    window.location.href = 'http://localhost:7886/sign-in.html';
+    window.location.href = 'sign-in.html';
 }
 
 

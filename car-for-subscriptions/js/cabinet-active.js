@@ -1,22 +1,22 @@
-if (sessionStorage.getItem('user') != null) {
-    let user = sessionStorage.getItem('user');
-    let userJson = JSON.parse(user);
-    let subId = userJson['subscriptionId'];
-    if (subId == 0) {
-    window.location.href = 'cabinet-inactive.html';
-    }else if(subId > 0){
-        if (sessionStorage.getItem('subscription') == null) {
-            let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId) 
-            .then(response => response.json())
-            .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
+// if (sessionStorage.getItem('user') != null) {
+//     let user = sessionStorage.getItem('user');
+//     let userJson = JSON.parse(user);
+//     let subId = userJson['subscriptionId'];
+//     if (subId == 0) {
+//     window.location.href = 'cabinet-inactive.html';
+//     }else if(subId > 0){
+//         if (sessionStorage.getItem('subscription') == null) {
+//             let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId) 
+//             .then(response => response.json())
+//             .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
 
-            window.location.href = 'cabinet-active.html';
-        }
-    }
+//             window.location.href = 'cabinet-active.html';
+//         }
+//     }
 
-}else{
-    window.location.href = 'sign-in.html';
-}
+// }else{
+//     window.location.href = 'sign-in.html';
+// }
 
 
 // Динамічний header в залежності від того, чи користувач залогований
@@ -32,7 +32,10 @@ if (sessionStorage.getItem('user') != null) {
     </li>
     `;
     const logoutBtn = headerEl.querySelector('#logout-btn');
-    logoutBtn.addEventListener('click', logoutUser);
+    if (logoutBtn) {
+      el.addEventListener('click', swapper, false);
+    }
+    
   } else {
     // Якщо користувач не залогований, виводимо кнопки "Увійти/Зареєструватись"
     headerEl.innerHTML = `

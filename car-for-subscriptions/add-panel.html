@@ -67,59 +67,64 @@
 					<div class="add-auto__form-wrapper">
 						<div class="add-auto__first-wrapper">
 							<div class="add-auto__item">
-								<label for="brand">Марка</label>
-								<input id="brand" type="text" placeholder="Volkswagen">
+								<label for="brand">Назва</label>
+								<input id="name" type="text" placeholder="Camry">
 							</div>
 							<div class="add-auto__item">
 								<label for="brand">Модель:</label>
-								<input id="brand" type="text" placeholder="Tiguan">
+								<input id="model" type="text" placeholder="SE">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Марка:</label>
+								<input id="brand" type="text" placeholder="Toyota">
 							</div>
 							<div class="add-auto__item">
 								<label for="brand">Рік</label>
-								<input id="brand" type="number" placeholder="2021">
+								<input id="year" type="number" placeholder="2021">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Коробка передач:</label>
-								<input id="brand" type="text" placeholder="Автомат">
+								<label for="brand">Колір:</label>
+								<input id="color" type="text" placeholder="Чорний">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Обʼєм двигуна:</label>
-								<input id="brand" type="number" placeholder="2">
+								<label for="brand">Ціна на місяць::</label>
+								<input id="price" type="number" placeholder="2500">
 							</div>
 							<div class="add-auto__item">
 								<label for="brand">Тип палива:</label>
-								<input id="brand" type="text" placeholder="Бензин">
+								<input id="fuelType" type="text" placeholder="Бензин">
 							</div>
+							
 						</div>
 
 						<div class="add-auto__second-wrapper">
 							<div class="add-auto__item">
-								<label for="brand">Колір</label>
-								<input id="brand" type="text" placeholder="Сірий">
+								<label for="brand">Ідентифікаційний номер:</label>
+								<input id="chassisNumber" type="text" placeholder="YV1MS382252123456">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Розгін::</label>
-								<input id="brand" type="number" placeholder="8,3">
+								<label for="brand">Реєстраційний номер:</label>
+								<input id="regNumber" type="text" placeholder="AA1111AA">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Витрати палива:</label>
-								<input id="brand" type="number" placeholder="5,3">
+								<label for="brand">Дата реєстрації:</label>
+								<input id="regDate" type="text" placeholder="21-01-2022">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Потужність</label>
-								<input id="brand" type="number" placeholder="155">
+								<label for="brand">Пробіг:</label>
+								<input id="mileage" type="number" placeholder="208">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Максимальна швидкість:</label>
-								<input id="brand" type="number" placeholder="208">
+								<label for="brand">Дата останього техогляду:</label>
+								<input id="lastServiceDate" type="text" placeholder="21-01-2022">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Ціна на місяць:</label>
-								<input id="brand" type="number" placeholder="1750">
+								<label for="brand">Фото (URL):</label>
+								<input id="image" type="text">
 							</div>
 						</div>
 					</div>
-					<button class="add-auto__button blue-button">Додати до каталогу</button>
+					<button class="add-auto__button blue-button" onclick="addCar()">Додати до каталогу</button>
 				</form>
 			</section>
 
@@ -151,6 +156,7 @@
 	</div>
 
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/add-panel.js"></script>
 </body>
 
 </html>
