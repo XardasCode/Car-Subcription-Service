@@ -495,8 +495,8 @@ body{
 			margin-bottom: 10px;
 		}
 	}
-	#item-wrapper-1.open .collapsible__list, #item-wrapper-2.open .collapsible__list, #item-wrapper-3.open .collapsible__list{
-		max-height: 500px;
+	.collapsible .collapsible__item-wrapper.open .collapsible__list, .collapsible #item-wrapper-2.open .collapsible__list, .collapsible #item-wrapper-3.open .collapsible__list {
+  		max-height: 600px;
 	  	transition: max-height 0.5s ease-in;
 	}
 	&__buttons{
@@ -560,6 +560,47 @@ body{
 	.display-none{
 		display: none;
 	}
+}
+.switch{
+	display: flex;
+	justify-content: center;
+	margin: 0 20px 0 20px;
+	img{
+		cursor: pointer;
+	}
+}
+.switch-item{
+	width: 32px;
+	height: 32px;
+	color: #fff;
+	background: #437DD5; 
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 10px;
+	cursor: pointer;
+	@media (max-width: 479.98px) {
+		width: 30px;
+		height: 30px;
+	}
+	@media (max-width: 379.98px) {
+		width: 28px;
+		height: 28px;
+	}
+}
+.switch-active{
+	background: #185fca;
+}
+.switch-inactive:hover, .switch-inactive:hover{
+	color: #2869CA;
+	background: inherit;
+	border: 2px solid #2869CA;
+	font-weight: bold;
+	transition: .2s ease-in;
+}
+.switch-inactive:last-child{
+	margin: 0;
 }
 /*****************
 ******Footer****** 
