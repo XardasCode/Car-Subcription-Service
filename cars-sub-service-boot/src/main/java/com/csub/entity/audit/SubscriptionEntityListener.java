@@ -17,6 +17,7 @@ public class SubscriptionEntityListener {
         log.debug("SubscriptionEntityListener.prePersist() called");
         subscription.setLastUpdateDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         subscription.setCreateDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        subscription.setStartDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
     }
 
     @PreUpdate

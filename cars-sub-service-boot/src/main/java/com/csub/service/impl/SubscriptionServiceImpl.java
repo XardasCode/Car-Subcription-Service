@@ -2,7 +2,6 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
-import com.csub.dao.ManagerDAO;
 import com.csub.dao.SubscriptionDAO;
 import com.csub.dao.UserDAO;
 import com.csub.dto.SubscriptionDTO;
@@ -32,8 +31,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     private final UserDAO userDAO;
 
-    private final ManagerDAO managerDAO;
-
     private final SubscriptionDTOMapper subscriptionDTOMapper;
 
     @Override
@@ -44,9 +41,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscriptionEntity = Subscription.createSubscriptionFromRequest(subscription);
         User user = userDAO.getUser(Long.parseLong(subscription.getUserId())).orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
         Car car = carDAO.getCar(Long.parseLong(subscription.getCarId())).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
-        Manager manager = managerDAO.getManager(Long.parseLong(subscription.getManagerId())).orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.UNDER_CONSIDERATION.getStatusId());
-
 
         subscriptionEntity.setStatus(status);
         subscriptionEntity.getStatus().getSubscriptions().add(subscriptionEntity);
@@ -54,17 +49,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscriptionEntity.setUser(user);
         subscriptionEntity.getUser().setSubscription(subscriptionEntity);
 
-        subscriptionEntity.setManager(manager);
-        subscriptionEntity.getManager().getSubscriptions().add(subscriptionEntity);
-
         subscriptionEntity.setCar(car);
         subscriptionEntity.getCar().setSubscription(subscriptionEntity);
 
-
-        long id = subscriptionDAO.addSubscription(subscriptionEntity).orElseThrow(
+        return subscriptionDAO.addSubscription(subscriptionEntity).orElseThrow(
                 () -> new ServerException("Subscription not added", ErrorList.SUBSCRIPTION_ALREADY_EXISTS));
-        log.debug("Subscription added: {}", subscription);
-        return id;
     }
 
     @Override

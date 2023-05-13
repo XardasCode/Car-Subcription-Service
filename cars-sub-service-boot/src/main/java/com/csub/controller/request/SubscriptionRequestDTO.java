@@ -12,12 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SubscriptionRequestDTO {
 
-    @NotBlank(message = "isActive cannot be blank")
-    private String isActive;
-
-    @NotBlank(message = "Start date cannot be blank")
-    private String startDate;
-
     @NotBlank(message = "Month price cannot be blank")
     private String monthPrice;
 
@@ -33,9 +27,12 @@ public class SubscriptionRequestDTO {
     @NotBlank(message = "Car cannot be blank")
     private String carId;
 
-    @NotBlank(message = "Manager cannot be blank")
-    private String managerId;
+    @NotBlank(message = "Passport number cannot be blank")
+    private String passportNumber;
 
-    @NotBlank(message = "Status cannot be blank")
-    private String statusId;
+    @NotBlank(message = "IPN number cannot be blank")
+    private String ipnNumber;
+
+    @NotBlank(message = "Social media link cannot be blank")
+    private String socMediaLink;
 }

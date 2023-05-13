@@ -5,9 +5,6 @@ import com.csub.entity.audit.SubscriptionEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
-
 @EntityListeners(SubscriptionEntityListener.class)
 @Data
 @AllArgsConstructor
@@ -36,6 +33,15 @@ public class Subscription {
 
     @Column(name = "total_months")
     private int totalMonths;
+
+    @Column(name = "passport_number")
+    private String passportNumber;
+
+    @Column(name = "ipn_number")
+    private String ipnNumber;
+
+    @Column(name = "soc_media_link")
+    private String socMediaLink;
 
     @Column(name = "create_date")
     private String createDate;
@@ -69,28 +75,13 @@ public class Subscription {
 
     public static Subscription createSubscriptionFromRequest(SubscriptionRequestDTO subscription) {
         return Subscription.builder()
-                .isActive(subscription.getIsActive() == null ? null : Boolean.parseBoolean(subscription.getIsActive()))
-                .startDate(subscription.getStartDate() == null ? null : subscription.getStartDate())
                 .monthPrice(subscription.getMonthPrice() == null ? 0 : Integer.parseInt(subscription.getMonthPrice()))
                 .totalMonths(subscription.getTotalMonths() == null ? 0 : Integer.parseInt(subscription.getTotalMonths()))
                 .totalPrice(subscription.getTotalPrice() == null ? 0 : Integer.parseInt(subscription.getTotalPrice()))
+                .ipnNumber(subscription.getIpnNumber() == null ? "" : subscription.getIpnNumber())
+                .passportNumber(subscription.getPassportNumber() == null ? "" : subscription.getPassportNumber())
+                .socMediaLink(subscription.getSocMediaLink() == null ? "" : subscription.getSocMediaLink())
+                .isActive(false)
                 .build();
     }
-
-    public static void mergeSubscription(Subscription dbSubscription, Subscription subscriptionEntity){
-        subscriptionEntity.setId(dbSubscription.getId());
-        subscriptionEntity.setCreateDate(dbSubscription.getCreateDate());
-        subscriptionEntity.setActive(subscriptionEntity.isActive());
-        subscriptionEntity.setStartDate((subscriptionEntity.getStartDate() != null && !subscriptionEntity.getStartDate().isBlank())
-                ? subscriptionEntity.getStartDate() : dbSubscription.getStartDate());
-        subscriptionEntity.setMonthPrice((subscriptionEntity.getMonthPrice() != 0) ? subscriptionEntity.getMonthPrice() : dbSubscription.getMonthPrice());
-        subscriptionEntity.setTotalMonths((subscriptionEntity.getTotalMonths() != 0) ? subscriptionEntity.getTotalMonths() : dbSubscription.getTotalMonths());
-        subscriptionEntity.setTotalPrice((subscriptionEntity.getTotalPrice() != 0) ? subscriptionEntity.getTotalPrice() : dbSubscription.getTotalPrice());
-        subscriptionEntity.setUser(subscriptionEntity.getUser() != null ? subscriptionEntity.getUser() : dbSubscription.getUser());
-        subscriptionEntity.setManager(subscriptionEntity.getManager() != null ? subscriptionEntity.getManager() : dbSubscription.getManager());
-        subscriptionEntity.setCar(subscriptionEntity.getCar() != null ? subscriptionEntity.getCar() : dbSubscription.getCar());
-        subscriptionEntity.setStatus(subscriptionEntity.getStatus() != null? subscriptionEntity.getStatus(): dbSubscription.getStatus());
-
-    }
-
 }
