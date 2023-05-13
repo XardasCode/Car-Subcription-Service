@@ -10,6 +10,7 @@ import java.util.function.Function;
 public class SubscriptionDTOMapper implements Function<Subscription, SubscriptionDTO> {
     @Override
     public SubscriptionDTO apply(Subscription subscription) {
+        long managerId = subscription.getManager() == null ? 0 : subscription.getManager().getId();
         return new SubscriptionDTO(
                 subscription.getId(),
                 subscription.isActive(),
@@ -19,7 +20,7 @@ public class SubscriptionDTOMapper implements Function<Subscription, Subscriptio
                 subscription.getTotalMonths(),
                 subscription.getUser().getId(),
                 subscription.getCar().getId(),
-                subscription.getManager().getId(),
+                managerId,
                 subscription.getStatus().getName());
     }
 }
