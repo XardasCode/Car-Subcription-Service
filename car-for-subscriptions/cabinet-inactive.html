@@ -1,188 +1,217 @@
 <!DOCTYPE html>
 <html lang="ua">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/cabinet-inactive.css">
-	<title>Кабінет</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/cabinet-inactive.css">
+    <title>Кабінет</title>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="container main_container">
+<div class="wrapper">
+    <div class="container main_container">
 
-			<header class="header">
-				<div class="container header__container">
-					<div class="row">
-						<nav class="navbar navbar-expand-lg header__navbar">
-						  <div class="container-fluid">
-						    <a class="navbar-brand header__logo" href="index.html">
-						    	<span class="header__span-1">Brand name</span>
-						    	<span class="header__span-2">Car Subscription</span>
-						    	<span class="header__car"></span>
-						    </a>
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
-						      <ul class="navbar-nav ms-auto mb-lg-0 header__list">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a> 
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> 
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
-						        </li>
-						        <div class="header__last-item">
-							        <li class="nav-item">
-							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" href="#" onclick="logoutUser()">Вийти</a>
-							        </li>
-						        </div>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-					</div>
-				</div>
-			</header>
-					
-			<section class="inactive">
-				<div class="inactive__container">
-					<div class="inactive__row">
+        <header class="header">
+            <div class="container header__container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg header__navbar">
+                        <div class="container-fluid">
+                            <a class="navbar-brand header__logo" href="index.html">
+                                <span class="header__span-1">Brand name</span>
+                                <span class="header__span-2">Car Subscription</span>
+                                <span class="header__car"></span>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto mb-lg-0 header__list">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="questions.html">Часті
+                                            запитання</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+                                    </li>
+                                    <div class="header__last-item">
+                                        <li class="nav-item">
+                                            <a class="nav-link active header__cabinet header__active"
+                                               aria-current="page" href="#">Мій кабінет</a><span
+                                                class="header__slash">/</span><a class="header__exit" href="#"
+                                                                                 onclick="logoutUser()">Вийти</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-						<div class="inactive__left">
-							<h3>Кабінет підписки</h3>
-							<div class="inactive__user">
-								<img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user">
-								<span id="username">Віктор Григорович</span>
-								<a href="#">
-									<img src="img/inactive/svg/edit.svg" onclick="editText()" class="inactive__edit-img" alt="edit">
-								</a>
-							</div>
-							<div class="inactive__email" id="email">viktor.grygorovych@ukr.tak</div>
-							<div class="inactive__birthday">
-								<img src="img/inactive/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
-							</div>
-							<div class="inactive__phone">
-								<img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">(067) 123-4567</span>
-							</div>
-							<br>
-							<a href="cabinet-manager.html">manager</a> (тимчасове посилання)
-						</div>
+        <section class="inactive">
+            <div class="inactive__container">
+                <div class="inactive__row">
 
-						<div class="inactive__right">
-							<div class="inactive__block">
-								<div class="inactive__status">Статус підписки: <span>Неактивна</span></div>
-							</div>
-							<div class="inactive__request">
-								<h3>Подати заявку на підписку</h3>
-								<form action="#" id="form">
-									<div class="inactive__wrapper-auto">
-										<label for="">Оберіть авто зі списку:</label>
-										<div class="inactive__auto">	
-										  	<input class="inactive__input-auto" type="hidden" name="">
-										  	<div class="inactive__head-auto">Volkswagen Tiguan</div>
-										  	<ul class="inactive__list-auto">
-										      <li class="inactive__item-auto">Volkswagen Tiguan</li>
-										      <li class="inactive__item-auto">Hyundai i30</li>
-										      <li class="inactive__item-auto">Toyota RAV-4</li>
-										      <li class="inactive__item-auto">Volkswagen T-Roc</li>
-										  	</ul>
-										</div>
-									</div>
+                    <div class="inactive__left">
+                        <h3>Кабінет підписки</h3>
+                        <div class="inactive__user">
+                            <img src="img/inactive/svg/user.svg" class="inactive__user-img" alt="user">
+                            <span id="username">Віктор Григорович</span>
+                            <a href="#">
+                                <img src="img/inactive/svg/edit.svg" onclick="editText()" class="inactive__edit-img"
+                                     alt="edit">
+                            </a>
+                        </div>
+                        <div class="inactive__email" id="email">viktor.grygorovych@ukr.tak</div>
+                        <div class="inactive__birthday">
+                            <img src="img/inactive/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
+                        </div>
+                        <div class="inactive__phone">
+                            <img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">(067) 123-4567</span>
+                        </div>
+                        <br>
+                        <a href="cabinet-manager.html">manager</a> (тимчасове посилання)
+                        <p class="mt-4" id="isVerified"></p>
+                    </div>
 
-									<div class="inactive__wrapper-term">
-										<label for="">Оберіть термін підписки:</label>
-										<div class="inactive__term">	
-										  	<input class="inactive__input-term" type="hidden" name="">
-										  	<div class="inactive__head-term">03.04.2023-03.04.2024</div>
-										  	<ul class="inactive__list-term">
-										  		<li class="inactive__item-term">03.04.2023-03.04.2024</li>
-										      <li class="inactive__item-term">03.04.2023-03.04.2025</li>
-										      <li class="inactive__item-term">03.04.2023-03.04.2026</li>
-										      <li class="inactive__item-term">03.04.2023-03.04.2027</li>
-										      <li class="inactive__item-term">03.04.2023-03.04.2028</li>
-										  	</ul>
-										</div>
-									</div>
+                    <div class="inactive__right">
+                        <div class="inactive__block">
+                            <div class="inactive__status">Статус підписки: <span>Неактивна</span></div>
+                        </div>
+                        <div class="inactive__request visually-hidden" id="subscriptionForm"> <!-- visually-hidden -->
+                            <h3>Подати заявку на підписку</h3>
+                            <form id="form">
+                                <input type="hidden" name="carId" id="carIdValue">
+                                <div class="inactive__wrapper-auto">
+                                    <label for="">Авто:</label>
+                                    <div class="inactive__auto">
+                                        <input class="inactive__input-auto text-primary" type="text" name="car"
+                                               id="carName"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="inactive__wrapper-auto">
+                                    <label for="">Бренд:</label>
+                                    <div class="inactive__auto">
+                                        <input class="inactive__input-auto text-primary" type="text" name="brand"
+                                               id="carBrand"
+                                               readonly>
+                                    </div>
+                                </div>
 
-									<div class="inactive__wrapper-color">
-										<label for="">Оберіть колір авто:</label>
-										<div class="inactive__color">	 
-										  	<input class="inactive__input-color" type="hidden" name="">
-										  	<div class="inactive__head-color">Сірий</div>
-										  	<ul class="inactive__list-color">
-										  		<li class="inactive__item-color">Червоний</li>
-										      <li class="inactive__item-color">Білий</li>
-										      <li class="inactive__item-color">Чорний</li>
-										      <li class="inactive__item-color">Жовтий</li>
-										  	</ul>
-										</div>
-									</div>
+                                <div class="inactive__wrapper-auto">
+                                    <label for="">Модель:</label>
+                                    <div class="inactive__auto">
+                                        <input class="inactive__input-auto text-primary" type="text" name="model"
+                                               id="carModel"
+                                               readonly>
+                                    </div>
+                                </div>
 
-									<div class="inactive__passport">
-										<label for="passport">Введіть номер паспорта:</label>
-										<input class="_req" id="passport" type="text" placeholder="10101010-10101">
-										<span id="result"></span>
-									</div>
-									<div class="inactive__ipn">
-										<label for="ipn">Введіть свій ІПН:</label>
-										<input class="_req" id="ipn" type="text" placeholder="0000000000">
-										<span id="result2"></span>
-									</div>
-									<div class="inactive__contact">
-										<label for="contact">Залишіть посилання на соцмережі:</label>
-										<input class="_req" type="text" placeholder="@h_vetinari">
-									</div>
-									<button class="inactive__button blue-button">Подати заявку</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                                <div class="inactive__wrapper-color">
+                                    <label for="">Колір:</label>
+                                    <div class="inactive__color">
+                                        <input class="inactive__input-color text-primary" type="text" name="color"
+                                               id="carColor"
+                                               readonly>
+                                    </div>
+                                </div>
 
-		</div>
-				
-			<footer class="footer">
-				<div class="container footer_container">
-					<div class="row no-gutters">
-						<div class="col-md-4 footer__logo">
-							<a class="footer__a" href="#">
-								<span class="footer__span-1">Brand name</span>
-								<span class="footer__span-2">Car Subscription</span>
-								<span class="footer__car"></span>
-							</a>
-						</div>
-						<div class="col-md-4 footer__copyright">
-							<span>2023 © Всі права захищені</span>
-						</div>
-						<div class="col-md-4 footer__icons">
-							<a href="https://t.me/CarSubscriptionService" target="_blank"><img src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
-							<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
-							<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
-							<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>								
-						</div>
-					</div>
-				</div>
-			</footer>
-				
-	</div>
+                                <div class="inactive__wrapper-color">
+                                    <label for="">Рік машини:</label>
+                                    <div class="inactive__color">
+                                        <input class="inactive__input-color text-primary" type="text" name="year"
+                                               id="carYear"
+                                               readonly>
+                                    </div>
+                                </div>
 
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<!-- Валідація -->
-	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-	<!-- Випадаюче меню -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- Підключення свого файлу -->
-	<script type="text/javascript" src="js/cabinet-inactive.js"></script>
-	
+
+                                <div class="inactive__wrapper-term">
+                                    <label for="">Оберіть термін підписки:</label>
+                                    <div class="inactive__term">
+                                        <input class="inactive__input-term" type="hidden" name="months">
+                                        <div class="inactive__head-term">Оберіть кількість місяців</div>
+                                        <ul class="inactive__list-term">
+                                            <li class="inactive__item-term" id="total_month_12_duplicate">12 місяців</li>
+                                            <li class="inactive__item-term" id="total_month_18">18 місяців</li>
+                                            <li class="inactive__item-term" id="total_month_24">24 місяці</li>
+                                            <li class="inactive__item-term" id="total_month_30">30 місяців</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="inactive__passport">
+                                    <label for="passport">Введіть номер паспорта:</label>
+                                    <input class="_req" id="passport" name="passport_num" type="text" placeholder="10101010-10101">
+                                    <span id="result"></span>
+                                </div>
+                                <div class="inactive__ipn">
+                                    <label for="ipn">Введіть свій ІПН:</label>
+                                    <input class="_req" id="ipn" type="text" name="ipn_num" placeholder="0000000000">
+                                    <span id="result2"></span>
+                                </div>
+                                <div class="inactive__contact">
+                                    <label for="contact">Залишіть посилання на соцмережі:</label>
+                                    <input class="_req" type="text" name="contact" placeholder="@example">
+                                </div>
+                                <button class="inactive__button blue-button">Подати заявку</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container footer_container">
+            <div class="row no-gutters">
+                <div class="col-md-4 footer__logo">
+                    <a class="footer__a" href="#">
+                        <span class="footer__span-1">Brand name</span>
+                        <span class="footer__span-2">Car Subscription</span>
+                        <span class="footer__car"></span>
+                    </a>
+                </div>
+                <div class="col-md-4 footer__copyright">
+                    <span>2023 © Всі права захищені</span>
+                </div>
+                <div class="col-md-4 footer__icons">
+                    <a href="https://t.me/CarSubscriptionService" target="_blank"><img
+                            src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+                    <a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img
+                            src="img/general-svg/inst.svg" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img
+                            src="img/general-svg/in.svg" alt="LinkedIn"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img
+                            src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Bootstrap -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<!-- Валідація -->
+<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+<!-- Випадаюче меню -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Підключення свого файлу -->
+<script type="text/javascript" src="js/cabinet-inactive.js"></script>
+
 </body>
 </html>

@@ -105,8 +105,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
   let myPage = `page=${page}`;
   let size = 'size=12';
-  // коли Арсен задеплоїть зміни status_name треба замінити на statusName
-  let filter = "filter=isActive:false,status_name:Under consideration";
+  let filter = "filter=isActive:false,statusName:Under consideration";
   let url = host + myPage + '&' + size + '&' + filter;
 
 
@@ -126,8 +125,7 @@ function getActiveSubscriptions(page) {
   let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
   let myPage = `page=${page}`;
   let size = 'size=12';
-  // коли Арсен задеплоїть зміни status_name треба замінити на statusName
-  let filter = "filter=isActive:true,status_name:Confirmed";
+  let filter = "filter=isActive:true,statusName:Confirmed";
   let url = host + myPage + '&' + size + '&' + filter;
 
   let getResponse =  fetch(url)

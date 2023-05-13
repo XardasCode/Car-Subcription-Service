@@ -1,52 +1,210 @@
 // Зміна статичних данних на динамічні / редірект в залежності від статусу підписки користувача 
 
-if (sessionStorage.getItem('user') != null) {
+addEventListener('DOMContentLoaded', async function () {
     let user = sessionStorage.getItem('user');
-    let userJson = JSON.parse(user);
-    let subId = userJson['subscriptionId'];
-    if (subId == 0) {
-        let username = document.getElementById('username');
-        let email = document.getElementById('email');
-        let phone = document.getElementById('phone');
-        let jsonName = userJson['name'];
-        let jsonSurname = userJson['surname'];
-        let jsonEmail = userJson['email'];
-        let jsonPhone = userJson['phone'];
-        username.innerHTML = jsonName + ' ' + jsonSurname;
-        email.innerHTML = jsonEmail;
-        phone.innerHTML = jsonPhone;
-    }else if(subId > 0){
-        if (sessionStorage.getItem('subscription') == null){
-            let getResponse = fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId)
-            .then(response => response.json())
-            .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
-            window.location.href = 'cabinet-active.html';
+    if (user != null) {
+        let userJson = JSON.parse(user);
+        let subId = userJson['subscriptionId'];
+        if (subId === 0) {
+            document.getElementById('form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const form = document.getElementById('form');
+
+                let error = formValidate(form);
+
+                if (error !== 0) {
+                    alert("Заповніть обов'язкові поля!")
+                } else {
+                    submitSubscriptionForm();
+                }
+            })
+
+            let username = document.getElementById('username');
+            let email = document.getElementById('email');
+            let phone = document.getElementById('phone');
+            let emailVerified = document.getElementById('isVerified');
+            let jsonName = userJson['name'];
+            let jsonSurname = userJson['surname'];
+            let jsonEmail = userJson['email'];
+            let jsonPhone = userJson['phone'];
+            let jsonIsVerified = userJson['isVerified'];
+            username.innerHTML = jsonName + ' ' + jsonSurname;
+            email.innerHTML = jsonEmail;
+            phone.innerHTML = jsonPhone;
+            if (jsonIsVerified === true) {
+                emailVerified.innerHTML = 'Пошта підтверджена';
+                await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
+            } else {
+                emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, будь ласка підтвердіть пошту: <a href="email-confirm.html">Підтвердити</a>';
+            }
+        } else if (subId > 0) {
+            if (sessionStorage.getItem('subscription') == null) {
+                fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId)
+                    .then(response => response.json())
+                    .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
+                window.location.href = 'cabinet-active.html';
+            }
         }
+    } else {
+        window.location.href = 'sign-in.html';
     }
-}else{
-    window.location.href = 'sign-in.html';
+});
+
+async function setSubscriptionForm() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let carId = urlParams.get('carId');
+    if (carId !== null) {
+        let formDiv = document.getElementById('subscriptionForm');
+        formDiv.classList.remove('visually-hidden');
+        let carIdValue = document.getElementById('carIdValue');
+        carIdValue.value = carId;
+        await setCarInfoToForm(carId);
+    }
 }
 
+async function setCarInfoToForm(carId) {
+    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + carId);
+    let status = response.status;
+    if (status !== 200) {
+        alert('Помилка при завантаженні інформації про автомобіль. Спробуйте пізніше');
+        window.location.href = 'error.html';
+    }
+    let car = await response.json();
+    let carNameJson = car['name'];
+    let carModelJson = car['model'];
+    let carBrandJson = car['brand'];
+    let carYearJson = car['year'];
+    let carColorJson = car['color'];
+    let carPriceJson = car['price'];
+
+    let carName = document.getElementById('carName');
+    let carModel = document.getElementById('carModel');
+    let carBrand = document.getElementById('carBrand');
+    let carYear = document.getElementById('carYear');
+    let carColor = document.getElementById('carColor');
+
+    carName.value = carNameJson;
+    carModel.value = carModelJson;
+    carBrand.value = carBrandJson;
+    carYear.value = carYearJson;
+    carColor.value = carColorJson;
+
+    await setPerMonthPrice(carPriceJson);
+}
+
+async function setPerMonthPrice(totalPrice) {
+    let monthsTwelveDuplicate = document.getElementById('total_month_12_duplicate');
+    let monthsEighteen = document.getElementById('total_month_18');
+    let monthsTwentyFourths = document.getElementById('total_month_24');
+    let monthsTwentyEight = document.getElementById('total_month_30');
+
+    totalPrice += 300; // Додавання вартості обслуговування
+    let priceTwelve = calculatePrice(totalPrice, 12);
+    let priceEighteen = calculatePrice(totalPrice, 18);
+    let priceTwentyFourths = calculatePrice(totalPrice, 24);
+    let priceTwentyEight = calculatePrice(totalPrice, 30);
+    
+    monthsTwelveDuplicate.innerHTML += ` ${priceTwelve}$/міс`;
+    monthsEighteen.innerHTML += ` ${priceEighteen}$/міс`;
+    monthsTwentyFourths.innerHTML += ` ${priceTwentyFourths}$/міс`;
+    monthsTwentyEight.innerHTML += ` ${priceTwentyEight}$/міс`;
+}
+
+async function submitSubscriptionForm() {
+    let form = document.getElementById('form');
+    let formData = new FormData(form);
+
+    let user = sessionStorage.getItem('user');
+    let userJson = await JSON.parse(user);
+
+    let userId = userJson['id'].toString();
+    let carId = formData.get('carId');
+    let monthsString = formData.get('months');
+    let passport = formData.get('passport_num');
+    let ipn = formData.get('ipn_num');
+    let contact = formData.get('contact');
+
+    let months = monthsString.slice(0, 2); // кількість місяців
+    let monthPay = parsePayPerMonth(monthsString); // сума грошей за місяць
+    if (monthPay === null) {
+        alert("Помилка при введені даних про кількість місяців, будь ласка, виберіть зі списку");
+        return;
+    }
+
+    let data = {
+        "monthPrice": monthPay,
+        "totalMonths": months,
+        "userId": userId,
+        "carId": carId,
+        "passportNumber": passport,
+        "ipnNumber": ipn,
+        "socMediaLink": contact
+    };
+    console.log(JSON.stringify(data));
+
+    await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        if (response.status === 201) {
+            alert('Заявка на підписку успішно оформлена!');
+            window.location.href = 'cabinet-expected.html';
+        } else {
+            alert('Помилка при оформленні підписки. Спробуйте пізніше');
+        }
+    });
+}
+
+function parsePayPerMonth(monthsString) {
+// Регулярний вираз для вилучення суми грошей
+    let regex = /\d+(\.\d+)?/;
+
+// Знаходження суми грошей в рядку
+    let match = monthsString.match(regex);
+
+    if (match === null) {
+        return null;
+    } else {
+        return match[0];
+    }
+// Отримання першого знайденого збігу (суми грошей)
+
+}
+
+function calculatePrice(fullPrice, months) {
+    // Розрахунок ціни за місяць
+    let monthlyPrice = fullPrice / months;
+
+    // Округлення до найближчого числа, кратного 50
+    let roundedPrice = Math.round(monthlyPrice / 10) * 10;
+
+    roundedPrice = roundedPrice - 0.1;
+    return roundedPrice;
+}
 
 // Можливість редагування імені
 
 function editText() {
-  // Отримую посилання на span
-  var textElement = document.getElementById("username");
-  // Отримую поточний текстовий вміст цього елемента
-  var currentText = textElement.innerHTML;
-  // Замінюю текст на форму для редагування
-  textElement.innerHTML = '<input type="text" id="edit-input" value="' + currentText + '"><button onclick="saveText()">Зберегти</button>';
+    // Отримую посилання на span
+    let textElement = document.getElementById("username");
+    // Отримую поточний текстовий вміст цього елемента
+    let currentText = textElement.innerHTML;
+    // Замінюю текст на форму для редагування
+    textElement.innerHTML = '<input type="text" id="edit-input" value="' + currentText + '"><button onclick="saveText()">Зберегти</button>';
 }
 
 function saveText() {
-  var inputElement = document.getElementById("edit-input");
-  // Отримую введене користувачем значення
-  var newText = inputElement.value;
-  // Отримую посилання на HTML-елемент, що містить текст, який ми хочемо редагувати
-  var textElement = inputElement.parentNode;
-  // Замінюю форму для редагування на нове ім'я
-  textElement.innerHTML = newText;
+    let inputElement = document.getElementById("edit-input");
+    // Отримую введене користувачем значення
+    let newText = inputElement.value;
+    // Отримую посилання на HTML-елемент, що містить текст, який ми хочемо редагувати
+    let textElement = inputElement.parentNode;
+    // Замінюю форму для редагування на нове ім'я
+    textElement.innerHTML = newText;
 }
 
 
@@ -145,76 +303,49 @@ jQuery(($) => {
 
 // Валідація полів на заповнення 
 
-document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
-    const form = document.getElementById('form');
-    form.addEventListener('submit', formSend); //при відправці форми ми переходимо в функцію formSend
 
-    async function formSend(e){
-        e.preventDefault(); //забороняєм стандартну відправку форми
+function formValidate(form) {
+    let error = 0;
+    let formReq = document.querySelectorAll('._req'); //required - обов'язкове поле
 
-        let error = formValidate(form);
+    for (let index = 0; index < formReq.length; index++) {
+        const input = formReq[index];
+        formRemoveError(input);
 
-        if(error === 0) {
-
-            /*let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', { //відправка технологією AJAX, за допомогою fetch
-                method: 'POST',
-                body: formData
-            });
-            if (response.ok) { //маємо получити відповідь вдала відправка чи ні
-                let result = await response.json(); //якщо все ок получаємо певну json відповідь
-                alert(result.message); //виводимо відповідь користувачеві
-                form.reset(); //очистка всіх полів форми
-            }else{
-                alert('Помилка'); //якщо щось пішло не так - виводиться помилка
-            }*/
-
-        } else {
-            alert("Заповніть обов'язкові поля!")
+        if (input.value === '') { //перевірка чи поле заповленене
+            formAddError(input);
+            error++;
         }
     }
+    return error;
+}
 
+function formAddError(input) {
+    input.parentElement.classList.add('_error'); //добавляю батьківському об'єкту клас error
+    input.classList.add('_error'); //добавляю самому об'єкту клас error
+}
 
-    function formValidate(form) {
-        let error = 0;
-        let formReq = document.querySelectorAll('._req'); //required - обов'язкове поле
-
-        for (let index = 0; index < formReq.length; index++) {
-            const input = formReq[index];
-            formRemoveError(input);
-
-            if(input.value === ''){ //перевірка чи поле заповленене 
-                formAddError(input);
-                error++;
-            }
-        }
-        return error;
-    }
-    function formAddError(input) {
-        input.parentElement.classList.add('_error'); //добавляю батьківському об'єкту клас error
-        input.classList.add('_error'); //добавляю самому об'єкту клас error
-    }
-    function formRemoveError(input) {
-        input.parentElement.classList.remove('_error'); //забираю клас error у батьківського об'єкта
-        input.classList.remove('_error'); //забираю клас error у об'єкта 
-    }
-});
+function formRemoveError(input) {
+    input.parentElement.classList.remove('_error'); //забираю клас error у батьківського об'єкта
+    input.classList.remove('_error'); //забираю клас error у об'єкта
+}
 
 
 // Валідація номеру паспорта регулярним виразом 
 
-var result = document.querySelector('#result');
-var form = document.querySelector('#form');
+let result = document.querySelector('#result');
+let form = document.querySelector('#form');
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
     checkPassportNumber(this.passport.value);
 })
 
-function checkPassportNumber(passportNo){
-    var passportRE = /^\d\d\d\d\d\d\d\d-\d\d\d\d\d$/;
+function checkPassportNumber(passportNo) {
+    let passportRE = /^\d\d\d\d\d\d\d\d-\d\d\d\d\d$/;
     if (passportNo.match(passportRE)) {
         result.innerHTML = 'Номер паспорту введено правильно';
-    }else {
+    } else {
         result.innerHTML = 'Номер паспорту введено <strong><u>не правильно</u></strong><br>Приклад: 10101010-10101';
     }
 }
@@ -222,22 +353,21 @@ function checkPassportNumber(passportNo){
 // Валідація ІПН регулярним виразом 
 
 var result2 = document.querySelector('#result2');
-var form = document.querySelector('#form');
+form = document.querySelector('#form');
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
     checkIpnNumber(this.ipn.value);
 })
 
-function checkIpnNumber(ipnNo){
+function checkIpnNumber(ipnNo) {
     var ipnRE = /^\d\d\d\d\d\d\d\d\d\d$/;
     if (ipnNo.match(ipnRE)) {
         result2.innerHTML = 'Номер паспорту введено правильно';
-    }else {
+    } else {
         result2.innerHTML = 'Номер паспорту введено <strong><u>не правильно</u></strong><br>Приклад: 0101010101';
     }
 }
-
 
 
 /*// Динамічний header в залежності від того, чи користувач залогований
@@ -268,8 +398,8 @@ function updateHeader() {
 
 // Розлогування користувача та редірект на сторінку входу
 
-function logoutUser() { 
-  sessionStorage.removeItem('user'); // Видалення з сесії
+function logoutUser() {
+    sessionStorage.removeItem('user'); // Видалення з сесії
 
-  window.location.replace('sign-in.html'); // Редірект на сторінку входу
+    window.location.replace('sign-in.html'); // Редірект на сторінку входу
 }
