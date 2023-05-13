@@ -18,6 +18,7 @@ public class UserDTOMapper implements Function<User, UserDTO> {
                 user.getEmail(),
                 user.getPhone(),
                 user.isBlocked(),
+                user.isVerified(),
                 subscriptionId);
     }
 }
