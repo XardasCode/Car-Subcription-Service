@@ -66,7 +66,7 @@ async function setSubscriptionForm() {
 async function setCarInfoToForm(carId) {
     let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + carId);
     let status = response.status;
-    if (status !== 200) {
+    if (status > 299) {
         alert('Помилка при завантаженні інформації про автомобіль. Спробуйте пізніше');
         window.location.href = 'error.html';
     }
@@ -104,7 +104,7 @@ async function setPerMonthPrice(totalPrice) {
     let priceEighteen = calculatePrice(totalPrice, 18);
     let priceTwentyFourths = calculatePrice(totalPrice, 24);
     let priceTwentyEight = calculatePrice(totalPrice, 30);
-    
+
     monthsTwelveDuplicate.innerHTML += ` ${priceTwelve}$/міс`;
     monthsEighteen.innerHTML += ` ${priceEighteen}$/міс`;
     monthsTwentyFourths.innerHTML += ` ${priceTwentyFourths}$/міс`;
@@ -149,11 +149,15 @@ async function submitSubscriptionForm() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data),
-    }).then(response => {
+    }).then(async response => {
         if (response.status === 201) {
             alert('Заявка на підписку успішно оформлена!');
             window.location.href = 'cabinet-expected.html';
         } else {
+            let error = await response.json();
+            let errorMessage = error['errorMessage'];
+            let errorCode = error['code'];
+            console.log("Error code: " + errorCode + " Error message: " + errorMessage);
             alert('Помилка при оформленні підписки. Спробуйте пізніше');
         }
     });
