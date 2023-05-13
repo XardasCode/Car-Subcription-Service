@@ -77,7 +77,6 @@ public class Subscription {
         return Subscription.builder()
                 .monthPrice(subscription.getMonthPrice() == null ? 0 : Integer.parseInt(subscription.getMonthPrice()))
                 .totalMonths(subscription.getTotalMonths() == null ? 0 : Integer.parseInt(subscription.getTotalMonths()))
-                .totalPrice(subscription.getTotalPrice() == null ? 0 : Integer.parseInt(subscription.getTotalPrice()))
                 .ipnNumber(subscription.getIpnNumber() == null ? "" : subscription.getIpnNumber())
                 .passportNumber(subscription.getPassportNumber() == null ? "" : subscription.getPassportNumber())
                 .socMediaLink(subscription.getSocMediaLink() == null ? "" : subscription.getSocMediaLink())

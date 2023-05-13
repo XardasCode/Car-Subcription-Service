@@ -15,9 +15,6 @@ public class SubscriptionRequestDTO {
     @NotBlank(message = "Month price cannot be blank")
     private String monthPrice;
 
-    @NotBlank(message = "Total price cannot be blank")
-    private String totalPrice;
-
     @NotBlank(message = "Total month cannot be blank")
     private String totalMonths;
 

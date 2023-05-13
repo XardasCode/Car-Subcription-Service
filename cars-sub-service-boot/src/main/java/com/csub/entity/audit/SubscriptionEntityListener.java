@@ -18,6 +18,7 @@ public class SubscriptionEntityListener {
         subscription.setLastUpdateDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         subscription.setCreateDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
         subscription.setStartDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        subscription.setTotalPrice(subscription.getMonthPrice() * subscription.getTotalMonths());
     }
 
     @PreUpdate

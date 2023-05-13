@@ -97,7 +97,6 @@ class SubscriptionServiceImplTest {
         subscriptionRequestDTO = SubscriptionRequestDTO.builder()
                 .monthPrice("2000")
                 .totalMonths("5")
-                .totalPrice("10000")
                 .userId("1")
                 .carId("1")
                 .build();
