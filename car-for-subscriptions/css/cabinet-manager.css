@@ -530,7 +530,6 @@ body {
   font-size: 24px;
   line-height: 29px;
   max-height: 80px;
-  overflow: hidden;
   -webkit-transition: max-height 0.5s ease-out;
   -o-transition: max-height 0.5s ease-out;
   transition: max-height 0.5s ease-out;
