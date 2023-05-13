@@ -2,7 +2,6 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
-import com.csub.dao.ManagerDAO;
 import com.csub.dao.SubscriptionDAO;
 import com.csub.dao.UserDAO;
 import com.csub.dto.SubscriptionDTO;
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class SubscriptionServiceImplTest {
@@ -33,8 +31,6 @@ class SubscriptionServiceImplTest {
     private  CarDAO carDAO;
     @Mock
     private  UserDAO userDAO;
-    @Mock
-    private  ManagerDAO managerDAO;
 
     private final SubscriptionDTOMapper subscriptionDTOMapper = new SubscriptionDTOMapper();
 
@@ -48,7 +44,7 @@ class SubscriptionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,carDAO,userDAO,managerDAO,subscriptionDTOMapper);
+        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,carDAO,userDAO,subscriptionDTOMapper);
         carStatus.setId(1);
         carStatus.setName("In stock");
         status.setId(1);
@@ -99,15 +95,11 @@ class SubscriptionServiceImplTest {
                 .status(status)
                 .build();
         subscriptionRequestDTO = SubscriptionRequestDTO.builder()
-                .isActive("true")
-                .startDate("21.04.2023")
                 .monthPrice("2000")
                 .totalMonths("5")
                 .totalPrice("10000")
                 .userId("1")
                 .carId("1")
-                .managerId("1")
-                .statusId("1")
                 .build();
 
 
