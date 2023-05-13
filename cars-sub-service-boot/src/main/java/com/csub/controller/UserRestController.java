@@ -104,16 +104,16 @@ public class UserRestController {
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}/generate-verification-code")
-    public ResponseEntity<JSONInfo> verifyEmail(@PathVariable long id) {
+    @PatchMapping(value = "/generate-verification-code")
+    public ResponseEntity<JSONInfo> verifyEmail(@RequestParam Long id) {
         log.info("Generating verification code for user with id {}", id);
         userService.generateVerificationCode(id);
         log.info("Verification code generated");
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}/verify-email")
-    public ResponseEntity<JSONInfo> verifyEmail(@PathVariable long id, @RequestParam String code) {
+    @PatchMapping(value = "/verify-email")
+    public ResponseEntity<JSONInfo> verifyEmail(@RequestParam Long id, @RequestParam String code) {
         log.info("Verifying email for user with id {}", id);
         userService.verifyEmail(id, code);
         log.info("Email verified");

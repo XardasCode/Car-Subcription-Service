@@ -151,6 +151,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void generateVerificationCode(long id) {
         log.debug("Generating verification code for user with id {}", id);
         User optionalUser = userDAO.getUser(id)
@@ -167,6 +168,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void verifyEmail(long id, String code) {
         log.debug("Verifying email for user with id {}", id);
         User optionalUser = userDAO.getUser(id)
