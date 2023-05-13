@@ -1,51 +1,50 @@
 // Можливість редагування імені
 
 function editText() {
-  // Отримую посилання на span
-  var textElement = document.getElementById("username");
-  // Отримую поточний текстовий вміст цього елемента
-  var currentText = textElement.innerHTML;
-  // Замінюю текст на форму для редагування
-  textElement.innerHTML = '<input type="text" id="edit-input" value="' + currentText + '"><button onclick="saveText()">Зберегти</button>';
+    // Отримую посилання на span
+    let textElement = document.getElementById("username");
+    // Отримую поточний текстовий вміст цього елемента
+    let currentText = textElement.innerHTML;
+    // Замінюю текст на форму для редагування
+    textElement.innerHTML = '<input type="text" id="edit-input" value="' + currentText + '"><button onclick="saveText()">Зберегти</button>';
 }
 
 function saveText() {
-  var inputElement = document.getElementById("edit-input");
-  // Отримую введене користувачем значення
-  var newText = inputElement.value;
-  // Отримую посилання на HTML-елемент, що містить текст, який ми хочемо редагувати
-  var textElement = inputElement.parentNode;
-  // Замінюю форму для редагування на нове ім'я
-  textElement.innerHTML = newText;
+    let inputElement = document.getElementById("edit-input");
+    // Отримую введене користувачем значення
+    let newText = inputElement.value;
+    // Отримую посилання на HTML-елемент, що містить текст, який ми хочемо редагувати
+    let textElement = inputElement.parentNode;
+    // Замінюю форму для редагування на нове ім'я
+    textElement.innerHTML = newText;
 }
 
 
+function showMore(id) {
 
- function showMore(id){
-
-  const itemWrapper = document.getElementById(`item-wrapper-${id}`);
-  const toggleBtn = document.getElementById(`toggle-btn-${id}`);
-  const activeBtn = document.getElementById(`active-btn-${id}`);
-  const regBtn = document.getElementById(`reg-btn-${id}`);
+    const itemWrapper = document.getElementById(`item-wrapper-${id}`);
+    const toggleBtn = document.getElementById(`toggle-btn-${id}`);
+    const activeBtn = document.getElementById(`active-btn-${id}`);
+    const regBtn = document.getElementById(`reg-btn-${id}`);
 
     if (itemWrapper.classList.contains('open')) {
-      // згорнути текст
-      if(activeBtn){
-        activeBtn.classList.add('display-none');
-      }
-      regBtn.classList.add('display-none');
-      itemWrapper.classList.remove('open');
-      toggleBtn.innerHTML = 'Показати більше';
+        // згорнути текст
+        if (activeBtn) {
+            activeBtn.classList.add('display-none');
+        }
+        regBtn.classList.add('display-none');
+        itemWrapper.classList.remove('open');
+        toggleBtn.innerHTML = 'Показати більше';
     } else {
-      // розгорнути текст
-      if(activeBtn){
-        activeBtn.classList.remove('display-none');
-      }
-      regBtn.classList.remove('display-none');
-      itemWrapper.classList.add('open');
-      toggleBtn.innerHTML = 'Показати менше';
+        // розгорнути текст
+        if (activeBtn) {
+            activeBtn.classList.remove('display-none');
+        }
+        regBtn.classList.remove('display-none');
+        itemWrapper.classList.add('open');
+        toggleBtn.innerHTML = 'Показати менше';
     }
-    
+
 }
 
 
@@ -89,69 +88,70 @@ function saveText() {
 
 
 window.addEventListener("DOMContentLoaded", (event) => {
-   getNotActiveSubscriptions('1');
+    getNotActiveSubscriptions('1');
 });
 
 
- function getNotActiveSubscriptions(page) {
+function getNotActiveSubscriptions(page) {
 
-  const goToActiveSub = document.getElementById('go-to-active-sub');
+    const goToActiveSub = document.getElementById('go-to-active-sub');
 
-  if(goToActiveSub){
-    goToActiveSub.onclick = function() { getActiveSubscriptions('1'); }
-    goToActiveSub.innerHTML='<a href="#" class="blue-button">Активні підписки</a>';
-  }
+    if (goToActiveSub) {
+        goToActiveSub.onclick = function () {
+            getActiveSubscriptions('1');
+        }
+        goToActiveSub.innerHTML = '<a href="#" class="blue-button">Активні підписки</a>';
+    }
 
-  let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
-  let myPage = `page=${page}`;
-  let size = 'size=12';
-  let filter = "filter=isActive:false,statusName:Under consideration";
-  let url = host + myPage + '&' + size + '&' + filter;
-
-
-  let getResponse =  fetch(url)
-  .then(response => response.json())
-  .then(json =>  generateSubscriptions(json));
+    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    let myPage = `page=${page}`;
+    let size = 'size=12';
+    let filter = "filter=isActive:false,statusName:Under consideration";
+    let url = host + myPage + '&' + size + '&' + filter;
+    fetch(url)
+        .then(response => response.json())
+        .then(json => generateSubscriptions(json));
 }
 
 function getActiveSubscriptions(page) {
 
-  const goToNotActiveSub = document.getElementById('go-to-active-sub');
-  if(goToNotActiveSub){
-    goToNotActiveSub.onclick = function() { getNotActiveSubscriptions('1'); }
-    goToNotActiveSub.innerHTML='<a href="#" class="blue-button">Неактивні підписки</a>';
-  }
+    const goToNotActiveSub = document.getElementById('go-to-active-sub');
+    if (goToNotActiveSub) {
+        goToNotActiveSub.onclick = function () {
+            getNotActiveSubscriptions('1');
+        }
+        goToNotActiveSub.innerHTML = '<a href="#" class="blue-button">Неактивні підписки</a>';
+    }
 
-  let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
-  let myPage = `page=${page}`;
-  let size = 'size=12';
-  let filter = "filter=isActive:true,statusName:Confirmed";
-  let url = host + myPage + '&' + size + '&' + filter;
-
-  let getResponse =  fetch(url)
-  .then(response => response.json())
-  .then(json =>  generateSubscriptions(json));
+    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    let myPage = `page=${page}`;
+    let size = 'size=12';
+    let filter = "filter=isActive:true,statusName:Confirmed";
+    let url = host + myPage + '&' + size + '&' + filter;
+    fetch(url)
+        .then(response => response.json())
+        .then(json => generateSubscriptions(json));
 }
 
 
-async function getCar(id){
-    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' +id);
-    const car = await responseCar.json();
-    return car;
+async function getCar(id) {
+    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + id);
+    return await responseCar.json();
 }
-async function getUser(id){
-  const responseUser = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' +id);
-  const user = await responseUser.json();
-  return user;
+
+async function getUser(id) {
+    const responseUser = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + id);
+    return await responseUser.json();
 }
-async function ptintSub(item,list){
-  const user = await getUser(item['userId']);
-  const car =  await getCar(item['carId']);
-  console.log(user);
-  
-  if(item['isActive']===false){
-    if(item['status']==="Rejected"){
-      list.innerHTML +=`
+
+async function ptintSub(item, list) {
+    const user = await getUser(item['userId']);
+    const car = await getCar(item['carId']);
+    console.log(user);
+
+    if (item['isActive'] === false) {
+        if (item['status'] === "Rejected") {
+            list.innerHTML += `
       <div class="collapsible__item-wrapper" id="item-wrapper-${item['id']}">
               <div class="collapsible__info">
                 <ul class="collapsible__list">
@@ -174,8 +174,8 @@ async function ptintSub(item,list){
           </div>	 
         </div>
       `;
-    }else{
-      list.innerHTML +=`
+        } else {
+            list.innerHTML += `
       <div class="collapsible__item-wrapper" id="item-wrapper-${item['id']}">
               <div class="collapsible__info">
                 <ul class="collapsible__list">
@@ -198,10 +198,10 @@ async function ptintSub(item,list){
           </div>	 
         </div>
       `;
-    }
-    
-  }else{
-    list.innerHTML +=`
+        }
+
+    } else {
+        list.innerHTML += `
   <div class="collapsible__item-wrapper" id="item-wrapper-${item['id']}">
            <div class="collapsible__info">
              <ul class="collapsible__list">
@@ -221,63 +221,66 @@ async function ptintSub(item,list){
       </div>	 
     </div>
   `;
-    
-  }
+
+    }
 
 }
 
 function generateSubscriptions(json) {
-  const list = document.querySelector('#sub-list');
-  if(list){
-    list.innerHTML = '';
-    json.forEach(item => {
-         ptintSub(item,list)  
+    const list = document.querySelector('#sub-list');
+    if (list) {
+        list.innerHTML = '';
+        json.forEach(item => {
+            ptintSub(item, list)
+        });
+
+    }
+}
+
+
+async function confirmSubscription(id) {
+    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm`, {
+        method: 'PATCH'
     });
-   
-  }
-}
-
-
-async function confirmSubscription(id){
-  const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm`, {
-    method: 'PATCH'});
     let responseJSON = await response.json();
     let status = responseJSON['status'];
-    if(status){
-			alert(status);
-      location.reload()
-      
-    }else{
-      let error = responseJSON['errorMessage'];
-			alert(error);
+    if (status) {
+        alert(status);
+        location.reload()
+
+    } else {
+        let error = responseJSON['errorMessage'];
+        alert(error);
     }
 }
 
-async function rejectSubscription(id){
-  const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/reject`, {
-    method: 'PATCH'});
+async function rejectSubscription(id) {
+    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/reject`, {
+        method: 'PATCH'
+    });
     let responseJSON = await response.json();
     let status = responseJSON['status'];
-    if(status){
-			alert(status);
-      location.reload()
-    }else{
-      let error = responseJSON['errorMessage'];
-			alert(error);
+    if (status) {
+        alert(status);
+        location.reload()
+    } else {
+        let error = responseJSON['errorMessage'];
+        alert(error);
     }
 }
-async function deleteSubscription(id){
-  alert("Ще не реалізовано на бекенді")
-  // const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}`, {
-  //   method: 'DELETE'});
-  //   let responseJSON = await response.json();
-  //   let status = responseJSON['status'];
-  //   if(status){
-	// 		alert(status);
 
-  //   }else{
-  //     let error = responseJSON['errorMessage'];
-	// 		alert(error);
-  //   }
+async function deleteSubscription(id) {
+    alert("Ще не реалізовано на бекенді")
+    // const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}`, {
+    //   method: 'DELETE'});
+    //   let responseJSON = await response.json();
+    //   let status = responseJSON['status'];
+    //   if(status){
+    // 		alert(status);
+
+    //   }else{
+    //     let error = responseJSON['errorMessage'];
+    // 		alert(error);
+    //   }
 }
 

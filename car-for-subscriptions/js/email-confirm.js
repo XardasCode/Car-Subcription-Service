@@ -32,7 +32,6 @@ async function checkConfirmCode(id) {
     });
     let status = response.status;
     if (status === 200) {
-        alert('Ви успішно підтвердили свій email');
         user['isVerified'] = true;
         window.location.href = 'cabinet-inactive.html';
     } else {
