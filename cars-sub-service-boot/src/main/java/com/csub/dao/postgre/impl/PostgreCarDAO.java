@@ -105,6 +105,13 @@ public class PostgreCarDAO implements CarDAO {
     @Override
     public Optional<CarStatus> getCarStatusById(String statusId) {
         log.debug("Getting car status with id {}", statusId);
+        int id = Integer.parseInt(statusId);
+        return Optional.ofNullable(sessionFactory.find(CarStatus.class, id));
+    }
+
+    @Override
+    public Optional<CarStatus> getCarStatusById(int statusId) {
+        log.debug("Getting car status with id {}", statusId);
         return Optional.ofNullable(sessionFactory.find(CarStatus.class, statusId));
     }
 }

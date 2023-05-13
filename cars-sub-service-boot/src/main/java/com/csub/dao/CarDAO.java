@@ -24,5 +24,7 @@ public interface CarDAO {
 
     Optional<CarStatus> getCarStatusById(String statusId);
 
+    Optional<CarStatus> getCarStatusById(int statusId);
+
     int getCarsCount(int size, List<String> filter);
 }
