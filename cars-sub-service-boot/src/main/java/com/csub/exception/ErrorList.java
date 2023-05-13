@@ -35,7 +35,9 @@ public enum ErrorList {
     SUBSCRIPTION_STATUS_NOT_FOUND(3004, HttpStatus.NOT_FOUND),
     USER_VERIFICATION_ERROR(10023, HttpStatus.BAD_REQUEST),
     EMAIL_NOT_SENT(5004, HttpStatus.INTERNAL_SERVER_ERROR),
-    PAYMENT_FAILED(5005,HttpStatus.INTERNAL_SERVER_ERROR);
+    PAYMENT_FAILED(5005, HttpStatus.INTERNAL_SERVER_ERROR),
+    USER_ALREADY_SUBSCRIBED(4001, HttpStatus.BAD_REQUEST),
+    CAR_ALREADY_SUBSCRIBED(4002, HttpStatus.BAD_REQUEST);
 
 
     private final int code;
@@ -50,4 +52,4 @@ public enum ErrorList {
         return status;
     }
 
-}
+    }

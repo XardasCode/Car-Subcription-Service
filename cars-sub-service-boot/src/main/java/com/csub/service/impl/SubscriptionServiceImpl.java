@@ -10,6 +10,7 @@ import com.csub.entity.*;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.SubscriptionService;
+import com.csub.util.CarStatusList;
 import com.csub.util.SubscriptionSearchInfo;
 import com.csub.util.SubscriptionStatusList;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Adding subscription: {}", subscription);
 
         Subscription subscriptionEntity = Subscription.createSubscriptionFromRequest(subscription);
-        User user = userDAO.getUser(Long.parseLong(subscription.getUserId())).orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
-        Car car = carDAO.getCar(Long.parseLong(subscription.getCarId())).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+        long userId = Long.parseLong(subscription.getUserId());
+        long carId = Long.parseLong(subscription.getCarId());
+        User user = userDAO.getUser(userId).orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
+        Car car = carDAO.getCar(carId).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+
+        checkIfCarAlreadySubscribed(car);
+        checkIfUserAlreadySubscribed(user);
+
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.UNDER_CONSIDERATION.getStatusId());
 
         subscriptionEntity.setStatus(status);
@@ -51,9 +58,24 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         subscriptionEntity.setCar(car);
         subscriptionEntity.getCar().setSubscription(subscriptionEntity);
+        CarStatus carStatus = carDAO.getCarStatusById(CarStatusList.UNAVAILABLE.getStatusId()).orElseThrow(
+                () -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
+        subscriptionEntity.getCar().setCarStatus(carStatus);
 
         return subscriptionDAO.addSubscription(subscriptionEntity).orElseThrow(
                 () -> new ServerException("Subscription not added", ErrorList.SUBSCRIPTION_ALREADY_EXISTS));
+    }
+
+    private void checkIfUserAlreadySubscribed(User user) {
+        if (user.getSubscription() != null) {
+            throw new ServerException("User already subscribed", ErrorList.USER_ALREADY_SUBSCRIBED);
+        }
+    }
+
+    private void checkIfCarAlreadySubscribed(Car car) {
+        if (car.getSubscription() != null) {
+            throw new ServerException("Car already subscribed", ErrorList.CAR_ALREADY_SUBSCRIBED);
+        }
     }
 
     @Override
