@@ -86,7 +86,7 @@ function showMore(id) {
 //   }
 // });
 
-
+let lastPage = '';
 window.addEventListener("DOMContentLoaded", (event) => {
     getNotActiveSubscriptions('1');
 });
@@ -105,8 +105,16 @@ function getNotActiveSubscriptions(page) {
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=12';
+    // let size = 'size=12';
+    let size = 'size=1';
     let filter = "filter=isActive:false,statusName:Under consideration";
+    
+    let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    //let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    let getResponsePage = fetch(urlPage)
+    .then(response => response.json())
+    .then(json => generatePageNumber(json, myPage,'notActive'));
+
     let url = host + myPage + '&' + size + '&' + filter;
     fetch(url)
         .then(response => response.json())
@@ -125,8 +133,14 @@ function getActiveSubscriptions(page) {
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=12';
+    // let size = 'size=12';
+    let size = 'size=1';
     let filter = "filter=isActive:true,statusName:Confirmed";
+    let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    //let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    let getResponsePage = fetch(urlPage)
+    .then(response => response.json())
+    .then(json => generatePageNumber(json, myPage,'active'));
     let url = host + myPage + '&' + size + '&' + filter;
     fetch(url)
         .then(response => response.json())
@@ -234,6 +248,72 @@ function generateSubscriptions(json) {
             ptintSub(item, list)
         });
 
+    }
+}
+function generatePageNumber(json, myPage,isActive){
+    lastPage = json;
+    const pageNumber = document.getElementById('page_number');
+    pageNumber.innerHTML = '';
+    let activePage = myPage.slice(5, myPage.length);
+    // setArrows(activePage, json);
+
+    for (var i = 1; i <= json; i++) {
+
+        if(isActive==='active'){
+            if (i == activePage) {
+                pageNumber.innerHTML += `<div class="switch-item switch-active" id="activePageActiveSub">${i}</div>`;
+            } else{
+
+                pageNumber.innerHTML += `<div class="switch-item switch-inactive" onclick="getActiveSubscriptions(${i})">${i}</div>`;
+            }
+           
+        }else{
+            if (i == activePage) {
+                pageNumber.innerHTML += `<div class="switch-item switch-active" id="activePageNotActiveSub">${i}</div>`;
+            } else{
+
+                pageNumber.innerHTML += `<div class="switch-item switch-inactive" onclick="getNotActiveSubscriptions(${i})">${i}</div>`;
+            }
+        }
+        
+    }
+}
+
+function goLeft(){
+    let div = document.getElementById('activePageActiveSub');
+    if (div) {
+        let page = div.textContent;
+        if (page != '1') {
+            getActiveSubscriptions(page - 1);
+        }
+    }else{
+        div = document.getElementById('activePageNotActiveSub');
+        if (div) {
+            let page = div.textContent;
+            if (page != '1') {
+            getNotActiveSubscriptions(page - 1);
+            }
+        }
+    }
+}
+function goRight(){
+    let div = document.getElementById('activePageActiveSub');
+
+    if (div) {
+        let page = div.textContent;
+        if (page != lastPage) {
+        let rightPage = (Number(page) + 1).toString(); 
+        getActiveSubscriptions(rightPage);
+        }
+    }else{
+        div = document.getElementById('activePageNotActiveSub');
+        if (div) {
+            let page = div.textContent;
+            if (page != lastPage) {
+            let rightPage = (Number(page) + 1).toString(); 
+            getNotActiveSubscriptions(rightPage);
+            }
+         }
     }
 }
 
