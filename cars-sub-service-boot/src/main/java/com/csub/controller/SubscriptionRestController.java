@@ -78,4 +78,12 @@ public class SubscriptionRestController {
         log.info("Subscription rejected");
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }
+    @GetMapping("/page-count")
+    public int getPageCount(
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "") List<String> filter
+    ) {
+        log.info("Getting page count");
+        return subscriptionService.getPageCount(size, filter);
+    }
 }
