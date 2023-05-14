@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/email-confirm.css">
+    <title>Підтвердження пошти</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="container main_container">
+
+        <header class="header">
+            <div class="container header__container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg header__navbar">
+                        <div class="container-fluid">
+                            <a class="navbar-brand header__logo" href="index.html">
+                                <span class="header__span-1">Brand name</span>
+                                <span class="header__span-2">Car Subscription</span>
+                                <span class="header__car"></span>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto mb-lg-0 header__list">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="questions.html">Часті
+                                            запитання</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+                                    </li>
+                                    <div class="header__last-item">
+                                        <li class="nav-item">
+                                            <a class="nav-link active header__sign-in" aria-current="page"
+                                               href="sign-in.html">Увійти</a><span class="header__slash">/</span><a
+                                                class="header__sign-up" href="sign-up.html">Зареєструватись</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="confirm">
+            <div class="confirm__block">
+                <div class="confirm__title">
+                    <h2>Для продовження, підтвердіть пошту</h2>
+                </div>
+                <div class="confirm__text">
+                    <p>
+                        <span>Ми надіслали Вам код,</span>
+                        <span>перевірте свою поштову скриньку та</span>
+                        введіть його в полі нижче
+                    </p>
+                </div>
+                <div class="confirm__spam">
+                    <p>
+                        <span>Не отримали код?</span>
+                        перевірте папку спам або надішліть код повторно
+                    </p>
+                </div>
+                <form action="#" class="confirm__form" id="form">
+                    <label for="confirm-code">Код підтвердження</label>
+                    <input id="confirm-code" type="text" placeholder="a02f-absc-aqwe-rewf">
+                </form>
+                <div class="confirm__resend">
+                    <a href="#" id="resendCode">Надіслати код повторно</a>
+                </div>
+            </div>
+            <div class="confirm__button">
+                <a href="#" class="blue-button" id="checkConfirmCode">Підтвердити</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container footer_container">
+            <div class="row no-gutters">
+                <div class="col-md-4 footer__logo">
+                    <a class="footer__a" href="#">
+                        <span class="footer__span-1">Brand name</span>
+                        <span class="footer__span-2">Car Subscription</span>
+                        <span class="footer__car"></span>
+                    </a>
+                </div>
+                <div class="col-md-4 footer__copyright">
+                    <span>2023 © Всі права захищені</span>
+                </div>
+                <div class="col-md-4 footer__icons">
+                    <a href="https://t.me/CarSubscriptionService" target="_blank"><img
+                            src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+                    <a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img
+                            src="img/general-svg/inst.svg" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img
+                            src="img/general-svg/in.svg" alt="LinkedIn"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img
+                            src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script src="js/email-confirm.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.text-wrapper{
+  max-width: 300px;
+}
+.text {
+  max-height: 80px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.text-wrapper.open .text {
+  max-height: 500px;
+  transition: max-height 0.5s ease-in;
+}
+
+.toggle-btn {
+  margin-top: 10px;
+}

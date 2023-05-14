@@ -12,7 +12,6 @@
 body{
 	font-family: 'Inter', sans-serif;
 	background: url(../img/bg-test.png) no-repeat 60% 0% aliceblue; //поправити bg
-	// background: lightgray;
 	@media (max-width: 767.98px) {
 		background: #f0f8ff;
 	}
@@ -50,14 +49,8 @@ body{
 	@media (max-width: 767.98px) {
 		font-size: 16px;
 	}
-	@media (max-width: 575.98px) {
-		
-	}
 	@media (max-width: 479.98px) {
 		font-size: 14px;
-	}
-	@media (max-width: 379.98px) {
-		// font-size: 10px;
 	}
 }
 .blue-button:hover{
@@ -118,12 +111,8 @@ body{
 	    left: 100px;
 	    padding-top: 7px;
 	}
-	&__collapse{
-		// text-align: center;
-	}
 	&__list{
 		li{
-			// padding: 0 15px;
 			a{
 				color: #fff !important; //Не хоче переоприділяти колір
 				padding: 33px 15px !important;
@@ -175,23 +164,22 @@ body{
 			border-radius: 0;
 		}
 	}
-	&__wrapper-lact-item{
+	&__last-item{
 		display: flex;
 		align-items: center;
 		@media (max-width: 991.98px) {
 			padding: 20px 15px;
 		}
 	}
-	.header__sign-in{
+	.header__cabinet{
 		display: inline;
 		padding: 0 !important;
-		margin-top: 33px;
 		margin-left: 10px;
 		@media (max-width: 991.98px) {
 			margin: 0;
 		}
 	}
-	.header__sign-in:hover{
+	.header__cabinet:hover{
 		text-decoration: underline;
 		background: none;
 	}
@@ -204,10 +192,10 @@ body{
 			font-size: 16px;
 		}
 	}
-	.header__sign-up{
+	.header__exit{
 		padding: 0 !important;
 	}
-	.header__sign-up:hover{
+	.header__exit:hover{
 		text-decoration: underline;
 		background: none;
 	}
@@ -248,7 +236,6 @@ body{
 			flex: 0 1 35%;
 		}
 		@media (max-width: 767.98px) {
-			// Проблема з left, сильно зменшується
 			margin-bottom: 50px;
 			margin-left: 0px;
 		}
@@ -286,12 +273,26 @@ body{
 			font-size: 18px;
 		}
 		span{
-			margin-right: 10px;
-			@media (max-width: 1199.98px) {
-				margin-right: 8px;
+			display: inline-flex;
+			flex-direction: column;
+			margin-right: 3px;
+			input{
+				max-width: 220px;
+				background: #F9F9F9;
+				border: 1px solid #437DD5;
+				box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+				border-radius: 10px;
+				padding: 3px 10px;
 			}
-			@media (max-width: 991.98px) {
-				margin-right: 5px;
+			button{
+				color: #fff;
+				background: rgba(46, 111, 208, 0.9);
+				border-radius: 10px;
+				padding: 5px 10px;
+				margin: 10px auto;
+			}
+			button:hover{
+				background: #2869ca;
 			}
 		}
 	}
@@ -306,6 +307,7 @@ body{
 	&__email{
 		font-size: 16px;
 		line-height: 19px;	
+		padding-left: 5px;
 		margin-bottom: 30px;	
 		position: relative;
 		top: -3px;
@@ -352,8 +354,11 @@ body{
 		@media (max-width: 991.98px) {
 			font-size: 14px;
 		}
+		span{
+			display: inline-block;
+			margin: 2px 0 0 2px;
+		}
 	}
-
 	&__right {
 		flex: 0 1 78%;
 		padding: 0;
@@ -564,37 +569,7 @@ body{
 				}
 			}
 		}
-	}
-		// .inactive__auto, .inactive__term, .inactive__color{
-		// 	background: none;
-		// 	color: none;
-		// 	border: 0px;
-		// 	margin-bottom: 10px;
-		// }
-		// .inactive__accordion-button {
-		// 	font-size: 16px;
-		// 	line-height: 19px;
-		// 	height: 32px;
-		// 	background: #F9F9F9;
-		// 	border: 1px solid #437DD5;
-		// 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-		// 	border-radius: 10px !important;
-		// 	padding: 0px 15px;
-		// 	z-index: 2;
-		// }
-		// .accordion-body{ //Пофіксити боді випадаючого списку
-		// 	font-size: 16px;
-		// 	line-height: 20px;
-		// 	background: #E8E8E8;
-		// 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-		// 	border: 1px solid #437DD5;
-		// 	border-radius: 0 0 10px 10px;
-		// 	padding: 12px 15px 5px 15px;
-		// 	position: relative;
-		// 	top: -8px;
-		// 	z-index: 1;
-		// }	
-
+	}	
 	&__auto, &__term, &__color, &__passport, &__ipn {
 		margin-bottom: 10px;
 		@media (max-width: 991.98px) {
@@ -623,14 +598,6 @@ body{
 		}
 	}
 }
-// @media (max-width: 1399.98px) {}
-// @media (max-width: 1199.98px) {}
-// @media (max-width: 991.98px) {}
-// @media (max-width: 767.98px) {}
-// @media (max-width: 575.98px) {}
-// @media (max-width: 479.98px) {}
-// @media (max-width: 379.98px) {}
-
 /***********************************************
 **********Стилізація випадаючого меню***********
 *********************auto***********************
@@ -642,7 +609,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }
@@ -668,11 +634,12 @@ body{
 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 	padding: 0px 15px;
-	// z-index: 10;
 	display: flex;
 	align-items: center;
     width: 100%;
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 .inactive__head-auto::after {
     width: 13px;
@@ -700,16 +667,17 @@ body{
     background: #E8E8E8;
     box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     border: 2px solid #437DD5;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 1;
     position: absolute;
-    top: 31px;
+    top: 22px;
     left: 0;
     right: 0;
     margin: 0;
-    padding: 5px 0;
+    padding: 12px 0 5px 0;
+    z-index: 9;
 }
 
 .inactive__list-auto::-webkit-scrollbar {
@@ -747,7 +715,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }
@@ -773,11 +740,12 @@ body{
 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 	padding: 0px 15px;
-	// z-index: 10;
 	display: flex;
 	align-items: center;
     width: 100%;
     cursor: pointer;
+    position: relative;
+    z-index: 8;
 }
 .inactive__head-term::after {
     width: 13px;
@@ -805,16 +773,17 @@ body{
     background: #E8E8E8;
     box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
     border: 2px solid #437DD5;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 1;
     position: absolute;
-    top: 31px;
+    top: 22px;
     left: 0;
     right: 0;
     margin: 0;
-    padding: 5px 0;
+    padding: 12px 0 5px 0;
+    z-index: 7;
 }
 
 .inactive__list-term::-webkit-scrollbar {
@@ -835,7 +804,6 @@ body{
     padding: 5px 15px;
     cursor: pointer;
     list-style-type: none;
-    // z-index: 1;
 }
 
 .inactive__list-term .inactive__item-term:hover {
@@ -852,7 +820,6 @@ body{
    position: relative;
    display: inline-block;
    width: 435px;
-   // z-index: 10;
    @media (max-width: 1199.98px) {
    	max-width: 300px;
    }
@@ -878,11 +845,12 @@ body{
 	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 	padding: 0px 15px;
-	// z-index: 10;
 	display: flex;
 	align-items: center;
-   width: 100%;
-   cursor: pointer;
+	width: 100%;
+	cursor: pointer;
+	position: relative;
+	z-index: 6;
 }
 .inactive__head-color::after {
     width: 13px;
@@ -902,24 +870,24 @@ body{
 }
 
 .inactive__list-color {
-   display: none;
-   font-size: 16px;
+	display: none;
+	font-size: 16px;
 	line-height: 19px;
 	text-align-last: left;
 	color: #000;
-   background: #E8E8E8;
-   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
-   border: 2px solid #437DD5;
-   border-radius: 10px;
-   overflow-x: hidden;
-   overflow-y: auto;
-   z-index: 1;
-   position: absolute;
-   top: 31px;
-   left: 0;
-   right: 0;
-   margin: 0;
-   padding: 5px 0;
+	background: #E8E8E8;
+	box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+	border: 2px solid #437DD5;
+	border-radius: 0 0 10px 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	top: 22px;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 12px 0 5px 0;
+	z-index: 5;
 }
 
 .inactive__list-color::-webkit-scrollbar {
@@ -945,6 +913,20 @@ body{
 
 .inactive__list-color .inactive__item-color:hover {
     background-color: #d8d8d8;
+}
+/*****************
+*****Валідація***** 
+******************/
+input._error{
+	box-shadow: 0 0 7px red !important;
+	border: 0px !important;
+}
+span#result, #result2{
+	display: block;
+	line-height: 20px;
+	margin-top: 3px;
+	margin-bottom: 0;
+	padding-right: 7px;
 }
 /*****************
 ******Footer****** 
@@ -1062,7 +1044,12 @@ body{
 		}
 	}
 	&__facebook{
-		padding: 0 2px;
-		margin-right: -2px;
+		padding: 0 5px;
+		margin-right: -5px;
+		position: relative;
+		right: 3px;
+	}
+	&__telegram{
+		height: 16px;
 	}
 }

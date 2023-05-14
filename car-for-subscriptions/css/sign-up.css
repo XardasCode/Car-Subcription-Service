@@ -210,7 +210,7 @@ body {
     .header .header__lang:hover {
       border-radius: 0; } }
 
-.header__wrapper-lact-item {
+.header__last-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -218,7 +218,7 @@ body {
   -ms-flex-align: center;
   align-items: center; }
   @media (max-width: 991.98px) {
-    .header__wrapper-lact-item {
+    .header__last-item {
       padding: 20px 15px; } }
 
 .header .header__sign-in {
@@ -491,7 +491,7 @@ body {
         padding: 12px 20px; } }
 
 /*****************
-******Валідація****** 
+*****Валідація*****
 ******************/
 input._error {
   -webkit-box-shadow: 0 0 7px red;
@@ -500,6 +500,12 @@ input._error {
 .checkbox._error {
   -webkit-box-shadow: 0 0 7px red;
   box-shadow: 0 0 7px red; }
+
+span#result {
+  display: block;
+  line-height: 20px;
+  margin-top: 3px;
+  padding-left: 7px; }
 
 /*****************
 ******Footer****** 
@@ -633,5 +639,9 @@ input._error {
     .footer__icons a:last-child {
       margin-right: 0; }
   .footer__facebook {
-    padding: 0 2px;
-    margin-right: -2px; }
+    padding: 0 5px;
+    margin-right: -5px;
+    position: relative;
+    right: 3px; }
+  .footer__telegram {
+    height: 16px; }

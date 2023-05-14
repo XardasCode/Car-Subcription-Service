@@ -353,3 +353,7 @@
     @media (max-width: 479.98px) {
       .sub-enter__button-rectangle {
         font-size: 12px; } }
+        
+.sub-enter__button-rectangle:hover{
+  background: #2869ca;
+}

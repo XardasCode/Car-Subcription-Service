@@ -1,26 +1,48 @@
-"use strict"
+// Відправлення форми входу
 
-
-document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
+document.addEventListener('DOMContentLoaded', function() { 
 	const form = document.getElementById('form__sign-in');
-	form.addEventListener('submit', formSend); //при відправці форми ми переходимо в функцію formSend
+	form.addEventListener('submit', formSend); 
 
 	async function formSend(e){
-		e.preventDefault(); //забороняєм стандартну відправку форми
+		e.preventDefault(); 
 
-		let email = document.getElementById('exampleInputEmail1').value;
-		let password = document.getElementById('exampleInputPassword1').value;
+		let email = document.getElementById('userInputEmail').value;
+		let password = document.getElementById('userInputPassword').value;
 		let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
-		alert(url);
-		let response = await fetch(url, { //відправка технологією AJAX, за допомогою fetch
-			method: 'GET'
-		});
-		if (response.ok) { //маємо получити відповідь вдала відправка чи ні
-			let result = await response.json(); //якщо все ок получаємо певну json відповідь
-			sessionStorage.setItem('user'); //через кому потрібно поставити user
-			window.location.href = "http://localhost:7886/cabinet-inactive.html";
+		let response = await fetch(url);
+	    let responseJSON = await response.json();
+		let status = responseJSON['id'];
+		if (status) {
+			sessionStorage.setItem('user', JSON.stringify(responseJSON));
+			let subscriptionId = responseJSON['subscriptionId'];
+			
+			if(subscriptionId != 0){
+				 url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' +subscriptionId;
+				 response = await fetch(url);
+				 responseJSON = await response.json();
+				 status = responseJSON['status'];
+
+				if(status==="Confirmed"){
+					window.location.href = 'cabinet-active.html';
+				}else{
+					window.location.href = 'cabinet-expected.html';
+				}
+				
+			}else{
+				window.location.href = 'cabinet-inactive.html';
+			}
+			
 		}else{
-			alert('Email або password бути введені неправильно'); //якщо щось пішло не так - виводиться помилка
+			let error = responseJSON['errorMessage'];
+			alert(error);
 		}
 	};
 })
+
+
+// Редірект користувача в кабінет, при спробі повернутись до сторінки входу
+
+if (sessionStorage.getItem('user') != null) {
+	window.location.href = 'cabinet-inactive.html';
+}

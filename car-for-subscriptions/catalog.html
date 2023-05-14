@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ua">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/catalog.css">
 	<title>Каталог</title>
@@ -16,7 +17,7 @@
 					<div class="row">
 						<nav class="navbar navbar-expand-lg header__navbar">
 						  <div class="container-fluid">
-						    <a class="navbar-brand header__logo" href="#">
+						    <a class="navbar-brand header__logo" href="index.html">
 						    	<span class="header__span-1">Brand name</span>
 						    	<span class="header__span-2">Car Subscription</span>
 						    	<span class="header__car"></span>
@@ -38,7 +39,7 @@
 						        <li class="nav-item">
 						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
 						        </li>
-						        <div class="header__wrapper-lact-item">
+						        <div class="header__last-item">
 							        <li class="nav-item">
 							          <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a><!--sign-up.html sign-in.html-->
 							        </li>
@@ -59,26 +60,19 @@
 
 							<div class="catalog__filter-left">
 								<div class="catalog__year filter-wrapper">
-									<input class="catalog__year-input" type="hidden" name="">
-									<div class="catalog__year-head filter-head">Рік: 2020</div>
+									<input class="catalog__year-input" type="hidden" name="" id="year-filter">
+									<div class="catalog__year-head filter-head">Рік</div>
 									<ul class="catalog__year-list filter-list">
-										<li class="catalog__year-item filter-item">Рік: 2020</li>
-										<li class="catalog__year-item filter-item">Рік: 2019</li>
-										<li class="catalog__year-item filter-item">Рік: 2018</li>
-										<li class="catalog__year-item filter-item">Рік: 2017</li>
-									</ul>
-								</div>
-								<div class="catalog__fuel filter-wrapper">
-									<input class="catalog__fuel-input" type="hidden" name="">
-									<div class="catalog__fuel-head filter-head">Паливо</div>
-									<ul class="catalog__fuel-list filter-list">
-										<li class="catalog__fuel-item filter-item">Бензин</li>
-										<li class="catalog__fuel-item filter-item">Дизель</li>
-										<li class="catalog__fuel-item filter-item">Електро</li>
+										<li class="catalog__year-item filter-item">2022</li>
+										<li class="catalog__year-item filter-item">2021</li>
+										<li class="catalog__year-item filter-item">2020</li>
+										<li class="catalog__year-item filter-item">2019</li>
+										<li class="catalog__year-item filter-item">2018</li>
+										<li class="catalog__year-item filter-item">2017</li>
 									</ul>
 								</div>
 								<div class="catalog__color filter-wrapper">
-									<input class="catalog__color-input" type="hidden" name="">
+									<input class="catalog__color-input" type="hidden" name="" id="color-filter">
 									<div class="catalog__color-head filter-head">Колір</div>
 									<ul class="catalog__color-list filter-list">
 										<li class="catalog__color-item filter-item">Чорний</li>
@@ -88,7 +82,7 @@
 									</ul>
 								</div>
 								<div class="catalog__price filter-wrapper">
-									<input class="catalog__price-input" type="hidden" name="">
+									<input class="catalog__price-input" type="hidden" name="" id="price-filter">
 									<div class="catalog__price-head filter-head">Ціна</div>
 									<ul class="catalog__price-list filter-list">
 										<li class="catalog__price-item filter-item">1000$</li>
@@ -98,7 +92,7 @@
 									</ul>
 								</div>
 								<div class="catalog__brand filter-wrapper">
-									<input class="catalog__brand-input" type="hidden" name="">
+									<input class="catalog__brand-input" type="hidden" name="" id="brand-filter">
 									<div class="catalog__brand-head filter-head">Бренд</div>
 									<ul class="catalog__brand-list filter-list">
 										<li class="catalog__brand-item filter-item">Volkswagen</li>
@@ -107,134 +101,148 @@
 										<li class="catalog__brand-item filter-item">Volvo</li>
 									</ul>
 								</div>
+								<div class="catalog__button filter-wrapper ">
+									<button class="blue-button" onclick="filterCars()">Фільтрація</button>
+								</div>
 							</div>
 
 							<div class="catalog__filter-right">
-								<form action="">
-									<input class="catalog__search" type="text" placeholder="Пошук">
-								</form>
+								<input class="catalog__search" type="text" placeholder="Пошук" id="model-filter">
+								<img src="img/catalog/svg/search.svg" alt="" onclick="filterCars()">
 							</div>	
 
 						</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-1.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen T-Roc</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="car-profile.html">
-								<img src="img/catalog/svg/car-2.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Tiguan</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-3.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Taigun</span>
-							</a>
-						</div>
+						<div class="catalog__item-list row row-cols-12 ">
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-4.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volkswagen Golf</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-5.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota RAV-4</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-6.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota Corolla</span>
-							</a>
-						</div>
+							<!-- <div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-1.png" class="adaptive-img" alt="Volkswagen T-Roc">
+									<span>Volkswagen T-Roc</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="car-profile.html">
+									<img src="img/catalog/car-2.png" class="adaptive-img" alt="Volkswagen Tiguan">
+									<span>Volkswagen Tiguan</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-3.png" class="adaptive-img" alt="Volkswagen Tiguan">
+									<span>Volkswagen Taigun</span>
+								</a>
+							</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-7.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Toyota Yaris</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-8.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Hyundai Tucson</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-9.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Hyundai i30</span>
-							</a>
-						</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-4.png" class="adaptive-img" alt="Volkswagen Golf">
+									<span>Volkswagen Golf</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-5.png" class="adaptive-img" alt="Toyota RAV-4">
+									<span>Toyota RAV-4</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-6.png" class="adaptive-img" alt="Toyota Corolla">
+									<span>Toyota Corolla</span>
+								</a>
+							</div>
 
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-10.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Volvo S60</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-11.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Audi A3</span>
-							</a>
-						</div>
-						<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
-							<a href="#">
-								<img src="img/catalog/svg/car-12.svg" class="adaptive-img" alt="Volkswagen T-Roc">
-								<span>Audi Q2</span>
-							</a>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-7.png" class="adaptive-img" alt="Toyota Yaris">
+									<span>Toyota Yaris</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-8.png" class="adaptive-img" alt="Hyundai Tucson">
+									<span>Hyundai Tucson</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-9.png" class="adaptive-img" alt="Hyundai i30">
+									<span>Hyundai i30</span>
+								</a>
+							</div>
+
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-10.png" class="adaptive-img" alt="Volvo S60">
+									<span>Volvo S60</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-11.png" class="adaptive-img" alt="Audi A3">
+									<span>Audi A3</span>
+								</a>
+							</div>
+							<div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+								<a href="#">
+									<img src="img/catalog/car-12.png" class="adaptive-img" alt="Audi Q2">
+									<span>Audi Q2</span>
+								</a>
+							</div> -->
+
 						</div>
 
 						<div class="catalog__switch">
-							<div class="catalog__switch-item switch-active">1</div>
-							<div class="catalog__switch-item">2</div>
-							<div class="catalog__switch-item">3</div>
+							<img src="img/catalog/svg/arrow-left.svg" id="arrow-left" alt="arrow-left" onclick="goLeft()">
+							<div class="catalog__switch" id="page_number">
+								<!-- <div class="catalog__switch-item switch-active">1</div>
+								<div class="catalog__switch-item switch-item">2</div>
+								<div class="catalog__switch-item switch-item">3</div> -->
+							</div>
+							<img src="img/catalog/svg/arrow-right.svg" id="arrow-right" alt="arrow-right" onclick="goRight()">
 						</div>
+
+						<a href="add-panel.html">add-panel (тимчасове посилання)</a> 
+						
 					</div>
 				</div>
 			</section>
 
 		</div>
 				
-			<footer class="footer">
-				<div class="container footer_container">
-					<div class="row no-gutters">
-						<div class="col-md-4 footer__logo">
-							<a class="footer__a" href="#">
-								<span class="footer__span-1">Brand name</span>
-								<span class="footer__span-2">Car Subscription</span>
-								<span class="footer__car"></span>
-							</a>
-						</div>
-						<div class="col-md-4 footer__copyright">
-							<span>2023 © Всі права захищені</span>
-						</div>
-						<div class="col-md-4 footer__icons">
-								<a href="#"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
-								<a href="#"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
-								<a href="#"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
-								<a href="#"><img src="img/general-svg/google.svg" alt="Google-plus"></a>
-								
-						</div>
+		<footer class="footer">
+			<div class="container footer_container">
+				<div class="row no-gutters">
+					<div class="col-md-4 footer__logo">
+						<a class="footer__a" href="#">
+							<span class="footer__span-1">Brand name</span>
+							<span class="footer__span-2">Car Subscription</span>
+							<span class="footer__car"></span>
+						</a>
+					</div>
+					<div class="col-md-4 footer__copyright">
+						<span>2023 © Всі права захищені</span>
+					</div>
+					<div class="col-md-4 footer__icons">
+						<a href="https://t.me/CarSubscriptionService" target="_blank"><img src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+							<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+							<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+							<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
 					</div>
 				</div>
-			</footer>
-				
+			</div>
+		</footer>
 	</div>
 
+	<!-- Bootstrap -->
 	<script src="js/bootstrap.bundle.min.js"></script>
-
 	<!-- Випадаюче меню -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Підключення свого файлу -->
 	<script type="text/javascript" src="js/catalog.js"></script>
-	<!-- Випадаюче меню -->
+	<!-- Динамічний header -->
+	<script src="js/dynamic-header.js"></script>
+	
 </body>
 </html>

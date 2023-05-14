@@ -13,7 +13,6 @@ body{
 	font-family: 'Inter', sans-serif;
 	background: url(../img/bg-test.png) no-repeat 60% 0% aliceblue; //поправити bg
 	// background: lightgray;
-
 	@media (max-width: 767.98px) {
 		background: #f0f8ff;
 	}
@@ -170,7 +169,7 @@ body{
 			border-radius: 0;
 		}
 	}
-	&__wrapper-lact-item{
+	&__last-item{
 		display: flex;
 		align-items: center;
 		@media (max-width: 991.98px) {
@@ -573,14 +572,18 @@ body{
 			background: rgba(17, 86, 190, 0.31);
 			padding: 10px;
 			border-radius: 50%;
-			// facebook кайфує
 		}
 		a:last-child{
 			margin-right: 0;
 		}
 	}
 	&__facebook{
-		padding: 0 2px;
-		margin-right: -2px;
+		padding: 0 5px;
+		margin-right: -5px;
+		position: relative;
+		right: 3px;
+	}
+	&__telegram{
+		height: 16px;
 	}
 }

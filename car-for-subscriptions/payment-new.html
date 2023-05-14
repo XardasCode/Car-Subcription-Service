@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/payment-new.css">
+	<title>Оплата</title>
+</head>
+<body>
+	<div class="wrapper"> 
+		<div class="container main_container">
+
+			<header class="header">
+				<div class="container header__container">
+					<div class="row">
+						<nav class="navbar navbar-expand-lg header__navbar">
+						  <div class="container-fluid">
+						    <a class="navbar-brand header__logo" href="index.html">
+						    	<span class="header__span-1">Brand name</span>
+						    	<span class="header__span-2">Car Subscription</span>
+						    	<span class="header__car"></span>
+						    </a>
+						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						      <span class="navbar-toggler-icon"></span>
+						    </button>
+						    <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+						      <ul class="navbar-nav ms-auto mb-lg-0 header__list">
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a> <!--questions.html-->
+						        </li>
+						        <li class="nav-item">
+						          <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+						        </li>
+						        <div class="header__last-item">
+							        <li class="nav-item">
+							          <a class="nav-link active header__sign-in" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#">Вийти</a><!--sign-up.html sign-in.html-->
+							        </li>
+						        </div>
+						      </ul>
+						    </div>
+						  </div>
+						</nav>
+					</div>
+				</div>
+			</header>
+				
+			<section class="payment">
+				<div class="payment__block">
+
+					<div class="payment__title">
+						<h2>Оплата</h2>
+					</div>
+
+					<div class="payment__list">
+						<div class="payment__value">
+							<div>Валюта:</div>
+							<div>Метод оплати:</div>
+							<div>Призначення:</div>
+						</div>
+						<div class="payment__key">
+							<div class="payment__currency">USD</div>
+							<div class="payment__method"><a href=""><img src="img/payment/pay-pal.png" alt="PayPal"></a></div>
+							<div class="payment__appointment"><span id="payment-description">Оплата підписки на авто</span ></div>
+						</div>
+					</div>
+
+					<div class="payment__confirm">
+						До оплати: <span id="month-price"></span>
+						<button class="blue-button" onclick="getApprovingURL()">Оплатити</button>
+					</div>
+					
+				</div>
+				<div class="payment__close">
+					<button type="button" class="btn-close" aria-label="Close"></button>
+				</div>
+			</section>
+			
+		</div>
+				
+			<footer class="footer">
+				<div class="container footer_container">
+					<div class="row no-gutters">
+						<div class="col-md-4 footer__logo">
+							<a class="footer__a" href="#">
+								<span class="footer__span-1">Brand name</span>
+								<span class="footer__span-2">Car Subscription</span>
+								<span class="footer__car"></span>
+							</a>
+						</div>
+						<div class="col-md-4 footer__copyright">
+							<span>2023 © Всі права захищені</span>
+						</div>
+						<div class="col-md-4 footer__icons">
+							<a href="https://t.me/CarSubscriptionService" target="_blank"><img src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+							<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+							<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+							<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+						</div>
+					</div>
+				</div>
+			</footer>
+				
+	</div>
+
+		<script type="text/javascript" src="js/payment.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

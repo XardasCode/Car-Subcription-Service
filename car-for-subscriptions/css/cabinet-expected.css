@@ -219,7 +219,7 @@ body {
     .header .header__lang:hover {
       border-radius: 0; } }
 
-.header__wrapper-lact-item {
+.header__last-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -227,19 +227,18 @@ body {
   -ms-flex-align: center;
   align-items: center; }
   @media (max-width: 991.98px) {
-    .header__wrapper-lact-item {
+    .header__last-item {
       padding: 20px 15px; } }
 
-.header .header__sign-in {
+.header .header__cabinet {
   display: inline;
   padding: 0 !important;
-  margin-top: 33px;
   margin-left: 10px; }
   @media (max-width: 991.98px) {
-    .header .header__sign-in {
+    .header .header__cabinet {
       margin: 0; } }
 
-.header .header__sign-in:hover {
+.header .header__cabinet:hover {
   text-decoration: underline;
   background: none; }
 
@@ -252,10 +251,10 @@ body {
     .header__slash {
       font-size: 16px; } }
 
-.header .header__sign-up {
+.header .header__exit {
   padding: 0 !important; }
 
-.header .header__sign-up:hover {
+.header .header__exit:hover {
   text-decoration: underline;
   background: none; }
 
@@ -621,5 +620,9 @@ body {
     .footer__icons a:last-child {
       margin-right: 0; }
   .footer__facebook {
-    padding: 0 2px;
-    margin-right: -2px; }
+    padding: 0 5px;
+    margin-right: -5px;
+    position: relative;
+    right: 3px; }
+  .footer__telegram {
+    height: 16px; }

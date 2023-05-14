@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/add-panel.css">
+	<title>Додати авто</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="container main_container">
+
+			<header class="header">
+				<div class="container header__container">
+					<div class="row">
+						<nav class="navbar navbar-expand-lg header__navbar">
+							<div class="container-fluid">
+								<a class="navbar-brand header__logo" href="index.html">
+									<span class="header__span-1">Brand name</span>
+									<span class="header__span-2">Car Subscription</span>
+									<span class="header__car"></span>
+								</a>
+								<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+									aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+									<ul class="navbar-nav ms-auto mb-lg-0 header__list">
+										<li class="nav-item">
+											<a class="nav-link active" aria-current="page" href="index.html">Головна</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active" aria-current="page" href="questions.html">Часті
+												запитання</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+										</li>
+										<div class="header__last-item">
+											<li class="nav-item">
+												<a class="nav-link active header__cabinet header__active" aria-current="page"
+													href="#">Мій кабінет</a><span class="header__slash">/</span><a
+													class="header__exit" href="sign-in.html">Вийти</a>
+											</li>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<section class="add-auto">
+				<div class="add-auto__title">
+					<h1>Додати авто до каталогу</h1>
+				</div>
+				<form class="form" action="#">
+					<div class="add-auto__form-wrapper">
+						<div class="add-auto__first-wrapper">
+							<div class="add-auto__item">
+								<label for="brand">Назва</label>
+								<input id="name" type="text" placeholder="Camry">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Модель:</label>
+								<input id="model" type="text" placeholder="SE">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Марка:</label>
+								<input id="brand" type="text" placeholder="Toyota">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Рік</label>
+								<input id="year" type="number" placeholder="2021">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Колір:</label>
+								<input id="color" type="text" placeholder="Чорний">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Ціна на місяць::</label>
+								<input id="price" type="number" placeholder="2500">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Тип палива:</label>
+								<input id="fuelType" type="text" placeholder="Бензин">
+							</div>
+							
+						</div>
+
+						<div class="add-auto__second-wrapper">
+							<div class="add-auto__item">
+								<label for="brand">Ідентифікаційний номер:</label>
+								<input id="chassisNumber" type="text" placeholder="YV1MS382252123456">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Реєстраційний номер:</label>
+								<input id="regNumber" type="text" placeholder="AA1111AA">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Дата реєстрації:</label>
+								<input id="regDate" type="text" placeholder="21-01-2022">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Пробіг:</label>
+								<input id="mileage" type="number" placeholder="208">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Дата останього техогляду:</label>
+								<input id="lastServiceDate" type="text" placeholder="21-01-2022">
+							</div>
+							<div class="add-auto__item">
+								<label for="brand">Фото (URL):</label>
+								<input id="image" type="text">
+							</div>
+						</div>
+					</div>
+					<button class="add-auto__button blue-button" onclick="addCar()">Додати до каталогу</button>
+				</form>
+			</section>
+
+		</div>
+
+		<footer class="footer">
+			<div class="container footer_container">
+				<div class="row no-gutters">
+					<div class="col-md-4 footer__logo">
+						<a class="footer__a" href="#">
+							<span class="footer__span-1">Brand name</span>
+							<span class="footer__span-2">Car Subscription</span>
+							<span class="footer__car"></span>
+						</a>
+					</div>
+					<div class="col-md-4 footer__copyright">
+						<span>2023 © Всі права захищені</span>
+					</div>
+					<div class="col-md-4 footer__icons">
+						<a href="https://t.me/CarSubscriptionService" target="_blank"><img src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+							<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+							<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+							<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/add-panel.js"></script>
+</body>
+
+</html>
