@@ -1,5 +1,3 @@
-
-
 // Відправка форми
 
 document.addEventListener('DOMContentLoaded', function() { //перевірка на те що документ вже загружений
