@@ -1,6 +1,7 @@
 package com.csub.dao.postgre.util;
 
 import com.csub.entity.*;
+import com.csub.util.CarSearchInfo;
 import com.csub.util.SubscriptionSearchInfo;
 import jakarta.persistence.criteria.*;
 import jakarta.validation.constraints.NotNull;
@@ -79,6 +80,16 @@ public final class SubscriptionCriteriaBuilderManager {
         } else {
             query.orderBy(builder.asc(root.get(field)));
         }
+    }
+
+    public static List<Predicate> buildCountCriteria(int size, List<String> filter, CriteriaBuilder builder, Root<Subscription> root) {
+        List<Predicate> fieldPredicates = new ArrayList<>();
+        SubscriptionSearchInfo info = SubscriptionSearchInfo.builder()
+                .filter(filter)
+                .size(size)
+                .build();
+        setFilterInfo(info, builder, root, fieldPredicates);
+        return fieldPredicates;
     }
 
 }

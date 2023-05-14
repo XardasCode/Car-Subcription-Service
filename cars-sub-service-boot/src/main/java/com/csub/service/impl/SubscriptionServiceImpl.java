@@ -124,4 +124,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return subscriptionDAO.getSubscriptionStatus(statusId).orElseThrow(
                 () -> new ServerException("Subscription status not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
     }
+
+    @Override
+    @Transactional
+    public int getPageCount(int size, List<String> filter) {
+        log.debug("Getting page count");
+        int count = subscriptionDAO.getSubscriptionsCount(size, filter);
+        log.debug("Count: {}", count);
+        return (int) Math.ceil((double) count / size);
+    }
 }

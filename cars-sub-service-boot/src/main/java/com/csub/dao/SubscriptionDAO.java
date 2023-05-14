@@ -22,4 +22,6 @@ public interface SubscriptionDAO {
     List<Subscription> searchSubscription(SubscriptionSearchInfo info);
 
     Optional<SubscriptionStatus> getSubscriptionStatus(int id);
+
+    int getSubscriptionsCount(int size, List<String> filter);
 }

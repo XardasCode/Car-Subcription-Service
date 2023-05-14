@@ -13,7 +13,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -83,5 +82,19 @@ public class PostgreSubscriptionDAO implements SubscriptionDAO {
     public Optional<SubscriptionStatus> getSubscriptionStatus(int id) {
         log.debug("Getting subscription status with id {}", id);
         return Optional.ofNullable(sessionFactory.find(SubscriptionStatus.class, id));
+    }
+
+    @Override
+    public int getSubscriptionsCount(int size, List<String> filter) {
+        log.debug("Getting subscriptions count with size {} and filter {}", size, filter);
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<Subscription> query = builder.createQuery(Subscription.class);
+        Root<Subscription> root = query.from(Subscription.class);
+
+        List<Predicate> predicates = SubscriptionCriteriaBuilderManager.buildCountCriteria(size, filter, builder, root);
+
+        query.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<Subscription> typedQuery = sessionFactory.createQuery(query);
+        return typedQuery.getResultList().size();
     }
 }
