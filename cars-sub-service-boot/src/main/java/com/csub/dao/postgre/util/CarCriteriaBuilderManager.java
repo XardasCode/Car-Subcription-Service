@@ -1,16 +1,19 @@
 package com.csub.dao.postgre.util;
 
 import com.csub.entity.Car;
+import com.csub.entity.CarStatus;
+import com.csub.entity.Subscription;
+import com.csub.entity.SubscriptionStatus;
 import com.csub.util.CarSearchInfo;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import com.csub.util.CarStatusList;
+import jakarta.persistence.criteria.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public final class CarCriteriaBuilderManager {
     private CarCriteriaBuilderManager() {
     }
@@ -41,6 +44,10 @@ public final class CarCriteriaBuilderManager {
     }
 
     private static void setFilterInfo(CarSearchInfo info, CriteriaBuilder builder, Root<Car> root, List<Predicate> fieldPredicates) {
+        long statusId = CarStatusList.AVAILABLE.getStatusId();
+        log.debug("Getting car with statusId {}", statusId);
+        fieldPredicates.add(builder.equal(root.get("carStatus"), statusId));
+
         if (info.getFilter() != null && !info.getFilter().isEmpty()) {
             for (String field : info.getFilter()) {
                 String[] filter = field.split(":");

@@ -63,10 +63,10 @@ public class SubscriptionRestController {
         );
     }
 
-    @PatchMapping(value = "/{id}/confirm")
-    public ResponseEntity<JSONInfo> confirmSubscription(@PathVariable long id) {
+    @PatchMapping(value = "/{id}/confirm/{managerId}")
+    public ResponseEntity<JSONInfo> confirmSubscription(@PathVariable long id, @PathVariable long managerId) {
         log.info("Confirming subscription with id {}", id);
-        subscriptionService.confirmSubscription(id);
+        subscriptionService.confirmSubscription(id, managerId);
         log.info("Subscription confirmed");
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
     }

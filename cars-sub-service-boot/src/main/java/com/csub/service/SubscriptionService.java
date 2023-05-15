@@ -19,7 +19,7 @@ public interface SubscriptionService {
 
     List<SubscriptionDTO> searchSubscription(SubscriptionSearchInfo info);
 
-    void confirmSubscription(long id);
+    void confirmSubscription(long id, long managerId);
 
     void rejectSubscription(long id);
 

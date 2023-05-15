@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 
 @Service
 @Slf4j
@@ -78,6 +80,7 @@ public class PayPalServiceImpl implements PayPalService {
         log.debug("Updating totalPrise in subscription");
         Subscription subscription = getSubEntity(id);
         subscription.setTotalPrice(subscription.getTotalPrice()-price);
+        subscription.setLastPayDate(LocalDateTime.now().toString());
         subscriptionDAO.updateSubscription(subscription);
         log.debug("TotalPrise in subscription updated");
     }
