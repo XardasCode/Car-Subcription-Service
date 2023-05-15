@@ -35,7 +35,7 @@ addEventListener('DOMContentLoaded', async function () {
                 emailVerified.innerHTML = 'Пошта підтверджена';
                 await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
             } else {
-                emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, будь ласка підтвердіть пошту: <a href="email-confirm.html">Підтвердити</a>';
+                emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
             }
         } else if (subId > 0) {
             if (sessionStorage.getItem('subscription') == null) {

@@ -9,6 +9,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 @media (max-width: 991.98px) {
     .car-main__container {
@@ -17,6 +18,10 @@
 .car-main__img {
     width: 50%;
 }
+@media (max-width: 991.98px) {
+    .car-main__img {
+      width: 450px; } }
+
 .adaptive-img {
     width: 100%;
 }
@@ -59,13 +64,10 @@
 .text__model-title {
     /* Tiguan R-Line */
 
-    font-size: 64px;
+    font-size: 60px;
     line-height: 60px;
     text-align: center;
-    white-space: nowrap;
-
     color: #437DD5;
-
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
   @media (max-width: 991.98px) {
@@ -120,16 +122,17 @@
 @media (max-width: 991.98px) {
     .car-main__text {
       width: 80%; } }
+@media (max-width: 575.98px) {
+    .car-main__text {
+      width: 95%; } }
 
 .car-main__text p {
     /* Об'єм двигуна: Рік випуску: Колір: Паливо: */
 
     margin: auto;
-
     text-align: justify;
     font-size: 28px;
     line-height: 40px;
-
     color: #437DD5;
 }
 
@@ -269,34 +272,38 @@
       padding: 0 15px; } }
 
 .sub-info__text p {       
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     margin: 22px auto;
     line-height: 16px;
 }
+.sub-info__text span{
+    font-size: 14px;
+}
+@media (max-width: 575.98px) {
+    .sub-info__text span {
+      font-size: 13px; } }
+
 @media (max-width: 991.98px) {
     .sub-info__text p {
-      font-size: 15px; } }
+      font-size: 17px; } }
   @media (max-width: 767.98px) {
     .sub-info__text p {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 10px; } }
   @media (max-width: 575.98px) {
     .sub-info__text p {
-      font-size: 13px;
+      font-size: 15px;
       line-height: 9px; } }
-  @media (max-width: 479.98px) {
-    .sub-info__text p {
-      font-size: 12px;
-      line-height: 5px; } }
 
-@media(max-width:600px) {         /* With hyphens */
-    .sub-info__text-bigscreen {
-        display:none; } }
+@media(max-width: 479.98px) {         /* With hyphens */
+    .sub-info__text-bigscreen span{
+      display: none;  
+         } }
           
-@media(min-width:599px) {         /* Remove hyphens */
+        /* Remove hyphens */
     .sub-info__text-smallscreen {
-        display:none; } }        
+        display:none; }         
 
 .sub-info__bold-text p {
     text-align: right;
@@ -307,20 +314,16 @@
 }
 @media (max-width: 991.98px) {
     .sub-info__bold-text p {
-      font-size: 16px;
+      font-size: 17px;
       line-height: 16px; } }
   @media (max-width: 767.98px) {
     .sub-info__bold-text p {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 10px;} }
   @media (max-width: 575.98px) {
     .sub-info__bold-text p {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 9px; } }
-  @media (max-width: 479.98px) {
-    .sub-info__bold-text p {
-      font-size: 13px;
-      line-height: 5px; } }
 
 /***********************
 ***** ENTER BUTTON *****
@@ -331,6 +334,12 @@
     justify-content: center;
     margin: 50px;
 }
+@media (max-width: 575.98px) {
+    .sub-enter__button {
+      margin: 40px; } }
+@media (max-width: 400px) {
+    .sub-enter__button {
+      margin: 30px; } }      
 
 .sub-enter__button-rectangle {
     font-size: 20px;
@@ -349,10 +358,8 @@
         font-size: 16px; } }
     @media (max-width: 575.98px) {
       .sub-enter__button-rectangle {
-        font-size: 14px; } }
-    @media (max-width: 479.98px) {
-      .sub-enter__button-rectangle {
-        font-size: 12px; } }
+        font-size: 14px;
+        padding: 14px 20px 14px 20px; } }
         
 .sub-enter__button-rectangle:hover{
   background: #2869ca;

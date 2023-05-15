@@ -458,6 +458,9 @@ body {
     @media (max-width: 479.98px) {
       .cabinet-active__block {
         padding: 12px 20px 25px 20px; } }
+    @media (max-width: 379.98px) {
+      .cabinet-active__block {
+        padding: 10px 17px 25px 17px; } }
   @media (max-width: 1199.98px) {
     .cabinet-active__block-text {
       margin-bottom: 30px; } }

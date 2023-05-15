@@ -21,7 +21,7 @@
 
 // Динамічний header в залежності від того, чи користувач залогований
 
-  const headerEl = document.querySelector('.header__last-item');
+/*  const headerEl = document.querySelector('.header__last-item');
   const userStr = sessionStorage.getItem('user');
   if (userStr) {
     // Якщо користувач залогований, виводимо кнопки "Мій кабінет/Вийти"
@@ -43,7 +43,7 @@
       <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a>
     </li>
     `;
-  }
+  }*/
 
 
 // Розлогування користувача та редірект на сторінку входу

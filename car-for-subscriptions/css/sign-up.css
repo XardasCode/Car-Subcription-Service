@@ -452,19 +452,17 @@ body {
     @media (max-width: 479.98px) {
       .sign-up__agree, .sign-up__want-receive {
         padding-left: 27px; } }
-  .sign-up__want-receive {
+  .sign-up__agree {
     margin-bottom: 22px; }
     @media (max-width: 767.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 20px !important; } }
     @media (max-width: 575.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 18px !important; } }
     @media (max-width: 479.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 16px !important; } }
-  .sign-up__agree {
-    margin-bottom: 8px; }
   .sign-up .sign-up__agree-label, .sign-up .sign-up__want-receive-label {
     font-size: 15px;
     line-height: 18px;
