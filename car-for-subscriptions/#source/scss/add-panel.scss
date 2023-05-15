@@ -347,6 +347,43 @@ body{
 			margin-bottom: 10px;
 		}
 	}
+	.file {
+		margin: 0 auto;
+		margin-left: 15px;
+
+	&__item {
+		position: relative;
+	}
+	.file__input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 97px;
+		height: 100%;
+		opacity: 0;
+		font-size: 0;
+		border-radius: 20px;
+		cursor: pointer;
+	}
+	&__button {
+		color: #fff;
+		display: inline-flex;
+		min-height: 40px;
+		border-radius: 20px;
+		justify-content: center;
+		align-items: center;
+		background: #417cd5;
+		padding: 0 20px;
+	}
+	&__preview {
+		display: inline-block;
+		max-width: 150px;
+		padding-top: 10px;
+	}
+	&__preview img{
+		max-width: 100%;
+	}
+}
 	&__second-wrapper {
 		margin-left: 30px;
 		@media (max-width: 991.98px) {

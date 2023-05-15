@@ -388,6 +388,42 @@ body {
     @media (max-width: 479.98px) {
       .add-auto__item {
         margin-bottom: 10px; } }
+  .add-auto .file {
+    margin: 0 auto;
+    margin-left: 15px; }
+    .add-auto .file__item {
+      position: relative; }
+    .add-auto .file .file__input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 97px;
+      height: 100%;
+      opacity: 0;
+      font-size: 0;
+      border-radius: 20px;
+      cursor: pointer; }
+    .add-auto .file__button {
+      color: #fff;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      min-height: 40px;
+      border-radius: 20px;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      background: #417cd5;
+      padding: 0 20px; }
+    .add-auto .file__preview {
+      display: inline-block;
+      max-width: 150px;
+      padding-top: 10px; }
+    .add-auto .file__preview img {
+      max-width: 100%; }
   .add-auto__second-wrapper {
     margin-left: 30px; }
     @media (max-width: 991.98px) {

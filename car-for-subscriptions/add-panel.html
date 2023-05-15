@@ -65,6 +65,7 @@
 				</div>
 				<form class="form" action="#">
 					<div class="add-auto__form-wrapper">
+
 						<div class="add-auto__first-wrapper">
 							<div class="add-auto__item">
 								<label for="brand">Назва</label>
@@ -87,14 +88,9 @@
 								<input id="color" type="text" placeholder="Чорний">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Ціна на місяць::</label>
+								<label for="brand">Ціна на місяць:</label>
 								<input id="price" type="number" placeholder="2500">
 							</div>
-							<div class="add-auto__item">
-								<label for="brand">Тип палива:</label>
-								<input id="fuelType" type="text" placeholder="Бензин">
-							</div>
-							
 						</div>
 
 						<div class="add-auto__second-wrapper">
@@ -119,8 +115,18 @@
 								<input id="lastServiceDate" type="text" placeholder="21-01-2022">
 							</div>
 							<div class="add-auto__item">
-								<label for="brand">Фото (URL):</label>
-								<input id="image" type="text">
+								<label for="brand">Тип палива:</label>
+								<input id="fuelType" type="text" placeholder="Бензин">
+							</div>
+							<div class="add-auto__item item-file">
+								<label for="brand">Вибрати фото:</label>
+								<div class="file">
+									<div class="file__item">
+									<input id="image" class="file__input" accept=".jpg, .png, .gif" type="file" name="image" >
+									<div class="file__button">Вибрати</div>
+									</div>
+								</div>
+								<div id="preview" class="file__preview"></div>
 							</div>
 						</div>
 					</div>
