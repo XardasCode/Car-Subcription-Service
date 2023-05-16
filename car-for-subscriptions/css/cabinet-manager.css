@@ -570,7 +570,7 @@ body {
   .collapsible__list li:last-child {
     margin-bottom: 10px; }
 
-.collapsible .collapsible .collapsible__item-wrapper.open .collapsible__list, .collapsible .collapsible #item-wrapper-2.open .collapsible__list, .collapsible .collapsible #item-wrapper-3.open .collapsible__list {
+.collapsible .collapsible__item-wrapper.open .collapsible__list, .collapsible .collapsible #item-wrapper-2.open .collapsible__list, .collapsible .collapsible #item-wrapper-3.open .collapsible__list {
   max-height: 600px;
   -webkit-transition: max-height 0.5s ease-in;
   -o-transition: max-height 0.5s ease-in;
