@@ -104,13 +104,13 @@ function getNotActiveSubscriptions(page) {
     }
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    // let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    // let size = 'size=12';
-    let size = 'size=1';
+    let size = 'size=6';
     let filter = "filter=isActive:false,statusName:Under consideration";
     
-    let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    //let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    let urlPage = 'http://localhost:8080/api/v1/cars/page-count?' + size + '&' + filter;
     let getResponsePage = fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'notActive'));
@@ -132,12 +132,12 @@ function getActiveSubscriptions(page) {
     }
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    //let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    // let size = 'size=12';
-    let size = 'size=1';
+    let size = 'size=6';
     let filter = "filter=isActive:true,statusName:Confirmed";
-    let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    //let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
     let getResponsePage = fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'active'));
@@ -174,7 +174,9 @@ async function ptintSub(item, list) {
                     <li>Авто: ${car['name']} ${car['brand']}</li>
                     <li>Кількість місяців: ${item['totalMonths']} </li>
                     <li>Номер телефону: ${user['phone']}</li>
-                    <li>Email: ${user['email']}</li>
+                    <li>Номер паспорта: ${item['passportNumber']}</li>
+                    <li>ІПН: ${item['ipnNumber']}</li>
+                    <li>Посилання на соцмережі: ${item['socMediaLink']}</li>
                   </ul>
               </div>
               <div class="collapsible__buttons">
@@ -199,6 +201,9 @@ async function ptintSub(item, list) {
                     <li>Кількість місяців: ${item['totalMonths']} </li>
                     <li>Номер телефону: ${user['phone']}</li>
                     <li>Email: ${user['email']}</li>
+                    <li>Номер паспорта: ${item['passportNumber']}</li>
+                    <li>ІПН: ${item['ipnNumber']}</li>
+                    <li>Посилання на соцмережі: ${item['socMediaLink']}</li>
                   </ul>
               </div>
               <div class="collapsible__buttons">
