@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		let password = document.getElementById('userInputPassword').value;
 		let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
 		let response = await fetch(url);
-	    let responseJSON = await response.json();
+	  let responseJSON = await response.json();
 		let status = responseJSON['id'];
 		if (status) {
 			sessionStorage.setItem('user', JSON.stringify(responseJSON));
@@ -34,8 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 			
 		}else{
-			let error = responseJSON['errorMessage'];
-			alert(error);
+			// let error = responseJSON['errorMessage'];
+			// alert(error);
+			const toastLiveExample = document.getElementById('liveToast')
+			const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+			toastBootstrap.show()
 		}
 	};
 })

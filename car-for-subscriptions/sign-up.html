@@ -75,16 +75,16 @@
 						</div>
 						<div class="col sign-up__number">
 							<label for="userInputNumber" class="form-label">Номер телефону</label>
-					   	<input type="text" id="userInputNumber" class="form-control _req" placeholder="(XXX) XXX-XXXX">
+					   	<input type="text" id="userInputNumber" class="form-control _req _phone" placeholder="(XXX) XXX-XXXX">
 							<span id="result"></span>
 						</div>
 						<div class="col sign-up__password">
 							<label for="userInputPassword" class="form-label">Пароль</label>
-							<input type="password" id="userInputPassword" placeholder="*********" class="form-control">
+							<input type="password" id="userInputPassword" placeholder="*********" class="form-control _password _req">
 						</div>
 						<div class="col sign-up__confirm-password">
 							<label for="userInputPasswordRepeat" class="form-label">Підтвердити пароль</label>
-							<input type="password" id="userInputPasswordRepeat" placeholder="*********" class="form-control" >
+							<input type="password" id="userInputPasswordRepeat" placeholder="*********" class="form-control _password _req">
 						</div>
 						<div class="col form-check sign-up__agree">
 							<input type="checkbox" checked class="form-check-input sign-up__checkbox checkbox _req" id="exampleCheck1">
@@ -123,7 +123,6 @@
 	</div>
 
 	<script src="js/bootstrap.bundle.min.js"></script>
-
 	<!-- Валідація + редірект -->
 	<script type="text/javascript" src="js/sign-up.js"></script>
 </body>
