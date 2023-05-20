@@ -2,12 +2,11 @@
 
 const headerEl = document.querySelector('.header__last-item');
 const userStr = sessionStorage.getItem('user');
-if (userStr) {
+if (userStr != null) {
   // Якщо користувач залогований, виводимо кнопки "Мій кабінет/Вийти"
-  const user = JSON.parse(userStr);
   headerEl.innerHTML = `
   <li class="nav-item">
-    <a class="nav-link active header__sign-in" aria-current="page" href="cabinet-inactive.html">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#" onclick="logoutUser()">Вийти</a>
+    <a class="nav-link active header__sign-in" aria-current="page" href="cabinet.html">Мій кабінет</a><span class="header__slash">/</span><a class="header__sign-up" href="#" onclick="logoutUser()">Вийти</a>
   </li>
   `;
   const logoutBtn = headerEl.querySelector('#logout-btn');

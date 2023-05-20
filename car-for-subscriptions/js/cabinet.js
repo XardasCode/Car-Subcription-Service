@@ -2,53 +2,84 @@
 
 addEventListener('DOMContentLoaded', async function () {
     let user = sessionStorage.getItem('user');
-    if (user != null) {
-        let userJson = JSON.parse(user);
-        let subId = userJson['subscriptionId'];
-        if (subId === 0) {
-            document.getElementById('form').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const form = document.getElementById('form');
+    await checkUser(user);
 
-                let error = formValidate(form);
+    let userJson = JSON.parse(user);
+    let subId = userJson['subscriptionId'];
+    if (subId === 0) {
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const form = document.getElementById('form');
 
-                if (error !== 0) {
-                    alert("Заповніть обов'язкові поля!")
-                } else {
-                    submitSubscriptionForm();
-                }
-            })
+            let error = formValidate(form);
 
-            let username = document.getElementById('username');
-            let email = document.getElementById('email');
-            let phone = document.getElementById('phone');
-            let emailVerified = document.getElementById('isVerified');
-            let jsonName = userJson['name'];
-            let jsonSurname = userJson['surname'];
-            let jsonEmail = userJson['email'];
-            let jsonPhone = userJson['phone'];
-            let jsonIsVerified = userJson['isVerified'];
-            username.innerHTML = jsonName + ' ' + jsonSurname;
-            email.innerHTML = jsonEmail;
-            phone.innerHTML = jsonPhone;
-            if (jsonIsVerified === true) {
-                emailVerified.innerHTML = 'Пошта підтверджена';
-                await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
+            if (error !== 0) {
+                alert("Заповніть обов'язкові поля!")
             } else {
-                emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
+                submitSubscriptionForm();
             }
-        } else if (subId > 0) {
-            if (sessionStorage.getItem('subscription') == null) {
-                fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId)
-                    .then(response => response.json())
-                    .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
-                window.location.href = 'cabinet-active.html';
-            }
+        })
+
+        let username = document.getElementById('username');
+        let email = document.getElementById('email');
+        let phone = document.getElementById('phone');
+        let emailVerified = document.getElementById('isVerified');
+        let jsonName = userJson['name'];
+        let jsonSurname = userJson['surname'];
+        let jsonEmail = userJson['email'];
+        let jsonPhone = userJson['phone'];
+        let jsonIsVerified = userJson['isVerified'];
+        username.innerHTML = jsonName + ' ' + jsonSurname;
+        email.innerHTML = jsonEmail;
+        phone.innerHTML = jsonPhone;
+        if (jsonIsVerified === true) {
+            emailVerified.innerHTML = 'Пошта підтверджена';
+            await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
+        } else {
+            emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, ' +
+                'будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
         }
-    } else {
-        window.location.href = 'sign-in.html';
+    } else if (subId > 0) {
+        await checkSubscriptionStatus(subId);
     }
 });
+
+async function checkUser(user) {
+    if (user === null) {
+        window.location.href = 'sign-in.html';
+    }
+    let userJson = JSON.parse(user);
+    let userRole = userJson['role']; //  Roles: USER, MANAGER
+    if (userRole === 'MANAGER') {
+        window.location.href = 'cabinet-manager.html';
+    }
+}
+
+async function checkSubscriptionStatus(subId) {
+    let subscription = sessionStorage.getItem('subscription');
+    if (subscription === null) {
+        await setSubscriptionToSession(subId);
+        subscription = sessionStorage.getItem('subscription');
+    }
+    let subJson = JSON.parse(subscription);
+    let subscriptionStatus = subJson['status'] // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
+    if (subscriptionStatus === 'UNDER_CONSIDERATION') {
+        document.getElementById('subStatus').innerHTML = 'На розгляді';
+    } else if (subscriptionStatus === 'CONFIRM_STATUS') {
+        window.location.href = 'cabinet-active.html';
+    }
+}
+
+async function setSubscriptionToSession(subId) {
+    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
+    let status = response.status;
+    if (status > 299) {
+        alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
+        window.location.href = 'error.html';
+    }
+    let subscriptionJson = await response.json();
+    sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
+}
 
 async function setSubscriptionForm() {
     const queryString = window.location.search;
@@ -312,8 +343,8 @@ function formValidate(form) {
     let error = 0;
     let formReq = document.querySelectorAll('._req'); //required - обов'язкове поле
 
-    for (let index = 0; index < formReq.length; index++) {
-        const input = formReq[index];
+    for (const element of formReq) {
+        const input = element;
         formRemoveError(input);
 
         if (input.value === '') { //перевірка чи поле заповленене
@@ -356,7 +387,7 @@ function checkPassportNumber(passportNo) {
 
 // Валідація ІПН регулярним виразом 
 
-var result2 = document.querySelector('#result2');
+let result2 = document.querySelector('#result2');
 form = document.querySelector('#form');
 
 form.addEventListener('submit', function (e) {
@@ -365,7 +396,7 @@ form.addEventListener('submit', function (e) {
 })
 
 function checkIpnNumber(ipnNo) {
-    var ipnRE = /^\d\d\d\d\d\d\d\d\d\d$/;
+    let ipnRE = /^\d\d\d\d\d\d\d\d\d\d$/;
     if (ipnNo.match(ipnRE)) {
         result2.innerHTML = 'Номер паспорту введено правильно';
     } else {

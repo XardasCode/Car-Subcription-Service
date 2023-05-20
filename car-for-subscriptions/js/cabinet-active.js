@@ -3,7 +3,7 @@
 //     let userJson = JSON.parse(user);
 //     let subId = userJson['subscriptionId'];
 //     if (subId == 0) {
-//     window.location.href = 'cabinet-inactive.html';
+//     window.location.href = 'cabinet.html';
 //     }else if(subId > 0){
 //         if (sessionStorage.getItem('subscription') == null) {
 //             let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId) 

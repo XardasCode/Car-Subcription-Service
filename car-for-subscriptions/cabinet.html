@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/cabinet-inactive.css">
+    <link rel="stylesheet" type="text/css" href="css/cabinet.css">
     <title>Кабінет</title>
 </head>
 <body>
@@ -71,20 +71,16 @@
                             </a>
                         </div>
                         <div class="inactive__email" id="email">user.email@ukr.tak</div>
-                        <!-- <div class="inactive__birthday">
-                            <img src="img/inactive/svg/calendar.svg" alt="calendar"><span>10.03.1995</span>
-                        </div> -->
                         <div class="inactive__phone">
                             <img src="img/inactive/svg/phone.svg" alt="phone"><span id="phone">(067) 123-4567</span>
                         </div>
                         <p id="isVerified"></p>
                         <br>
-                        <a href="cabinet-manager.html">manager</a> (тимчасове посилання)
                     </div>
 
                     <div class="inactive__right">
                         <div class="inactive__block">
-                            <div class="inactive__status">Статус підписки: <span>Неактивна</span></div>
+                            <div class="inactive__status">Статус підписки: <span id="subStatus">Неактивна</span></div>
                         </div>
                         <div class="inactive__request visually-hidden" id="subscriptionForm"> <!-- visually-hidden -->
                             <h3>Подати заявку на підписку</h3>
@@ -207,7 +203,7 @@
 <!-- Випадаюче меню -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Підключення свого файлу -->
-<script type="text/javascript" src="js/cabinet-inactive.js"></script>
+<script type="text/javascript" src="js/cabinet.js"></script>
 
 </body>
 </html>

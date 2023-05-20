@@ -7,7 +7,7 @@ addEventListener("DOMContentLoaded", async () => {
 
     user = JSON.parse(user);
     if (user['isVerified'] === true) {
-        window.location.href = 'cabinet-inactive.html';
+        window.location.href = 'cabinet.html';
     }
 
     const id = user['id'];
@@ -32,8 +32,11 @@ async function checkConfirmCode(id) {
     });
     let status = response.status;
     if (status === 200) {
+        let user = sessionStorage.getItem('user');
+        user = JSON.parse(user);
         user['isVerified'] = true;
-        window.location.href = 'cabinet-inactive.html';
+        sessionStorage.setItem('user', JSON.stringify(user));
+        window.location.href = 'cabinet.html';
     } else {
         alert('Невірний код підтвердження');
     }

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			sessionStorage.setItem('user', JSON.stringify(responseJSON));
 			let subscriptionId = responseJSON['subscriptionId'];
 			
-			if(subscriptionId != 0){
+			if(subscriptionId !== 0){
 				 url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' +subscriptionId;
 				 response = await fetch(url);
 				 responseJSON = await response.json();
@@ -30,12 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 				
 			}else{
-				window.location.href = 'cabinet-inactive.html';
+				window.location.href = 'cabinet.html';
 			}
 			
 		}else{
-			// let error = responseJSON['errorMessage'];
-			// alert(error);
 			const toastLiveExample = document.getElementById('liveToast')
 			const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
 			toastBootstrap.show()
@@ -47,5 +45,5 @@ document.addEventListener('DOMContentLoaded', function() {
 // Редірект користувача в кабінет, при спробі повернутись до сторінки входу
 
 if (sessionStorage.getItem('user') != null) {
-	window.location.href = 'cabinet-inactive.html';
+	window.location.href = 'cabinet.html';
 }

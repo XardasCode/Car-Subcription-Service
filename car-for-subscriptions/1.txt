@@ -3,8 +3,7 @@
 <!--questions.html-->
 <!--sign-up.html-->
 <!--sign-in.html-->
-<!--cabinet-inactive.html-->
-<!--cabinet-expected.html-->
+<!--cabinet.html-->
 <!--cabinet-active.html-->
 <!--report.html-->
 <!--payment.html-->

@@ -1,25 +1,25 @@
 function labelthumbs(json) {
 
     document.write('<ul id="label_with_thumbs">');
-    for (var i = 0; i < numposts; i++) {
-        var entry = json.feed.entry[i];
+    for (let i = 0; i < numposts; i++) {
+        let entry = json.feed.entry[i];
 
-        var posttitle = entry.title.$t;
+        let posttitle = entry.title.$t;
 
-        var posturl;
+        let posturl;
         if (i == json.feed.entry.length) break;
-        for (var k = 0; k < entry.link.length; k++) {
-            if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
-                var commenttext = entry.link[k].title;
-                var commenturl = entry.link[k].href;
+        for (const element of entry.link) {
+            if (element.rel == 'replies' && element.type == 'text/html') {
+                let commenttext = element.title;
+                let commenturl = element.href;
             }
 
-            if (entry.link[k].rel == 'alternate') {
-                posturl = entry.link[k].href;
+            if (element.rel == 'alternate') {
+                posturl = element.href;
                 break;
             }
         }
-        var thumburl;
+        let thumburl;
         try {
             thumburl = entry.media$image.url;
         } catch (error)
@@ -35,15 +35,15 @@ function labelthumbs(json) {
             } else thumburl = 'http://3.bp.blogspot.com/-zP87C2q9yog/UVopoHY30SI/AAAAAAAAE5k/AIyPvrpGLn8/s1600/picture_not_available.png';
         }
 
-        var postdate = entry.published.$t;
+        let postdate = entry.published.$t;
 
-        var cdyear = postdate.substring(0, 4);
+        let cdyear = postdate.substring(0, 4);
 
-        var cdmonth = postdate.substring(5, 7);
+        let cdmonth = postdate.substring(5, 7);
 
-        var cdday = postdate.substring(8, 10);
+        let cdday = postdate.substring(8, 10);
 
-        var monthnames = new Array();
+        let monthnames = new Array();
         monthnames[1] = "Jan";
         monthnames[2] = "Feb";
         monthnames[3] = "Mar";
@@ -62,13 +62,13 @@ function labelthumbs(json) {
             document.write('<strong><a href="' + posturl + '" target ="_top">' + posttitle + '</a></strong><br> <a href="' + posturl + '" target ="_top"><img class="label_thumb" src="' + thumburl + '"/></a>');
         document.write('');
         if ("content" in entry) {
-            var postcontent = entry.content.$t;
+            let postcontent = entry.content.$t;
         } else
 
         if ("summary" in entry) {
-            var postcontent = entry.summary.$t;
-        } else var postcontent = "";
-        var re = /<\S[^>]*>/g;
+            let postcontent = entry.summary.$t;
+        } else let postcontent = "";
+        let re = /<\S[^>]*>/g;
         postcontent = postcontent.replace(re, "");
 
         if (showpostsummary == true) {
@@ -80,22 +80,22 @@ function labelthumbs(json) {
                 document.write('');
                 postcontent = postcontent.substring(0, numchars);
 
-                var quoteEnd = postcontent.lastIndexOf(" ");
+                let quoteEnd = postcontent.lastIndexOf(" ");
                 postcontent = postcontent.substring(0, quoteEnd);
                 document.write(postcontent + '...');
                 document.write('');
             }
         }
 
-        var towrite = '';
-        var flag = 0;
+        let towrite = '';
+        let flag = 0;
         document.write('<br>');
-        if (showpostdate == true) {
+        if (showpostdate === true) {
             towrite = towrite + monthnames[parseInt(cdmonth, 10)] + '-' + cdday + ' - ' + cdyear;
             flag = 1;
         }
 
-        if (showcommentnum == true)
+        if (showcommentnum === true)
 
         {
             if (flag == 1) {
@@ -109,19 +109,19 @@ function labelthumbs(json) {
             flag = 1;;
         }
 
-        if (displaymore == true)
+        if (displaymore === true)
 
         {
-            if (flag == 1) towrite = towrite + ' | ';
+            if (flag === 1) towrite = towrite + ' | ';
             towrite = towrite + '<a href="' + posturl + '" class="url" target ="_top">More »</a>';
             flag = 1;;
         }
 
         document.write(towrite);
         document.write('</li>');
-        if (displayseparator == true)
+        if (displayseparator === true)
 
-            if (i != (numposts - 1))
+            if (i !== (numposts - 1))
 
                 document.write('');
     }

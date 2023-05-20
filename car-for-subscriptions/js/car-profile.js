@@ -7,9 +7,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let user = sessionStorage.getItem('user');
     let userJson = JSON.parse(user);
     let subId = userJson['subscriptionId'];
-    button = document.getElementById('button');
-    if (subId == 0) {
-        button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet-inactive.html?carId=${carId}">Оформити підписку</a>`
+    let button = document.getElementById('button');
+    if (subId === 0) {
+        button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet.html?carId=${carId}">Оформити підписку</a>`
     }else{
         button.style.display = 'none';
     }

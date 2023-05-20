@@ -19,11 +19,11 @@ function filterCars(pageNumber = '1'){
     let price = document.getElementById('price-filter').value;
     let brand = document.getElementById('brand-filter').value;
 
-    model = model == '' ? null : model;
-    year = year == '' ? null : year;
-    color = color == '' ? null : color;
-    price = price == '' ? null : price.slice(0, -1);
-    brand = brand == '' ? null : brand;
+    model = model === '' ? null : model;
+    year = year === '' ? null : year;
+    color = color === '' ? null : color;
+    price = price === '' ? null : price.slice(0, -1);
+    brand = brand === '' ? null : brand;
     getCars(pageNumber, model, year, color, price, brand);
 }
 
@@ -52,12 +52,12 @@ function getCars(page, model, year, color, price, brand) {
         filter.slice(0, -1);
     }
     let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
-    let getResponsePage = fetch(urlPage)
+     fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage));
 
     let url = host + myPage + '&' + size + '&' + filter;
-    let getResponse = fetch(url)
+    fetch(url)
     .then(response => response.json())
     .then(json => generateCars(json));
 }
@@ -112,7 +112,7 @@ function goLeft(){
     let div = document.getElementById('activePage');
     if (div) {
         let page = div.textContent;
-        if (page != '1') {
+        if (page !== '1') {
         filterCars(page - 1);
         }
     }
@@ -121,7 +121,7 @@ function goRight(){
     let div = document.getElementById('activePage');
     if (div) {
         let page = div.textContent;
-        if (page != lastPage) {
+        if (page !== lastPage) {
         let rightPage = (Number(page) + 1).toString(); 
         filterCars(rightPage);
         }
