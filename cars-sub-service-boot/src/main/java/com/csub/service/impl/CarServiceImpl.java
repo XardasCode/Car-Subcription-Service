@@ -10,6 +10,7 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.CarService;
 import com.csub.util.CarSearchInfo;
+import com.csub.util.CarStatusList;
 import com.csub.util.ImageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class CarServiceImpl implements CarService {
         log.debug("Adding car: {}", car);
         Car carEntity = Car.createCarFromRequest(car);
 
-        CarStatus carStatus = getCarStatusById(car.getStatusId());
+        CarStatus carStatus = getCarStatusById(CarStatusList.AVAILABLE.name());
         carEntity.setCarStatus(carStatus);
         carEntity.getCarStatus().getCars().add(carEntity);
         carDAO.addCar(carEntity);

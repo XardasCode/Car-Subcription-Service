@@ -78,7 +78,6 @@ class CarServiceImplTest {
                 .regDate("2022-01-01")
                 .mileage("10000")
                 .lastServiceDate("2022-03-01")
-                .statusId("1")
                 .build();
         Mockito.doNothing().when(carDAO).addCar(any());
         Mockito.when(carDAO.getCarStatusById("1")).thenReturn(Optional.ofNullable(carStatus));

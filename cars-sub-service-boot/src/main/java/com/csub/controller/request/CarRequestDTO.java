@@ -51,10 +51,4 @@ public class CarRequestDTO {
 
     @NotBlank(message = "Last service date cannot be blank")
     private String lastServiceDate;
-
-    @NotBlank(message = "Status id cannot be blank")
-    private String statusId;
-
-    @NotBlank(message = "Image cannot be blank")
-    private String image;
 }
