@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface CarService {
-    void addCar(CarRequestDTO carDTO);
+    long addCar(CarRequestDTO carDTO);
 
     CarDTO getCar(long id);
 

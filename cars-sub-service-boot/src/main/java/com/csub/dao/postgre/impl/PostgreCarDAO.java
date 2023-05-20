@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 
 @Repository
@@ -27,10 +28,11 @@ public class PostgreCarDAO implements CarDAO {
     private final EntityManager sessionFactory;
 
     @Override
-    public void addCar(Car car) {
+    public OptionalLong addCar(Car car) {
         log.debug("Adding car: {}", car);
         sessionFactory.persist(car);
         log.debug("Car added: {}", car);
+        return OptionalLong.of(car.getId());
     }
 
     @Override

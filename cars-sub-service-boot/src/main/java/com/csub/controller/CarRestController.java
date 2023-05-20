@@ -52,8 +52,8 @@ public class CarRestController {
     @PostMapping
     public ResponseEntity<JSONInfo> addCar(@RequestBody @Valid CarRequestDTO carDTO) {
         log.info("Adding car");
-        carService.addCar(carDTO);
-        return ResponseEntity.ok(JSONInfo.builder().message("Car added successfully").build());
+        long carId = carService.addCar(carDTO);
+        return ResponseEntity.ok(JSONInfo.builder().message(String.valueOf(carId)).build());
     }
 
     @PatchMapping(value = "/{id}")

@@ -6,9 +6,10 @@ import com.csub.util.CarSearchInfo;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.OptionalLong;
 
 public interface CarDAO {
-    void addCar(Car car);
+    OptionalLong addCar(Car car);
 
     void deleteCar(long id);
 

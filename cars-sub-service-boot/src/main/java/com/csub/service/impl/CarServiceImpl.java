@@ -33,15 +33,16 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public void addCar(CarRequestDTO car) {
+    public long addCar(CarRequestDTO car) {
         log.debug("Adding car: {}", car);
         Car carEntity = Car.createCarFromRequest(car);
 
-        CarStatus carStatus = getCarStatusById(CarStatusList.AVAILABLE.name());
+        CarStatus carStatus = getCarStatusById(CarStatusList.AVAILABLE.getStatusId());
         carEntity.setCarStatus(carStatus);
         carEntity.getCarStatus().getCars().add(carEntity);
-        carDAO.addCar(carEntity);
+        long carId = carDAO.addCar(carEntity).orElseThrow(() -> new ServerException("Car not added", ErrorList.CAR_NOT_CREATED));
         log.debug("Car added: {}", car);
+        return carId;
     }
 
     @Override
@@ -114,7 +115,7 @@ public class CarServiceImpl implements CarService {
         return imagePath;
     }
 
-    private CarStatus getCarStatusById(String statusId) {
+    private CarStatus getCarStatusById(int statusId) {
         log.debug("Getting car status by id {}", statusId);
         return carDAO.getCarStatusById(statusId)
                 .orElseThrow(() -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
