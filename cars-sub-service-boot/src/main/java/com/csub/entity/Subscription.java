@@ -34,7 +34,7 @@ public class Subscription {
     @Column(name = "total_months")
     private int totalMonths;
 
-    @Column(name = "passport_number")
+    @Column(name = "pass_number")
     private String passportNumber;
 
     @Column(name = "ipn_number")
@@ -68,7 +68,7 @@ public class Subscription {
     @JoinColumn(name = "manager_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Manager manager;
+    private User manager;
 
     @ManyToOne
     @JoinColumn(name = "status_id")

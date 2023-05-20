@@ -3,10 +3,7 @@ package com.csub.entity;
 import com.csub.controller.request.UserRequestDTO;
 import com.csub.entity.audit.UserEntityListener;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @EntityListeners(UserEntityListener.class)
 @Data
@@ -52,7 +49,15 @@ public class User {
     private String lastUpdateDate;
 
     @OneToOne(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Subscription subscription;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private UserRole role;
 
     public static User mapUserRequestDTOToUser(UserRequestDTO user) {
         return User.builder()

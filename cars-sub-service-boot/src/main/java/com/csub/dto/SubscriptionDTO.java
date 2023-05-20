@@ -13,5 +13,5 @@ public record SubscriptionDTO(long id,
                               long userId,
                               long carId,
                               long managerId,
-                              String status ) {
+                              String status) {
 }

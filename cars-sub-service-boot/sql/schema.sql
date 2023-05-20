@@ -1,23 +1,10 @@
-DROP TABLE IF EXISTS managers CASCADE;
 DROP TABLE IF EXISTS car_statuses CASCADE;
 DROP TABLE IF EXISTS cars CASCADE;
+DROP TABLE IF EXISTS users_roles CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS subscription_statuses CASCADE;
 DROP TABLE IF EXISTS subscriptions CASCADE;
 
-
-CREATE TABLE IF NOT EXISTS managers
-(
-    id          SERIAL PRIMARY KEY,
-    name        VARCHAR(255) NOT NULL,
-    surname     VARCHAR(255) NOT NULL,
-    password    VARCHAR(255) NOT NULL,
-    email       VARCHAR(255) NOT NULL,
-    create_date varchar(255) NOT NULL,
-    last_update varchar(255) NOT NULL,
-
-    UNIQUE (email)
-);
 
 CREATE TABLE IF NOT EXISTS car_statuses
 (
@@ -31,7 +18,7 @@ CREATE TABLE IF NOT EXISTS cars
     name              VARCHAR(255) NOT NULL,
     model             VARCHAR(255) NOT NULL,
     brand             VARCHAR(255) NOT NULL,
-    year              INT          NOT NULL,
+    production_year              INT          NOT NULL,
     color             VARCHAR(255) NOT NULL,
     price             INT          NOT NULL,
     fuel_type         VARCHAR(255) NOT NULL,
@@ -48,6 +35,11 @@ CREATE TABLE IF NOT EXISTS cars
     FOREIGN KEY (status_id) REFERENCES car_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS users_roles
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS users
 (
@@ -62,7 +54,9 @@ CREATE TABLE IF NOT EXISTS users
     verification_code VARCHAR(255),
     create_date       varchar(255) NOT NULL,
     last_update_date  varchar(255) NOT NULL,
+    role_id           INT          NOT NULL,
 
+    FOREIGN KEY (role_id) REFERENCES users_roles (id) ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (email)
 );
 
@@ -82,6 +76,10 @@ CREATE TABLE IF NOT EXISTS subscriptions
     total_months     INT          NOT NULL,
     create_date      varchar(255) NOT NULL,
     last_update_date varchar(255) NOT NULL,
+    pass_number      varchar(255)          NOT NULL,
+    ipn_number      varchar(255)          NOT NULL,
+    soc_media_link   varchar(255)          NOT NULL,
+    last_pay_date    varchar(255)          NOT NULL,
 
     user_id          INT,
     car_id           INT,
@@ -90,7 +88,7 @@ CREATE TABLE IF NOT EXISTS subscriptions
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (status_id) REFERENCES subscription_statuses (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (manager_id) REFERENCES managers (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (manager_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (user_id),
     UNIQUE (car_id)
 );

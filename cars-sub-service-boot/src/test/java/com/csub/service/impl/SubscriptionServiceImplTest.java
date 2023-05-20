@@ -37,7 +37,6 @@ class SubscriptionServiceImplTest {
     User user;
     Subscription subscription;
     Car car;
-    Manager manager;
     SubscriptionRequestDTO subscriptionRequestDTO;
     CarStatus carStatus = new CarStatus();
     SubscriptionStatus status = new SubscriptionStatus();
@@ -75,13 +74,6 @@ class SubscriptionServiceImplTest {
                 .lastServiceDate("05.10.2022")
                 .carStatus(carStatus)
                 .build();
-        manager = Manager.builder()
-                .id(1)
-                .name("John")
-                .surname("Wick")
-                .email("killer2077@gmail.com")
-                .password("TheLordOfDarkness")
-                .build();
         subscription = Subscription.builder()
                 .id(1)
                 .isActive(true)
@@ -89,7 +81,6 @@ class SubscriptionServiceImplTest {
                 .monthPrice(2000)
                 .totalMonths(5)
                 .totalPrice(10000)
-                .manager(manager)
                 .user(user)
                 .car(car)
                 .status(status)

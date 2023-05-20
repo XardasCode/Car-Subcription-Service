@@ -2,7 +2,6 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
-import com.csub.dao.ManagerDAO;
 import com.csub.dao.SubscriptionDAO;
 import com.csub.dao.UserDAO;
 import com.csub.dto.SubscriptionDTO;
@@ -32,8 +31,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final CarDAO carDAO;
 
     private final UserDAO userDAO;
-
-    private final ManagerDAO managerDAO;
 
     private final SubscriptionDTOMapper subscriptionDTOMapper;
 

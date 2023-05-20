@@ -34,25 +34,15 @@ class PostgreCarDAOTest {
         User user = User.builder()
                 .name("Test")
                 .build();
-        Manager manager = Manager.builder()
-                .name("Test")
-                .build();
-        Subscription subscription = Subscription.builder()
-                .user(user)
-                .manager(manager)
-                .build();
         CarStatus carStatus = CarStatus.builder()
                 .name("Test")
                 .build();
         car = Car.builder()
                 .name("Test car")
-                .subscription(subscription)
                 .carStatus(carStatus)
                 .build();
 
         entityManager.persist(user);
-        entityManager.persist(manager);
-        entityManager.persist(subscription);
         entityManager.persist(carStatus);
         entityManager.persist(car);
         entityManager.flush();

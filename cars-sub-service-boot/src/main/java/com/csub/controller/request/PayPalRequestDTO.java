@@ -23,6 +23,4 @@ public class PayPalRequestDTO {
 
     @NotBlank(message = "Description cannot be blank")
     private String description;
-
-
 }

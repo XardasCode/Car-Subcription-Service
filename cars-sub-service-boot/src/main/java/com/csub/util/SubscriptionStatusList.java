@@ -1,9 +1,9 @@
 package com.csub.util;
 
 public enum SubscriptionStatusList {
-    UNDER_CONSIDERATION(3),
-    CONFIRM_STATUS(4),
-    REJECT_STATUS(5);
+    UNDER_CONSIDERATION(1),
+    CONFIRM_STATUS(2),
+    REJECT_STATUS(3);
 
     private final int statusId;
 

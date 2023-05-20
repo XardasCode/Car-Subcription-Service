@@ -43,10 +43,6 @@ public final class SubscriptionCriteriaBuilderManager {
                             Join<Subscription, Car> carJoin = root.join("car", JoinType.INNER);
                             fieldPredicates.add(builder.like(carJoin.get("brand"), "%" + filter[1] + "%" ));
                         }
-                        case MANAGER -> {
-                            Join<Subscription, Manager> managerJoin = root.join("manager", JoinType.INNER);
-                            fieldPredicates.add(builder.like(managerJoin.get("surname"), "%" + filter[1] + "%" ));
-                        }
                         case STATUS -> {
                             Join<Subscription, SubscriptionStatus> statusJoin = root.join("status", JoinType.INNER);
                             fieldPredicates.add(builder.like(statusJoin.get("name"), "%" + filter[1] + "%" ));

@@ -26,37 +26,37 @@ public class PaymentController {
     private final PayPalService payPalService;
 
     @Value("${redirect.success-payment-page}")
-    private String REDIRECT_SUCCESS_PAGE;
+    private String redirectSuccessPage;
 
     @Value("${redirect.error-payment-page}")
-    private String REDIRECT_ERROR_PAGE;
+    private String redirectErrorPage;
 
     @Value("${redirect.approving.success}")
-    private String SUCCESS_URL;
+    private String successUrl;
 
     @Value("${redirect.approving.cancel}")
-    private String CANCEL_URL;
+    private String cancelUrl;
 
 
     @PostMapping(value = "/paypal/{id}")
     public ResponseEntity<JSONInfo> createPaymentPayPal(@RequestBody @Valid PayPalRequestDTO paymentPayPal, @PathVariable String id) {
         log.info("Creating payment: {}", paymentPayPal);
-        String url = payPalService.createPayment(paymentPayPal,SUCCESS_URL+id,CANCEL_URL);
-        return new ResponseEntity<>(JSONInfo.builder().message(url).build(),HttpStatus.OK);
+        String url = payPalService.createPayment(paymentPayPal, successUrl + id, cancelUrl);
+        return new ResponseEntity<>(JSONInfo.builder().message(url).build(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/cancel")
-    public ResponseEntity<Object> canselPay(){
-        URI page =  URI.create(REDIRECT_ERROR_PAGE);
+    public ResponseEntity<Object> canselPay() {
+        URI page = URI.create(redirectErrorPage);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
     @GetMapping(value = "/success/{id}")
-    public ResponseEntity<Object> successApprovingPaymentPayPal(@PathVariable long id, @RequestParam("paymentId") String paymentID, @RequestParam("PayerID") String payerId){
+    public ResponseEntity<Object> successApprovingPaymentPayPal(@PathVariable long id, @RequestParam("paymentId") String paymentID, @RequestParam("PayerID") String payerId) {
         log.info("Executing payment");
-        URI page = URI.create(payPalService.executePayment(paymentID, payerId, id) ? REDIRECT_SUCCESS_PAGE : REDIRECT_ERROR_PAGE);
+        URI page = URI.create(payPalService.executePayment(paymentID, payerId, id) ? redirectSuccessPage : redirectErrorPage);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
