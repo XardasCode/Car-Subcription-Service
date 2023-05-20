@@ -9,6 +9,7 @@ import com.csub.exception.ServerException;
 import com.csub.dao.UserDAO;
 import com.csub.service.UserService;
 import com.csub.util.EmailSender;
+import com.csub.util.UserRolesList;
 import com.csub.util.UserSearchInfo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
         checkIfEmailAlreadyExists(user.getEmail());
         user.setPassword(encryptPassword(user.getPassword()));
         User userEntity = User.mapUserRequestDTOToUser(user);
+        userEntity.setRole(userDAO.getRoleById(UserRolesList.USER.getRoleId()));
         long id = userDAO.addUser(userEntity).orElseThrow(() -> new ServerException("User not added", ErrorList.USER_NOT_CREATED));
         log.debug("User added: {}", user);
         return id;

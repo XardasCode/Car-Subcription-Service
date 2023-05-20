@@ -2,6 +2,7 @@ package com.csub.dao.postgre.impl;
 
 import com.csub.entity.User;
 import com.csub.dao.UserDAO;
+import com.csub.entity.UserRole;
 import com.csub.util.UserSearchInfo;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
@@ -97,5 +98,11 @@ public class PostgreUserDAO implements UserDAO {
                 .setParameter("name", "%" + partOfName + "%")
                 .setParameter("surname", "%" + partOfSurname + "%")
                 .getResultList();
+    }
+
+    @Override
+    public UserRole getRoleById(int roleId) {
+        log.debug("Getting role with id {}", roleId);
+        return sessionFactory.find(UserRole.class, roleId);
     }
 }

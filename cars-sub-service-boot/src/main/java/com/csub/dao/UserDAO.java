@@ -1,6 +1,7 @@
 package com.csub.dao;
 
 import com.csub.entity.User;
+import com.csub.entity.UserRole;
 import com.csub.util.UserSearchInfo;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface UserDAO {
     Optional<User> getUserByEmail(String email);
 
     List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
+
+    UserRole getRoleById(int roleId);
 }
