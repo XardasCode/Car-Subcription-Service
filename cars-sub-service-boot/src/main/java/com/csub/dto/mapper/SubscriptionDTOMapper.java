@@ -11,6 +11,7 @@ public class SubscriptionDTOMapper implements Function<Subscription, Subscriptio
     @Override
     public SubscriptionDTO apply(Subscription subscription) {
         long managerId = subscription.getManager() == null ? 0 : subscription.getManager().getId();
+        String lastPayDate = subscription.getLastPayDate() == null ? "null" : subscription.getLastPayDate();
         return new SubscriptionDTO(
                 subscription.getId(),
                 subscription.isActive(),
@@ -18,6 +19,10 @@ public class SubscriptionDTOMapper implements Function<Subscription, Subscriptio
                 subscription.getMonthPrice(),
                 subscription.getTotalPrice(),
                 subscription.getTotalMonths(),
+                subscription.getPassportNumber(),
+                subscription.getIpnNumber(),
+                subscription.getSocMediaLink(),
+                lastPayDate,
                 subscription.getUser().getId(),
                 subscription.getCar().getId(),
                 managerId,

@@ -43,6 +43,9 @@ public class Subscription {
     @Column(name = "soc_media_link")
     private String socMediaLink;
 
+    @Column(name = "last_pay_date")
+    private String lastPayDate;
+
     @Column(name = "create_date")
     private String createDate;
 

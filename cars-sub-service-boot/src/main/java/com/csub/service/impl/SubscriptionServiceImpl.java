@@ -2,6 +2,7 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.dao.CarDAO;
+import com.csub.dao.ManagerDAO;
 import com.csub.dao.SubscriptionDAO;
 import com.csub.dao.UserDAO;
 import com.csub.dto.SubscriptionDTO;
@@ -31,6 +32,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final CarDAO carDAO;
 
     private final UserDAO userDAO;
+
+    private final ManagerDAO managerDAO;
 
     private final SubscriptionDTOMapper subscriptionDTOMapper;
 
@@ -116,10 +119,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public void confirmSubscription(long id) {
+    public void confirmSubscription(long id, long managerId) {
         log.debug("Confirming subscription with id {}", id);
         Subscription subscription = getSubscriptionEntity(id);
         subscription.setActive(true);
+//        Manager manager = managerDAO.getManager(managerId).orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
+//        subscription.setManager(manager); доробити
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.CONFIRM_STATUS.getStatusId());
         subscription.setStatus(status);
         subscriptionDAO.updateSubscription(subscription);
@@ -130,10 +135,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void rejectSubscription(long id) {
         log.debug("Rejecting subscription with id {}", id);
         Subscription subscription = getSubscriptionEntity(id);
-        subscription.setActive(false);
-        SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.REJECT_STATUS.getStatusId());
-        subscription.setStatus(status);
-        subscriptionDAO.updateSubscription(subscription);
+        Car car = carDAO.getCar(subscription.getCar().getId()).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+        CarStatus carStatus = carDAO.getCarStatusById(CarStatusList.AVAILABLE.getStatusId()).orElseThrow(
+                () -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
+        car.setCarStatus(carStatus);
+        carDAO.updateCar(car);
+        subscriptionDAO.deleteSubscription(id);
     }
 
     private Subscription getSubscriptionEntity(long id) {
