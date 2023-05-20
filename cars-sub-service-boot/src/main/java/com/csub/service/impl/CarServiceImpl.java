@@ -61,7 +61,6 @@ public class CarServiceImpl implements CarService {
         Car dbCar = getCarEntity(id);
         Car carEntity = Car.createCarFromRequest(car);
 
-        updateCarStatus(car, carEntity, dbCar);
 
         Car.mergeCars(dbCar, carEntity);
 
@@ -125,19 +124,6 @@ public class CarServiceImpl implements CarService {
         log.debug("Getting car with id {}", id);
         return carDAO.getCar(id)
                 .orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
-    }
-
-    private void updateCarStatus(CarRequestDTO car, Car carEntity, Car dbCar) {
-        if (car.getStatusId() != null) {
-            long statusId = Long.parseLong(car.getStatusId());
-            CarStatus carStatus = getCarStatusById(car.getStatusId()); // get car status or throw exception
-            carEntity.setCarStatus(carStatus);
-            if (statusId != dbCar.getCarStatus().getId()) {
-                carEntity.getCarStatus().getCars().add(carEntity);
-            }
-        } else {
-            carEntity.setCarStatus(dbCar.getCarStatus());
-        }
     }
 }
 
