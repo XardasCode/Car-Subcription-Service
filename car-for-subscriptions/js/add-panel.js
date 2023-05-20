@@ -11,9 +11,7 @@ async function addCar(){
         "regNumber":document.getElementById('regNumber').value,
         "regDate": document.getElementById('regDate').value,
         "mileage": document.getElementById('mileage').value,
-        "lastServiceDate":document.getElementById('lastServiceDate').value,
-        "statusId": "1",
-        "image":document.getElementById('image').value 
+        "lastServiceDate":document.getElementById('lastServiceDate').value
     };
     
 
