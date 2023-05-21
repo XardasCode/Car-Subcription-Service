@@ -118,6 +118,7 @@ public class Car {
         carEntity.setImagePath((carEntity.getImagePath() != null && !carEntity.getImagePath().isBlank())
                 ? carEntity.getImagePath() : dbCar.getImagePath());
         carEntity.setSubscription(carEntity.getSubscription() != null ? carEntity.getSubscription() : dbCar.getSubscription());
+        carEntity.setCarStatus(dbCar.getCarStatus());
     }
 }
 
