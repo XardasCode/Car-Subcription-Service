@@ -358,11 +358,11 @@ function goRight(){
 
 
 async function confirmSubscription(id) {
-
+    let user = sessionStorage.getItem('user');
     let userJson = JSON.parse(user);
     let userRole = userJson['role']; //  Roles: USER, MANAGER
     if (userRole === 'MANAGER') {
-        managerId = userJson['id'];
+        let managerId = userJson['id'];
         const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm/${managerId}`, {
             method: 'PATCH'
         });

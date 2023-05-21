@@ -63,13 +63,16 @@ async function getCar(id) {
 }
 
 async function checkSubscriptionStatus(subId) {
-    let subscription = sessionStorage.getItem('subscription');
-    if (subscription === null) {
-        await setSubscriptionToSession(subId);
-        subscription = sessionStorage.getItem('subscription');
+ 
+    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
+    let status = response.status;
+    if (status > 299) {
+        alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
+        window.location.href = 'error.html';
     }
-    let subJson = JSON.parse(subscription);
-    let subscriptionStatus = subJson['status'] // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
+    let subscription =  await response.json();
+    let subscriptionStatus = subscription['status']; // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
+    console.log(subscriptionStatus);
     if (subscriptionStatus === 'UNDER_CONSIDERATION') {
         document.getElementById('subStatus').innerHTML = 'На розгляді';
 
@@ -79,11 +82,11 @@ async function checkSubscriptionStatus(subId) {
         let inactive = document.getElementById('inactive__right');
         inactive.classList.add('visually-hidden');
 
-        const car = await getCar(subJson['carId']);
+        const car = await getCar(subscription['carId']);
         document.getElementById('carName').textContent = `${car['name']} ${car['brand']}`;
 
         let currentDate = new Date();
-        let lastPayDate = new Date(subJson['lastPayDate']); 
+        let lastPayDate = new Date(subscription['lastPayDate']); 
         let timeDifference = currentDate.getTime() - lastPayDate.getTime();
         let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         daysDifference = 30 - daysDifference;
@@ -92,23 +95,18 @@ async function checkSubscriptionStatus(subId) {
         }else if(daysDifference == 0){
             document.getElementById('daysToPay').textContent =`Сьогодні день оплати підписки.` ;
         }else{
-            document.getElementById('daysToPay').textContent =`Будь ласка, оплатіть вашу підписку, інакше ми будем змушень її анулювати!` ;
+            document.getElementById('daysToPay').textContent =`Будь ласка, оплатіть вашу підписку!` ;
         }
         
         
     }
 }
 
-async function setSubscriptionToSession(subId) {
-    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
-    let status = response.status;
-    if (status > 299) {
-        alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
-        window.location.href = 'error.html';
-    }
-    let subscriptionJson = await response.json();
-    sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
-}
+// async function setSubscriptionToSession(subId) {
+   
+//     let subscriptionJson = await response.json();
+//     sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
+// }
 
 async function setSubscriptionForm() {
     const queryString = window.location.search;
@@ -212,8 +210,14 @@ async function submitSubscriptionForm() {
         body: JSON.stringify(data),
     }).then(async response => {
         if (response.status === 201) {
+            let message = await response.json();
+            let subId = message['message'];
+            let user = sessionStorage.getItem('user');
+            user = JSON.parse(user);
+            user['subscriptionId'] = subId;
+            sessionStorage.setItem('user', JSON.stringify(user));
             alert('Заявка на підписку успішно оформлена!');
-            window.location.href = 'cabinet-expected.html';
+            window.location.href = 'cabinet.html';
         } else {
             let error = await response.json();
             let errorMessage = error['errorMessage'];
