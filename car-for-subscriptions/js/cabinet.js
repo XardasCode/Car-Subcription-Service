@@ -138,12 +138,13 @@ async function setCarInfoToForm(carId) {
     let carColorJson = car['color'];
     let carPriceJson = car['price'];
 
-    let carName = document.getElementById('carName');
+    let carName = document.getElementById('carName2');
     let carModel = document.getElementById('carModel');
     let carBrand = document.getElementById('carBrand');
     let carYear = document.getElementById('carYear');
     let carColor = document.getElementById('carColor');
-
+    console.log(carNameJson)
+    console.log(carName)
     carName.value = carNameJson;
     carModel.value = carModelJson;
     carBrand.value = carBrandJson;

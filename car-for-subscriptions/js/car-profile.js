@@ -28,7 +28,7 @@ async function setButtonBySubscriptionAndRole(carId) {
 }
 
 async function setSubscriptionButton(subId, carId) {
-    if (subId == null || subId === "") {
+    if (subId == '0' || subId === "") {
         let button = document.getElementById('button');
         button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet.html?carId=${carId}">Оформити підписку</a>`;
     } else {
