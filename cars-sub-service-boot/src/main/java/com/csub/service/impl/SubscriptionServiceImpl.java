@@ -120,8 +120,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Confirming subscription with id {}", id);
         Subscription subscription = getSubscriptionEntity(id);
         subscription.setActive(true);
-//        Manager manager = managerDAO.getManager(managerId).orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
-//        subscription.setManager(manager); доробити
+        User manager = userDAO.getUser(managerId).orElseThrow(() -> new ServerException("Manager not found", ErrorList.MANAGER_NOT_FOUND));
+        subscription.setManager(manager);
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.CONFIRM_STATUS.getStatusId());
         subscription.setStatus(status);
         subscriptionDAO.updateSubscription(subscription);
