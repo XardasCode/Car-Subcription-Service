@@ -15,23 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		let status = responseJSON['id'];
 		if (status) {
 			sessionStorage.setItem('user', JSON.stringify(responseJSON));
-			let subscriptionId = responseJSON['subscriptionId'];
-			
-			if(subscriptionId !== 0){
-				 url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' +subscriptionId;
-				 response = await fetch(url);
-				 responseJSON = await response.json();
-				 status = responseJSON['status'];
-
-				if(status==="Confirmed"){
-					window.location.href = 'cabinet-active.html';
-				}else{
-					window.location.href = 'cabinet-expected.html';
-				}
-				
-			}else{
-				window.location.href = 'cabinet.html';
-			}
+			window.location.href = 'cabinet.html';
 			
 		}else{
 			const toastLiveExample = document.getElementById('liveToast')

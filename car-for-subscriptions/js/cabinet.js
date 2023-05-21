@@ -5,6 +5,26 @@ addEventListener('DOMContentLoaded', async function () {
     await checkUser(user);
 
     let userJson = JSON.parse(user);
+    let username = document.getElementById('username');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('phone');
+    let emailVerified = document.getElementById('isVerified');
+    let jsonName = userJson['name'];
+    let jsonSurname = userJson['surname'];
+    let jsonEmail = userJson['email'];
+    let jsonPhone = userJson['phone'];
+    let jsonIsVerified = userJson['isVerified'];
+    username.innerHTML = jsonName + ' ' + jsonSurname;
+    email.innerHTML = jsonEmail;
+    phone.innerHTML = jsonPhone;
+    if (jsonIsVerified === true) {
+        emailVerified.innerHTML = 'Пошта підтверджена';
+        await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
+    } else {
+        emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, ' +
+            'будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
+    }
+
     let subId = userJson['subscriptionId'];
     if (subId === 0) {
         document.getElementById('form').addEventListener('submit', function (event) {
@@ -20,25 +40,7 @@ addEventListener('DOMContentLoaded', async function () {
             }
         })
 
-        let username = document.getElementById('username');
-        let email = document.getElementById('email');
-        let phone = document.getElementById('phone');
-        let emailVerified = document.getElementById('isVerified');
-        let jsonName = userJson['name'];
-        let jsonSurname = userJson['surname'];
-        let jsonEmail = userJson['email'];
-        let jsonPhone = userJson['phone'];
-        let jsonIsVerified = userJson['isVerified'];
-        username.innerHTML = jsonName + ' ' + jsonSurname;
-        email.innerHTML = jsonEmail;
-        phone.innerHTML = jsonPhone;
-        if (jsonIsVerified === true) {
-            emailVerified.innerHTML = 'Пошта підтверджена';
-            await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
-        } else {
-            emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, ' +
-                'будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
-        }
+       
     } else if (subId > 0) {
         await checkSubscriptionStatus(subId);
     }
@@ -55,6 +57,11 @@ async function checkUser(user) {
     }
 }
 
+async function getCar(id) {
+    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + id);
+    return await responseCar.json();
+}
+
 async function checkSubscriptionStatus(subId) {
     let subscription = sessionStorage.getItem('subscription');
     if (subscription === null) {
@@ -65,8 +72,30 @@ async function checkSubscriptionStatus(subId) {
     let subscriptionStatus = subJson['status'] // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
     if (subscriptionStatus === 'UNDER_CONSIDERATION') {
         document.getElementById('subStatus').innerHTML = 'На розгляді';
+
     } else if (subscriptionStatus === 'CONFIRM_STATUS') {
-        window.location.href = 'cabinet-active.html';
+        let activeDiv = document.getElementById('active__right');
+        activeDiv.classList.remove('visually-hidden');
+        let inactive = document.getElementById('inactive__right');
+        inactive.classList.add('visually-hidden');
+
+        const car = await getCar(subJson['carId']);
+        document.getElementById('carName').textContent = `${car['name']} ${car['brand']}`;
+
+        let currentDate = new Date();
+        let lastPayDate = new Date(subJson['lastPayDate']); 
+        let timeDifference = currentDate.getTime() - lastPayDate.getTime();
+        let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        daysDifference = 30 - daysDifference;
+        if(daysDifference > 0){
+            document.getElementById('daysToPay').textContent =`Залишилось днів до наступного платежу: ${daysDifference.toString()}` ;
+        }else if(daysDifference == 0){
+            document.getElementById('daysToPay').textContent =`Сьогодні день оплати підписки.` ;
+        }else{
+            document.getElementById('daysToPay').textContent =`Будь ласка, оплатіть вашу підписку, інакше ми будем змушень її анулювати!` ;
+        }
+        
+        
     }
 }
 

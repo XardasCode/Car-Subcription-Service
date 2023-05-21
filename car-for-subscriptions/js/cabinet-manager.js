@@ -1,3 +1,34 @@
+
+addEventListener('DOMContentLoaded', async function () {
+    let user = sessionStorage.getItem('user');
+    await checkUser(user);
+    let userJson = JSON.parse(user);
+
+    let username = document.getElementById('username');
+    let email = document.getElementById('email');
+    console.log(userJson);
+    let jsonName = userJson['name'];
+    let jsonSurname = userJson['surname'];
+    let jsonEmail = userJson['email'];
+
+    username.innerHTML = jsonName + ' ' + jsonSurname;
+    email.innerHTML = jsonEmail;
+
+});
+
+
+async function checkUser(user) {
+    if (user === null) {
+        window.location.href = 'sign-in.html';
+    }
+    let userJson = JSON.parse(user);
+    let userRole = userJson['role']; //  Roles: USER, MANAGER
+    if (userRole === 'USER') {
+        window.location.href = 'cabinet.html';
+    }
+}
+
+
 // Можливість редагування імені
 
 function editText() {
@@ -107,10 +138,10 @@ function getNotActiveSubscriptions(page) {
     // let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
     let size = 'size=6';
-    let filter = "filter=isActive:false,statusName:Under consideration";
+    let filter = "filter=isActive:false,statusName:UNDER_CONSIDERATION";
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'http://localhost:8080/api/v1/cars/page-count?' + size + '&' + filter;
+    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
     let getResponsePage = fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'notActive'));
@@ -135,7 +166,7 @@ function getActiveSubscriptions(page) {
     //let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
     let size = 'size=6';
-    let filter = "filter=isActive:true,statusName:Confirmed";
+    let filter = "filter=isActive:true,statusName:CONFIRM_STATUS";
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
     let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
     let getResponsePage = fetch(urlPage)
@@ -164,7 +195,7 @@ async function ptintSub(item, list) {
     console.log(user);
 
     if (item['isActive'] === false) {
-        if (item['status'] === "Rejected") {
+        if (item['status'] === "REJECTED_STATUS") {
             list.innerHTML += `
       <div class="collapsible__item-wrapper" id="item-wrapper-${item['id']}">
               <div class="collapsible__info">
@@ -230,6 +261,9 @@ async function ptintSub(item, list) {
                  <li>Кількість місяців: ${item['totalMonths']} </li>
                  <li>Номер телефону: ${user['phone']}</li>
                  <li>Email: ${user['email']}</li>
+                 <li>Номер паспорта: ${item['passportNumber']}</li>
+                 <li>ІПН: ${item['ipnNumber']}</li>
+                 <li>Посилання на соцмережі: ${item['socMediaLink']}</li>
               </ul>
            </div>
            <div class="collapsible__buttons">
@@ -324,19 +358,26 @@ function goRight(){
 
 
 async function confirmSubscription(id) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm`, {
-        method: 'PATCH'
-    });
-    let responseJSON = await response.json();
-    let status = responseJSON['status'];
-    if (status) {
-        alert(status);
-        location.reload()
 
-    } else {
-        let error = responseJSON['errorMessage'];
-        alert(error);
+    let userJson = JSON.parse(user);
+    let userRole = userJson['role']; //  Roles: USER, MANAGER
+    if (userRole === 'MANAGER') {
+        managerId = userJson['id'];
+        const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm/${managerId}`, {
+            method: 'PATCH'
+        });
+        let responseJSON = await response.json();
+        let status = responseJSON['status'];
+        if (status) {
+            alert(status);
+            location.reload()
+    
+        } else {
+            let error = responseJSON['errorMessage'];
+            alert(error);
+        }
     }
+  
 }
 
 async function rejectSubscription(id) {
@@ -352,6 +393,12 @@ async function rejectSubscription(id) {
         let error = responseJSON['errorMessage'];
         alert(error);
     }
+}
+
+function logoutUser() {
+    sessionStorage.removeItem('user'); // Видалення з сесії
+
+    window.location.replace('sign-in.html'); // Редірект на сторінку входу
 }
 
 async function deleteSubscription(id) {
