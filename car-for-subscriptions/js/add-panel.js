@@ -1,4 +1,4 @@
-addEventListener('DOMContentLoaded', function () {
+addEventListener('DOMContentLoaded', async function () {
     // получаю input file в змінну
     const image = document.getElementById('image');
     // получаю div для превью в змінну
@@ -7,6 +7,12 @@ addEventListener('DOMContentLoaded', function () {
     image.addEventListener('change', () => {
         uploadFile(image.files[0]);
     });
+
+    let carId = new URLSearchParams(window.location.search).get('carId');
+    if (carId != null) {
+        await setCarInfoToForm(carId);
+    }
+
 
     function uploadFile(file) {
         // перевірка на тип файлу
@@ -35,12 +41,46 @@ addEventListener('DOMContentLoaded', function () {
     let form = document.getElementById('formUpload');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        await addCar();
+        let isUpdate = carId != null;
+        await sendForm(isUpdate);
     });
 });
 
+async function setCarInfoToForm(carId) {
+    let car = await getCarFromServer(carId);
+    document.getElementById('name').value = car['name'];
+    document.getElementById('model').value = car['model'];
+    document.getElementById('brand').value = car['brand'];
+    document.getElementById('year').value = car['year'];
+    document.getElementById('color').value = car['color'];
+    document.getElementById('price').value = car['price'];
+    document.getElementById('fuelType').value = car['fuelType'];
+    document.getElementById('chassisNumber').value = car['chassisNumber'];
+    document.getElementById('regNumber').value = car['regNumber'];
+    document.getElementById('regDate').value = car['regDate'];
+    document.getElementById('mileage').value = car['mileage'];
+    document.getElementById('lastServiceDate').value = car['lastServiceDate'];
+}
 
-async function addCar() {
+async function getCarFromServer(carId) {
+    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    let responseJSON = await response.json();
+    let status = response.status;
+    if (status > 299) {
+        let error = responseJSON['errorMessage'];
+        alert(error);
+    } else {
+        console.log("Car received");
+        return responseJSON;
+    }
+}
+
+async function sendForm(isUpdate) {
     let newCar = {
         "name": document.getElementById('name').value,
         "model": document.getElementById('model').value,
@@ -55,7 +95,38 @@ async function addCar() {
         "mileage": document.getElementById('mileage').value,
         "lastServiceDate": document.getElementById('lastServiceDate').value
     };
+    if (isUpdate) {
+        let carId = new URLSearchParams(window.location.search).get('carId');
+        await updateCar(newCar, carId);
+    } else {
+        await addNewCar(newCar)
+    }
+}
 
+async function updateCar(newCar, carId) {
+    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCar)
+    });
+    let responseJSON = await response.json();
+    let status = response.status;
+    if (status > 299) {
+        let error = responseJSON['errorMessage'];
+        alert(error);
+    } else {
+        console.log("Car updated");
+        let isPhotoUpdated = document.getElementById('image').files.length > 0;
+        if (isPhotoUpdated) {
+            await sendPhotoToServer(carId);
+        }
+        window.location.replace('car-profile.html?id=' + carId);
+    }
+}
+
+async function addNewCar(newCar) {
     const response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars', {
         method: 'POST',
         headers: {

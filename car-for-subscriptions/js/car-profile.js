@@ -2,24 +2,55 @@
 
 window.addEventListener("DOMContentLoaded", async (event) => {
     let carId = window.location.search.substr(1);
+    if (carId == null || carId === "") {
+        window.location.replace('error.html')
+    }
     carId = carId.slice(3, carId.length);
     if (sessionStorage.getItem('user') != null) {
-        let user = sessionStorage.getItem('user');
-        let userJson = JSON.parse(user);
-        let subId = userJson['subscriptionId'];
-        let button = document.getElementById('button');
-        if (subId === 0) {
-            button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet.html?carId=${carId}">Оформити підписку</a>`
-        } else {
-            button.style.display = 'none';
-        }
+        await setButtonBySubscriptionAndRole(carId);
     }
     if (carId) {
         await displayCar(carId)
-    } else {
-        window.location.replace('error.html')
     }
 });
+
+async function setButtonBySubscriptionAndRole(carId) {
+    let user = sessionStorage.getItem('user');
+    let userJson = JSON.parse(user);
+    let userRole = userJson['role']; //  Roles: USER, MANAGER
+    if (userRole === "USER") {
+        let subId = userJson['subscriptionId'];
+        await setSubscriptionButton(subId, carId);
+    } else { // MANAGER
+        let button = document.getElementById('button');
+        button.innerHTML = `<a class="sub-enter__button-rectangle" href="add-panel.html?carId=${carId}">Оновити дані</a>`;
+    }
+}
+
+async function setSubscriptionButton(subId, carId) {
+    if (subId == null || subId === "") {
+        let button = document.getElementById('button');
+        button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet.html?carId=${carId}">Оформити підписку</a>`;
+    } else {
+        await checkSubscription(subId, carId);
+    }
+}
+
+async function checkSubscription(subId, carId) {
+    let subscription = sessionStorage.getItem('subscription');
+    if (subscription == null || subscription === "") {
+        let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId;
+        let response = await fetch(url);
+        subscription = await response.json();
+        sessionStorage.setItem('subscription', JSON.stringify(subscription));
+    }
+    let subscriptionJson = JSON.parse(subscription);
+    let subscriptionStatus = subscriptionJson['status'] // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
+    let button = document.getElementById('button');
+    if (subscriptionStatus === "CONFIRM_STATUS" || subscriptionStatus === "UNDER_CONSIDERATION") {
+        button.display = 'none'; // Якщо підписка присутня, то кнопка не відображається
+    }
+}
 
 async function displayCar(carId) {
     const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`);
