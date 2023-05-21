@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
             const input = formReq[index];
             formRemoveError(input);
             if (input.classList.contains('_phone')) { //перевірка phone
-                formAddError(input);
                 let phoneRE = /^\d{10}$/;
                 let phone = document.getElementById('userInputNumber').value;
                 let result = document.querySelector('#result');
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
                 } else {
                     formAddError(input);
                     error++;
-                    result.innerHTML = 'Номер телефону введено <strong><u>не правильно</u></strong><br>Приклад: (XXX) XXX-XXXX';
+                    result.innerHTML = 'Номер телефону введено <strong><u>не правильно</u></strong><br>Приклад: 0987654321';
                 }
             }
             if (input.classList.contains('_password')) { //перевірка password
