@@ -28,27 +28,12 @@ async function setButtonBySubscriptionAndRole(carId) {
 }
 
 async function setSubscriptionButton(subId, carId) {
-    if (subId == '0' || subId === "") {
+    let button = document.getElementById('button');
+    if (subId === '0' || subId === "") {
         let button = document.getElementById('button');
         button.innerHTML = `<a class="sub-enter__button-rectangle" href="cabinet.html?carId=${carId}">Оформити підписку</a>`;
     } else {
-        await checkSubscription(subId, carId);
-    }
-}
-
-async function checkSubscription(subId, carId) {
-    let subscription = sessionStorage.getItem('subscription');
-    if (subscription == null || subscription === "") {
-        let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId;
-        let response = await fetch(url);
-        subscription = await response.json();
-        sessionStorage.setItem('subscription', JSON.stringify(subscription));
-    }
-    let subscriptionJson = JSON.parse(subscription);
-    let subscriptionStatus = subscriptionJson['status'] // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
-    let button = document.getElementById('button');
-    if (subscriptionStatus === "CONFIRM_STATUS" || subscriptionStatus === "UNDER_CONSIDERATION") {
-        button.display = 'none'; // Якщо підписка присутня, то кнопка не відображається
+        button.style.display = 'none';
     }
 }
 
