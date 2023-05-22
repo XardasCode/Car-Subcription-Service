@@ -1,3 +1,36 @@
+// Випадаючий список "тип палива""
+
+jQuery(($) => {
+    $('.add-auto__fuel').on('click', '.add-auto__fuel-head', function () {
+        if ($(this).hasClass('open')) {
+            $(this).removeClass('open');
+            $(this).next().fadeOut();
+        } else {
+            $('.add-auto__fuel-head').removeClass('open');
+            $('.add-auto__list').fadeOut();
+            $(this).addClass('open');
+            $(this).next().fadeIn();
+        }
+    });
+
+    $('.add-auto__fuel').on('click', '.add-auto__fuel-item', function () {
+        $('.add-auto__fuel-head').removeClass('open');
+        $(this).parent().fadeOut();
+        $(this).parent().prev().text($(this).text());
+        $(this).parent().prev().prev().val($(this).text());
+    });
+
+    $(document).click(function (e) {
+        if (!$(e.target).closest('.add-auto__fuel').length) {
+            $('.add-auto__fuel-head').removeClass('open');
+            $('.add-auto__list').fadeOut();
+        }
+    });
+});
+
+
+// Прев'ю після вибору фото
+
 addEventListener('DOMContentLoaded', async function () {
     // получаю input file в змінну
     const image = document.getElementById('image');
@@ -164,3 +197,5 @@ async function sendPhotoToServer(carId) {
     }
     console.log("Photo uploaded");
 }
+
+

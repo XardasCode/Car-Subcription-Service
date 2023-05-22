@@ -115,27 +115,31 @@
                             <input id="lastServiceDate" type="date" placeholder="21-01-2022" required>
                         </div>
                         <div class="add-auto__item">
-                            <label for="fuelType">Тип палива:</label>
-                            <select class="form-select" id="fuelType" name="fuelType">
-                                <option value="Бензин">Бензин</option>
-                                <option value="Дизель">Дизель</option>
-                                <option value="Газ">Газ</option>
-                                <option value="Електро">Електро</option>
-                                <option value="Гібрид">Гібрид</option>
-                            </select>
-                        </div>
-                        <div class="add-auto__item item-file">
-                            <label for="brand">Вибрати фото:</label>
-                            <div class="file">
-                                <div class="file__item">
-                                    <input id="image" class="file__input" accept=".jpg, .png, .gif" type="file"
-                                           name="image">
-                                    <div class="file__button">Вибрати</div>
-                                </div>
+                            <label for="">Тип палива:</label>
+                            <div class="add-auto__fuel">
+                                <input class="add-auto__fuel-input" type="hidden" name="" id="fuel-filter">
+                                <div class="add-auto__fuel-head">Обрати</div>
+                                <ul class="add-auto__list" id="fuelType" name="fuelType">
+                                    <li class="add-auto__fuel-item" value="Бензин">Бензин</li>
+                                    <li class="add-auto__fuel-item" value="Дизель">Дизель</li>
+                                    <li class="add-auto__fuel-item" value="Газ">Газ</li>
+                                    <li class="add-auto__fuel-item" value="Електро">Електро</li>
+                                    <li class="add-auto__fuel-item" value="Гібрид">Гібрид</li>
+                                </ul>
                             </div>
-                            <div id="preview" class="file__preview"></div>
                         </div>
                     </div>
+                </div>
+                <div class="add-auto__item item-file">
+                    <label for="brand">Вибрати фото:</label>
+                    <div class="file">
+                        <div class="file__item">
+                            <input id="image" class="file__input" accept=".jpg, .png, .gif" type="file"
+                                   name="image">
+                            <div class="file__button">Вибрати</div>
+                        </div>
+                    </div>
+                    <div id="preview" class="file__preview"></div>
                 </div>
                 <button class="add-auto__button blue-button">Додати до каталогу</button>
             </form>
@@ -171,6 +175,8 @@
 </div>
 
 <script src="js/bootstrap.bundle.min.js"></script>
+<!-- Випадаюче меню -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/add-panel.js"></script>
 </body>
 
