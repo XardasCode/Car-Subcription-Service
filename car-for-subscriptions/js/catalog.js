@@ -67,10 +67,12 @@ function generateCars(json) {
     json.forEach(item => {
         let image = item['image'] == null ? 'img/catalog/svg/car-8.svg' : item['image'];
         document.querySelector('.catalog__item-list').innerHTML += ` 
-        <div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+        <div class="col-sm-12 col-md-6 col-xl-4 catalog__block card">
             <a href="car-profile.html?id=${item['id']}">
-                <img src="${image}" class="adaptive-img" alt="Volkswagen T-Roc">
-                <span> ${item['name']}</span>
+                <img src="${image}" class="adaptive-img card-img-top" alt="Volkswagen T-Roc">
+                <div class="card-body">
+                <h5 class="card-title">${item.name} ${item.model} ${item.brand}</h5>
+              </div>
             </a>
         </div>
         `
