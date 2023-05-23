@@ -119,6 +119,9 @@ body {
   @media (max-width: 991.98px) {
     .blue-button {
       font-size: 18px; } }
+  @media (max-width: 479.98px) {
+    .blue-button {
+      font-size: 16px; } }
 
 .blue-button:hover {
   background: #2869ca; }
@@ -281,20 +284,15 @@ body {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding-left: 20px;
     margin-bottom: 40px; }
-    @media (max-width: 1399.98px) {
-      .catalog__filter {
-        padding-left: 10px;
-        margin-bottom: 30px; } }
     @media (max-width: 1199.98px) {
       .catalog__filter {
         padding: 0 0 0 5px;
-        margin-bottom: 10px; } }
+        margin-bottom: 30px; } }
     @media (max-width: 991.98px) {
       .catalog__filter {
         padding: 0;
-        margin-bottom: 10px; } }
+        margin-bottom: 20px; } }
     @media (max-width: 767.98px) {
       .catalog__filter {
         -webkit-box-orient: vertical;
@@ -303,7 +301,7 @@ body {
         flex-direction: column-reverse; } }
     @media (max-width: 575.98px) {
       .catalog__filter {
-        margin-bottom: 0px; } }
+        margin-bottom: 10px; } }
   .catalog .filter-wrapper {
     position: relative;
     display: inline-block;
@@ -473,6 +471,13 @@ body {
     cursor: pointer; }
   .catalog__button button {
     padding: 10px 10px; }
+    @media (max-width: 479.98px) {
+      .catalog__button button {
+        font-size: 18px; } }
+    @media (max-width: 379.98px) {
+      .catalog__button button {
+        font-size: 16px;
+        padding: 8px 10px; } }
   .catalog__filter-right {
     position: relative;
     margin-right: -10px;
@@ -548,17 +553,24 @@ body {
     @media (max-width: 479.98px) {
       .catalog__search {
         width: 220px; } }
+  .catalog__item-list {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
   .catalog__block {
-    margin-bottom: 50px; }
+    width: 410px;
+    border: 1px solid #437DD5;
+    padding: 0;
+    margin: 0 10px 20px 10px; }
     @media (max-width: 1199.98px) {
       .catalog__block {
-        margin-bottom: 40px; } }
+        margin: 0 7px 14px 7px; } }
     @media (max-width: 991.98px) {
       .catalog__block {
-        margin-bottom: 30px; } }
-    @media (max-width: 379.98px) {
+        margin: 0 0 15px 0; } }
+    @media (max-width: 479.98px) {
       .catalog__block {
-        margin-bottom: 20px; } }
+        margin: 0 0 10px 0; } }
   .catalog span {
     font-size: 24px;
     line-height: 29px;
@@ -572,14 +584,53 @@ body {
     @media (max-width: 379.98px) {
       .catalog span {
         font-size: 20px; } }
-  .catalog__switch {
+  .catalog h5 {
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    display: block;
+    color: #000;
+    margin: 0; }
+    @media (max-width: 479.98px) {
+      .catalog h5 {
+        font-size: 22px; } }
+    @media (max-width: 379.98px) {
+      .catalog h5 {
+        font-size: 20px; } }
+  .catalog .card-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    @media (max-width: 479.98px) {
+      .catalog .card-body {
+        padding-top: 10px; } }
+  .catalog .card-button {
+    padding: 7px 20px;
+    margin: 15px auto 10px auto; }
+    @media (max-width: 991.98px) {
+      .catalog .card-button {
+        padding: 5px 15px;
+        margin: 15px auto 5px auto; } }
+    @media (max-width: 479.98px) {
+      .catalog .card-button {
+        margin: 10px auto 0px auto; } }
+  .catalog__pagination {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin: 0 20px 0 20px; }
+    margin-top: 10px; }
+  .catalog__switch {
+    margin: 0 30px 0 30px; }
+    @media (max-width: 991.98px) {
+      .catalog__switch {
+        margin: 0 20px 0 20px; } }
     .catalog__switch img {
       cursor: pointer; }
   .catalog__switch-item {

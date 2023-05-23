@@ -70,10 +70,11 @@ function generateCars(json) {
         <div class="col-sm-12 col-md-6 col-xl-4 catalog__block card">
             <a href="car-profile.html?id=${item['id']}">
                 <img src="${image}" class="adaptive-img card-img-top" alt="Volkswagen T-Roc">
-                <div class="card-body">
-                <h5 class="card-title">${item.name} ${item.model} ${item.brand}</h5>
-              </div>
             </a>
+            <div class="card-body">
+                <h5 class="card-title">${item.name} ${item.model} ${item.brand}</h5>
+                <a href="car-profile.html?id=${item['id']}" class="blue-button card-button">Детальніше</a>
+            </div>
         </div>
         `
     });
