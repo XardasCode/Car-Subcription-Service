@@ -556,10 +556,18 @@ body{
 		display: none;
 	}
 }
+.pagination{
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 10px 0;
+}
 .switch{
 	display: flex;
 	justify-content: center;
-	margin: 0 20px 0 20px;
+	margin: 0 30px 0 30px;
+	@media (max-width: 991.98px) {
+		margin: 0 20px 0 20px;
+	}
 	img{
 		cursor: pointer;
 	}
@@ -573,7 +581,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 10px;
+	// margin-right: 10px;
 	cursor: pointer;
 	@media (max-width: 479.98px) {
 		width: 30px;

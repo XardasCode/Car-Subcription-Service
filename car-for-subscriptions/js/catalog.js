@@ -73,7 +73,7 @@ function generateCars(json) {
             </a>
             <div class="card-body">
                 <h5 class="card-title">${item.name} ${item.model} ${item.brand}</h5>
-                <a href="car-profile.html?id=${item['id']}" class="blue-button card-button">Детальніше</a>
+               
             </div>
         </div>
         `
