@@ -43,54 +43,54 @@ class SubscriptionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,carDAO,userDAO,subscriptionDTOMapper);
-        carStatus.setId(1);
-        carStatus.setName("In stock");
-        status.setId(1);
-        status.setName("Active");
-        user = User.builder()
-                .id(1)
-                .name("Fogell")
-                .surname("McLovin")
-                .email("McLovin3000@gmail.com")
-                .password("DTlpxUE8OnvOh96bMNDYDHIdwTes0oLFP6pzA5cZSB7SGB9jU+eWJmeKNRUK0Np6")
-                .phone("0985491837")
-                .isVerified(false)
-                .isBlocked(false)
-                .build();
-        car = Car.builder()
-                .id(1)
-                .name("Camry")
-                .model("3.5 6AT Premium")
-                .brand("Toyota ")
-                .year(2019)
-                .color("Black")
-                .price(2000)
-                .fuelType("Gasoline")
-                .chassisNumber("9591")
-                .regNumber("TT")
-                .regDate("25.05.2020")
-                .mileage(Integer.parseInt("11230"))
-                .lastServiceDate("05.10.2022")
-                .carStatus(carStatus)
-                .build();
-        subscription = Subscription.builder()
-                .id(1)
-                .isActive(true)
-                .startDate("21.04.2023")
-                .monthPrice(2000)
-                .totalMonths(5)
-                .totalPrice(10000)
-                .user(user)
-                .car(car)
-                .status(status)
-                .build();
-        subscriptionRequestDTO = SubscriptionRequestDTO.builder()
-                .monthPrice("2000")
-                .totalMonths("5")
-                .userId("1")
-                .carId("1")
-                .build();
+//        subscriptionService = new SubscriptionServiceImpl();
+//        carStatus.setId(1);
+//        carStatus.setName("In stock");
+//        status.setId(1);
+//        status.setName("Active");
+//        user = User.builder()
+//                .id(1)
+//                .name("Fogell")
+//                .surname("McLovin")
+//                .email("McLovin3000@gmail.com")
+//                .password("DTlpxUE8OnvOh96bMNDYDHIdwTes0oLFP6pzA5cZSB7SGB9jU+eWJmeKNRUK0Np6")
+//                .phone("0985491837")
+//                .isVerified(false)
+//                .isBlocked(false)
+//                .build();
+//        car = Car.builder()
+//                .id(1)
+//                .name("Camry")
+//                .model("3.5 6AT Premium")
+//                .brand("Toyota ")
+//                .year(2019)
+//                .color("Black")
+//                .price(2000)
+//                .fuelType("Gasoline")
+//                .chassisNumber("9591")
+//                .regNumber("TT")
+//                .regDate("25.05.2020")
+//                .mileage(Integer.parseInt("11230"))
+//                .lastServiceDate("05.10.2022")
+//                .carStatus(carStatus)
+//                .build();
+//        subscription = Subscription.builder()
+//                .id(1)
+//                .isActive(true)
+//                .startDate("21.04.2023")
+//                .monthPrice(2000)
+//                .totalMonths(5)
+//                .totalPrice(10000)
+//                .user(user)
+//                .car(car)
+//                .status(status)
+//                .build();
+//        subscriptionRequestDTO = SubscriptionRequestDTO.builder()
+//                .monthPrice("2000")
+//                .totalMonths("5")
+//                .userId("1")
+//                .carId("1")
+//                .build();
 
 
     }

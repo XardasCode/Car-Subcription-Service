@@ -11,13 +11,17 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.SubscriptionService;
 import com.csub.util.CarStatusList;
+import com.csub.util.GenerateReportPDF;
 import com.csub.util.SubscriptionSearchInfo;
 import com.csub.util.SubscriptionStatusList;
+import com.itextpdf.text.DocumentException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +37,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final UserDAO userDAO;
 
     private final SubscriptionDTOMapper subscriptionDTOMapper;
+
+    private final GenerateReportPDF generateReportPDF;
 
     @Override
     @Transactional
@@ -159,4 +165,24 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Count: {}", count);
         return (int) Math.ceil((double) count / size);
     }
+    @Override
+    @Transactional
+    public byte[] getReportPDF(long id){
+        log.debug("Generating report pdf");
+        Subscription subscription = subscriptionDAO.getSubscription(id).orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
+        Car car = carDAO.getCar(subscription.getCar().getId()).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+        byte[] reportPDF;
+        try {
+            reportPDF = generateReportPDF.generatePdf(car,subscription);
+        }catch (DocumentException e) {
+
+            throw new  ServerException("Failed to generate report",e, ErrorList.GENERATING_REPORT_FAILED);
+        } catch (IOException e) {
+            throw new ServerException("Failed to generate report",e, ErrorList.GENERATING_REPORT_FAILED);
+        }
+
+        log.debug("Report generated");
+        return reportPDF;
+    }
+
 }

@@ -25,4 +25,7 @@ public interface SubscriptionService {
 
     @Transactional
     int getPageCount(int size, List<String> filter);
+
+    @Transactional
+    byte[] getReportPDF(long id);
 }

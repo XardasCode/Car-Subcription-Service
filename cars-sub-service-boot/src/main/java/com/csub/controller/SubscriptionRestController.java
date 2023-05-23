@@ -3,12 +3,18 @@ package com.csub.controller;
 import com.csub.controller.request.SubscriptionRequestDTO;
 import com.csub.controller.util.JSONInfo;
 import com.csub.dto.SubscriptionDTO;
+import com.csub.exception.ErrorList;
+import com.csub.exception.ServerException;
 import com.csub.service.SubscriptionService;
 import com.csub.util.SubscriptionSearchInfo;
+import com.itextpdf.text.DocumentException;
+import com.paypal.base.rest.PayPalRESTException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,5 +91,15 @@ public class SubscriptionRestController {
     ) {
         log.info("Getting page count");
         return subscriptionService.getPageCount(size, filter);
+    }
+
+    @GetMapping("/{id}/generate-pdf")
+    public ResponseEntity<byte[]> getReportPDF(@PathVariable long id)  {
+        byte[] pdfBytes = subscriptionService.getReportPDF(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "report.pdf");
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
+
     }
 }
