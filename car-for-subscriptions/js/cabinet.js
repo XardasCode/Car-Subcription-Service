@@ -91,10 +91,13 @@ async function checkSubscriptionStatus(subId) {
         let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         daysDifference = 30 - daysDifference;
         if(daysDifference > 0){
+            document.getElementById('paymentBtn').style.visibility = 'hidden';
             document.getElementById('daysToPay').textContent =`Залишилось днів до наступного платежу: ${daysDifference.toString()}` ;
         }else if(daysDifference == 0){
+            document.getElementById('paymentBtn').style.visibility = 'visible';
             document.getElementById('daysToPay').textContent =`Сьогодні день оплати підписки.` ;
         }else{
+            document.getElementById('paymentBtn').style.visibility = 'visible';
             document.getElementById('daysToPay').textContent =`Будь ласка, оплатіть вашу підписку!` ;
         }
         
