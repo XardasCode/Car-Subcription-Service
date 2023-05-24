@@ -48,8 +48,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscriptionEntity = Subscription.createSubscriptionFromRequest(subscription);
         long userId = Long.parseLong(subscription.getUserId());
         long carId = Long.parseLong(subscription.getCarId());
-        User user = userDAO.getUser(userId).orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
-        Car car = carDAO.getCar(carId).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+        User user = userDAO.getUser(userId).orElseThrow(
+                () -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
+        Car car = carDAO.getCar(carId).orElseThrow(
+                () -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
 
         checkIfCarAlreadySubscribed(car);
         checkIfUserAlreadySubscribed(user);

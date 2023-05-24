@@ -50,7 +50,6 @@ class UserServiceImplTest {
     @BeforeEach
     void setUp() {
         userService = new UserServiceImpl(userDAO, userDTOMapper, emailSender,passwordManager);
-        Subscription subscription = Subscription.builder().build();
         userRole = UserRole.builder().name("USER").build();
         user = User.builder()
                 .id(0)
