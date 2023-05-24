@@ -3,6 +3,7 @@ package com.csub.service;
 import com.csub.controller.request.UserRequestDTO;
 import com.csub.dto.UserDTO;
 import com.csub.util.UserSearchInfo;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -29,4 +30,10 @@ public interface UserService {
     void generateVerificationCode(long id);
 
     void verifyEmail(long id, String code);
+
+    @Transactional
+    List<UserDTO> searchUsers(UserSearchInfo info);
+
+    @Transactional
+    int getPageCount(int size, List<String> filter);
 }

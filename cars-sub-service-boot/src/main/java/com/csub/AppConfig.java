@@ -1,5 +1,6 @@
 package com.csub;
 
+import com.csub.util.PasswordManager;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
@@ -74,5 +75,11 @@ public class AppConfig {
         APIContext context = new APIContext(qAuthTokenCredential().getAccessToken());
         context.setConfigurationMap(paypalConfig());
         return context;
+    }
+
+    @Bean
+    public PasswordManager passwordManager() {
+        PasswordManager passwordManager = new PasswordManager();
+        return passwordManager;
     }
 }

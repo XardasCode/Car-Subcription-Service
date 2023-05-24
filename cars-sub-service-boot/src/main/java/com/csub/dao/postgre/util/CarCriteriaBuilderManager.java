@@ -20,8 +20,15 @@ public final class CarCriteriaBuilderManager {
 
     private static final String BRAND = "brand";
     private static final String MODEL = "model";
+
+    private static final String YEAR_FROM = "yearFrom";
+    private static final String YEAR_TO = "yearTo";
     private static final String YEAR = "year";
+
+    private static final String PRICE_FROM = "priceFrom";
+    private static final String PRICE_TO = "priceTo";
     private static final String PRICE = "price";
+
     private static final String COLOR = "color";
     private static final String ID = "id";
     private static final String DESC = "desc";
@@ -46,7 +53,7 @@ public final class CarCriteriaBuilderManager {
     private static void setFilterInfo(CarSearchInfo info, CriteriaBuilder builder, Root<Car> root, List<Predicate> fieldPredicates) {
         long statusId = CarStatusList.AVAILABLE.getStatusId();
         log.debug("Getting car with statusId {}", statusId);
-        fieldPredicates.add(builder.equal(root.get("carStatus"), statusId));
+        fieldPredicates.add(builder.equal(root.get("role"), statusId));
 
         if (info.getFilter() != null && !info.getFilter().isEmpty()) {
             for (String field : info.getFilter()) {
@@ -57,7 +64,11 @@ public final class CarCriteriaBuilderManager {
                         case MODEL -> fieldPredicates.add(builder.like(root.get(MODEL), "%" + filter[1] + "%"));
                         case COLOR -> fieldPredicates.add(builder.like(root.get(COLOR), "%" + filter[1] + "%"));
                         case YEAR -> fieldPredicates.add(builder.equal(root.get(YEAR), Integer.parseInt(filter[1])));
+                        case YEAR_FROM -> fieldPredicates.add(builder.greaterThanOrEqualTo(root.get(YEAR), Integer.parseInt(filter[1])));
+                        case YEAR_TO -> fieldPredicates.add(builder.lessThanOrEqualTo(root.get(YEAR), Integer.parseInt(filter[1])));
                         case PRICE -> fieldPredicates.add(builder.equal(root.get(PRICE), Integer.parseInt(filter[1])));
+                        case PRICE_FROM -> fieldPredicates.add(builder.greaterThanOrEqualTo(root.get(PRICE), Integer.parseInt(filter[1])));
+                        case PRICE_TO -> fieldPredicates.add(builder.lessThanOrEqualTo(root.get(PRICE), Integer.parseInt(filter[1])));
                     }
                 }
 

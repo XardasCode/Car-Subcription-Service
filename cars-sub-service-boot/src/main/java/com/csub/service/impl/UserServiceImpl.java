@@ -8,10 +8,7 @@ import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.dao.UserDAO;
 import com.csub.service.UserService;
-import com.csub.util.EmailSender;
-import com.csub.util.PasswordManager;
-import com.csub.util.UserRolesList;
-import com.csub.util.UserSearchInfo;
+import com.csub.util.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -187,5 +184,23 @@ public class UserServiceImpl implements UserService {
         optionalUser.setVerificationCode(null);
         optionalUser.setVerified(true);
         userDAO.updateUser(optionalUser);
+    }
+
+    @Override
+    @Transactional
+    public List<UserDTO> searchUsers(UserSearchInfo info) {
+        log.debug("Searching user with filter");
+        List<User> users = userDAO.searchUsers(info);
+        log.debug("Subscriptions found: {}", users.size());
+        return users.stream().map(userDTOMapper).toList();
+    }
+
+    @Override
+    @Transactional
+    public int getPageCount(int size, List<String> filter) {
+        log.debug("Getting page count");
+        int count = userDAO.getUsersCount(size, filter);
+        log.debug("Count: {}", count);
+        return (int) Math.ceil((double) count / size);
     }
 }

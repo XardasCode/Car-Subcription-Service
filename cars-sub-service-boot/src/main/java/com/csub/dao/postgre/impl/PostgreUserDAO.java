@@ -1,10 +1,16 @@
 package com.csub.dao.postgre.impl;
 
+import com.csub.dao.postgre.util.UserCriteriaBuilderManager;
 import com.csub.entity.User;
 import com.csub.dao.UserDAO;
 import com.csub.entity.UserRole;
 import com.csub.util.UserSearchInfo;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -105,4 +111,35 @@ public class PostgreUserDAO implements UserDAO {
         log.debug("Getting role with id {}", roleId);
         return sessionFactory.find(UserRole.class, roleId);
     }
+    @Override
+    public List<User> searchUsers(UserSearchInfo info) {
+        log.debug("Getting users with search info {}", info);
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+
+        List<Predicate> predicates = UserCriteriaBuilderManager.buildCriteria(info, builder, query, root);
+
+        int offset = (info.getPage() - 1) * info.getSize();
+        query.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<User> typedQuery = sessionFactory.createQuery(query)
+                .setFirstResult(offset)
+                .setMaxResults(info.getSize());
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public int getUsersCount(int size, List<String> filter) {
+        log.debug("Getting users count with size {} and filter {}", size, filter);
+        CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+
+        List<Predicate> predicates = UserCriteriaBuilderManager.buildCountCriteria(size, filter, builder, root);
+
+        query.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<User> typedQuery = sessionFactory.createQuery(query);
+        return typedQuery.getResultList().size();
+    }
+
 }

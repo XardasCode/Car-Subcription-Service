@@ -2,8 +2,10 @@ package com.csub.controller;
 
 import com.csub.controller.request.UserRequestDTO;
 import com.csub.controller.util.JSONInfo;
+import com.csub.dto.SubscriptionDTO;
 import com.csub.dto.UserDTO;
 import com.csub.service.UserService;
+import com.csub.util.SubscriptionSearchInfo;
 import com.csub.util.UserSearchInfo;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -48,21 +50,21 @@ public class UserRestController {
         return ResponseEntity.ok(userService.checkUserCredentials(email, password));
     }
 
-    @GetMapping(value = "/search")
-    public ResponseEntity<List<UserDTO>> findUsers(@RequestParam(value = "partOfName", required = false) String partOfName,
-                                                   @RequestParam(value = "partOfSurname", required = false) String partOfSurname,
-                                                   @RequestParam(value = "isSortByName", required = false) boolean isSortByName,
-                                                   @RequestParam(value = "sortType", required = false) String sortType,
-                                                   @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                                   @RequestParam(value = "size", required = false, defaultValue = "10") int size
-    ) {
-        log.info("Searching users");
-        UserSearchInfo info = UserSearchInfo.builder()
-                .page(page)
-                .size(size)
-                .build();
-        return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType, info));
-    }
+//    @GetMapping(value = "/search")
+//    public ResponseEntity<List<UserDTO>> findUsers(@RequestParam(value = "partOfName", required = false) String partOfName,
+//                                                   @RequestParam(value = "partOfSurname", required = false) String partOfSurname,
+//                                                   @RequestParam(value = "isSortByName", required = false) boolean isSortByName,
+//                                                   @RequestParam(value = "sortType", required = false) String sortType,
+//                                                   @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+//                                                   @RequestParam(value = "size", required = false, defaultValue = "10") int size
+//    ) {
+//        log.info("Searching users");
+//        UserSearchInfo info = UserSearchInfo.builder()
+//                .page(page)
+//                .size(size)
+//                .build();
+//        return ResponseEntity.ok(userService.findUsers(partOfName, partOfSurname, isSortByName, sortType, info));
+//    }
 
     @PostMapping
     public ResponseEntity<JSONInfo> addUser(@RequestBody @Valid UserRequestDTO user) {
@@ -118,5 +120,33 @@ public class UserRestController {
         userService.verifyEmail(id, code);
         log.info("Email verified");
         return new ResponseEntity<>(JSONInfo.builder().message(String.valueOf(id)).build(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/search")
+    public List<UserDTO> searchSubscription(
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "id") String sortField,
+            @RequestParam(required = false, defaultValue = "ASC") String direction,
+            @RequestParam(required = false, defaultValue = "") List<String> filter
+    ) {
+        log.info("Getting subscription");
+        return userService.searchUsers(
+                UserSearchInfo.builder()
+                        .page(page)
+                        .size(size)
+                        .sortField(sortField)
+                        .direction(direction)
+                        .filter(filter)
+                        .build()
+        );
+    }
+    @GetMapping("/page-count")
+    public int getPageCount(
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "") List<String> filter
+    ) {
+        log.info("Getting page count");
+        return userService.getPageCount(size, filter);
     }
 }

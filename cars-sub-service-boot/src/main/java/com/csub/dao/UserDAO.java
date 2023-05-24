@@ -25,4 +25,8 @@ public interface UserDAO {
     List<User> findUsers(String partOfName, String partOfSurname, boolean isSortByName, String sortType);
 
     UserRole getRoleById(int roleId);
+
+    List<User> searchUsers(UserSearchInfo info);
+
+    int getUsersCount(int size, List<String> filter);
 }
