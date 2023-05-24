@@ -26,14 +26,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
 
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
-
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -44,13 +41,15 @@ class UserServiceImplTest {
     @Mock
     private  EmailSender emailSender;
     private final UserDTOMapper userDTOMapper = new UserDTOMapper();
+    @Mock
+    private  PasswordManager passwordManager;
 
     User user;
     UserRole userRole;
 
     @BeforeEach
     void setUp() {
-        userService = new UserServiceImpl(userDAO, userDTOMapper, emailSender);
+        userService = new UserServiceImpl(userDAO, userDTOMapper, emailSender,passwordManager);
         Subscription subscription = Subscription.builder().build();
         userRole = UserRole.builder().name("USER").build();
         user = User.builder()
@@ -93,6 +92,8 @@ class UserServiceImplTest {
                 .phone(user.getPhone())
                 .password(user.getPassword())
                 .build();
+
+        Mockito.when(passwordManager.encryptPassword(user.getPassword())).thenReturn(user.getPassword());
         Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.of(user.getId()));
         Mockito.when(userDAO.getRoleById(UserRolesList.USER.getRoleId())).thenReturn(userRole);
 
@@ -104,7 +105,6 @@ class UserServiceImplTest {
     @DisplayName("addUser must throw ServerException when user is not valid")
     @Test
     void addUserMustThrowServerException() {
-        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.empty());
         UserRequestDTO userRequestDTO = UserRequestDTO.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
@@ -112,6 +112,11 @@ class UserServiceImplTest {
                 .phone(user.getPhone())
                 .password(user.getPassword())
                 .build();
+        User empryUser = new User();
+        Mockito.when(passwordManager.encryptPassword(user.getPassword())).thenReturn(user.getPassword());
+        Mockito.when(userDAO.addUser(user)).thenReturn(OptionalLong.empty());
+        Mockito.when(userDAO.getRoleById(UserRolesList.USER.getRoleId())).thenReturn(userRole);
+
         assertThatThrownBy(() -> userService.addUser(userRequestDTO))
                 .hasMessage("User not added");
         Mockito.verify(userDAO, Mockito.times(1)).addUser(user);
@@ -133,8 +138,8 @@ class UserServiceImplTest {
     @Test
     void getUserMustThrowServerException() {
         Mockito.when(userDAO.getUser(anyLong())).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> userService.getUser(0))
-                .hasMessage("User with id "+String.valueOf(0)+" not found");
+        assertThatThrownBy(() -> userService.getUser(user.getId()))
+                .hasMessage("User with id "+String.valueOf(user.getId())+" not found");
         Mockito.verify(userDAO, Mockito.times(1)).getUser(user.getId());
     }
 
@@ -189,7 +194,7 @@ class UserServiceImplTest {
                 .phone(userUpdate.getPhone())
                 .password(userUpdate.getPassword())
                 .build();
-        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
+        Mockito.when(userDAO.getUser(anyLong())).thenReturn(Optional.of(user));
         Mockito.when(userDAO.getUserByEmail(userUpdate.getEmail())).thenReturn(Optional.of(userUpdate));
         assertThatThrownBy(() -> userService.updateUser(userRequestDTO, userUpdate.getId()))
                 .hasMessage("User with email " + userUpdate.getEmail() + " already exists");
@@ -259,6 +264,33 @@ class UserServiceImplTest {
         Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
         assertThatThrownBy(() -> userService.generateVerificationCode(user.getId()))
                 .hasMessage("User with id " + user.getId() + " is already verified");
+    }
+
+    @DisplayName("verifyEmailThrowException must throw ServerException when user VerificationCode is null")
+    @Test
+    void verifyEmailThrowException() {
+        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
+        assertThatThrownBy(() -> userService.verifyEmail(user.getId(),"123"))
+                .hasMessage("User with id " + user.getId() + " has no verification code");
+    }
+
+    @DisplayName("verifyEmailThrowException2 must throw ServerException when user VerificationCode is not equals code")
+    @Test
+    void verifyEmailThrowException2() {
+        user.setVerificationCode("123");
+        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
+        assertThatThrownBy(() -> userService.verifyEmail(user.getId(),"124"))
+                .hasMessage("User with id " + user.getId() + " has wrong verification code");
+    }
+
+    @DisplayName("verifyEmail must update user Verified to true")
+    @Test
+    void verifyEmail() {
+        Mockito.doNothing().when(userDAO).updateUser(user);
+        Mockito.when(userDAO.getUser(user.getId())).thenReturn(Optional.of(user));
+        user.setVerificationCode("123");
+        userService.verifyEmail(user.getId(),"123");
+        Mockito.verify(userDAO, Mockito.times(1)).updateUser(user);
     }
 
 

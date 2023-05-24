@@ -9,6 +9,7 @@ import com.csub.exception.ServerException;
 import com.csub.dao.UserDAO;
 import com.csub.service.UserService;
 import com.csub.util.EmailSender;
+import com.csub.util.PasswordManager;
 import com.csub.util.UserRolesList;
 import com.csub.util.UserSearchInfo;
 import jakarta.transaction.Transactional;
@@ -20,8 +21,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.csub.util.PasswordManager.checkPassword;
-import static com.csub.util.PasswordManager.encryptPassword;
 
 
 @Service
@@ -34,6 +33,8 @@ public class UserServiceImpl implements UserService {
     private final UserDTOMapper userDTOMapper;
 
     private final EmailSender emailSender;
+
+    private final PasswordManager passwordManager;
 
     @Override
     @Transactional
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public long addUser(UserRequestDTO user) {
         log.debug("Adding user: {}", user);
         checkIfEmailAlreadyExists(user.getEmail());
-        user.setPassword(encryptPassword(user.getPassword()));
+        user.setPassword(passwordManager.encryptPassword(user.getPassword()));
         User userEntity = User.mapUserRequestDTOToUser(user);
         userEntity.setRole(userDAO.getRoleById(UserRolesList.USER.getRoleId()));
         long id = userDAO.addUser(userEntity).orElseThrow(() -> new ServerException("User not added", ErrorList.USER_NOT_CREATED));
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService {
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }
         User thisUser = user.get();
-        if (!checkPassword(password, thisUser.getPassword())) {
+        if (!passwordManager.checkPassword(password, thisUser.getPassword())) {
             log.warn("User with email {} has bad pass: {}", email, password);
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }
