@@ -147,11 +147,7 @@ body {
   padding: 0; }
 
 .header__logo {
-  font-size: 15px;
-  line-height: 18px;
-  position: relative;
-  padding-right: 5px;
-  padding-bottom: 5px; }
+  margin-right: 0; }
 
 .header__span-1 {
   text-transform: uppercase;
@@ -188,10 +184,10 @@ body {
   background: rgba(17, 86, 190, 0.5); }
 
 .header__active {
-  text-decoration: underline; }
+  background: rgba(17, 90, 190, 0.35); }
 
 .header__active:hover {
-  background: rgba(17, 90, 190, 0.35); }
+  background: rgba(17, 90, 190, 0.35) !important; }
 
 .header .header__lang {
   font-size: 15px;
@@ -230,15 +226,16 @@ body {
     .header__last-item {
       padding: 20px 15px; } }
 
-.header .header__cabinet {
+.header .header__sign-in {
   display: inline;
   padding: 0 !important;
+  margin-top: 33px;
   margin-left: 10px; }
   @media (max-width: 991.98px) {
-    .header .header__cabinet {
+    .header .header__sign-in {
       margin: 0; } }
 
-.header .header__cabinet:hover {
+.header .header__sign-in:hover {
   text-decoration: underline;
   background: none; }
 
@@ -251,12 +248,13 @@ body {
     .header__slash {
       font-size: 16px; } }
 
-.header .header__exit {
+.header .header__sign-up {
   padding: 0 !important; }
 
-.header .header__exit:hover {
+.header .header__sign-up:hover {
   text-decoration: underline;
   background: none; }
+
 
 
   /****************
