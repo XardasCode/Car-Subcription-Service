@@ -55,60 +55,40 @@
 					<div class="row">
 						
 						<div class="catalog__filter">
-
-							<div class="catalog__filter-left">
-								<div class="catalog__year filter-wrapper">
-									<input class="catalog__year-input" type="hidden" name="" id="year-filter">
-									<div class="catalog__year-head filter-head">Рік</div>
-									<ul class="catalog__year-list filter-list">
-										<li class="catalog__year-item filter-item">2022</li>
-										<li class="catalog__year-item filter-item">2021</li>
-										<li class="catalog__year-item filter-item">2020</li>
-										<li class="catalog__year-item filter-item">2019</li>
-										<li class="catalog__year-item filter-item">2018</li>
-										<li class="catalog__year-item filter-item">2017</li>
-									</ul>
-								</div>
-								<div class="catalog__color filter-wrapper">
-									<input class="catalog__color-input" type="hidden" name="" id="color-filter">
-									<div class="catalog__color-head filter-head">Колір</div>
-									<ul class="catalog__color-list filter-list">
-										<li class="catalog__color-item filter-item">Чорний</li>
-										<li class="catalog__color-item filter-item">Сірий</li>
-										<li class="catalog__color-item filter-item">Білий</li>
-										<li class="catalog__color-item filter-item">Жовтий</li>
-									</ul>
-								</div>
 								<div class="catalog__price filter-wrapper">
-									<input class="catalog__price-input" type="hidden" name="" id="price-filter">
-									<div class="catalog__price-head filter-head">Ціна</div>
-									<ul class="catalog__price-list filter-list">
-										<li class="catalog__price-item filter-item">1000$</li>
-										<li class="catalog__price-item filter-item">2000$</li>
-										<li class="catalog__price-item filter-item">3000$</li>
-										<li class="catalog__price-item filter-item">4000$</li>
-									</ul>
+									<p class="catalog__filter-title title catalog__price-title">Ціна</p>
+									<div class="catalog__price-wrapper">
+										<p class="catalog__price-text">Від</p>
+										<input class="catalog__price-input filter-head" placeholder="1000"></input>
+										<p class="catalog__price-text">До</p>
+										<input class="catalog__price-input filter-head" placeholder="4000"></input>
+									</div>
+								</div>
+								<div class="catalog__year filter-wrapper">
+									<p class="catalog__filter-title catalog__year-title">Рік</p>
+									<div class="catalog__year-wrapper">
+										<p class="catalog__year-text">Від</p>
+										<input class="catalog__year-input filter-head" placeholder="1000"></input>
+										<p class="catalog__year-text">До</p>
+										<input class="catalog__year-input filter-head" placeholder="4000"></input>
+									</div>
 								</div>
 								<div class="catalog__brand filter-wrapper">
-									<input class="catalog__brand-input" type="hidden" name="" id="brand-filter">
-									<div class="catalog__brand-head filter-head">Бренд</div>
-									<ul class="catalog__brand-list filter-list">
-										<li class="catalog__brand-item filter-item">Volkswagen</li>
-										<li class="catalog__brand-item filter-item">Toyota</li>
-										<li class="catalog__brand-item filter-item">Hyundai</li>
-										<li class="catalog__brand-item filter-item">Volvo</li>
-									</ul>
+									<p class="catalog__filter-title catalog__brand-title">Бренд</p>
+									<div class="catalog__brand-wrapper">
+										<input class="catalog__brand-input filter-head" placeholder="Volkswagen"></input>
+									</div>
 								</div>
-								<div class="catalog__button filter-wrapper ">
+								<div class="catalog__colour filter-wrapper">
+									<p class="catalog__filter-title catalog__colour-title">Колір</p>
+									<div class="catalog__colour-wrapper">
+										<input class="catalog__colour-input filter-head" placeholder="Червоний"></input>
+									</div>
+								</div>
+								<div class="catalog__button filter-wrapper">
+									<p class="catalog__filter-title title catalog__price-title">&nbsp;</p>
 									<button class="blue-button" onclick="filterCars()">Фільтрація</button>
 								</div>
-							</div>
-
-							<div class="catalog__filter-right">
-								<input class="catalog__search" type="text" placeholder="Пошук" id="model-filter">
-								<img src="img/catalog/svg/search.svg" alt="" onclick="filterCars()">
-							</div>	
-
 						</div>
 
 						<div class="catalog__item-list row row-cols-12 card-deck">
