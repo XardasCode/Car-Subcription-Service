@@ -2,6 +2,7 @@ package com.csub.service;
 
 import com.csub.controller.request.UserRequestDTO;
 import com.csub.dto.UserDTO;
+import com.csub.entity.User;
 import com.csub.util.UserSearchInfo;
 import jakarta.transaction.Transactional;
 
@@ -36,4 +37,6 @@ public interface UserService {
 
     @Transactional
     int getPageCount(int size, List<String> filter);
+
+    List<User> getUsersWithSubscriptions();
 }

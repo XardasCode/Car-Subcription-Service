@@ -111,6 +111,7 @@ public class PostgreUserDAO implements UserDAO {
         log.debug("Getting role with id {}", roleId);
         return sessionFactory.find(UserRole.class, roleId);
     }
+
     @Override
     public List<User> searchUsers(UserSearchInfo info) {
         log.debug("Getting users with search info {}", info);
@@ -142,4 +143,10 @@ public class PostgreUserDAO implements UserDAO {
         return typedQuery.getResultList().size();
     }
 
+    @Override
+    public List<User> getUsersWithSubscriptions() {
+        log.debug("Getting users with subscriptions");
+        String query = "SELECT u FROM User u JOIN FETCH u.subscription s WHERE s.status.name = 'CONFIRM_STATUS'";
+        return sessionFactory.createQuery(query, User.class).getResultList();
+    }
 }

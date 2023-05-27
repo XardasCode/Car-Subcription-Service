@@ -29,4 +29,6 @@ public interface UserDAO {
     List<User> searchUsers(UserSearchInfo info);
 
     int getUsersCount(int size, List<String> filter);
+
+    List<User> getUsersWithSubscriptions();
 }

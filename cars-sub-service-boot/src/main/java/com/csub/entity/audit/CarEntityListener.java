@@ -23,6 +23,7 @@ public class CarEntityListener {
     public void preUpdate(Car car) {
         log.debug("CarAuditListener.preUpdate() called");
         car.setLastUpdateDate(OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+
     }
 
     @PreDestroy

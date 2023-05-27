@@ -10,10 +10,7 @@ import com.csub.entity.*;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.SubscriptionService;
-import com.csub.util.CarStatusList;
-import com.csub.util.GenerateReportPDF;
-import com.csub.util.SubscriptionSearchInfo;
-import com.csub.util.SubscriptionStatusList;
+import com.csub.util.*;
 import com.itextpdf.text.DocumentException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +36,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final SubscriptionDTOMapper subscriptionDTOMapper;
 
     private final GenerateReportPDF generateReportPDF;
+
+    private final EmailSender emailSender;
 
     @Override
     @Transactional
@@ -132,6 +131,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setManager(manager);
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.CONFIRM_STATUS.getStatusId());
         subscription.setStatus(status);
+
+        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка підтверджена", "Ваша підписка була підтверджена, ви можете взяти автомобіль");
         subscriptionDAO.updateSubscription(subscription);
     }
 
@@ -144,6 +145,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         CarStatus carStatus = carDAO.getCarStatusById(CarStatusList.AVAILABLE.getStatusId()).orElseThrow(
                 () -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
         car.setCarStatus(carStatus);
+
+        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка відхилена", "Ваша підписка була відхилена, будь ласка виправте інформацію і спробуйте ще раз");
+
         carDAO.updateCar(car);
         subscriptionDAO.deleteSubscription(id);
     }
@@ -167,20 +171,21 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         log.debug("Count: {}", count);
         return (int) Math.ceil((double) count / size);
     }
+
     @Override
     @Transactional
-    public byte[] getReportPDF(long id){
+    public byte[] getReportPDF(long id) {
         log.debug("Generating report pdf");
-        Subscription subscription = subscriptionDAO.getSubscription(id).orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
-        Car car = carDAO.getCar(subscription.getCar().getId()).orElseThrow(() -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+        Subscription subscription = subscriptionDAO.getSubscription(id).orElseThrow(
+                () -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
+        Car car = carDAO.getCar(subscription.getCar().getId()).orElseThrow(
+                () -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
+
         byte[] reportPDF;
         try {
-            reportPDF = generateReportPDF.generatePdf(car,subscription);
-        }catch (DocumentException e) {
-
-            throw new  ServerException("Failed to generate report",e, ErrorList.GENERATING_REPORT_FAILED);
-        } catch (IOException e) {
-            throw new ServerException("Failed to generate report",e, ErrorList.GENERATING_REPORT_FAILED);
+            reportPDF = generateReportPDF.generatePdf(car, subscription);
+        } catch (DocumentException | IOException e) {
+            throw new ServerException("Failed to generate report", e, ErrorList.GENERATING_REPORT_FAILED);
         }
 
         log.debug("Report generated");

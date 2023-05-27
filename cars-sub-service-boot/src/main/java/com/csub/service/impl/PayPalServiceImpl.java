@@ -2,10 +2,13 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.PayPalRequestDTO;
 import com.csub.dao.SubscriptionDAO;
+import com.csub.dao.UserDAO;
 import com.csub.entity.Subscription;
+import com.csub.entity.User;
 import com.csub.exception.ErrorList;
 import com.csub.exception.ServerException;
 import com.csub.service.PayPalService;
+import com.csub.util.EmailSender;
 import com.csub.util.PayPalPaymentManager;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
@@ -23,12 +26,17 @@ import java.time.LocalDateTime;
 public class PayPalServiceImpl implements PayPalService {
 
     private final PayPalPaymentManager payPalPaymentManager;
+
     private final SubscriptionDAO subscriptionDAO;
+
+    private final UserDAO userDAO;
+
+    private final EmailSender emailSender;
 
 
     @Override
     @Transactional
-    public String createPayment( PayPalRequestDTO paymentPayPal, String successUrl, String cancelUrl) {
+    public String createPayment(PayPalRequestDTO paymentPayPal, String successUrl, String cancelUrl) {
         log.info("Creating payment: {}", paymentPayPal);
 
         try {
@@ -43,14 +51,14 @@ public class PayPalServiceImpl implements PayPalService {
             throw new ServerException("Failed to create payment", ErrorList.PAYMENT_FAILED);
 
         } catch (PayPalRESTException e) {
-            throw new  ServerException("Failed to create payment",e, ErrorList.PAYMENT_FAILED);
+            throw new ServerException("Failed to create payment", e, ErrorList.PAYMENT_FAILED);
         }
 
     }
 
     @Override
     @Transactional
-    public boolean executePayment(String paymentId, String payerId, long id){
+    public boolean executePayment(String paymentId, String payerId, long id) {
         log.info("Executing payment");
         try {
             Payment payment = payPalPaymentManager.executePayment(paymentId, payerId);
@@ -58,13 +66,13 @@ public class PayPalServiceImpl implements PayPalService {
 
                 log.info("Payment executed {}", payment.toJSON());
                 String total = payment.getTransactions().get(0).getAmount().getTotal();
-                int price = (int)  Double.parseDouble(total);
+                int price = (int) Double.parseDouble(total);
 
                 log.debug("Updating totalPrise in subscription. price = {}", price);
                 updateTotalPriseSubscription(id, price);
                 log.debug("TotalPrise in subscription updated");
 
-            }else{
+            } else {
                 return false;
             }
         } catch (PayPalRESTException e) {
@@ -75,16 +83,25 @@ public class PayPalServiceImpl implements PayPalService {
         return true;
     }
 
+    @Override
+    public void sendPaymentEmail(String payerId, String paymentID) {
+        log.info("Sending payment email");
+        User user = userDAO.getUser(Long.parseLong(payerId))
+                .orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
+        emailSender.sendEmail(user.getEmail(), "Payment", "Your payment was successful. Payment ID: " + paymentID);
+        log.info("Payment email sent");
+    }
 
     private void updateTotalPriseSubscription(long id, int price) {
         log.debug("Updating totalPrise in subscription");
         Subscription subscription = getSubEntity(id);
-        subscription.setTotalPrice(subscription.getTotalPrice()-price);
+        subscription.setTotalPrice(subscription.getTotalPrice() - price);
         subscription.setLastPayDate(LocalDateTime.now().toString());
         subscriptionDAO.updateSubscription(subscription);
         log.debug("TotalPrise in subscription updated");
     }
-    private Subscription getSubEntity(long id){
+
+    private Subscription getSubEntity(long id) {
         log.debug("Getting subscription with id {}", id);
         return subscriptionDAO.getSubscription(id)
                 .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));

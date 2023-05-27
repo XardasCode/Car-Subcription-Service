@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -23,6 +24,7 @@ import java.util.Map;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableScheduling
 public class AppConfig {
 
     @Autowired
@@ -59,15 +61,16 @@ public class AppConfig {
     }
 
     @Bean
-    public Map<String,String> paypalConfig(){
-        Map<String,String> configMap = new HashMap<>();
-        configMap.put("mode",mode);
+    public Map<String, String> paypalConfig() {
+        Map<String, String> configMap = new HashMap<>();
+        configMap.put("mode", mode);
         return configMap;
 
     }
+
     @Bean
-    public OAuthTokenCredential qAuthTokenCredential(){
-        return new OAuthTokenCredential(clientId,clientSecret,paypalConfig());
+    public OAuthTokenCredential qAuthTokenCredential() {
+        return new OAuthTokenCredential(clientId, clientSecret, paypalConfig());
     }
 
     @Bean

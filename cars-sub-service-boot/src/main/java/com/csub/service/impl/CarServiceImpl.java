@@ -37,7 +37,7 @@ public class CarServiceImpl implements CarService {
         log.debug("Adding car: {}", car);
         Car carEntity = Car.createCarFromRequest(car);
 
-        CarStatus carStatus =  carDAO.getCarStatusById(CarStatusList.AVAILABLE.getStatusId()).orElseThrow(() -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
+        CarStatus carStatus = carDAO.getCarStatusById(CarStatusList.AVAILABLE.getStatusId()).orElseThrow(() -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
         carEntity.setCarStatus(carStatus);
         carEntity.getCarStatus().getCars().add(carEntity);
         long carId = carDAO.addCar(carEntity).orElseThrow(() -> new ServerException("Car not added", ErrorList.CAR_NOT_CREATED));
@@ -114,12 +114,6 @@ public class CarServiceImpl implements CarService {
         log.debug("Image URL: {}", imagePath);
         return imagePath;
     }
-
-//    private CarStatus getCarStatusById(int statusId) {
-//        log.debug("Getting car status by id {}", statusId);
-//        return carDAO.getCarStatusById(statusId)
-//                .orElseThrow(() -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
-//    }
 
     private Car getCarEntity(long id) {
         log.debug("Getting car with id {}", id);

@@ -58,8 +58,6 @@ class CarServiceImplTest {
                 .regDate("2022-10-05")
                 .mileage(11230)
                 .lastServiceDate("2022-10-05")
-//                .createDate("2022-10-05")
-//                .lastUpdateDate("2022-10-05")
                 .carStatus(carStatus)
                 .subscription(subscription)
                 .build();

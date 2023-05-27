@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -202,5 +201,12 @@ public class UserServiceImpl implements UserService {
         int count = userDAO.getUsersCount(size, filter);
         log.debug("Count: {}", count);
         return (int) Math.ceil((double) count / size);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getUsersWithSubscriptions() {
+        log.debug("Getting users with subscriptions");
+        return userDAO.getUsersWithSubscriptions();
     }
 }

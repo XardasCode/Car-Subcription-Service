@@ -35,7 +35,7 @@ class PostgreCarDAOTest {
                 .name("Test")
                 .build();
         CarStatus carStatus = CarStatus.builder()
-                .name("Test")
+                .name("AVAILABLE")
                 .build();
         car = Car.builder()
                 .name("Test car")

@@ -8,10 +8,7 @@ import com.csub.dto.CarDTO;
 import com.csub.dto.SubscriptionDTO;
 import com.csub.dto.mapper.SubscriptionDTOMapper;
 import com.csub.entity.*;
-import com.csub.util.CarStatusList;
-import com.csub.util.GenerateReportPDF;
-import com.csub.util.SubscriptionSearchInfo;
-import com.csub.util.SubscriptionStatusList;
+import com.csub.util.*;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,17 +34,18 @@ class SubscriptionServiceImplTest {
     @Mock
     private SubscriptionDAO subscriptionDAO;
     @Mock
-    private  CarDAO carDAO;
+    private CarDAO carDAO;
     @Mock
-    private  UserDAO userDAO;
-
-    private final SubscriptionDTOMapper subscriptionDTOMapper = new SubscriptionDTOMapper();
+    private UserDAO userDAO;
     @Mock
     private GenerateReportPDF generateReportPDF;
+
+    @Mock
+    private EmailSender emailSender;
+
     User user;
     Subscription subscription;
     Car car;
-
     User manager;
     CarStatus carStatus;
     SubscriptionStatus subscriptionStatus;
@@ -56,13 +54,13 @@ class SubscriptionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO,carDAO,userDAO,subscriptionDTOMapper,generateReportPDF);
+        subscriptionService = new SubscriptionServiceImpl(subscriptionDAO, carDAO, userDAO, new SubscriptionDTOMapper(), generateReportPDF, emailSender);
         userRole = UserRole.builder().name("USER").build();
         user = User.builder()
                 .id(0)
                 .name("Fogell")
                 .surname("McLovin")
-                .email("McLovin3000@gmail.com")
+                .email("test@gmail.com")
                 .password("DTlpxUE8OnvOh96bMNDYDHIdwTes0oLFP6pzA5cZSB7SGB9jU+eWJmeKNRUK0Np6")
                 .phone("0985491837")
                 .isVerified(false)
@@ -76,7 +74,7 @@ class SubscriptionServiceImplTest {
                 .id(0)
                 .name("John")
                 .surname("Week")
-                .email("keller2077@gmail.com")
+                .email("test@gmail.com")
                 .password("DTlpxUE8OnvOh96bMNDYDHIdwTes0oLFP6pzA5cZSB7SGB9jU+eWJmeKNRUK0Np6")
                 .phone("0985491839")
                 .isVerified(false)
@@ -130,7 +128,6 @@ class SubscriptionServiceImplTest {
                 .ipnNumber(subscription.getIpnNumber())
                 .socMediaLink(subscription.getSocMediaLink())
                 .build();
-
 
 
     }
@@ -187,7 +184,6 @@ class SubscriptionServiceImplTest {
     }
 
 
-
     @DisplayName("deleteSubscription checks if the subscriptionDAO method is called")
     @Test
     void deleteSubscription() {
@@ -213,13 +209,13 @@ class SubscriptionServiceImplTest {
 
     @DisplayName("getPageCount checks if the subscriptionDAO method getCarsCount is called")
     @Test
-    void  getPageCount() {
+    void getPageCount() {
         int size = 12;
         List<String> filter = new ArrayList<>();
         filter.add("isActive:true");
-        Mockito.when(subscriptionDAO.getSubscriptionsCount(size,filter)).thenReturn(24);
-        int actual = subscriptionService.getPageCount(size,filter);
-        Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscriptionsCount(size,filter);
+        Mockito.when(subscriptionDAO.getSubscriptionsCount(size, filter)).thenReturn(24);
+        int actual = subscriptionService.getPageCount(size, filter);
+        Mockito.verify(subscriptionDAO, Mockito.times(1)).getSubscriptionsCount(size, filter);
         assertEquals(2, actual);
     }
 
@@ -231,9 +227,11 @@ class SubscriptionServiceImplTest {
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         Mockito.when(userDAO.getUser(manager.getId())).thenReturn(Optional.of(manager));
         Mockito.when(subscriptionDAO.getSubscriptionStatus(SubscriptionStatusList.CONFIRM_STATUS.getStatusId())).thenReturn(Optional.ofNullable(subscriptionStatus));
+        Mockito.doNothing().when(emailSender).sendEmail(Mockito.any(), Mockito.any(), Mockito.any());
         subscriptionService.confirmSubscription(subscription.getId(), manager.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).updateSubscription(subscription);
     }
+
     @DisplayName("rejectSubscription checks if the subscriptionDAO method is called")
     @Test
     void rejectSubscription() {
@@ -242,10 +240,11 @@ class SubscriptionServiceImplTest {
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
         Mockito.when(carDAO.getCarStatusById(CarStatusList.AVAILABLE.getStatusId())).thenReturn(Optional.ofNullable(carStatus));
-
+        Mockito.doNothing().when(emailSender).sendEmail(Mockito.any(), Mockito.any(), Mockito.any());
         subscriptionService.rejectSubscription(subscription.getId());
         Mockito.verify(subscriptionDAO, Mockito.times(1)).deleteSubscription(subscription.getId());
     }
+
     @DisplayName("searchSubscription must return filtered list of subscription ")
     @Test
     void searchSubscription() {
@@ -271,16 +270,15 @@ class SubscriptionServiceImplTest {
     @SneakyThrows
     @DisplayName("getReportPDF checks if the getReportPDF method is called")
     @Test
-    void  getReportPDF() {
+    void getReportPDF() {
 
-        byte [] pdf = new byte[1];
+        byte[] pdf = new byte[1];
         Mockito.when(subscriptionDAO.getSubscription(subscription.getId())).thenReturn(Optional.of(subscription));
         Mockito.when(carDAO.getCar(car.getId())).thenReturn(Optional.ofNullable(car));
         OngoingStubbing<byte[]> ongoingStubbing = Mockito.when(generateReportPDF.generatePdf(car, subscription)).thenReturn(pdf);
-        byte []  actual = subscriptionService.getReportPDF(subscription.getId());
-        Mockito.verify(generateReportPDF, Mockito.times(1)).generatePdf(car,subscription);
+        byte[] actual = subscriptionService.getReportPDF(subscription.getId());
+        Mockito.verify(generateReportPDF, Mockito.times(1)).generatePdf(car, subscription);
         assertEquals(pdf, actual);
     }
-
-
 }
+

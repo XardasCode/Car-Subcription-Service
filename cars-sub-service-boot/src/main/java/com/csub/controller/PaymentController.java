@@ -4,6 +4,7 @@ import com.csub.controller.request.PayPalRequestDTO;
 import com.csub.controller.util.JSONInfo;
 import com.csub.service.PayPalService;
 
+import com.csub.util.EmailSender;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +59,7 @@ public class PaymentController {
         log.info("Executing payment");
         URI page = URI.create(payPalService.executePayment(paymentID, payerId, id) ? redirectSuccessPage : redirectErrorPage);
         HttpHeaders httpHeaders = new HttpHeaders();
+        payPalService.sendPaymentEmail(payerId, paymentID);
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
