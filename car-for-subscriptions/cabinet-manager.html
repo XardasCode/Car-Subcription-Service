@@ -18,9 +18,7 @@
 						<nav class="navbar navbar-expand-lg header__navbar">
 						  <div class="container-fluid">
 						    <a class="navbar-brand header__logo" href="index.html">
-						    	<span class="header__span-1">Brand name</span>
-						    	<span class="header__span-2">Car Subscription</span>
-						    	<span class="header__car"></span>
+						    	<img src="img/logo.png" alt="logo">
 						    </a>
 						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						      <span class="navbar-toggler-icon"></span>
@@ -41,7 +39,7 @@
 						        </li>
 						        <div class="header__last-item">
 							        <li class="nav-item">
-							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" href="sign-in.html">Вийти</a>
+							          <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" href="#" onclick="logoutUser()">Вийти</a>
 							        </li>
 						        </div>
 						      </ul>
@@ -139,12 +137,12 @@
 				</div>
 			</section>
 
-			<div class="switch">
+			<div class="pagination">
 				<img src="img/catalog/svg/arrow-left.svg" id="arrow-left" alt="arrow-left" onclick="goLeft()">
 				<div class="switch" id="page_number">
-					<div class="switch-item switch-active">1</div>
+					<!-- <div class="switch-item switch-active">1</div>
 					<div class="switch-item switch-inactive">2</div>
-					<div class="switch-item switch-inactive">3</div>
+					<div class="switch-item switch-inactive">3</div> -->
 				</div>
 				<img src="img/catalog/svg/arrow-right.svg" id="arrow-right" alt="arrow-right" onclick="goRight()">
 			</div>
@@ -156,9 +154,7 @@
 					<div class="row no-gutters">
 						<div class="col-md-4 footer__logo">
 							<a class="footer__a" href="#">
-								<span class="footer__span-1">Brand name</span>
-								<span class="footer__span-2">Car Subscription</span>
-								<span class="footer__car"></span>
+								<img src="img/logo.png" alt="logo">
 							</a>
 						</div>
 						<div class="col-md-4 footer__copyright">
@@ -180,6 +176,5 @@
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<!-- Підключення свого файлу -->
 	<script type="text/javascript" src="js/cabinet-manager.js"></script>
-
 </body>
 </html>

@@ -2,53 +2,114 @@
 
 addEventListener('DOMContentLoaded', async function () {
     let user = sessionStorage.getItem('user');
-    if (user != null) {
-        let userJson = JSON.parse(user);
-        let subId = userJson['subscriptionId'];
-        if (subId === 0) {
-            document.getElementById('form').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const form = document.getElementById('form');
+    await checkUser(user);
 
-                let error = formValidate(form);
-
-                if (error !== 0) {
-                    alert("Заповніть обов'язкові поля!")
-                } else {
-                    submitSubscriptionForm();
-                }
-            })
-
-            let username = document.getElementById('username');
-            let email = document.getElementById('email');
-            let phone = document.getElementById('phone');
-            let emailVerified = document.getElementById('isVerified');
-            let jsonName = userJson['name'];
-            let jsonSurname = userJson['surname'];
-            let jsonEmail = userJson['email'];
-            let jsonPhone = userJson['phone'];
-            let jsonIsVerified = userJson['isVerified'];
-            username.innerHTML = jsonName + ' ' + jsonSurname;
-            email.innerHTML = jsonEmail;
-            phone.innerHTML = jsonPhone;
-            if (jsonIsVerified === true) {
-                emailVerified.innerHTML = 'Пошта підтверджена';
-                await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
-            } else {
-                emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, будь ласка підтвердіть пошту: <a href="email-confirm.html">Підтвердити</a>';
-            }
-        } else if (subId > 0) {
-            if (sessionStorage.getItem('subscription') == null) {
-                fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId)
-                    .then(response => response.json())
-                    .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
-                window.location.href = 'cabinet-active.html';
-            }
-        }
+    let userJson = JSON.parse(user);
+    let username = document.getElementById('username');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('phone');
+    let emailVerified = document.getElementById('isVerified');
+    let jsonName = userJson['name'];
+    let jsonSurname = userJson['surname'];
+    let jsonEmail = userJson['email'];
+    let jsonPhone = userJson['phone'];
+    let jsonIsVerified = userJson['isVerified'];
+    username.innerHTML = jsonName + ' ' + jsonSurname;
+    email.innerHTML = jsonEmail;
+    phone.innerHTML = jsonPhone;
+    if (jsonIsVerified === true) {
+        emailVerified.innerHTML = 'Пошта підтверджена';
+        await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
     } else {
-        window.location.href = 'sign-in.html';
+        emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, ' +
+            'будь ласка підтвердіть пошту: <a href="email-confirm.html" class="blue-button">Підтвердити</a>';
+    }
+
+    let subId = userJson['subscriptionId'];
+    if (subId === 0) {
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const form = document.getElementById('form');
+
+            let error = formValidate(form);
+
+            if (error !== 0) {
+                alert("Заповніть обов'язкові поля!")
+            } else {
+                submitSubscriptionForm();
+            }
+        })
+
+
+    } else if (subId > 0) {
+        await checkSubscriptionStatus(subId);
     }
 });
+
+async function checkUser(user) {
+    if (user === null) {
+        window.location.href = 'sign-in.html';
+    }
+    let userJson = JSON.parse(user);
+    let userRole = userJson['role']; //  Roles: USER, MANAGER
+    if (userRole === 'MANAGER') {
+        window.location.href = 'cabinet-manager.html';
+    }
+}
+
+async function getCar(id) {
+    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + id);
+    return await responseCar.json();
+}
+
+async function checkSubscriptionStatus(subId) {
+
+    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
+    let status = response.status;
+    if (status > 299) {
+        alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
+        window.location.href = 'error.html';
+    }
+    let subscription = await response.json();
+    let subscriptionStatus = subscription['status']; // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
+    console.log(subscriptionStatus);
+    if (subscriptionStatus === 'UNDER_CONSIDERATION') {
+        document.getElementById('subStatus').innerHTML = 'На розгляді';
+
+    } else if (subscriptionStatus === 'CONFIRM_STATUS') {
+        let activeDiv = document.getElementById('active__right');
+        activeDiv.classList.remove('visually-hidden');
+        let inactive = document.getElementById('inactive__right');
+        inactive.classList.add('visually-hidden');
+
+        const car = await getCar(subscription['carId']);
+        document.getElementById('carName').textContent = `${car['name']} ${car['brand']}`;
+
+        let currentDate = new Date();
+        let lastPayDate = new Date(subscription['lastPayDate']);
+        let timeDifference = currentDate.getTime() - lastPayDate.getTime();
+        let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        daysDifference = 30 - daysDifference;
+        if (daysDifference > 0) {
+            document.getElementById('paymentBtn').style.visibility = 'hidden';
+            document.getElementById('daysToPay').textContent = `Залишилось днів до наступного платежу: ${daysDifference.toString()}`;
+        } else if (daysDifference == 0) {
+            document.getElementById('paymentBtn').style.visibility = 'visible';
+            document.getElementById('daysToPay').textContent = `Сьогодні день оплати підписки.`;
+        } else {
+            document.getElementById('paymentBtn').style.visibility = 'visible';
+            document.getElementById('daysToPay').textContent = `Будь ласка, оплатіть вашу підписку!`;
+        }
+
+
+    }
+}
+
+// async function setSubscriptionToSession(subId) {
+
+//     let subscriptionJson = await response.json();
+//     sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
+// }
 
 async function setSubscriptionForm() {
     const queryString = window.location.search;
@@ -78,12 +139,13 @@ async function setCarInfoToForm(carId) {
     let carColorJson = car['color'];
     let carPriceJson = car['price'];
 
-    let carName = document.getElementById('carName');
+    let carName = document.getElementById('carName2');
     let carModel = document.getElementById('carModel');
     let carBrand = document.getElementById('carBrand');
     let carYear = document.getElementById('carYear');
     let carColor = document.getElementById('carColor');
-
+    console.log(carNameJson)
+    console.log(carName)
     carName.value = carNameJson;
     carModel.value = carModelJson;
     carBrand.value = carBrandJson;
@@ -151,8 +213,14 @@ async function submitSubscriptionForm() {
         body: JSON.stringify(data),
     }).then(async response => {
         if (response.status === 201) {
+            let message = await response.json();
+            let subId = message['message'];
+            let user = sessionStorage.getItem('user');
+            user = JSON.parse(user);
+            user['subscriptionId'] = subId;
+            sessionStorage.setItem('user', JSON.stringify(user));
             alert('Заявка на підписку успішно оформлена!');
-            window.location.href = 'cabinet-expected.html';
+            window.location.href = 'cabinet.html';
         } else {
             let error = await response.json();
             let errorMessage = error['errorMessage'];
@@ -173,7 +241,10 @@ function parsePayPerMonth(monthsString) {
     if (match === null) {
         return null;
     } else {
-        return match[0];
+        let roundedPrice = match[0];
+        let price = parseFloat(roundedPrice);
+        price = price + 0.1; // to avoid rounding errors
+        return price.toString();
     }
 // Отримання першого знайденого збігу (суми грошей)
 
@@ -312,8 +383,8 @@ function formValidate(form) {
     let error = 0;
     let formReq = document.querySelectorAll('._req'); //required - обов'язкове поле
 
-    for (let index = 0; index < formReq.length; index++) {
-        const input = formReq[index];
+    for (const element of formReq) {
+        const input = element;
         formRemoveError(input);
 
         if (input.value === '') { //перевірка чи поле заповленене
@@ -356,7 +427,7 @@ function checkPassportNumber(passportNo) {
 
 // Валідація ІПН регулярним виразом 
 
-var result2 = document.querySelector('#result2');
+let result2 = document.querySelector('#result2');
 form = document.querySelector('#form');
 
 form.addEventListener('submit', function (e) {
@@ -365,39 +436,13 @@ form.addEventListener('submit', function (e) {
 })
 
 function checkIpnNumber(ipnNo) {
-    var ipnRE = /^\d\d\d\d\d\d\d\d\d\d$/;
+    let ipnRE = /^\d\d\d\d\d\d\d\d\d\d$/;
     if (ipnNo.match(ipnRE)) {
         result2.innerHTML = 'Номер паспорту введено правильно';
     } else {
         result2.innerHTML = 'Номер паспорту введено <strong><u>не правильно</u></strong><br>Приклад: 0101010101';
     }
 }
-
-
-/*// Динамічний header в залежності від того, чи користувач залогований
-
-function updateHeader() {
-  const headerEl = document.querySelector('.header__last-item');
-  const userStr = sessionStorage.getItem('user');
-  if (userStr) {
-    // Якщо користувач залогований, виводимо кнопки "Мій кабінет/Вийти"
-    const user = JSON.parse(userStr);
-    headerEl.innerHTML = `
-    <li class="nav-item">
-      <a class="nav-link active header__cabinet header__active" aria-current="page" href="#">Мій кабінет</a><span class="header__slash">/</span><a class="header__exit" id="logoutButton" href="#">Вийти</a>
-    </li>
-    `;
-    const logoutBtn = headerEl.querySelector('#logout-btn');
-    logoutBtn.addEventListener('click', logoutUser);
-  } else {
-    // Якщо користувач не залогований, виводимо кнопки "Увійти/Зареєструватись"
-    headerEl.innerHTML = `
-    <li class="nav-item">
-      <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a>
-    </li>
-    `;
-  }
-}*/
 
 
 // Розлогування користувача та редірект на сторінку входу

@@ -4,21 +4,18 @@ let userJson = JSON.parse(user);
 const subId = userJson['subscriptionId'];
 
 window.addEventListener("DOMContentLoaded", (event) => {
-   
         getSubscription(subId);
-    
 });
 
 async function getSubscription(id){
          let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + id;
 		let response = await fetch(url);
 	    let responseJSON = await response.json();
-		let monthPrice = responseJSON['monthPrice'];
-        document.getElementById('month-price').textContent = monthPrice;
+    document.getElementById('month-price').textContent = responseJSON['monthPrice'];
 }
 
  function getApprovingURL(){
-    price = document.getElementById('month-price').textContent;
+    let price = document.getElementById('month-price').textContent;
    
     let paymentJson = {
         "price": price,
@@ -43,9 +40,4 @@ async function getSubscription(id){
         }
       console.log(result);
     })
-    
-
-
-
-           
 }

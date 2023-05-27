@@ -20,25 +20,25 @@
                     <figure class="report__line">
                     </figure>
                     <div class="report__title">
-                        <span>Марка: Volkswagen</span>
-                        <span>Модель: Tiguan</span>
-                        <span>Номер шасі: WVWZZZ1KVSG006953</span>
-                        <span>Тип пального: В</span>
-                        <span>Колір: Сірий</span>
-                        <span>Реєстраційний номер: АА3946МЕ </span>
-                        <span>Рік випуску: 2021</span>
-                        <span>Дата реєстрації: 09.05.2021</span>
-                        <span>Пробіг: 32.560км</span>
+                        
+                            <span>Марка: <i id ='brand'></i></span>
+                            <span>Модель: <i id ='name'></i></span>
+                            <span>Номер шасі:  <i id ='chassisNumber'></i></span>
+                            <span>Тип пального:  <i id ='fuelType'></i></span>
+                            <span>Колір:  <i id ='color'></i></span>
+                            <span>Реєстраційний номер:  <i id ='regNumber'></i> </span>
+                            <span>Рік випуску:  <i id ='year'></i></span>
+                            <span>Дата реєстрації: <i id ='regDate'></i></span>
+                            <span>Пробіг: <i id ='mileage'></i></span>
                         <div class="report__bottomtext">
-                            <h2>Останнє ТО: 12.02.2023</h2>
-                            <h2>Заміна мастила: 31.000км</h2>
-                            <h2>Останній платіж: 01.03.2023</h2>
+                            <h2>Останнє ТО: <i id ='lastServiceDate'></i></h2>
+                            <h2>Останній платіж: <i id ='lastPayDate'></i></h2>
                         </div>
-                        <a href="#" class="download">Завантажити квитанцію</a>
+                        <a href="#" onclick="downloadPDF()" class="download">Завантажити квитанцію</a>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn-close report__button" aria-label="Close"></button>
+            <button type="button"  onclick="Close()" class="btn-close report__button" aria-label="Close"></button>
         </section>
     
     </div>
@@ -49,7 +49,7 @@
 		</div>
 				
 	<!-- </div> -->
-
-	<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="./js/car-report.js"></script>
 </body>
 </html>

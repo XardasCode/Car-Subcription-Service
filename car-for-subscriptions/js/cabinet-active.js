@@ -3,7 +3,7 @@
 //     let userJson = JSON.parse(user);
 //     let subId = userJson['subscriptionId'];
 //     if (subId == 0) {
-//     window.location.href = 'cabinet-inactive.html';
+//     window.location.href = 'cabinet.html';
 //     }else if(subId > 0){
 //         if (sessionStorage.getItem('subscription') == null) {
 //             let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId) 
@@ -16,12 +16,12 @@
 
 // }else{
 //     window.location.href = 'sign-in.html';
-// }
+// }zz
 
 
 // Динамічний header в залежності від того, чи користувач залогований
 
-  const headerEl = document.querySelector('.header__last-item');
+/*  const headerEl = document.querySelector('.header__last-item');
   const userStr = sessionStorage.getItem('user');
   if (userStr) {
     // Якщо користувач залогований, виводимо кнопки "Мій кабінет/Вийти"
@@ -43,7 +43,7 @@
       <a class="nav-link active header__sign-in" aria-current="page" href="sign-in.html">Увійти</a><span class="header__slash">/</span><a class="header__sign-up" href="sign-up.html">Зареєструватись</a>
     </li>
     `;
-  }
+  }*/
 
 
 // Розлогування користувача та редірект на сторінку входу

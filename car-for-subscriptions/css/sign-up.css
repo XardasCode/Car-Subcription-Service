@@ -144,11 +144,7 @@ body {
   padding: 0; }
 
 .header__logo {
-  font-size: 15px;
-  line-height: 18px;
-  position: relative;
-  padding-right: 5px;
-  padding-bottom: 5px; }
+  margin-right: 0; }
 
 .header__span-1 {
   text-transform: uppercase;
@@ -452,19 +448,17 @@ body {
     @media (max-width: 479.98px) {
       .sign-up__agree, .sign-up__want-receive {
         padding-left: 27px; } }
-  .sign-up__want-receive {
+  .sign-up__agree {
     margin-bottom: 22px; }
     @media (max-width: 767.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 20px !important; } }
     @media (max-width: 575.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 18px !important; } }
     @media (max-width: 479.98px) {
-      .sign-up__want-receive {
+      .sign-up__agree {
         margin-bottom: 16px !important; } }
-  .sign-up__agree {
-    margin-bottom: 8px; }
   .sign-up .sign-up__agree-label, .sign-up .sign-up__want-receive-label {
     font-size: 15px;
     line-height: 18px;
@@ -542,27 +536,16 @@ span#result {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 24px;
-    line-height: 29px;
-    position: relative;
     color: #fff; }
     @media (max-width: 767.98px) {
       .footer__logo {
-        margin-bottom: 20px;
-        position: relative;
-        right: 15px;
+        margin-bottom: 30px;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center; } }
   .footer__a {
     position: relative;
-    top: -6px; }
-    @media (max-width: 1199.98px) {
-      .footer__a {
-        font-size: 15px;
-        line-height: 18px;
-        padding-bottom: 20px;
-        top: 0px; } }
+    top: 4px; }
   .footer__span-1 {
     color: #fff;
     text-transform: uppercase;

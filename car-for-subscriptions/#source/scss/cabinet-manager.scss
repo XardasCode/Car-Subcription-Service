@@ -95,12 +95,7 @@ body{
 		padding: 0;
 	}
 	&__logo{
-		font-size: 15px;
-		line-height: 18px;
-		position: relative;
-		padding-right: 5px;
-		padding-bottom: 5px;
-		// color: #fff;
+		margin-right: 0;
 	}
 	&__span-1{
 		text-transform: uppercase;
@@ -455,7 +450,7 @@ body{
 		font-size: 24px;
 		line-height: 29px;
 		max-height: 80px;
-		// overflow: hidden;
+		overflow: hidden;
 		transition: max-height 0.5s ease-out;
 		padding: 0;
 		margin: 0;
@@ -495,7 +490,7 @@ body{
 			margin-bottom: 10px;
 		}
 	}
-	.collapsible .collapsible__item-wrapper.open .collapsible__list, .collapsible #item-wrapper-2.open .collapsible__list, .collapsible #item-wrapper-3.open .collapsible__list {
+	.collapsible__item-wrapper.open .collapsible__list, .collapsible #item-wrapper-2.open .collapsible__list, .collapsible #item-wrapper-3.open .collapsible__list {
   		max-height: 600px;
 	  	transition: max-height 0.5s ease-in;
 	}
@@ -561,10 +556,18 @@ body{
 		display: none;
 	}
 }
+.pagination{
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 10px 0;
+}
 .switch{
 	display: flex;
 	justify-content: center;
-	margin: 0 20px 0 20px;
+	margin: 0 30px 0 30px;
+	@media (max-width: 991.98px) {
+		margin: 0 20px 0 20px;
+	}
 	img{
 		cursor: pointer;
 	}
@@ -578,7 +581,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 10px;
+	// margin-right: 10px;
 	cursor: pointer;
 	@media (max-width: 479.98px) {
 		width: 30px;
@@ -627,26 +630,15 @@ body{
 	}
 	&__logo{
 		display: flex;
-		font-size: 24px;
-		line-height: 29px;
-		position: relative;
 		color: #fff;
 		@media (max-width: 767.98px) {
-			margin-bottom: 20px;
-			position: relative;
-			right: 15px;
+			margin-bottom: 30px;
 			justify-content: center;
 		}
 	}
 	&__a{
 		position: relative;
-		top: -6px;
-		@media (max-width: 1199.98px) {
-			font-size: 15px;
-			line-height: 18px;
-			padding-bottom: 20px;
-			top: 0px;
-		}
+		top: 4px;
 	}
 	&__span-1{
 		color: #fff;

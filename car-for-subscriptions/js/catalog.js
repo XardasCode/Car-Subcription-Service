@@ -19,11 +19,11 @@ function filterCars(pageNumber = '1'){
     let price = document.getElementById('price-filter').value;
     let brand = document.getElementById('brand-filter').value;
 
-    model = model == '' ? null : model;
-    year = year == '' ? null : year;
-    color = color == '' ? null : color;
-    price = price == '' ? null : price.slice(0, -1);
-    brand = brand == '' ? null : brand;
+    model = model === '' ? null : model;
+    year = year === '' ? null : year;
+    color = color === '' ? null : color;
+    price = price === '' ? null : price.slice(0, -1);
+    brand = brand === '' ? null : brand;
     getCars(pageNumber, model, year, color, price, brand);
 }
 
@@ -52,12 +52,12 @@ function getCars(page, model, year, color, price, brand) {
         filter.slice(0, -1);
     }
     let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
-    let getResponsePage = fetch(urlPage)
+     fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage));
 
     let url = host + myPage + '&' + size + '&' + filter;
-    let getResponse = fetch(url)
+    fetch(url)
     .then(response => response.json())
     .then(json => generateCars(json));
 }
@@ -67,11 +67,14 @@ function generateCars(json) {
     json.forEach(item => {
         let image = item['image'] == null ? 'img/catalog/svg/car-8.svg' : item['image'];
         document.querySelector('.catalog__item-list').innerHTML += ` 
-        <div class="col-sm-12 col-md-6 col-xl-4 catalog__block">
+        <div class="col-sm-12 col-md-6 col-xl-4 catalog__block card">
             <a href="car-profile.html?id=${item['id']}">
-                <img src="${image}" class="adaptive-img" alt="Volkswagen T-Roc">
-                <span> ${item['name']}</span>
+                <img src="${image}" class="adaptive-img card-img-top" alt="Volkswagen T-Roc">
             </a>
+            <div class="card-body">
+                <h5 class="card-title">${item.name} ${item.model} ${item.brand}</h5>
+               
+            </div>
         </div>
         `
     });
@@ -112,7 +115,7 @@ function goLeft(){
     let div = document.getElementById('activePage');
     if (div) {
         let page = div.textContent;
-        if (page != '1') {
+        if (page !== '1') {
         filterCars(page - 1);
         }
     }
@@ -121,7 +124,7 @@ function goRight(){
     let div = document.getElementById('activePage');
     if (div) {
         let page = div.textContent;
-        if (page != lastPage) {
+        if (page !== lastPage) {
         let rightPage = (Number(page) + 1).toString(); 
         filterCars(rightPage);
         }

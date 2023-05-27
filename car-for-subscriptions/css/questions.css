@@ -147,11 +147,7 @@ body {
   padding: 0; }
 
 .header__logo {
-  font-size: 15px;
-  line-height: 18px;
-  position: relative;
-  padding-right: 5px;
-  padding-bottom: 5px; }
+  margin-right: 0; }
 
 .header__span-1 {
   text-transform: uppercase;
@@ -445,27 +441,16 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 24px;
-    line-height: 29px;
-    position: relative;
     color: #fff; }
     @media (max-width: 767.98px) {
       .footer__logo {
-        margin-bottom: 20px;
-        position: relative;
-        right: 15px;
+        margin-bottom: 30px;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center; } }
   .footer__a {
     position: relative;
-    top: -6px; }
-    @media (max-width: 1199.98px) {
-      .footer__a {
-        font-size: 15px;
-        line-height: 18px;
-        padding-bottom: 20px;
-        top: 0px; } }
+    top: 4px; }
   .footer__span-1 {
     color: #fff;
     text-transform: uppercase;

@@ -53,12 +53,6 @@ body{
 	@media (max-width: 575.98px) {
 		font-size: 14px;
 	}
-	@media (max-width: 479.98px) {
-		font-size: 12px;
-	}
-	@media (max-width: 379.98px) {
-		// font-size: 10px;
-	}
 }
 .blue-button:hover{
 	background: #2869ca;
@@ -94,12 +88,7 @@ body{
 		padding: 0;
 	}
 	&__logo{
-		font-size: 15px;
-		line-height: 18px;
-		position: relative;
-		padding-right: 5px;
-		padding-bottom: 5px;
-		// color: #fff;
+		margin-right: 0;
 	}
 	&__span-1{
 		text-transform: uppercase;
@@ -220,7 +209,7 @@ body{
 		margin-bottom: 60px;
 	}
 	@media (max-width: 575.98px) {
-		margin-bottom: 40px;
+		margin-bottom: 50px;
 	}
 	&__left{
 		@media (max-width: 1199.98px) {
@@ -293,6 +282,9 @@ body{
 	}
 	&__a{
 		padding: 14px 24px 14px 24px;
+		@media (max-width: 575.98px) {
+			padding: 14px 20px 14px 20px;
+		}
 	}
 }
 /*****************
@@ -314,7 +306,7 @@ body{
 	}
 	&__img{
 		@media (max-width: 575.98px) {
-			max-width: 85%;
+			// max-width: 85%;
 			margin: 0 auto;
 		}
 	}
@@ -365,7 +357,6 @@ body{
 		@media (max-width: 379.98px) {
 			width: 30px;
 	   	height: 50px; 
-		   top: 15px;		 
 			padding: 0 0px 0 6px;
 		}
 	}
@@ -420,6 +411,9 @@ body{
 	}
 	&__a {
 		padding: 14px 24px 14px 24px;
+		@media (max-width: 575.98px) {
+			padding: 14px 20px 14px 20px;
+		}
 	}
 }
 .carousel-control-prev-icon{
@@ -496,7 +490,7 @@ body{
 	}
 	img{
 		@media (max-width: 575.98px) {
-			max-width: 60%;
+			max-width: 80%;
 			height: auto;
 		}
 	}
@@ -532,7 +526,6 @@ body{
 	height: 105px;
 	position: relative;
 	display: flex;
-	// justify-content: center;
 	align-items: center;
 	text-align: center;
 	@media (max-width: 767.98px){
@@ -540,26 +533,15 @@ body{
 	}
 	&__logo{
 		display: flex;
-		font-size: 24px;
-		line-height: 29px;
-		position: relative;
 		color: #fff;
 		@media (max-width: 767.98px) {
-			margin-bottom: 20px;
-			position: relative;
-			right: 15px;
+			margin-bottom: 30px;
 			justify-content: center;
 		}
 	}
 	&__a{
 		position: relative;
-		top: -6px;
-		@media (max-width: 1199.98px) {
-			font-size: 15px;
-			line-height: 18px;
-			padding-bottom: 20px;
-			top: 0px;
-		}
+		top: 4px;
 	}
 	&__span-1{
 		color: #fff;
@@ -603,7 +585,7 @@ body{
 		justify-content: center;
 		align-items: center;
 		@media (max-width: 767.98px) {
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 		}
 		@media (max-width: 575.98px) {
 			font-size: 14px;

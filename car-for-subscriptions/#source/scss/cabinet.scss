@@ -87,12 +87,7 @@ body{
 		padding: 0;
 	}
 	&__logo{
-		font-size: 15px;
-		line-height: 18px;
-		position: relative;
-		padding-right: 5px;
-		padding-bottom: 5px;
-		// color: #fff;
+		margin-right: 0;
 	}
 	&__span-1{
 		text-transform: uppercase;
@@ -263,6 +258,39 @@ body{
 				margin-bottom: 20px;
 			}
 		}
+		p{
+			font-size: 16px;
+			padding: 0 15px 0 0;
+			margin: 20px 0 0 0;
+			@media (max-width: 1199.98px) {
+				margin: 15px 0 0 0;
+			}
+			@media (max-width: 991.98px) {
+				font-size: 15px;
+				margin: 10px 0 0 0;
+			}
+			@media (max-width: 767.98px) {
+				width: 250px;
+				padding: 0;
+			}
+			a{
+				display: block;
+				padding: 7px 15px;
+				margin: 15px 0 0 0;
+				max-width: 175px;
+				@media (max-width: 991.98px) {
+					max-width: 160px;
+				}
+				@media (max-width: 767.98px) {
+					max-width: 145px;
+					margin: 15px auto 0 auto;
+				}
+				@media (max-width: 479.98px) {
+					max-width: 130px;
+					margin: 10px auto 0 auto;
+				}
+			}
+		}
 	}
 	&__user {
 		font-size: 20px;
@@ -308,19 +336,19 @@ body{
 		font-size: 16px;
 		line-height: 19px;	
 		padding-left: 5px;
-		margin-bottom: 30px;	
+		margin-bottom: 20px;	
 		position: relative;
 		top: -3px;
 		left: 28px;
 		@media (max-width: 1199.98px) {
-			margin-bottom: 25px;
+			margin-bottom: 15px;
 		}
 		@media (max-width: 991.98px) {
 			font-size: 14px;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 		@media (max-width: 479.98px) {
-			margin-bottom: 15px;
+			margin-bottom: 5px;
 		}
 	}
 	&__birthday {
@@ -384,7 +412,7 @@ body{
 			width: 350px;
 		}
 		@media (max-width: 379.98px) {
-			width: 300px;
+			width: 290px;
 		}
 	}
 	&__block {
@@ -415,7 +443,7 @@ body{
 			margin-bottom: 40px;	
 		}
 		@media (max-width: 479.98px) {
-			padding: 12px 20px;
+			padding: 12px 15px;
 			margin-bottom: 30px;
 		}
 		@media (max-width: 379.98px) {
@@ -670,7 +698,6 @@ body{
     border-radius: 0 0 10px 10px;
     overflow-x: hidden;
     overflow-y: auto;
-    z-index: 1;
     position: absolute;
     top: 22px;
     left: 0;
@@ -953,26 +980,15 @@ span#result, #result2{
 	}
 	&__logo{
 		display: flex;
-		font-size: 24px;
-		line-height: 29px;
-		position: relative;
 		color: #fff;
 		@media (max-width: 767.98px) {
-			margin-bottom: 20px;
-			position: relative;
-			right: 15px;
+			margin-bottom: 30px;
 			justify-content: center;
 		}
 	}
 	&__a{
 		position: relative;
-		top: -6px;
-		@media (max-width: 1199.98px) {
-			font-size: 15px;
-			line-height: 18px;
-			padding-bottom: 20px;
-			top: 0px;
-		}
+		top: 4px;
 	}
 	&__span-1{
 		color: #fff;
