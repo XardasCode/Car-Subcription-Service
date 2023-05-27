@@ -40,7 +40,7 @@ addEventListener('DOMContentLoaded', async function () {
             }
         })
 
-       
+
     } else if (subId > 0) {
         await checkSubscriptionStatus(subId);
     }
@@ -63,14 +63,14 @@ async function getCar(id) {
 }
 
 async function checkSubscriptionStatus(subId) {
- 
+
     let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
     let status = response.status;
     if (status > 299) {
         alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
         window.location.href = 'error.html';
     }
-    let subscription =  await response.json();
+    let subscription = await response.json();
     let subscriptionStatus = subscription['status']; // Statuses:     UNDER_CONSIDERATION, CONFIRM_STATUS, REJECT_STATUS
     console.log(subscriptionStatus);
     if (subscriptionStatus === 'UNDER_CONSIDERATION') {
@@ -86,27 +86,27 @@ async function checkSubscriptionStatus(subId) {
         document.getElementById('carName').textContent = `${car['name']} ${car['brand']}`;
 
         let currentDate = new Date();
-        let lastPayDate = new Date(subscription['lastPayDate']); 
+        let lastPayDate = new Date(subscription['lastPayDate']);
         let timeDifference = currentDate.getTime() - lastPayDate.getTime();
         let daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         daysDifference = 30 - daysDifference;
-        if(daysDifference > 0){
+        if (daysDifference > 0) {
             document.getElementById('paymentBtn').style.visibility = 'hidden';
-            document.getElementById('daysToPay').textContent =`Залишилось днів до наступного платежу: ${daysDifference.toString()}` ;
-        }else if(daysDifference == 0){
+            document.getElementById('daysToPay').textContent = `Залишилось днів до наступного платежу: ${daysDifference.toString()}`;
+        } else if (daysDifference == 0) {
             document.getElementById('paymentBtn').style.visibility = 'visible';
-            document.getElementById('daysToPay').textContent =`Сьогодні день оплати підписки.` ;
-        }else{
+            document.getElementById('daysToPay').textContent = `Сьогодні день оплати підписки.`;
+        } else {
             document.getElementById('paymentBtn').style.visibility = 'visible';
-            document.getElementById('daysToPay').textContent =`Будь ласка, оплатіть вашу підписку!` ;
+            document.getElementById('daysToPay').textContent = `Будь ласка, оплатіть вашу підписку!`;
         }
-        
-        
+
+
     }
 }
 
 // async function setSubscriptionToSession(subId) {
-   
+
 //     let subscriptionJson = await response.json();
 //     sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
 // }
@@ -241,7 +241,10 @@ function parsePayPerMonth(monthsString) {
     if (match === null) {
         return null;
     } else {
-        return match[0];
+        let roundedPrice = match[0];
+        let price = parseFloat(roundedPrice);
+        price = price + 0.1; // to avoid rounding errors
+        return price.toString();
     }
 // Отримання першого знайденого збігу (суми грошей)
 
