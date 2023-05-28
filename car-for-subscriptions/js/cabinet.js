@@ -105,12 +105,6 @@ async function checkSubscriptionStatus(subId) {
     }
 }
 
-// async function setSubscriptionToSession(subId) {
-
-//     let subscriptionJson = await response.json();
-//     sessionStorage.setItem('subscription', JSON.stringify(subscriptionJson));
-// }
-
 async function setSubscriptionForm() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -233,7 +227,7 @@ async function submitSubscriptionForm() {
 
 function parsePayPerMonth(monthsString) {
 // Регулярний вираз для вилучення суми грошей
-    let regex = /\d+(\.\d+)?/;
+    let regex = /(\d+\.\d+)\$/;
 
 // Знаходження суми грошей в рядку
     let match = monthsString.match(regex);
@@ -244,6 +238,7 @@ function parsePayPerMonth(monthsString) {
         let roundedPrice = match[0];
         let price = parseFloat(roundedPrice);
         price = price + 0.1; // to avoid rounding errors
+        console.log(`Price: ${price}`);
         return price.toString();
     }
 // Отримання першого знайденого збігу (суми грошей)
