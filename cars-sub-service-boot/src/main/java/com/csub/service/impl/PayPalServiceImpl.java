@@ -29,8 +29,6 @@ public class PayPalServiceImpl implements PayPalService {
 
     private final SubscriptionDAO subscriptionDAO;
 
-    private final UserDAO userDAO;
-
     private final EmailSender emailSender;
 
 
@@ -84,11 +82,12 @@ public class PayPalServiceImpl implements PayPalService {
     }
 
     @Override
-    public void sendPaymentEmail(String payerId, String paymentID) {
+    public void sendPaymentEmail(long id) {
         log.info("Sending payment email");
-        User user = userDAO.getUser(Long.parseLong(payerId))
-                .orElseThrow(() -> new ServerException("User not found", ErrorList.USER_NOT_FOUND));
-        emailSender.sendEmail(user.getEmail(), "Payment", "Your payment was successful. Payment ID: " + paymentID);
+        Subscription subscription = subscriptionDAO.getSubscription(id)
+                .orElseThrow(() -> new ServerException("Subscription not found", ErrorList.SUBSCRIPTION_NOT_FOUND));
+        User user = subscription.getUser();
+        emailSender.sendEmail(user.getEmail(), "Оплата успішна", "Your payment was successful");
         log.info("Payment email sent");
     }
 

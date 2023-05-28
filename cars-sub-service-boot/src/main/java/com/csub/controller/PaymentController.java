@@ -59,7 +59,7 @@ public class PaymentController {
         log.info("Executing payment");
         URI page = URI.create(payPalService.executePayment(paymentID, payerId, id) ? redirectSuccessPage : redirectErrorPage);
         HttpHeaders httpHeaders = new HttpHeaders();
-        payPalService.sendPaymentEmail(payerId, paymentID);
+        payPalService.sendPaymentEmail(id);
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }

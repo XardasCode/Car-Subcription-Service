@@ -8,5 +8,5 @@ public interface PayPalService {
 
     boolean executePayment(String paymentId, String payerId, long id);
 
-    void sendPaymentEmail(String payerId, String paymentID);
+    void sendPaymentEmail(long id);
 }
