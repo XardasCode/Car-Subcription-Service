@@ -132,7 +132,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         SubscriptionStatus status = getSubscriptionStatus(SubscriptionStatusList.CONFIRM_STATUS.getStatusId());
         subscription.setStatus(status);
 
-        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка підтверджена", "Ваша підписка була підтверджена, ви можете взяти автомобіль");
+        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка підтверджена", "Hello, " + subscription.getUser().getName() + " " + subscription.getUser().getSurname() + "!\n" +
+                "Your subscription has been confirmed. You can now take your car");
         subscriptionDAO.updateSubscription(subscription);
     }
 
@@ -146,7 +147,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 () -> new ServerException("Car status not found", ErrorList.CAR_STATUS_NOT_FOUND));
         car.setCarStatus(carStatus);
 
-        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка відхилена", "Ваша підписка була відхилена, будь ласка виправте інформацію і спробуйте ще раз");
+        emailSender.sendEmail(subscription.getUser().getEmail(), "Підписка відхилена",
+                "Hello, " + subscription.getUser().getName() + " " + subscription.getUser().getSurname() + "!\n" +
+                        "Your subscription has been rejected. Please, give us your valid information to confirm your subscription");
 
         carDAO.updateCar(car);
         subscriptionDAO.deleteSubscription(id);

@@ -59,14 +59,15 @@ public class PaymentChecker {
 
     private void sendPaymentOverdueEmail(User user, long daysUntilNextPayment) {
         String subject = "Оплата прострочена";
-        String text = "Вітаємо! Ми помітили, що ви досі не оплатили поточний місяць, Ваша оплата прострочена на " + daysUntilNextPayment + " днів. " +
-                "Будь ласка, оплатіть його якомога швидше, щоб не втратити доступ до сервісу";
+        String text = "Hello, " + user.getName() + "! Your payment will be overdue for " + daysUntilNextPayment + " days." +
+                "Please, pay for the next month as soon as possible. ";
         emailSender.sendEmail(user.getEmail(), subject, text);
     }
 
     private void sendPaymentReminderEmail(User user, long daysUntilNextPayment) {
         String subject = "Нагадування про оплату";
-        String text = "Вітаємо! За умовами підписки, Вам необхідно оплатити наступний місяць протягом " + daysUntilNextPayment + " днів";
+        String text = "Hello, " + user.getName() + "! Your payment is overdue for " + daysUntilNextPayment + " days already. " +
+                "Please, pay for the next month as soon as possible or your subscription will be canceled. ";
         emailSender.sendEmail(user.getEmail(), subject, text);
     }
 
