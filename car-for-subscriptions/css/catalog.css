@@ -110,18 +110,18 @@ body {
   height: auto; }
 
 .blue-button {
-  font-size: 16px;
-  line-height: 17px;
+  font-size: 20px;
+  line-height: 24px;
   text-transform: uppercase;
   color: #fff;
   background: rgba(46, 111, 208, 0.9);
   border-radius: 10px; }
   @media (max-width: 991.98px) {
     .blue-button {
-      font-size: 15px; } }
+      font-size: 18px; } }
   @media (max-width: 479.98px) {
     .blue-button {
-      font-size: 14px; } }
+      font-size: 16px; } }
 
 .blue-button:hover {
   background: #2869ca; }
@@ -267,7 +267,7 @@ body {
 *****Catalog*****
 *****************/
 .catalog {
-  margin: 20px 0 70px 0; }
+  margin: 30px 0 70px 0; }
   @media (max-width: 767.98px) {
     .catalog {
       text-align: center; } }
@@ -281,10 +281,11 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     margin-bottom: 40px;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap; }
     @media (max-width: 1199.98px) {
       .catalog__filter {
@@ -296,28 +297,26 @@ body {
     @media (max-width: 575.98px) {
       .catalog__filter {
         margin-bottom: 10px; } }
-
-  .catalog__year-wrapper, .catalog__price-wrapper {
+  .catalog .catalog__year-wrapper, .catalog .catalog__price-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-  }      
-
-  .catalog__year, .catalog__price {
-    min-width: 200px;
-  }
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .catalog .catalog__year, .catalog .catalog__price {
+    min-width: 200px; }
   .catalog .filter-wrapper {
     position: relative;
     display: inline-block;
     width: 155px;
-    margin: 0 10px;}
+    margin: 0 10px; }
     @media (max-width: 1199.98px) {
       .catalog .filter-wrapper {
         width: 130px; } }
     @media (max-width: 991.98px) {
       .catalog .filter-wrapper {
         margin-bottom: 8px; } }
-    
-
   .catalog .filter-head {
     font-size: 18px;
     line-height: 22px;
@@ -342,39 +341,39 @@ body {
     -ms-flex-align: center;
     align-items: center;
     width: 100%;
-    cursor: pointer;
     z-index: 2;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     position: relative; }
     @media (max-width: 1199.98px) {
       .catalog .filter-head {
         font-size: 16px;
         line-height: 20px; } }
-
-  .catalog__price .filter-head, .catalog__year .filter-head {
-    margin: 0 5px 0 0;
-  }      
-
-  .catalog__year-text, .catalog__price-text {
-    margin: 0 4px 0 0;
-  }      
-
-  .catalog__filter-title {
+  .catalog .catalog__price .filter-head, .catalog .catalog__year .filter-head {
+    margin: 0 5px 0 0; }
+  .catalog .catalog__year-text, .catalog .catalog__price-text {
+    margin: 0 4px 0 0; }
+  .catalog .catalog__filter-title {
     text-align: center;
-    font-size: 16px;
-    margin: 4px 0;
-  }
-
-  .catalog__button button {
-    padding: 10px 10px; }
-    @media (max-width: 479.98px) {
-      .catalog__button button {
+    font-size: 20px;
+    margin-bottom: 7px; }
+    @media (max-width: 991.98px) {
+      .catalog .catalog__filter-title {
         font-size: 18px; } }
-    @media (max-width: 379.98px) {
-      .catalog__button button {
-        font-size: 16px;
-        padding: 8px 10px; } }
-
+  .catalog .catalog__price-title, .catalog .catalog__year-title {
+    margin-left: 20px; }
+  .catalog__button {
+    position: relative;
+    bottom: 5px; }
+    .catalog__button button {
+      padding: 10px 10px; }
+      @media (max-width: 479.98px) {
+        .catalog__button button {
+          font-size: 18px; } }
+      @media (max-width: 379.98px) {
+        .catalog__button button {
+          font-size: 16px;
+          padding: 8px 10px; } }
   .catalog__item-list {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
@@ -529,27 +528,16 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 24px;
-    line-height: 29px;
-    position: relative;
     color: #fff; }
     @media (max-width: 767.98px) {
       .footer__logo {
-        margin-bottom: 20px;
-        position: relative;
-        right: 15px;
+        margin-bottom: 30px;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center; } }
   .footer__a {
     position: relative;
-    top: -6px; }
-    @media (max-width: 1199.98px) {
-      .footer__a {
-        font-size: 15px;
-        line-height: 18px;
-        padding-bottom: 20px;
-        top: 0px; } }
+    top: 4px; }
   .footer__span-1 {
     color: #fff;
     text-transform: uppercase;

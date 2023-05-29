@@ -11,175 +11,173 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="container main_container">
+    <div class="wrapper">
+        <div class="container main_container">
 
-        <header class="header">
-            <div class="container header__container">
-                <div class="row">
-                    <nav class="navbar navbar-expand-lg header__navbar">
-                        <div class="container-fluid">
-                            <a class="navbar-brand header__logo" href="index.html">
-                                <img src="img/logo.png" alt="logo">
-                            </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav ms-auto mb-lg-0 header__list">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="questions.html">Часті
-                                            запитання</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
-                                    </li>
-                                    <div class="header__last-item">
+            <header class="header">
+                <div class="container header__container">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-lg header__navbar">
+                            <div class="container-fluid">
+                                <a class="navbar-brand header__logo" href="index.html">
+                                    <img src="img/logo.png" alt="logo">
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse header__collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ms-auto mb-lg-0 header__list">
                                         <li class="nav-item">
-                                            <a class="nav-link active header__cabinet header__active"
-                                               aria-current="page"
-                                               href="#">Мій кабінет</a><span class="header__slash">/</span><a
-                                                class="header__exit" href="sign-in.html">Вийти</a>
+                                            <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
                                         </li>
-                                    </div>
-                                </ul>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="questions.html">Часті
+                                                запитання</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active header__lang" aria-current="page" href="#">UA</a>
+                                        </li>
+                                        <div class="header__last-item">
+                                            <li class="nav-item">
+                                                <a class="nav-link active header__cabinet header__active"
+                                                   aria-current="page"
+                                                   href="#">Мій кабінет</a><span class="header__slash">/</span><a
+                                                    class="header__exit" href="sign-in.html">Вийти</a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <section class="add-auto">
+                <div class="add-auto__title">
+                    <h1>Додати авто до каталогу</h1>
+                </div>
+                <form class="form" action="#" id="formUpload">
+                    <div class="add-auto__form-wrapper">
+
+                        <div class="add-auto__first-wrapper">
+                            <div class="add-auto__item">
+                                <label for="name">Назва</label>
+                                <input id="name" type="text" placeholder="Camry" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="model">Модель:</label>
+                                <input id="model" type="text" placeholder="SE" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="brand">Марка:</label>
+                                <input id="brand" type="text" placeholder="Toyota" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="year">Рік</label>
+                                <input id="year" type="number" placeholder="2021" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="color">Колір:</label>
+                                <input id="color" type="text" placeholder="Чорний" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="price">Вартість авто:</label>
+                                <input id="price" type="number" placeholder="2500" required>
                             </div>
                         </div>
-                    </nav>
-                </div>
-            </div>
-        </header>
 
-        <section class="add-auto">
-            <div class="add-auto__title">
-                <h1>Додати авто до каталогу</h1>
-            </div>
-            <form class="form" action="#" id="formUpload">
-                <div class="add-auto__form-wrapper">
-
-                    <div class="add-auto__first-wrapper">
-                        <div class="add-auto__item">
-                            <label for="name">Назва</label>
-                            <input id="name" type="text" placeholder="Camry" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="model">Модель:</label>
-                            <input id="model" type="text" placeholder="SE" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="brand">Марка:</label>
-                            <input id="brand" type="text" placeholder="Toyota" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="year">Рік</label>
-                            <input id="year" type="number" placeholder="2021" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="color">Колір:</label>
-                            <input id="color" type="text" placeholder="Чорний" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="price">Вартість авто:</label>
-                            <input id="price" type="number" placeholder="2500" required>
-                        </div>
-                    </div>
-
-                    <div class="add-auto__second-wrapper">
-                        <div class="add-auto__item">
-                            <label for="chassisNumber">Номер шасі:</label>
-                            <input id="chassisNumber" type="text" placeholder="YV1MS382252123456"
-                                   pattern="^[A-Z0-9]{17}$" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="regNumber">Реєстраційний номер:</label>
-                            <input id="regNumber" type="text" placeholder="AA1111AA" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="regDate">Дата реєстрації:</label>
-                            <input id="regDate" type="date" placeholder="21-01-2022" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="mileage">Пробіг:</label>
-                            <input id="mileage" type="number" placeholder="208" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="lastServiceDate">Дата останього техогляду:</label>
-                            <input id="lastServiceDate" type="date" placeholder="21-01-2022" required>
-                        </div>
-                        <div class="add-auto__item">
-                            <label for="">Тип палива:</label>
-                            <div class="add-auto__fuel">
-                                <input class="add-auto__fuel-input" type="hidden" name="" id="fuel-filter">
-                                <div class="add-auto__fuel-head">Обрати</div>
-                                <ul class="add-auto__list" id="fuelType" name="fuelType">
-                                    <li class="add-auto__fuel-item" value="Бензин">Бензин</li>
-                                    <li class="add-auto__fuel-item" value="Дизель">Дизель</li>
-                                    <li class="add-auto__fuel-item" value="Газ">Газ</li>
-                                    <li class="add-auto__fuel-item" value="Електро">Електро</li>
-                                    <li class="add-auto__fuel-item" value="Гібрид">Гібрид</li>
-                                </ul>
+                        <div class="add-auto__second-wrapper">
+                            <div class="add-auto__item">
+                                <label for="chassisNumber">Номер шасі:</label>
+                                <input id="chassisNumber" type="text" placeholder="YV1MS382252123456"
+                                       pattern="^[A-Z0-9]{17}$" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="regNumber">Реєстраційний номер:</label>
+                                <input id="regNumber" type="text" placeholder="AA1111AA" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="regDate">Дата реєстрації:</label>
+                                <input id="regDate" type="date" placeholder="21-01-2022" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="mileage">Пробіг:</label>
+                                <input id="mileage" type="number" placeholder="208" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="lastServiceDate">Дата останього техогляду:</label>
+                                <input id="lastServiceDate" type="date" placeholder="21-01-2022" required>
+                            </div>
+                            <div class="add-auto__item">
+                                <label for="">Тип палива:</label>
+                                <div class="add-auto__fuel">
+                                    <input class="add-auto__fuel-input" type="hidden" id="fuelType" name="" id="fuel-filter">
+                                    <div class="add-auto__fuel-head">Обрати</div>
+                                    <ul class="add-auto__list" name="fuelType">
+                                        <li class="add-auto__fuel-item" value="Бензин">Бензин</li>
+                                        <li class="add-auto__fuel-item" value="Дизель">Дизель</li>
+                                        <li class="add-auto__fuel-item" value="Газ">Газ</li>
+                                        <li class="add-auto__fuel-item" value="Електро">Електро</li>
+                                        <li class="add-auto__fuel-item" value="Гібрид">Гібрид</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="add-auto__item item-file">
-                    <label for="brand">Вибрати фото:</label>
-                    <div class="file">
-                        <div class="file__item">
-                            <input id="image" class="file__input" accept=".jpg, .png, .gif" type="file"
-                                   name="image">
-                            <div class="file__button">Вибрати</div>
+                    <div class="add-auto__item item-file">
+                        <label for="brand">Вибрати фото:</label>
+                        <div class="file">
+                            <div class="file__item">
+                                <input id="image" class="file__input" accept=".jpg, .png, .gif" type="file"
+                                       name="image">
+                                <div class="file__button">Вибрати</div>
+                            </div>
                         </div>
+                        <div id="preview" class="file__preview"></div>
                     </div>
-                    <div id="preview" class="file__preview"></div>
+                    <button class="add-auto__button blue-button">Додати до каталогу</button>
+                </form>
+            </section>
+
+        </div>
+
+        <footer class="footer">
+            <div class="container footer_container">
+                <div class="row no-gutters">
+                    <div class="col-md-4 footer__logo">
+                        <a class="footer__a" href="#">
+                            <img src="img/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="col-md-4 footer__copyright">
+                        <span>2023 © Всі права захищені</span>
+                    </div>
+                    <div class="col-md-4 footer__icons">
+                        <a href="https://t.me/CarSubscriptionService" target="_blank"><img
+                                src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
+                        <a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img
+                                src="img/general-svg/inst.svg" alt="Instagram"></a>
+                        <a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img
+                                src="img/general-svg/in.svg" alt="LinkedIn"></a>
+                        <a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img
+                                src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+                    </div>
                 </div>
-                <button class="add-auto__button blue-button">Додати до каталогу</button>
-            </form>
-        </section>
+            </div>
+        </footer>
 
     </div>
 
-    <footer class="footer">
-        <div class="container footer_container">
-            <div class="row no-gutters">
-                <div class="col-md-4 footer__logo">
-                    <a class="footer__a" href="#">
-                        <img src="img/logo.png" alt="logo">
-                    </a>
-                </div>
-                <div class="col-md-4 footer__copyright">
-                    <span>2023 © Всі права захищені</span>
-                </div>
-                <div class="col-md-4 footer__icons">
-                    <a href="https://t.me/CarSubscriptionService" target="_blank"><img
-                            src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
-                    <a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img
-                            src="img/general-svg/inst.svg" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img
-                            src="img/general-svg/in.svg" alt="LinkedIn"></a>
-                    <a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img
-                            src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-</div>
-
-<script src="js/bootstrap.bundle.min.js"></script>
-<!-- Випадаюче меню -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/add-panel.js"></script>
-<!-- Динамічний header -->
-    <script src="js/dynamic-header.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Випадаюче меню -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/add-panel.js"></script>
 </body>
 
 </html>
