@@ -3,60 +3,76 @@
 let lastPage = '';
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    getCars('1', null, null, null, null, null);
+    getCars('1', null, null, null, null, null, null);
 });
 
-document.getElementById('model-filter').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      filterCars();
-    }
-});
+// document.getElementById('model-filter').addEventListener('keypress', function (e) {
+//     if (e.key === 'Enter') {
+//       filterCars();
+//     }
+// });
 
 function filterCars(pageNumber = '1'){
-    let model = document.getElementById('model-filter').value;
-    let year = document.getElementById('year-filter').value;
-    let color = document.getElementById('color-filter').value;
-    let price = document.getElementById('price-filter').value;
-    let brand = document.getElementById('brand-filter').value;
 
-    model = model === '' ? null : model;
-    year = year === '' ? null : year;
+
+    let yearFrom = document.getElementById('yearFrom').value;
+    let yearTo = document.getElementById('yearTo').value;
+
+    let priceFrom = document.getElementById('priceFrom').value;
+    let priceTo = document.getElementById('priceTo').value;
+
+    let color = document.getElementById('color').value;
+    let brand = document.getElementById('brand').value;
+
+
+    yearFrom = yearFrom === '' ? null : yearFrom;
+    yearTo = yearTo === '' ? null : yearTo;
+
+    priceFrom = priceFrom === '' ? null : priceFrom;
+    priceTo = priceTo === '' ? null : priceTo;
+
     color = color === '' ? null : color;
-    price = price === '' ? null : price.slice(0, -1);
     brand = brand === '' ? null : brand;
-    getCars(pageNumber, model, year, color, price, brand);
+    getCars(pageNumber, yearFrom, yearTo, priceFrom, priceTo,color, brand);
 }
 
-function getCars(page, model, year, color, price, brand) {
+function getCars(page,  yearFrom, yearTo, priceFrom, priceTo,color, brand) {
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars?';
     let myPage = `page=${page}`;
     let size = 'size=12';
     let filter = "";
-    if(year != null || color != null || price != null || brand != null || model != null){
+    if(yearFrom != null  || yearTo != null || priceFrom != null  || priceTo != null  || color != null || brand != null){
         filter = `filter=`;
-        if (model != null) {
-            filter += `model:${model},`;
+
+        if (yearFrom != null) {
+            filter += `yearFrom:${yearFrom},`;
         }
-        if (year != null) {
-            filter += `year:${year},`;
+        if (yearTo != null) {
+            filter += `yearTo:${yearTo},`;
         }
+        if (priceFrom != null) {
+            filter += `priceFrom:${priceFrom},`;
+        }
+        if (priceTo != null) {
+            filter += `priceTo:${priceTo},`;
+        }
+
         if (color != null) {
             filter += `color:${color},`;
-        }
-        if (price != null) {
-            filter += `price:${price},`;
         }
         if (brand != null) {
             filter += `brand:${brand},`;
         }
-        filter.slice(0, -1);
+
     }
     let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
-     fetch(urlPage)
+    
+    fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage));
 
     let url = host + myPage + '&' + size + '&' + filter;
+
     fetch(url)
     .then(response => response.json())
     .then(json => generateCars(json));
