@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/blocker.css"
+    <link rel="stylesheet" type="text/css" href="css/blocker.css">
     <title>Сторінка блокування</title>
 </head>
 <body>
@@ -56,15 +56,26 @@
 						
 						<div class="catalog__filter">
 								<div class="catalog__price filter-wrapper">
-									<p class="catalog__filter-title title catalog__price-title">Статус підписки</p>
+									<!-- <p class="catalog__filter-title title catalog__price-title">Статус підписки</p>
 									<div class="catalog__price-wrapper">
 										<input class="catalog__price-input filter-head" placeholder="Активна"></input>
+									</div> -->
+									<div class="profile__activated-sub" >
+										<label for="">Статус підписки:</label>
+										<select name="" id="" >
+											<option value="">Активна</option>
+											<option value="">На розгляді</option>
+											<option value="">Без підписки</option>
+										</select>
 									</div>
+								
+								
 								</div>
 								<div class="catalog__year filter-wrapper">
-									<p class="catalog__filter-title catalog__year-title">Статус блокування</p>
-									<div class="catalog__year-wrapper">
-										<input class="catalog__year-input filter-head" placeholder="Розблоковані"></input>
+									
+								<p class="catalog__filter-title catalog__year-title"></p>
+									<div class="profile__activated-sub" >
+										<a href="#" class="blue-button">Заблоковані</a>
 									</div>
 								</div>
 
@@ -258,6 +269,7 @@
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<!-- Підключення свого файлу -->
 	<script type="text/javascript" src="js/cabinet-manager.js"></script>
-
+	<script src="js/dynamic-header.js"></script>
+	<script src="js/blocker.js"></script>
 </body>
 </html>

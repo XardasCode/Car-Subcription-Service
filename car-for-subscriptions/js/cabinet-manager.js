@@ -159,7 +159,7 @@ function getActiveSubscriptions(page) {
         goToNotActiveSub.onclick = function () {
             getNotActiveSubscriptions('1');
         }
-        goToNotActiveSub.innerHTML = '<a href="#" class="blue-button">Неактивні підписки</a>';
+        goToNotActiveSub.innerHTML = '<a href="#" class="blue-button inactiveBtn">Неактивні підписки</a>';
     }
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';

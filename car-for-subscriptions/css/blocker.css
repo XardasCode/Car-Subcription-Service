@@ -890,3 +890,29 @@ body {
     right: 3px; }
   .footer__telegram {
     height: 16px; }
+
+    .profile__activated-sub{
+      display: grid;
+    }
+    @media (max-width: 767.98px) {
+      .profile__activated-sub {
+        text-align: center; } }
+    
+    .profile__activated-sub a {
+      padding: 14px 30px; }
+      @media (max-width: 1399.98px) {
+        .profile__activated-sub a {
+          padding: 14px 29px; } }
+
+.profile__activated-sub label{
+  font-size: 16px;
+  padding-bottom: 5px;
+
+}
+.profile__activated-sub select{
+  border-radius: 5px;
+  border: 2px solid #437DD5;
+  font-size: 16px;
+  padding: 5px;
+
+}
