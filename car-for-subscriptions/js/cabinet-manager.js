@@ -6,7 +6,6 @@ addEventListener('DOMContentLoaded', async function () {
 
     let username = document.getElementById('username');
     let email = document.getElementById('email');
-    console.log(userJson);
     let jsonName = userJson['name'];
     let jsonSurname = userJson['surname'];
     let jsonEmail = userJson['email'];
@@ -137,12 +136,12 @@ function getNotActiveSubscriptions(page) {
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
     // let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=6';
+    let size = 'size=2';
     let filter = "filter=isActive:false,statusName:UNDER_CONSIDERATION";
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
-    let getResponsePage = fetch(urlPage)
+    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
+        fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'notActive'));
 
@@ -165,11 +164,11 @@ function getActiveSubscriptions(page) {
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
     //let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=6';
+    let size = 'size=2';
     let filter = "filter=isActive:true,statusName:CONFIRM_STATUS";
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
-    let getResponsePage = fetch(urlPage)
+    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'active'));
     let url = host + myPage + '&' + size + '&' + filter;
@@ -192,7 +191,7 @@ async function getUser(id) {
 async function ptintSub(item, list) {
     const user = await getUser(item['userId']);
     const car = await getCar(item['carId']);
-    console.log(user);
+    
 
     if (item['isActive'] === false) {
         if (item['status'] === "REJECTED_STATUS") {
@@ -377,7 +376,6 @@ async function confirmSubscription(id) {
             alert(error);
         }
     }
-  
 }
 
 async function rejectSubscription(id) {
