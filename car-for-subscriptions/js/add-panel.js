@@ -199,3 +199,8 @@ async function sendPhotoToServer(carId) {
 }
 
 
+function logoutUser() { 
+    sessionStorage.removeItem('user'); // Видалення з сесії
+  
+    window.location.replace('sign-in.html'); // Редірект на сторінку входу
+  }

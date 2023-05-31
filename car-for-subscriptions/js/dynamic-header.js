@@ -29,3 +29,7 @@ function logoutUser() { // Функція для розлогування кор
 
   window.location.replace('sign-in.html'); // Редірект на сторінку входу
 }
+
+function goToCabinet() { 
+  window.location.replace('cabinet.html'); 
+}
