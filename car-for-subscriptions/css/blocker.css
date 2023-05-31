@@ -108,12 +108,6 @@ body {
   @media (max-width: 767.98px) {
     .blue-button {
       font-size: 16px; } }
-  @media (max-width: 575.98px) {
-    .blue-button {
-      font-size: 14px; } }
-  @media (max-width: 479.98px) {
-    .blue-button {
-      font-size: 12px; } }
 
 .blue-button:hover {
   background: #2869ca; }
@@ -456,11 +450,11 @@ body {
     flex-wrap: wrap; }
     @media (max-width: 1250.98px) {
       .catalog__filter {
-        margin-left: 70px;
+/*        margin-left: 70px;*/
         padding: 0;} }
     @media (max-width: 991.98px) {
       .catalog__filter {
-        margin-left: 50px;
+/*        margin-left: 50px;*/
         padding: 0;} }
     @media (max-width: 800.98px) {
       .catalog__filter {
@@ -614,6 +608,7 @@ body {
     display: block;
   }        
   .cabinet-active__status {
+    text-align: center;
     font-size: 24px;
     line-height: 29px; }
     @media (max-width: 1399.98px) {
@@ -793,21 +788,13 @@ body {
     color: #fff; }
     @media (max-width: 767.98px) {
       .footer__logo {
-        margin-bottom: 20px;
-        position: relative;
-        right: 15px;
+        margin-bottom: 30px;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center; } }
   .footer__a {
     position: relative;
-    top: -6px; }
-    @media (max-width: 1199.98px) {
-      .footer__a {
-        font-size: 15px;
-        line-height: 18px;
-        padding-bottom: 20px;
-        top: 0px; } }
+    top: 4px; }
   .footer__span-1 {
     color: #fff;
     text-transform: uppercase;
@@ -893,6 +880,7 @@ body {
 
     .profile__activated-sub{
       display: grid;
+      text-align: center
     }
     @media (max-width: 767.98px) {
       .profile__activated-sub {
@@ -902,17 +890,129 @@ body {
       padding: 14px 30px; }
       @media (max-width: 1399.98px) {
         .profile__activated-sub a {
-          padding: 14px 29px; } }
+          padding: 14px 30px; } }
 
 .profile__activated-sub label{
   font-size: 16px;
   padding-bottom: 5px;
-
 }
 .profile__activated-sub select{
   border-radius: 5px;
   border: 2px solid #437DD5;
   font-size: 16px;
   padding: 5px;
+}
 
+/******dropdown-menu******/
+.blocker__dropdown-menu{
+/*  border: 1px solid #000;*/
+}
+.blocker__dropdown-menu label{
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+.blocker__status {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+@media (max-width: 991.98px) {
+  .blocker__status {
+    max-width: 335px;
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 767.98px) {
+  .blocker__status{
+    max-width: 435px;
+  }
+}
+@media (max-width: 479.98px) {
+  .blocker__status{
+    max-width: 340px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 379.98px) {
+  .blocker__status{
+    max-width: 290px;
+  }
+}
+.blocker__status-head {
+  font-size: 16px;
+  line-height: 19px;
+  height: 36px;
+  background: #F9F9F9;
+  border: 2px solid #437DD5;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.blocker__status-head::after {
+  width: 13px;
+  height: 9px;
+  background: url("../img/inactive/svg/check-mark.svg") no-repeat center / cover;
+  position: absolute;
+  right: 23px;
+  bottom: 50%;
+  transform: translateY(50%);
+  content: '';
+  display: block;
+  transition: .2s ease-in;
+}
+.blocker__status-head.open::after {
+  transform: translateY(50%) rotate(180deg);
+}
+.blocker__status-list {
+  display: none;
+  font-size: 16px;
+  line-height: 19px;
+  text-align-last: left;
+  color: #000;
+  background: #E8E8E8;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid #437DD5;
+  border-radius: 0 0 10px 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 12px 0 5px 0;
+  z-index: 1;
+}
+.blocker__status-list::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F8F9FA;
+  padding: 5px;
+}
+
+.blocker__status-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #D9D9D9;
+}
+
+.blocker__status-item {
+  font-size: 16px;
+  line-height: 19px;
+  position: relative;
+  padding: 5px 15px;
+  cursor: pointer;
+  list-style-type: none;
+}
+.blocker__status-item:hover{
+  background-color: #d8d8d8;
+}
+
+.not-blocked{
+  padding: 14px 14px !important;
 }

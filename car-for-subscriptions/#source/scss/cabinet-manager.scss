@@ -357,12 +357,21 @@ body{
 			margin-bottom: 33px;
 		}
 		a{
-			padding: 14px 17px;
+			padding: 14px 85px;
+			@media (max-width: 1399.98px) {
+				padding: 14px 83px;
+			}
 			@media (max-width: 1199.98px) {
-				padding: 14px 18px;
+				padding: 14px 79px;
 			}
 			@media (max-width: 991.98px) {
-				padding: 14px 19px;
+				padding: 14px 77px;
+			}
+			@media (max-width: 767.98px) {
+				padding: 14px 73px;
+			}
+			@media (max-width: 379.98px) {
+				padding: 14px 68px;
 			}
 		}
 	}
@@ -404,9 +413,27 @@ body{
 			text-align: center;
 		}
 		a{
-			padding: 14px 30px;
+			padding: 14px 29px;
 			@media (max-width: 1399.98px) {
-				padding: 14px 29px;
+				// padding: 14px 29px;
+			}
+		}
+		.inactiveBtn{
+			padding: 14px 15.5px;
+			@media (max-width: 1399.98px) {
+				padding: 14px 16.5px;
+			}
+			@media (max-width: 1199.98px) {
+				padding: 14px 17px;
+			}
+			@media (max-width: 991.98px) {
+				padding: 14px 17.5px;
+			}
+			@media (max-width: 767.98px) {
+				padding: 14px 18px;
+			}
+			@media (max-width: 379.98px) {
+				padding: 14px 19px;
 			}
 		}	
 	}

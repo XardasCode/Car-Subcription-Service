@@ -29,7 +29,7 @@
 						          <a class="nav-link active" aria-current="page" href="index.html">Головна</a>
 						        </li>
 						        <li class="nav-item">
-						          <a class="nav-link active header__active" aria-current="page" href="#">Каталог</a>
+						          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
 						        </li>
 						        <li class="nav-item">
 						          <a class="nav-link active" aria-current="page" href="questions.html">Часті запитання</a>
@@ -62,13 +62,24 @@
 									</div> -->
 									<div class="profile__activated-sub" id = 'sekectSubStatus' >
 										<label for="">Статус підписки:</label>
-										<select name="subStatus" id="subStatus" onchange="filterUsers()" >
+										<select name="subStatus" id="subStatus" onchange="filterUsers()">
 											<option value="subscriptionStatus:CONFIRM_STATUS">Активна</option>
 											<option value="subscriptionStatus:UNDER_CONSIDERATION">На розгляді</option>
 											<option value="noSubscription:true">Без підписки</option>
 										</select>
 									</div>
-								
+									<div class="blocker__dropdown-menu" id='sekectSubStatus'>
+						                            <label for="">Статус підписки:</label>
+						                            <div class="blocker__status">
+						                                <input class="blocker__status-input" name="subStatus" id="subStatus" onchange="filterUsers()" type="hidden">
+						                                <div class="blocker__status-head">Обрати</div>
+						                                <ul class="blocker__status-list" name="fuelType">
+						                                    <li class="blocker__status-item" value="subscriptionStatus:CONFIRM_STATUS">Активна</li>
+						                                    <li class="blocker__status-item" value="subscriptionStatus:UNDER_CONSIDERATION">На розгляді</li>
+						                                    <li class="blocker__status-item" value="noSubscription:true">Без підписки</li>
+						                                </ul>
+						                            </div>
+						                        </div>
 								
 								</div>
 								<div class="catalog__year filter-wrapper">
@@ -236,9 +247,9 @@
 					</div>
 					<div class="col-md-4 footer__icons">
 						<a href="https://t.me/CarSubscriptionService" target="_blank"><img src="img/general-svg/telegram.png" alt="Telegram" class="footer__telegram"></a>
-							<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
-							<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
-							<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
+						<a href="https://www.instagram.com/carsubscriptionservice/" target="_blank"><img src="img/general-svg/inst.svg" alt="Instagram"></a>
+						<a href="https://www.linkedin.com/in/car-subscription-service-b598b5275/" target="_blank"><img src="img/general-svg/in.svg" alt="LinkedIn"></a>
+						<a href="https://www.facebook.com/profile.php?id=100092668595658" target="_blank"><img src="img/general-svg/face.svg" alt="Facebook" class="footer__facebook"></a>
 					</div>
 				</div>
 			</div>
@@ -248,8 +259,11 @@
 
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.bundle.min.js"></script>
-	<!-- Підключення свого файлу -->
+	<!-- Випадаюче меню -->
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Динамічний  -->
 	<script src="js/dynamic-header.js"></script>
+	<!-- Підключення свого файлу -->
 	<script src="js/blocker.js"></script>
 </body>
 </html>

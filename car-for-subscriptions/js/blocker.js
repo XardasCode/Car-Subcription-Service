@@ -30,7 +30,7 @@ function isBlockOrNotIsBlock(){
 
     if(isBlocked){
         selector.style.visibility = 'hidden'
-        isBlockedBtn.innerHTML=`<a href="#" class="blue-button" id ='unblock-users' onclick="isBlockOrNotIsBlock()" >Не заблоковані</a>`
+        isBlockedBtn.innerHTML=`<a href="#" class="blue-button not-blocked" id ='unblock-users' onclick="isBlockOrNotIsBlock()" >Не&nbspзаблоковані</a>`
     }else{
         selector.style.visibility = 'visible'
         isBlockedBtn.innerHTML=`<a href="#" class="blue-button" id ='block-users' onclick="isBlockOrNotIsBlock()" >Заблоковані</a>`
@@ -190,3 +190,34 @@ async function unblockUser(id){
         alert(error);
     }
 }
+
+
+// Випадаючий список "статус підписки""
+
+jQuery(($) => {
+    $('.blocker__status').on('click', '.blocker__status-head', function () {
+        if ($(this).hasClass('open')) {
+            $(this).removeClass('open');
+            $(this).next().fadeOut();
+        } else {
+            $('.blocker__status-head').removeClass('open');
+            $('.blocker__status-list').fadeOut();
+            $(this).addClass('open');
+            $(this).next().fadeIn();
+        }
+    });
+
+    $('.blocker__status').on('click', '.blocker__status-item', function () {
+        $('.blocker__status-head').removeClass('open');
+        $(this).parent().fadeOut();
+        $(this).parent().prev().text($(this).text());
+        $(this).parent().prev().prev().val($(this).text());
+    });
+
+    $(document).click(function (e) {
+        if (!$(e.target).closest('.blocker__status').length) {
+            $('.blocker__status-head').removeClass('open');
+            $('.blocker__status-list').fadeOut();
+        }
+    });
+});
