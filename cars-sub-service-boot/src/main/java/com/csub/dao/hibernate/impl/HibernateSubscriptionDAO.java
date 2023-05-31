@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.dao.postgre.util.SubscriptionCriteriaBuilderManager;
 import com.csub.entity.Subscription;
@@ -22,7 +22,7 @@ import java.util.OptionalLong;
 @Repository
 @AllArgsConstructor
 @Slf4j
-public class PostgreSubscriptionDAO implements SubscriptionDAO {
+public class HibernateSubscriptionDAO implements SubscriptionDAO {
 
     private final EntityManager sessionFactory;
 

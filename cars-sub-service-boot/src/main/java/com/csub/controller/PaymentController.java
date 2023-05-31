@@ -4,7 +4,6 @@ import com.csub.controller.request.PayPalRequestDTO;
 import com.csub.controller.util.JSONInfo;
 import com.csub.service.PayPalService;
 
-import com.csub.util.EmailSender;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,11 +54,12 @@ public class PaymentController {
     }
 
     @GetMapping(value = "/success/{id}")
-    public ResponseEntity<Object> successApprovingPaymentPayPal(@PathVariable long id, @RequestParam("paymentId") String paymentID, @RequestParam("PayerID") String payerId) {
+    public ResponseEntity<Object> successApprovingPaymentPayPal(@PathVariable long id,
+                                                                @RequestParam("paymentId") String paymentID,
+                                                                @RequestParam("PayerID") String payerId) {
         log.info("Executing payment");
         URI page = URI.create(payPalService.executePayment(paymentID, payerId, id) ? redirectSuccessPage : redirectErrorPage);
         HttpHeaders httpHeaders = new HttpHeaders();
-        payPalService.sendPaymentEmail(id);
         httpHeaders.setLocation(page);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }

@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.entity.Subscription;
 import com.csub.entity.SubscriptionStatus;
@@ -17,12 +17,12 @@ import org.springframework.test.context.TestPropertySource;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
-@ComponentScan(basePackages = "com.csub.dao.postgre.impl")
+@ComponentScan(basePackages = "com.csub.dao.hibernate.impl")
 @TestPropertySource(locations = "classpath:application-test.properties")
-class PostgreSubscriptionDAOTest {
+class HibernateSubscriptionDAOTest {
 
     @Autowired
-    private PostgreSubscriptionDAO postgreCarDAO;
+    private HibernateSubscriptionDAO postgreCarDAO;
 
     @Autowired
     private TestEntityManager entityManager;

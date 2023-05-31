@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.entity.User;
 import com.csub.util.UserSearchInfo;
@@ -15,12 +15,12 @@ import org.springframework.test.context.TestPropertySource;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
-@ComponentScan(basePackages = "com.csub.dao.postgre.impl")
+@ComponentScan(basePackages = "com.csub.dao.hibernate.impl")
 @TestPropertySource(locations = "classpath:application-test.properties")
-class PostgreUserDAOTest {
+class HibernateUserDAOTest {
 
     @Autowired
-    private PostgreUserDAO postgreUserDAO;
+    private HibernateUserDAO hibernateUserDAO;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -50,7 +50,7 @@ class PostgreUserDAOTest {
     @DisplayName("Get user by id must return user")
     @Test
     void getUserById() {
-        assertThat(postgreUserDAO.getUser(user.getId()).orElseThrow())
+        assertThat(hibernateUserDAO.getUser(user.getId()).orElseThrow())
                 .isEqualTo(user);
     }
 
@@ -60,8 +60,8 @@ class PostgreUserDAOTest {
         User user = User.builder()
                 .name("Test")
                 .build();
-        postgreUserDAO.addUser(user);
-        assertThat(postgreUserDAO.getUser(user.getId()).orElseThrow())
+        hibernateUserDAO.addUser(user);
+        assertThat(hibernateUserDAO.getUser(user.getId()).orElseThrow())
                 .isEqualTo(user);
     }
 
@@ -71,10 +71,10 @@ class PostgreUserDAOTest {
         User user = User.builder()
                 .name("Test")
                 .build();
-        postgreUserDAO.addUser(user);
+        hibernateUserDAO.addUser(user);
         user.setName("Test2");
-        postgreUserDAO.updateUser(user);
-        assertThat(postgreUserDAO.getUser(user.getId()).orElseThrow())
+        hibernateUserDAO.updateUser(user);
+        assertThat(hibernateUserDAO.getUser(user.getId()).orElseThrow())
                 .isEqualTo(user);
     }
 
@@ -84,15 +84,15 @@ class PostgreUserDAOTest {
         User user = User.builder()
                 .name("Test")
                 .build();
-        postgreUserDAO.addUser(user);
-        postgreUserDAO.deleteUser(user.getId());
-        assertThat(postgreUserDAO.getUser(user.getId())).isEmpty();
+        hibernateUserDAO.addUser(user);
+        hibernateUserDAO.deleteUser(user.getId());
+        assertThat(hibernateUserDAO.getUser(user.getId())).isEmpty();
     }
 
     @DisplayName("Get user by email must return user")
     @Test
     void getUserByEmail() {
-        assertThat(postgreUserDAO.getUserByEmail(user.getEmail()).orElseThrow())
+        assertThat(hibernateUserDAO.getUserByEmail(user.getEmail()).orElseThrow())
                 .isEqualTo(user);
     }
 
@@ -103,13 +103,13 @@ class PostgreUserDAOTest {
                 .page(1)
                 .size(12)
                 .build();
-        assertThat(postgreUserDAO.getUsers(userSearchInfo)).isNotEmpty();
+        assertThat(hibernateUserDAO.getUsers(userSearchInfo)).isNotEmpty();
     }
 
     @DisplayName("Find users must return not empty list")
     @Test
     void findUsers() {
-        assertThat(postgreUserDAO.findUsers("Test", "Test", true, "ASC")).isNotEmpty();
+        assertThat(hibernateUserDAO.findUsers("Test", "Test", true, "ASC")).isNotEmpty();
     }
 
 

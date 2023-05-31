@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.dao.postgre.util.CarCriteriaBuilderManager;
 import com.csub.entity.Car;
@@ -23,7 +23,7 @@ import java.util.OptionalLong;
 @Repository
 @AllArgsConstructor
 @Slf4j
-public class PostgreCarDAO implements CarDAO {
+public class HibernateCarDAO implements CarDAO {
 
     private final EntityManager sessionFactory;
 

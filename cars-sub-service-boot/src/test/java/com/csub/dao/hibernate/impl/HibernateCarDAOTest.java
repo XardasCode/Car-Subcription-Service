@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.entity.*;
 import com.csub.util.CarSearchInfo;
@@ -17,12 +17,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
-@ComponentScan(basePackages = "com.csub.dao.postgre.impl")
+@ComponentScan(basePackages = "com.csub.dao.hibernate.impl")
 @TestPropertySource(locations = "classpath:application-test.properties")
-class PostgreCarDAOTest {
+class HibernateCarDAOTest {
 
     @Autowired
-    private PostgreCarDAO postgreCarDAO;
+    private HibernateCarDAO hibernateCarDAO;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -58,14 +58,14 @@ class PostgreCarDAOTest {
     @DisplayName("Get car by id must return car")
     @Test
     void getCarById() {
-        Car carFromDB = postgreCarDAO.getCar(car.getId()).orElseThrow();
+        Car carFromDB = hibernateCarDAO.getCar(car.getId()).orElseThrow();
         assertThat(carFromDB.getId()).isEqualTo(car.getId());
     }
 
     @DisplayName("Get car by id must return empty optional")
     @Test
     void getCarByIdEmpty() {
-        assertThat(postgreCarDAO.getCar(0)).isEmpty();
+        assertThat(hibernateCarDAO.getCar(0)).isEmpty();
     }
 
     @DisplayName("Add car must not throw exception")
@@ -78,8 +78,8 @@ class PostgreCarDAOTest {
                 .name("Test car")
                 .carStatus(carStatus)
                 .build();
-        postgreCarDAO.addCar(car);
-        assertThat(postgreCarDAO.getCar(car.getId())).isNotEmpty();
+        hibernateCarDAO.addCar(car);
+        assertThat(hibernateCarDAO.getCar(car.getId())).isNotEmpty();
     }
 
     @DisplayName("Update car must not throw exception")
@@ -92,10 +92,10 @@ class PostgreCarDAOTest {
                 .name("Test car")
                 .carStatus(carStatus)
                 .build();
-        postgreCarDAO.addCar(car);
+        hibernateCarDAO.addCar(car);
         car.setName("Test car 2");
-        postgreCarDAO.updateCar(car);
-        assertThat(postgreCarDAO.getCar(car.getId()).orElseThrow().getName()).isEqualTo("Test car 2");
+        hibernateCarDAO.updateCar(car);
+        assertThat(hibernateCarDAO.getCar(car.getId()).orElseThrow().getName()).isEqualTo("Test car 2");
     }
 
     @DisplayName("Delete car must not throw exception")
@@ -108,9 +108,9 @@ class PostgreCarDAOTest {
                 .name("Test car")
                 .carStatus(carStatus)
                 .build();
-        postgreCarDAO.addCar(car);
-        postgreCarDAO.deleteCar(car.getId());
-        assertThat(postgreCarDAO.getCar(car.getId())).isEmpty();
+        hibernateCarDAO.addCar(car);
+        hibernateCarDAO.deleteCar(car.getId());
+        assertThat(hibernateCarDAO.getCar(car.getId())).isEmpty();
     }
 
     @DisplayName("Get cars must return list of cars")
@@ -122,14 +122,14 @@ class PostgreCarDAOTest {
                 .direction("DESC")
                 .sortField("id")
                 .build();
-        List<Car> cars = postgreCarDAO.getCars(carSearchInfo);
+        List<Car> cars = hibernateCarDAO.getCars(carSearchInfo);
         assertThat(cars).isNotEmpty();
     }
 
     @DisplayName("Get cars count must return count of cars")
     @Test
     void getCarsCount() {
-        long count = postgreCarDAO.getCarsCount(12, List.of("id"));
+        long count = hibernateCarDAO.getCarsCount(12, List.of("id"));
         assertThat(count).isPositive();
     }
 
@@ -137,14 +137,14 @@ class PostgreCarDAOTest {
     @Test
     void getCarImage() {
         String url = "test";
-        postgreCarDAO.updateImage(url, car.getId());
-        assertThat(postgreCarDAO.getImageURL(car.getId())).isEqualTo(url);
+        hibernateCarDAO.updateImage(url, car.getId());
+        assertThat(hibernateCarDAO.getImageURL(car.getId())).isEqualTo(url);
     }
 
     @DisplayName("Get car status by id must return car status")
     @Test
     void getCarStatus() {
-        CarStatus carStatus = postgreCarDAO.getCarStatusById(String.valueOf(car.getCarStatus().getId())).orElseThrow();
+        CarStatus carStatus = hibernateCarDAO.getCarStatusById(String.valueOf(car.getCarStatus().getId())).orElseThrow();
         assertThat(carStatus.getId()).isEqualTo(car.getCarStatus().getId());
     }
 

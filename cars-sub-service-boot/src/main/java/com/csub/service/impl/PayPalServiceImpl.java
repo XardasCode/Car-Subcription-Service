@@ -2,7 +2,6 @@ package com.csub.service.impl;
 
 import com.csub.controller.request.PayPalRequestDTO;
 import com.csub.dao.SubscriptionDAO;
-import com.csub.dao.UserDAO;
 import com.csub.entity.Subscription;
 import com.csub.entity.User;
 import com.csub.exception.ErrorList;
@@ -78,6 +77,8 @@ public class PayPalServiceImpl implements PayPalService {
             return false;
         }
         log.info("Payment executed");
+        sendPaymentEmail(id);
+        log.info("Sent success email");
         return true;
     }
 

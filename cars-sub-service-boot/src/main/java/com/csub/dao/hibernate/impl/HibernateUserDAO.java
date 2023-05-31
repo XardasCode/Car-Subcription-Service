@@ -1,4 +1,4 @@
-package com.csub.dao.postgre.impl;
+package com.csub.dao.hibernate.impl;
 
 import com.csub.dao.postgre.util.UserCriteriaBuilderManager;
 import com.csub.entity.User;
@@ -22,7 +22,7 @@ import java.util.OptionalLong;
 @Repository
 @AllArgsConstructor
 @Slf4j
-public class PostgreUserDAO implements UserDAO {
+public class HibernateUserDAO implements UserDAO {
 
     private final EntityManager sessionFactory;
 
