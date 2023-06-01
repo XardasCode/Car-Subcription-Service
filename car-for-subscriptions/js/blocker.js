@@ -28,20 +28,32 @@ function isBlockOrNotIsBlock(){
     let isBlockedBtn = document.getElementById('block-users-btn');
     let selector = document.getElementById('sekectSubStatus');
 
+
     if(isBlocked){
+  
         selector.style.visibility = 'hidden'
         isBlockedBtn.innerHTML=`<a href="#" class="blue-button not-blocked" id ='unblock-users' onclick="isBlockOrNotIsBlock()" >Не&nbspзаблоковані</a>`
     }else{
+      
         selector.style.visibility = 'visible'
         isBlockedBtn.innerHTML=`<a href="#" class="blue-button" id ='block-users' onclick="isBlockOrNotIsBlock()" >Заблоковані</a>`
     }
-    filterUsers();
+    filterUsers("1");
 }
 
 function filterUsers(pageNumber = '1'){
 
     let subStatus = document.getElementById('subStatus').value;
     let isBlockedBtn = document.getElementById('block-users');
+    let filterStatus = '';
+
+    if(subStatus==='Активна'){
+        filterStatus = 'subscriptionStatus:CONFIRM_STATUS';
+    }else if(subStatus==='На розгляді'){
+        filterStatus = 'subscriptionStatus:UNDER_CONSIDERATION';
+    }else{
+        filterStatus = 'noSubscription:true';
+    }
 
     let isBlocked = "isBlocked:true";
 
@@ -49,8 +61,8 @@ function filterUsers(pageNumber = '1'){
         isBlocked = "isBlocked:false";
     }
 
-    subStatus = subStatus === '' ? null : subStatus;
-    getUsers(pageNumber,subStatus, isBlocked);
+    filterStatus = filterStatus === '' ? null : filterStatus;
+    getUsers(pageNumber,filterStatus, isBlocked);
 }
 
 
@@ -67,7 +79,7 @@ function getUsers(page,subStatus, isBlocked) {
 
     let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/search?';
     let myPage = `page=${page}`;
-    let size = 'size=8';
+    let size = 'size=2';
     let filter = `filter=${isBlocked},${subStatus}`;
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;

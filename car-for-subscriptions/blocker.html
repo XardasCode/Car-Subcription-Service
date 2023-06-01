@@ -60,23 +60,23 @@
 									<div class="catalog__price-wrapper">
 										<input class="catalog__price-input filter-head" placeholder="Активна"></input>
 									</div> -->
-									<div class="profile__activated-sub" id = 'sekectSubStatus' >
+									<!-- <div class="profile__activated-sub" id = 'sekectSubStatus' >
 										<label for="">Статус підписки:</label>
 										<select name="subStatus" id="subStatus" onchange="filterUsers()">
 											<option value="subscriptionStatus:CONFIRM_STATUS">Активна</option>
 											<option value="subscriptionStatus:UNDER_CONSIDERATION">На розгляді</option>
 											<option value="noSubscription:true">Без підписки</option>
 										</select>
-									</div>
+									</div> -->
 									<div class="blocker__dropdown-menu" id='sekectSubStatus'>
 						                            <label for="">Статус підписки:</label>
 						                            <div class="blocker__status">
-						                                <input class="blocker__status-input" name="subStatus" id="subStatus" onchange="filterUsers()" type="hidden">
-						                                <div class="blocker__status-head">Обрати</div>
+						                                <input class="blocker__status-input" name="subStatus" id="subStatus"  type="hidden">
+						                                <div class="blocker__status-head">Активна</div>
 						                                <ul class="blocker__status-list" name="fuelType">
-						                                    <li class="blocker__status-item" value="subscriptionStatus:CONFIRM_STATUS">Активна</li>
-						                                    <li class="blocker__status-item" value="subscriptionStatus:UNDER_CONSIDERATION">На розгляді</li>
-						                                    <li class="blocker__status-item" value="noSubscription:true">Без підписки</li>
+						                                    <li onclick="getUsers('1','subscriptionStatus:CONFIRM_STATUS','isBlocked:false')" class="blocker__status-item" value="subscriptionStatus:CONFIRM_STATUS">Активна</li>
+						                                    <li onclick="getUsers('1','subscriptionStatus:UNDER_CONSIDERATION','isBlocked:false')" class="blocker__status-item" value="subscriptionStatus:UNDER_CONSIDERATION">На розгляді</li>
+						                                    <li onclick="getUsers('1','noSubscription:true','isBlocked:false')" class="blocker__status-item" value="noSubscription:true">Без підписки</li>
 						                                </ul>
 						                            </div>
 						                        </div>
