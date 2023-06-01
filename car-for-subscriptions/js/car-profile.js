@@ -38,7 +38,7 @@ async function setSubscriptionButton(subId, carId) {
 }
 
 async function displayCar(carId) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`);
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/cars/${carId}`);
     const car = await response.json();
 
     let picture = document.getElementById('picture');

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
 
         if (error === 0) {
 
-            const response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users', {
+            const response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
             let status = responseJSON['status'];
             if (status === 'success') {
                 let id = responseJSON['message'];
-                await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + id)
+                await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/users/' + id)
                     .then(response => response.json())
                     .then(json => sessionStorage.setItem('user', JSON.stringify(json)));
                 window.location.href = 'cabinet.html';

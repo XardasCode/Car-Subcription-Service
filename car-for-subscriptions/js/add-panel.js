@@ -96,7 +96,7 @@ async function setCarInfoToForm(carId) {
 }
 
 async function getCarFromServer(carId) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/cars/${carId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ async function sendForm(isUpdate) {
 }
 
 async function updateCar(newCar, carId) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/${carId}`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/cars/${carId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ async function updateCar(newCar, carId) {
 }
 
 async function addNewCar(newCar) {
-    const response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars', {
+    const response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/cars', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ async function sendPhotoToServer(carId) {
     let file = document.getElementById('image').files[0];
     formData.append('imageFile', file);
 
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/image/${carId}`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/cars/image/${carId}`, {
         method: 'POST',
         body: formData
     });

@@ -6,7 +6,7 @@
 //     window.location.href = 'cabinet.html';
 //     }else if(subId > 0){
 //         if (sessionStorage.getItem('subscription') == null) {
-//             let getResponse = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/'+subId) 
+//             let getResponse = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/'+subId) 
 //             .then(response => response.json())
 //             .then(json => sessionStorage.setItem('subscription', JSON.stringify(json)));
 

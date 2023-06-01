@@ -77,13 +77,13 @@ function getUsers(page,subStatus, isBlocked) {
     //     goToActiveSub.innerHTML = '<a href="#" class="blue-button">Не заблоковаеі</a>';
     // }
 
-    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/search?';
+    let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/users/search?';
     let myPage = `page=${page}`;
     let size = 'size=2';
     let filter = `filter=${isBlocked},${subStatus}`;
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/page-count?' + size + '&' + filter;
+    let urlPage = 'https://carfinity-api.lm.r.appspot.com/api/v1/users/page-count?' + size + '&' + filter;
         fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage));
@@ -174,7 +174,7 @@ function goRight(){
 
 async function blockUser(id){
 
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/users/${id}/block`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/users/${id}/block`, {
         method: 'PATCH'
     });
     let responseJSON = await response.json();
@@ -189,7 +189,7 @@ async function blockUser(id){
 }
 
 async function unblockUser(id){
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/users/${id}/unblock`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/users/${id}/unblock`, {
         method: 'PATCH'
     });
     let responseJSON = await response.json();

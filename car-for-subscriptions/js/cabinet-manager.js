@@ -133,14 +133,14 @@ function getNotActiveSubscriptions(page) {
         goToActiveSub.innerHTML = '<a href="#" class="blue-button">Активні підписки</a>';
     }
 
-    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/search?';
     // let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
     let size = 'size=2';
     let filter = "filter=isActive:false,statusName:UNDER_CONSIDERATION";
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    let urlPage = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
         fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'notActive'));
@@ -161,13 +161,13 @@ function getActiveSubscriptions(page) {
         goToNotActiveSub.innerHTML = '<a href="#" class="blue-button inactiveBtn">Неактивні підписки</a>';
     }
 
-    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/search?';
+    let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/search?';
     //let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
     let size = 'size=2';
     let filter = "filter=isActive:true,statusName:CONFIRM_STATUS";
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
+    let urlPage = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;
     fetch(urlPage)
     .then(response => response.json())
     .then(json => generatePageNumber(json, myPage,'active'));
@@ -179,12 +179,12 @@ function getActiveSubscriptions(page) {
 
 
 async function getCar(id) {
-    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + id);
+    const responseCar = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/cars/' + id);
     return await responseCar.json();
 }
 
 async function getUser(id) {
-    const responseUser = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + id);
+    const responseUser = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/users/' + id);
     return await responseUser.json();
 }
 
@@ -362,7 +362,7 @@ async function confirmSubscription(id) {
     let userRole = userJson['role']; //  Roles: USER, MANAGER
     if (userRole === 'MANAGER') {
         let managerId = userJson['id'];
-        const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm/${managerId}`, {
+        const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/${id}/confirm/${managerId}`, {
             method: 'PATCH'
         });
         let responseJSON = await response.json();
@@ -379,7 +379,7 @@ async function confirmSubscription(id) {
 }
 
 async function rejectSubscription(id) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}/reject`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/${id}/reject`, {
         method: 'PATCH'
     });
     let responseJSON = await response.json();
@@ -401,7 +401,7 @@ function logoutUser() {
 
 async function deleteSubscription(id) {
     alert("Ще не реалізовано на бекенді")
-    // const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/${id}`, {
+    // const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/${id}`, {
     //   method: 'DELETE'});
     //   let responseJSON = await response.json();
     //   let status = responseJSON['status'];

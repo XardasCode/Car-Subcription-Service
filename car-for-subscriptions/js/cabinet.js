@@ -58,13 +58,13 @@ async function checkUser(user) {
 }
 
 async function getCar(id) {
-    const responseCar = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + id);
+    const responseCar = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/cars/' + id);
     return await responseCar.json();
 }
 
 async function checkSubscriptionStatus(subId) {
 
-    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + subId);
+    let response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/' + subId);
     let status = response.status;
     if (status > 299) {
         alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
@@ -119,7 +119,7 @@ async function setSubscriptionForm() {
 }
 
 async function setCarInfoToForm(carId) {
-    let response = await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + carId);
+    let response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/cars/' + carId);
     let status = response.status;
     if (status > 299) {
         alert('Помилка при завантаженні інформації про автомобіль. Спробуйте пізніше');
@@ -199,7 +199,7 @@ async function submitSubscriptionForm() {
     };
     console.log(JSON.stringify(data));
 
-    await fetch('https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions', {
+    await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		let email = document.getElementById('userInputEmail').value;
 		let password = document.getElementById('userInputPassword').value;
-		let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
+		let url = 'https://carfinity-api.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
 		let response = await fetch(url);
 	  let responseJSON = await response.json();
 		let status = responseJSON['id'];

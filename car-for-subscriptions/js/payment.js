@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 async function getSubscription(id){
-         let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + id;
+         let url = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/' + id;
 		let response = await fetch(url);
 	    let responseJSON = await response.json();
     document.getElementById('month-price').textContent = responseJSON['monthPrice'];
@@ -25,7 +25,7 @@ async function getSubscription(id){
         "description" : "Payment for car subscription"
     };
 
-   fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/pay/paypal/${subId}`, {
+   fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/pay/paypal/${subId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

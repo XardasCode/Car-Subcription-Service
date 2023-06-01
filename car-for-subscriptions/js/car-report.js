@@ -8,10 +8,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 async function getSubscription(id){
-   let url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/subscriptions/' + id;
+   let url = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/' + id;
    let responseSub = await fetch(url);
    let subscriptionJSON  = await responseSub.json();
-   url = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/' + subscriptionJSON['carId'];
+   url = 'https://carfinity-api.lm.r.appspot.com/api/v1/cars/' + subscriptionJSON['carId'];
    let responseCar = await fetch(url);
    let carJSON = await responseCar.json();
    console.log(carJSON)
@@ -33,7 +33,7 @@ async function downloadPDF() {
     if(subId){
        
         //let host = "http://localhost:8081";
-        let host = "https://circular-ally-383113.lm.r.appspot.com";
+        let host = "https://carfinity-api.lm.r.appspot.com";
 
         fetch(`${host}/api/v1/subscriptions/${subId}/generate-pdf`, {
             method: 'GET',

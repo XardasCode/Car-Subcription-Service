@@ -37,7 +37,7 @@ function filterCars(pageNumber = '1'){
 }
 
 function getCars(page,  yearFrom, yearTo, priceFrom, priceTo,color, brand) {
-    let host = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars?';
+    let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/cars?';
     let myPage = `page=${page}`;
     let size = 'size=12';
     let filter = "";
@@ -65,7 +65,7 @@ function getCars(page,  yearFrom, yearTo, priceFrom, priceTo,color, brand) {
         }
 
     }
-    let urlPage = 'https://circular-ally-383113.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
+    let urlPage = 'https://carfinity-api.lm.r.appspot.com/api/v1/cars/page-count?' + size + '&' + filter;
     
     fetch(urlPage)
     .then(response => response.json())

@@ -26,7 +26,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 async function checkConfirmCode(id) {
     let code = document.getElementById('confirm-code').value;
-    let url = `https://circular-ally-383113.lm.r.appspot.com/api/v1/users/verify-email?id=${id}&code=${code}`;
+    let url = `https://carfinity-api.lm.r.appspot.com/api/v1/users/verify-email?id=${id}&code=${code}`;
     let response = await fetch(url, {
         method: 'PATCH'
     });
@@ -44,7 +44,7 @@ async function checkConfirmCode(id) {
 }
 
 async function sendCodeToUserEmail(id) {
-    const response = await fetch(`https://circular-ally-383113.lm.r.appspot.com/api/v1/users/generate-verification-code?id=${id}`, {
+    const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/users/generate-verification-code?id=${id}`, {
         method: 'PATCH'
     });
     let status = response.status;
