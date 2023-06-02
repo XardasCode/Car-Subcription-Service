@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		let password = document.getElementById('userInputPassword').value;
 		let url = 'https://carfinity-api.lm.r.appspot.com/api/v1/users/' + email + '/' + password;
 		let response = await fetch(url);
-	  let responseJSON = await response.json();
+	   let responseJSON = await response.json();
 		let status = responseJSON['id'];
 		if (status) {
 			sessionStorage.setItem('user', JSON.stringify(responseJSON));

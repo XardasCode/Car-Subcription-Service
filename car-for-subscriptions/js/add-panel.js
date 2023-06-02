@@ -55,8 +55,8 @@ addEventListener('DOMContentLoaded', async function () {
             return;
         }
         // перевірка на розмір файлу
-        if (file.size > 2 * 1024 * 1024) {
-            alert('Файл повинен бути менше 2 Мб!');
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Файл повинен бути менше 10 Мб!');
             return;
         }
 

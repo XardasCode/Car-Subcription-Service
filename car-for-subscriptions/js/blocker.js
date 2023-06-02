@@ -125,7 +125,7 @@ function generateUsers(json) {
 								</div>
 
 								<div class="cabinet-active__block-text">
-									<div class="cabinet-active__status">
+									<div class="cabinet-active__status button-report">
 										${item['isBlocked']===false?`<a class="cabinet-active__a-report blue-button" onclick="blockUser(${item['id']})" href="#">Заблокувати</a>`:`<a class="cabinet-active__a-report blue-button" onclick="unblockUser(${item['id']})" href="#">Розблокуати</a>`}
 									</div>
 								</div>

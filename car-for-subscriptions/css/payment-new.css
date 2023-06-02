@@ -102,7 +102,10 @@ body {
   text-transform: uppercase;
   color: #fff;
   background: rgba(46, 111, 208, 0.9);
-  border-radius: 10px; }
+  border-radius: 10px;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s; }
   @media (max-width: 991.98px) {
     .blue-button {
       font-size: 18px; } }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="img/logo-black.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon-black.png" type="image/x-icon">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/add-panel.css">
     <title>Додати авто</title>
@@ -142,6 +142,57 @@
                         <div id="preview" class="file__preview"></div>
                     </div>
                     <button class="add-auto__button blue-button">Додати до каталогу</button>
+                    <!-- Modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Додати до каталогу
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="col-md-4 footer__logo">
+                                <a class="footer__a" href="#">
+                                    <img src="img/logo-black.png" alt="logo">
+                                </a>
+                            </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Виберіть тип палива 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Гаразд</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Додати до каталогу
+                </button>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="col-md-4 footer__logo">
+                                <a class="footer__a" href="#">
+                                    <img src="img/logo-black.png" alt="logo">
+                                </a>
+                            </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Виберіть тип палива 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Гаразд</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 </form>
             </section>
 
