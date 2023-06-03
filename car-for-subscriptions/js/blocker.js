@@ -79,7 +79,7 @@ function getUsers(page,subStatus, isBlocked) {
 
     let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/users/search?';
     let myPage = `page=${page}`;
-    let size = 'size=2';
+    let size = 'size=5';
     let filter = `filter=${isBlocked},${subStatus}`;
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
