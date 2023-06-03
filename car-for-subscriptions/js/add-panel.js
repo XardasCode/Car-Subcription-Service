@@ -50,13 +50,21 @@ addEventListener('DOMContentLoaded', async function () {
     function uploadFile(file) {
         // перевірка на тип файлу
         if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
-            alert('Дозволені тільки зображення!');
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Дозволені тільки зображення!"
             image.value = '';
             return;
         }
         // перевірка на розмір файлу
         if (file.size > 10 * 1024 * 1024) {
-            alert('Файл повинен бути менше 10 Мб!');
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Файл повинен бути менше 10 Мб!"
             return;
         }
 
@@ -66,7 +74,11 @@ addEventListener('DOMContentLoaded', async function () {
             preview.innerHTML = `<img src="${e.target.result}" alt="Фото">`;
         };
         reader.onerror = function (e) {
-            alert("Помилка");
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Помилка"
         };
         reader.readAsDataURL(file);
     }
@@ -106,7 +118,11 @@ async function getCarFromServer(carId) {
     let status = response.status;
     if (status > 299) {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     } else {
         console.log("Car received");
         return responseJSON;
@@ -148,7 +164,11 @@ async function updateCar(newCar, carId) {
     let status = response.status;
     if (status > 299) {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     } else {
         console.log("Car updated");
         let isPhotoUpdated = document.getElementById('image').files.length > 0;
@@ -171,7 +191,11 @@ async function addNewCar(newCar) {
     let status = response.status;
     if (status > 299) {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     } else {
         console.log("Car added");
         await sendPhotoToServer(responseJSON['message']);
@@ -193,7 +217,11 @@ async function sendPhotoToServer(carId) {
     let status = response.status;
     if (status > 299) {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     }
     console.log("Photo uploaded");
 }

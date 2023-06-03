@@ -38,7 +38,11 @@ async function checkConfirmCode(id) {
         sessionStorage.setItem('user', JSON.stringify(user));
         window.location.href = 'cabinet.html';
     } else {
-        alert('Невірний код підтвердження');
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = "Невірний код підтвердження"
     }
 
 }
@@ -49,7 +53,11 @@ async function sendCodeToUserEmail(id) {
     });
     let status = response.status;
     if (status !== 200) {
-        alert('Помилка почтового сервісу! Спробуйте пізніше');
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = "Помилка почтового сервісу! Спробуйте пізніше"
     }
 }
 

@@ -372,7 +372,7 @@ body {
       .catalog .catalog__filter-title {
         font-size: 18px; } }
   .catalog .catalog__price-title, .catalog .catalog__year-title {
-    margin-left: 20px; }
+    margin-left: 40px; }
   .catalog__button {
     position: relative;
     bottom: 5px; }
@@ -461,6 +461,9 @@ body {
     justify-content: center;
     margin-top: 10px; }
   .catalog__switch {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     margin: 0 30px 0 30px; }
     @media (max-width: 991.98px) {
       .catalog__switch {

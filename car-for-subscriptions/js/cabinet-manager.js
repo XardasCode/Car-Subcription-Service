@@ -368,12 +368,15 @@ async function confirmSubscription(id) {
         let responseJSON = await response.json();
         let status = responseJSON['status'];
         if (status) {
-            alert(status);
             location.reload()
     
         } else {
             let error = responseJSON['errorMessage'];
-            alert(error);
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = error
         }
     }
 }
@@ -385,11 +388,14 @@ async function rejectSubscription(id) {
     let responseJSON = await response.json();
     let status = responseJSON['status'];
     if (status) {
-        alert(status);
         location.reload()
     } else {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     }
 }
 
@@ -398,19 +404,3 @@ function logoutUser() {
 
     window.location.replace('sign-in.html'); // Редірект на сторінку входу
 }
-
-async function deleteSubscription(id) {
-    alert("Ще не реалізовано на бекенді")
-    // const response = await fetch(`https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/${id}`, {
-    //   method: 'DELETE'});
-    //   let responseJSON = await response.json();
-    //   let status = responseJSON['status'];
-    //   if(status){
-    // 		alert(status);
-
-    //   }else{
-    //     let error = responseJSON['errorMessage'];
-    // 		alert(error);
-    //   }
-}
-

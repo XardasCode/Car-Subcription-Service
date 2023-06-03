@@ -331,7 +331,7 @@ body{
 		}
 	}
 	.catalog__price-title, .catalog__year-title{
-		margin-left: 20px;
+		margin-left: 40px;
 	}
 
 	&__button{
@@ -422,6 +422,7 @@ body{
 		margin-top: 10px;
 	}
 	&__switch{
+		display: flex;
 		margin: 0 30px 0 30px;
 		@media (max-width: 991.98px) {
 			margin: 0 20px 0 20px;

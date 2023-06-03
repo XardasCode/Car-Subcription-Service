@@ -34,7 +34,11 @@ addEventListener('DOMContentLoaded', async function () {
             let error = formValidate(form);
 
             if (error !== 0) {
-                alert("Заповніть обов'язкові поля!")
+                const toastLiveExample = document.getElementById('liveToast')
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                toastBootstrap.show()
+                const bodyText = document.getElementById('alertMessage')
+                bodyText.innerHTML = "Заповніть обов'язкові поля!"
             } else {
                 submitSubscriptionForm();
             }
@@ -67,7 +71,11 @@ async function checkSubscriptionStatus(subId) {
     let response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/' + subId);
     let status = response.status;
     if (status > 299) {
-        alert('Помилка при завантаженні інформації про підписку. Спробуйте пізніше');
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = "Помилка при завантаженні інформації про підписку. Спробуйте пізніше"
         window.location.href = 'error.html';
     }
     let subscription = await response.json();
@@ -122,7 +130,11 @@ async function setCarInfoToForm(carId) {
     let response = await fetch('https://carfinity-api.lm.r.appspot.com/api/v1/cars/' + carId);
     let status = response.status;
     if (status > 299) {
-        alert('Помилка при завантаженні інформації про автомобіль. Спробуйте пізніше');
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = "Помилка при завантаженні інформації про автомобіль. Спробуйте пізніше"
         window.location.href = 'error.html';
     }
     let car = await response.json();
@@ -184,7 +196,11 @@ async function submitSubscriptionForm() {
     let months = monthsString.slice(0, 2); // кількість місяців
     let monthPay = parsePayPerMonth(monthsString); // сума грошей за місяць
     if (monthPay === null) {
-        alert("Помилка при введені даних про кількість місяців, будь ласка, виберіть зі списку");
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = "Помилка при введені даних про кількість місяців, будь ласка, виберіть зі списку"
         return;
     }
 
@@ -213,14 +229,22 @@ async function submitSubscriptionForm() {
             user = JSON.parse(user);
             user['subscriptionId'] = subId;
             sessionStorage.setItem('user', JSON.stringify(user));
-            alert('Заявка на підписку успішно оформлена!');
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Заявка на підписку успішно оформлена"
             window.location.href = 'cabinet.html';
         } else {
             let error = await response.json();
             let errorMessage = error['errorMessage'];
             let errorCode = error['code'];
             console.log("Error code: " + errorCode + " Error message: " + errorMessage);
-            alert('Помилка при оформленні підписки. Спробуйте пізніше');
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Помилка при оформленні підписки. Спробуйте пізніше"
         }
     });
 }

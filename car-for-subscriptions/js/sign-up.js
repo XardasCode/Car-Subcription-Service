@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
                 window.location.href = 'cabinet.html';
             } else {
                 let error = responseJSON['errorMessage'];
-                alert(error);
+                const toastLiveExample = document.getElementById('liveToast')
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                toastBootstrap.show()
+                const bodyText = document.getElementById('alertMessage')
+                bodyText.innerHTML = error
             }
         }
     }
@@ -73,7 +77,11 @@ document.addEventListener('DOMContentLoaded', function () { //перевірка
                 if (password !== repeatPassword) {
                     formAddError(input);
                     error++;
-                    alert('Паролі не збігаються');
+                    const toastLiveExample = document.getElementById('liveToast')
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                    toastBootstrap.show()
+                    const bodyText = document.getElementById('alertMessage')
+                    bodyText.innerHTML = 'Паролі не збігаються'
                 }
             }
             if (input.classList.contains('_email')) { //перевірка email

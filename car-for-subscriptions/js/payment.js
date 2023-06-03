@@ -1,4 +1,3 @@
-
 let user = sessionStorage.getItem('user');
 let userJson = JSON.parse(user);
 const subId = userJson['subscriptionId'];
@@ -36,7 +35,11 @@ async function getSubscription(id){
         if (result['status'] === 'success') {
             window.location.href = result['message'];
         }else{
-            alert("Не вдалося створити оплату(тут повинне бути посилання на сторінку error payment)");
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Не вдалося створити оплату!"
         }
       console.log(result);
     })

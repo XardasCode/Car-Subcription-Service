@@ -180,11 +180,14 @@ async function blockUser(id){
     let responseJSON = await response.json();
     let status = responseJSON['status'];
     if (status) {
-        alert(status);
         location.reload()
     } else {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     }
 }
 
@@ -195,11 +198,14 @@ async function unblockUser(id){
     let responseJSON = await response.json();
     let status = responseJSON['status'];
     if (status) {
-        alert(status);
         location.reload()
     } else {
         let error = responseJSON['errorMessage'];
-        alert(error);
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+        const bodyText = document.getElementById('alertMessage')
+        bodyText.innerHTML = error
     }
 }
 
