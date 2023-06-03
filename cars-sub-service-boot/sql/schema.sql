@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS subscriptions
     pass_number      VARCHAR(255) NOT NULL,
     ipn_number       VARCHAR(255) NOT NULL,
     soc_media_link   VARCHAR(255) NOT NULL,
-    last_pay_date    VARCHAR(255) NOT NULL,
+    last_pay_date    VARCHAR(255),
 
     user_id          INT,
     car_id           INT,
