@@ -6,9 +6,12 @@ import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
 import com.uploadcare.api.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -45,6 +48,7 @@ public class AppConfig {
     @Value("${paypal.mode}")
     private String mode;
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -55,11 +59,13 @@ public class AppConfig {
         return em;
     }
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public Client client() {
         return new Client(uploadCarePublicKey, uploadCareSecretKey);
     }
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public Map<String, String> paypalConfig() {
         Map<String, String> configMap = new HashMap<>();
@@ -68,11 +74,13 @@ public class AppConfig {
 
     }
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public OAuthTokenCredential qAuthTokenCredential() {
         return new OAuthTokenCredential(clientId, clientSecret, paypalConfig());
     }
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public APIContext apiContext() throws PayPalRESTException {
         APIContext context = new APIContext(qAuthTokenCredential().getAccessToken());
@@ -80,6 +88,7 @@ public class AppConfig {
         return context;
     }
 
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     @Bean
     public PasswordManager passwordManager() {
         PasswordManager passwordManager = new PasswordManager();
