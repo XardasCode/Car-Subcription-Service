@@ -156,10 +156,11 @@ body{
 	.header__lang{
 		font-size: 15px;
 		line-height: 18px;
+		color: #fff !important;
 		margin: 0 40px;
 		padding: 8px !important;
 		position: relative;
-		top: 27px;
+		top: 25px;
 		border-radius: 50%;
 		@media (max-width: 991.98px) {
 			font-size: 20px;

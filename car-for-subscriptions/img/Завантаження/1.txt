@@ -1,0 +1,18 @@
+Очередь
+GROUP E
+1) cosmicSHINE - cosmicSAXAROK
+2) cosmicSHINE - cosmicBANANA
+3) cosmicDANEK - cosmicSHINE
+4) cosmicSAXAROK - cosmic BANANA
+5) cosmicSAXAROK - cosmicDANEK
+6) cosmicBANANA - cosmicDANEK
+
+GROUP D
+1) cosmicG1DRA - cosmicLIHT
+2) cosmicG1DRA - cosmicROYZET
+3) cosmicZEUS - cosmicG1DRA
+4) cosmicLIHT - cosmicROYZET
+5) cosmicZEUS - cosmicLIHT
+6) cosmicZEUS - cosmicROYZET
+
+СТАРТ В 20:30

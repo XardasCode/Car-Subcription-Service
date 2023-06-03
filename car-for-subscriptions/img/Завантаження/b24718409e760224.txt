@@ -1,0 +1,55 @@
+Group A:
+cosmicRURIK38 - cosmicSAXAROK cosmicRURIK38 win 
+cosmicLIHT - cosmicSNAKE cosmicLIHT win
+cosmicSNAKE - cosmicSAXAROK cosmicSAXAROK win
+cosmicRURIK38 - cosmicLIHT DRAW
+cosmicRURIK38 - cosmicSNAKE ?????
+cosmicLIHT - cosmicSHINE cosmicSAXAROK win
+
+PTS:
+cosmicRURIK38 - 4
+cosmicLIHT - 4
+cosmicSNAKE - 0
+cosmicSAXAROK - 6
+
+Group B:
+cosmicFargaT - cosmicDANZE cosmicFargaT win 
+cosmicFargaT - cosmicSHINE cosmicSHINE win 
+cosmicFargaT - cosmicNIKO cosmicNIKO win
+cosmicDANZE - cosmicNIKO cosmicNIKO win
+cosmicSHINE  - cosmicDANZE cosmicSHINE win
+cosmicNIKO - cosmicSHINE cosmicSHINE win 
+
+PTS:
+cosmicFargaT - 3
+cosmicSHINE - 9
+cosmicDANZE - 0
+cosmicNIKO - 6
+
+Group C:
+cosmicBANANA - cosmicG1DRA cosmicBANANA win
+cosmicBANANA - cosmicMEHASS cosmicBANANA win
+cosmicBANANA - cosmicDANEK DRAW
+cosmicG1DRA - cosmicMEHASS cosmicG1DRA win
+cosmicDANEK - cosmicMEHASS cosmicDANEK win
+cosmicG1DRA - cosmicDANEK cosmicDANEK win 
+ 
+PTS:
+cosmicBANANA - 7
+cosmicG1DRA - 0
+cosmicDANEK - 7
+cosmicMAHASS - 0
+
+Group D:
+cosmicCOOLEN - cosmicTWIST cosmicTWIST win 
+cosmicTWIST - cosmicZEUS cosmicZEUS win
+cosmicROYZET - cosmicTWIST cosmicROYZET win
+cosmicROYZET - cosmicCOOLEN cosmicROYZET win
+cosmicCOOLEN - cosmicZEUS cosmicZEUS win 
+cosmicROYZET - cosmicZEUS cosmicROYZET win 
+
+PTS:
+coscmicCOOLEN - 0
+cosmicZEUS - 6
+cosmicROYZET - 9
+cosmicTWIST - 3

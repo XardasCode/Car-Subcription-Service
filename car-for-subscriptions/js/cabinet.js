@@ -18,7 +18,7 @@ addEventListener('DOMContentLoaded', async function () {
     email.innerHTML = jsonEmail;
     phone.innerHTML = jsonPhone;
     if (jsonIsVerified === true) {
-        emailVerified.innerHTML = 'Пошта підтверджена';
+        emailVerified.innerHTML = '✔️ Пошта підтверджена';
         await setSubscriptionForm(); // Встановлення інформації про автомобіль в форму тільки якщо пошта підтверджена
     } else {
         emailVerified.innerHTML = 'Ваша пошта ще не підтверджена. Щоб мати змогу оформити підписку, ' +
