@@ -415,7 +415,9 @@ body {
               .switch-item {
                 width: 28px;
                 height: 28px; } }
-          
+          .switch-item:last-child{
+            margin: 0;
+          }
           .switch-active {
             background: #185fca; }
           
