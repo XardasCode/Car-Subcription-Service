@@ -72,7 +72,11 @@ public class UserServiceImpl implements UserService {
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }
         User thisUser = user.get();
-        if (!passwordManager.checkPassword(password, thisUser.getPassword())) {
+        if (thisUser.isBlocked()) {
+            log.warn("User with email {} is blocked", email);
+            throw new ServerException("User with email " + email + " is blocked", ErrorList.USER_BLOCKED);
+        }
+        if (!PasswordManager.checkPassword(password, thisUser.getPassword())) {
             log.warn("User with email {} has bad pass: {}", email, password);
             throw new ServerException("User with email " + email + " or password " + password + " not found", ErrorList.USER_NOT_FOUND);
         }

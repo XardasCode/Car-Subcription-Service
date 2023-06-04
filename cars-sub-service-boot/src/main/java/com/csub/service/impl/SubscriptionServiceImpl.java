@@ -52,6 +52,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Car car = carDAO.getCar(carId).orElseThrow(
                 () -> new ServerException("Car not found", ErrorList.CAR_NOT_FOUND));
 
+        if (user.isBlocked()) {
+            throw new ServerException("User is blocked", ErrorList.USER_BLOCKED);
+        }
+
         checkIfCarAlreadySubscribed(car);
         checkIfUserAlreadySubscribed(user);
 
