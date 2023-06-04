@@ -461,6 +461,8 @@ body {
     -ms-flex-pack: center;
     justify-content: center;
     margin-top: 10px; }
+    .catalog__pagination img {
+      cursor: pointer; }
   .catalog__switch {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -469,8 +471,6 @@ body {
     @media (max-width: 991.98px) {
       .catalog__switch {
         margin: 0 20px 0 20px; } }
-    .catalog__switch img {
-      cursor: pointer; }
   .catalog__switch-item {
     width: 32px;
     height: 32px;

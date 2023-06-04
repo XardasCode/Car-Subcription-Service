@@ -630,6 +630,242 @@ body{
 		}
 	}
 }
+
+
+.cabinet-active {
+	&__right {
+		flex: 0 1 78%;
+		padding: 0;
+		@media (max-width: 1399.98px) {
+			flex: 0 1 70%;
+		}
+		@media (max-width: 1199.98px) {
+			flex: 0 1 65%;
+		}
+		@media (max-width: 991.98px) {
+			flex: 0 1 62%;
+		}
+		@media (max-width: 767.98px) {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+	}
+	&__block {
+		background: rgba(249, 249, 249, 0.3);
+		box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.2);
+		border: 2px solid #437DD5;
+		border-radius: 20px;
+		padding: 26px 36px 30px 40px;
+		// margin-bottom: 40px;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		@media (max-width: 1399.98px) {
+			padding: 23px 33px;
+		}
+		@media (max-width: 1199.98px) {
+			padding: 20px 30px 35px 30px;
+			display: block;
+		}
+		@media (max-width: 991.98px) {
+			padding: 15px 25px 30px 25px;
+		}
+		@media (max-width: 479.98px) {
+			padding: 12px 20px 25px 20px;
+		}
+		@media (max-width: 379.98px) {
+			padding: 10px 17px 25px 17px;
+		}
+	}
+
+	&__block-text{
+		@media (max-width: 1199.98px) {
+			margin-bottom: 30px;
+		}
+	}
+
+	&__status {
+		font-size: 24px;
+		line-height: 29px;
+		margin-bottom: 40px;
+		@media (max-width: 1399.98px) {
+			font-size: 22px;
+		}
+		@media (max-width: 1199.98px) {
+			font-size: 20px;
+			margin-bottom: 20px;
+		}
+		@media (max-width: 991.98px) {
+			font-size: 18px;
+			margin-bottom: 15px;
+		}
+		@media (max-width: 575.98px) {
+			margin-bottom: 5px;
+			font-size: 17px;
+		}
+		@media (max-width: 479.98px) {
+			font-size: 16px;
+			line-height: 25px;
+		}
+		@media (max-width: 379.98px) {
+			line-height: 22px;
+		}
+		span{
+			@media (max-width: 479.98px) {
+				font-weight: bold;
+			}
+		}
+	}
+	&__auto {
+		font-size: 24px;
+		line-height: 29px;
+		margin-bottom: 40px;
+		@media (max-width: 1399.98px) {
+			font-size: 22px;
+		}
+		@media (max-width: 1199.98px) {
+			font-size: 20px;
+			margin-bottom: 20px;
+		}
+		@media (max-width: 991.98px) {
+			font-size: 18px;
+			margin-bottom: 15px;
+		}
+		@media (max-width: 575.98px) {
+			font-size: 17px;
+			margin-bottom: 5px;
+		}
+		@media (max-width: 479.98px) {
+			font-size: 16px;
+			line-height: 25px;
+		}
+		@media (max-width: 379.98px) {
+			line-height: 22px;
+		}
+		span{
+			@media (max-width: 479.98px) {
+				font-weight: bold;
+			}
+		}
+		a{
+			font-size: 15px;
+			line-height: 18px;
+			text-decoration: underline;
+			color: #000;
+			@media (max-width: 991.98px) {
+				font-size: 14px;
+			}
+			@media (max-width: 575.98px) {
+				font-size: 13px;
+			}
+		}
+	}
+	&__remain {
+		font-size: 24px;
+		line-height: 29px;
+		@media (max-width: 1399.98px) {
+			font-size: 22px;
+		}
+		@media (max-width: 1199.98px) {
+			font-size: 20px;
+		}
+		@media (max-width: 991.98px) {
+			font-size: 18px;
+		}
+		@media (max-width: 575.98px) {
+			font-size: 17px;
+			margin-bottom: 5px;
+		}
+		@media (max-width: 479.98px) {
+			font-size: 16px;
+			line-height: 25px;
+		}
+		@media (max-width: 379.98px) {
+			line-height: 22px;
+		}
+		span{
+			@media (max-width: 479.98px) {
+				font-weight: bold;
+			}
+		}
+	}
+
+	&__block-buttons{
+		@media (max-width: 1199.98px) {
+			display: flex;
+			align-items: center;
+		}
+		@media (max-width: 991.98px) {
+			display: block;
+		}
+		@media (max-width: 767.98px) {
+			text-align: center;
+		}
+	}
+
+	&__button-report{
+		margin-bottom: 51px;
+		@media (max-width: 1199.98px) {
+			margin-bottom: 0px;
+			margin-right: 20px;
+		}
+		@media (max-width: 991.98px) {
+			margin-bottom: 35px;
+			margin-right: 0px;
+		}
+	}
+	&__a-report{
+		font-size: 15px;
+		line-height: 18px;
+		padding: 10px 87px;
+		@media (max-width: 1399.98px) {
+			padding: 10px 60px;
+		}
+		@media (max-width: 1199.98px) {
+			padding: 10px 39px;
+		}
+		@media (max-width: 379.98px) {
+			padding: 10px 29px;
+		}
+	}
+	&__button-payment{
+		margin-bottom: 7px;
+		@media (max-width: 1199.98px) {
+			margin-bottom: 0px;
+		}
+	}
+	&__a-payment{
+		font-size: 15px;
+		line-height: 18px;
+		padding: 10px 78px;
+		@media (max-width: 1399.98px) {
+			padding: 10px 51px;
+		}
+		@media (max-width: 1199.98px) {
+			padding: 10px 30px;
+		}
+		@media (max-width: 379.98px) {
+			padding: 10px 20px;
+		}
+	}
+	// &__a{
+	// 	padding: 14px 16px;
+	// 	@media (max-width: 1199.98px) {
+	// 		font-size: 18px;
+	// 	}
+	// 	@media (max-width: 991.98px) {
+	// 		font-size: 16px;
+	// 		padding: 14px 16px;
+	// 	}
+	// 	@media (max-width: 479.98px) {
+	// 		font-size: 14px;
+	// 	}
+	// }
+}
+
+
 /***********************************************
 **********Стилізація випадаючого меню***********
 *********************auto***********************
