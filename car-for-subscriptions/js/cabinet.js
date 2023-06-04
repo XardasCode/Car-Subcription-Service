@@ -234,6 +234,12 @@ async function submitSubscriptionForm() {
             const bodyText = document.getElementById('alertMessage')
             bodyText.innerHTML = "Заявка на підписку успішно оформлена"
             window.location.href = 'cabinet.html';
+        } else if (response.status === 403) {
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+            const bodyText = document.getElementById('alertMessage')
+            bodyText.innerHTML = "Ваш акаунт заблоковано!"
         } else {
             let error = await response.json();
             let errorMessage = error['errorMessage'];
