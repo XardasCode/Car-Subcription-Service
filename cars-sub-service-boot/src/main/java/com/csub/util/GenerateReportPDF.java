@@ -152,8 +152,13 @@ public class GenerateReportPDF {
         pdfPTable2.addCell(pdfPCell3);
 
         String lastPayDate = subscription.getLastPayDate();
+        if(lastPayDate == null){
+            lastPayDate = "Не було";
+        }else{
+            lastPayDate = lastPayDate.substring(0, lastPayDate.indexOf("."));
+        }
         pdfPCell2 = new PdfPCell(new Paragraph("Останній платіж",font));
-        pdfPCell3 = new PdfPCell(new Paragraph(lastPayDate.substring(0, lastPayDate.indexOf(".")),font));
+        pdfPCell3 = new PdfPCell(new Paragraph(lastPayDate,font));
         pdfPCell2.setVerticalAlignment(Element.ALIGN_CENTER);
         pdfPCell2.setMinimumHeight(cellHeight);
         pdfPCell3.setVerticalAlignment(Element.ALIGN_CENTER);
