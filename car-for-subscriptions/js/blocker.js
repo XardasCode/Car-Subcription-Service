@@ -98,16 +98,8 @@ function getUsers(page,subStatus, isBlocked) {
 
 function generateUsers(json) {
     let subStatus = document.getElementById('subStatus').value;
-    let Status = '';
-    if(subStatus === 'subscriptionStatus:CONFIRM_STATUS'){
-        Status = 'Активна';
-    }else if(subStatus === 'subscriptionStatus:UNDER_CONSIDERATION'){
-        Status = 'На розгляді';
-    }else{
-        Status = 'Без підписки';
-    }
-
-
+    subStatus = subStatus !==""? subStatus:"Активна";
+    console.log(subStatus);
     const users_container = document.querySelector('#users_container');
     users_container.innerHTML = '';
     json.forEach(item => {
@@ -121,7 +113,7 @@ function generateUsers(json) {
 								</div>
 
                                 <div class="cabinet-active__block-text">
-									<div class="cabinet-active__status">Підписка: <span>${Status}</span></div>
+									<div class="cabinet-active__status">Підписка: <span>${subStatus}</span></div>
 								</div>
 
 								<div class="cabinet-active__block-text">
