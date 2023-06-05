@@ -136,7 +136,7 @@ function getNotActiveSubscriptions(page) {
     let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/search?';
     // let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=2';
+    let size = 'size=4';
     let filter = "filter=isActive:false,statusName:UNDER_CONSIDERATION";
     
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
@@ -164,7 +164,7 @@ function getActiveSubscriptions(page) {
     let host = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/search?';
     //let host = 'http://localhost:8080/api/v1/subscriptions/search?';
     let myPage = `page=${page}`;
-    let size = 'size=2';
+    let size = 'size=4';
     let filter = "filter=isActive:true,statusName:CONFIRM_STATUS";
     //let urlPage = 'http://localhost:8080/api/v1/subscriptions/page-count?' + size + '&' + filter;
     let urlPage = 'https://carfinity-api.lm.r.appspot.com/api/v1/subscriptions/page-count?' + size + '&' + filter;

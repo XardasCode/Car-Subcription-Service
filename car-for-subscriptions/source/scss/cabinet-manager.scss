@@ -612,7 +612,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// margin-right: 10px;
+	margin-right: 10px;
 	cursor: pointer;
 	@media (max-width: 479.98px) {
 		width: 30px;
@@ -622,6 +622,9 @@ body{
 		width: 28px;
 		height: 28px;
 	}
+}
+.switch-item:last-child {
+    margin: 0;
 }
 .switch-active{
 	background: #185fca;
